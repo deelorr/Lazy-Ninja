@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bi1v3lsgao0wn"]
+[gd_scene load_steps=18 format=3 uid="uid://bi1v3lsgao0wn"]
 
 [ext_resource type="PackedScene" uid="uid://cw32y4dbgj36m" path="res://scenes/characters/player.tscn" id="1_33q1i"]
 [ext_resource type="Texture2D" uid="uid://jtuqvr1lwjq7" path="res://art/tilesets/ground.png" id="1_crrrf"]
@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://b2blmb7y86f78" path="res://scenes/items/Lifepot.tscn" id="5_k76w3"]
 [ext_resource type="PackedScene" uid="uid://bi3sw8caf5ubs" path="res://scenes/items/Sword.tscn" id="6_h7t66"]
 [ext_resource type="PackedScene" uid="uid://cytnun4f64ouu" path="res://scenes/gui/hearts_container.tscn" id="7_b21lc"]
+[ext_resource type="Script" path="res://scripts/gui/canvas_layer.gd" id="10_wu4s8"]
+[ext_resource type="PackedScene" uid="uid://77s2jr485rus" path="res://scenes/items/inventory_gui.tscn" id="11_jg4rn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0qkei"]
 texture = ExtResource("1_crrrf")
@@ -912,7 +914,7 @@ layer_2/z_index = 1
 layer_2/navigation_enabled = false
 layer_2/tile_data = PackedInt32Array(196621, 1, 0, 589839, 1, 0, 720918, 1, 0, 262174, 1, 0, 655391, 1, 0, 589861, 1, 0, 1179686, 1, 0, 1245214, 1, 0, 1245203, 1, 0, 1310726, 1, 0, 1114114, 1, 0, 458754, 1, 0, 720905, 1, 0, 131079, 1, 0)
 layer_3/name = "collectables"
-layer_3/tile_data = PackedInt32Array(524296, 3, 65536, 589831, 3, 65536, 393223, 3, 131072, 393222, 3, 131072, 327686, 3, 131072, 327685, 3, 131072, 589830, 3, 65536, 524295, 3, 65536)
+layer_3/tile_data = PackedInt32Array(524296, 3, 65536, 589831, 3, 65536, 393223, 3, 131072, 393222, 3, 131072, 589830, 3, 65536, 524295, 3, 65536, 589832, 3, 65536, 458760, 3, 65536, 458759, 3, 65536, 524294, 3, 65536, 458757, 3, 65536, 524293, 3, 65536, 589829, 3, 65536, 327688, 3, 131072, 393224, 3, 131072)
 
 [node name="Player" parent="TileMap" instance=ExtResource("1_33q1i")]
 position = Vector2(159, 86)
@@ -941,6 +943,8 @@ end_point = NodePath("Marker2D")
 position = Vector2(-58, -1)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 3
+script = ExtResource("10_wu4s8")
 
 [node name="hearts_container" parent="CanvasLayer" instance=ExtResource("7_b21lc")]
 layout_direction = 3
@@ -948,3 +952,19 @@ anchors_preset = 0
 anchor_left = 0.0
 anchor_right = 0.0
 grow_horizontal = 1
+
+[node name="InventoryGUI" parent="CanvasLayer" instance=ExtResource("11_jg4rn")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -40.0
+offset_right = 64.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="closed" from="CanvasLayer/InventoryGUI" to="." method="_on_inventory_gui_closed"]
+[connection signal="opened" from="CanvasLayer/InventoryGUI" to="." method="_on_inventory_gui_opened"]
