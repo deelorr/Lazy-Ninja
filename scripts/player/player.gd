@@ -4,9 +4,7 @@ extends CharacterBody2D
 @onready var animations = $AnimationPlayer
 
 @export var max_health: int = 3
-@onready var current_health: int = max_health 
-
-var poop = false
+@onready var current_health: int = max_health
 
 func handle_input():
 	var move_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
