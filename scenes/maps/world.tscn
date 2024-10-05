@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bi3sw8caf5ubs" path="res://scenes/items/Sword.tscn" id="6_h7t66"]
 [ext_resource type="PackedScene" uid="uid://cytnun4f64ouu" path="res://scenes/gui/hearts_container.tscn" id="7_b21lc"]
 [ext_resource type="Script" path="res://scripts/gui/canvas_layer.gd" id="10_wu4s8"]
-[ext_resource type="PackedScene" uid="uid://77s2jr485rus" path="res://scenes/items/inventory_gui.tscn" id="11_jg4rn"]
+[ext_resource type="PackedScene" uid="uid://77s2jr485rus" path="res://scenes/gui/inventory/inventory_gui.tscn" id="11_jg4rn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0qkei"]
 texture = ExtResource("1_crrrf")

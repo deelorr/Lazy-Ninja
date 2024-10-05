@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bdt4kr6t4xynu" path="res://scenes/items/collectable.tscn" id="1_guwvw"]
 [ext_resource type="Texture2D" uid="uid://bar267x1axvkf" path="res://art/items/Sword.png" id="2_jggwp"]
 [ext_resource type="Script" path="res://scripts/items/sword.gd" id="2_s65gu"]
-[ext_resource type="Resource" uid="uid://bw0c1ucp4jhue" path="res://scenes/inventory/sword.tres" id="3_n8d06"]
+[ext_resource type="Resource" uid="uid://bw0c1ucp4jhue" path="res://resources/inventory/sword.tres" id="3_n8d06"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rahnb"]
 resource_local_to_scene = true
