@@ -10,6 +10,8 @@ signal healthChanged
 @export var max_health: int = 3
 @onready var current_health: int = max_health
 
+@export var knockback_power = 500
+
 func _ready():
 	pass
 
@@ -39,7 +41,12 @@ func handleCollision():
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
 		var collider = collision.get_collider()
-		#print_debug(collider.name)
+		print_debug(collider.name)
+		
+func knockback(enemy_velocity: Vector2):
+	var knockback_direction = (enemy_velocity - velocity).normalized() * knockback_power
+	velocity = knockback_direction
+	move_and_slide()
 
 func _on_hurt_box_area_entered(area:Area2D):
 	if area.name == "hit_box":
@@ -47,3 +54,4 @@ func _on_hurt_box_area_entered(area:Area2D):
 		if current_health < 0:
 			current_health = max_health
 		healthChanged.emit(current_health)
+		knockback(area.get_parent().velocity)
