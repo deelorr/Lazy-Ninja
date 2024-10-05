@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cdkfsmeq0yn4y" path="res://art/player/player_sprites.png" id="1_3lps0"]
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_xum27"]
-[ext_resource type="Resource" uid="uid://dvw7wrxslo3yr" path="res://scenes/inventory/player_inventory.tres" id="2_c7tpp"]
+[ext_resource type="Resource" uid="uid://dvw7wrxslo3yr" path="res://resources/inventory/player_inventory.tres" id="2_c7tpp"]
 
 [sub_resource type="Animation" id="Animation_60f7p"]
 length = 0.001
@@ -150,7 +150,7 @@ _data = {
 z_index = 1
 script = ExtResource("1_xum27")
 speed = 100
-Inventory = ExtResource("2_c7tpp")
+inventory = ExtResource("2_c7tpp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 clip_children = 2

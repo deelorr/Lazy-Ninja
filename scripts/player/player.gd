@@ -15,7 +15,7 @@ signal healthChanged
 
 @export var knockback_power = 500
 
-@export var Inventory: Inventory
+@export var inventory: Inventory
 
 var isHurt = false
 
@@ -75,7 +75,7 @@ func hurt_by_enemy_area(area):
 
 func _on_hurt_box_area_entered(area:Area2D):
 	if area.has_method("collect"):
-		area.collect(Inventory)
+		area.collect(inventory)
 
 
 func _on_hurt_box_area_exited(area: Area2D):
