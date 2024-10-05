@@ -933,9 +933,8 @@ position = Vector2(-58, -1)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="hearts_container" parent="CanvasLayer" instance=ExtResource("7_b21lc")]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -52.0
-offset_right = 0.0
-grow_horizontal = 0
+layout_direction = 3
+anchors_preset = 0
+anchor_left = 0.0
+anchor_right = 0.0
+grow_horizontal = 1
