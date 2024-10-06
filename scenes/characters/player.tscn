@@ -428,6 +428,7 @@ libraries = {
 one_shot = true
 
 [node name="weapon" type="Node2D" parent="."]
+visible = false
 position = Vector2(6, -1)
 rotation = 2.0944
 script = ExtResource("4_fk1a3")
