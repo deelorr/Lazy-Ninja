@@ -384,6 +384,7 @@ _data = {
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
+collision_layer = 9
 script = ExtResource("1_xum27")
 speed = 100
 inventory = ExtResource("2_c7tpp")

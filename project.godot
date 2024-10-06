@@ -15,6 +15,10 @@ run/main_scene="res://scenes/maps/world.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+scene_manager="*res://scripts/scene_manager.gd"
+
 [display]
 
 window/size/viewport_width=320
@@ -73,6 +77,7 @@ attack={
 2d_physics/layer_1="player"
 2d_physics/layer_2="enemy"
 2d_physics/layer_3="hit_boxes"
+2d_physics/layer_4="triggers"
 
 [rendering]
 
