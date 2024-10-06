@@ -1,7 +1,7 @@
 class_name Player
 extends CharacterBody2D
 
-signal healthChanged
+signal health_changed
 
 @export var speed: int = 35
 @export var max_health: int = 3
@@ -16,8 +16,8 @@ signal healthChanged
 @onready var current_health: int = max_health
 
 var last_anim_direction: String = "down"
-var isHurt: bool = false
-var isAttacking: bool = false
+var is_hurt: bool = false
+var is_attacking: bool = false
 
 func _ready():
 	effects.play("RESET")
@@ -27,7 +27,7 @@ func _physics_process(_delta):
 	move_and_slide()
 	update_animation()
 	
-	if !isHurt:
+	if !is_hurt:
 		for area in hurt_box.get_overlapping_areas():
 			if area.name == "hit_box":
 				hurt_by_enemy_area(area)
@@ -39,16 +39,8 @@ func handle_input():
 	if Input.is_action_just_pressed("attack"):
 		attack()
 
-func attack():
-	animations.play("attack_" + last_anim_direction)
-	isAttacking = true
-	weapon.enable()
-	await animations.animation_finished
-	weapon.disable()
-	isAttacking = false
-
 func update_animation():
-	if isAttacking:
+	if is_attacking:
 		return
 	if velocity.length() == 0:
 		if animations.is_playing():
@@ -62,6 +54,14 @@ func update_animation():
 		animations.play("walk_" + direction)
 		last_anim_direction = direction
 
+func attack():
+	animations.play("attack_" + last_anim_direction)
+	is_attacking = true
+	weapon.enable()
+	await animations.animation_finished
+	weapon.disable()
+	is_attacking = false
+
 func knockback(enemy_velocity: Vector2):
 	var knockback_direction = (enemy_velocity - velocity).normalized() * knockback_power
 	velocity = knockback_direction
@@ -71,19 +71,15 @@ func hurt_by_enemy_area(area):
 	current_health -= 1
 	if current_health < 0:
 		current_health = max_health
-	healthChanged.emit(current_health)
-	isHurt = true
+	health_changed.emit(current_health)
+	is_hurt = true
 	knockback(area.get_parent().velocity)
 	effects.play("hurt_blink")
 	hurt_timer.start()
 	await hurt_timer.timeout
 	effects.play("RESET")
-	isHurt = false
-	
+	is_hurt = false
 
-func _on_hurt_box_area_entered(area:Area2D):
+func _on_hurt_box_area_entered(area):
 	if area.has_method("collect"):
 		area.collect(inventory)
-
-func _on_hurt_box_area_exited(area: Area2D):
-	pass

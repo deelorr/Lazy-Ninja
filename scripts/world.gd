@@ -6,10 +6,7 @@ extends Node2D
 func _ready():
 	hearts_container.set_max_hearts(player.max_health)
 	hearts_container.update_hearts(player.current_health)
-	player.healthChanged.connect(hearts_container.update_hearts)
-
-func _process(_delta):
-	pass
+	player.health_changed.connect(hearts_container.update_hearts)
 
 func _on_inventory_gui_closed() -> void:
 	get_tree().paused = false

@@ -2,12 +2,6 @@ extends HBoxContainer
 
 @onready var heart_GUI = preload("res://scenes/gui/heart.tscn")
 
-func _ready():
-	pass
-	
-func _process(_delta):
-	pass
-
 func set_max_hearts(max_hearts):
 	for i in range(max_hearts):
 		var heart = heart_GUI.instantiate()

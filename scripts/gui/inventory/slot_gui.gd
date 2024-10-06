@@ -15,4 +15,3 @@ func update(slot: InventorySlot):
 		item_sprite.texture = slot.item.texture
 		amount_label.visible = true
 		amount_label.text = str(slot.amount)
-	

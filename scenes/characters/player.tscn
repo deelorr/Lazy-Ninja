@@ -436,4 +436,3 @@ script = ExtResource("4_fk1a3")
 [node name="sword" parent="weapon" instance=ExtResource("4_gaop7")]
 
 [connection signal="area_entered" from="hurt_box" to="." method="_on_hurt_box_area_entered"]
-[connection signal="area_exited" from="hurt_box" to="." method="_on_hurt_box_area_exited"]

@@ -6,19 +6,20 @@ extends CharacterBody2D
 
 @onready var animations = $AnimationPlayer
 
-var start_position
-var end_position
+var start_position: Vector2
+var end_position: Vector2
 
-var isDead = false
+var is_dead: bool = false
 
 func _ready():
 	start_position = position
 	end_position = end_point.global_position
 
-func change_direction():
-	var temp_end = end_position
-	end_position = start_position
-	start_position = temp_end
+func _physics_process(_delta):
+	if is_dead: return
+	update_velocity()
+	move_and_slide()
+	update_animation()
 
 func update_velocity():
 	var move_direction = (end_position - position)
@@ -38,18 +39,16 @@ func update_animation():
 
 		animations.play("walk_" + direction)
 
-func _physics_process(_delta):
-	if isDead: return
-	update_velocity()
-	move_and_slide()
-	update_animation()
-
+func change_direction():
+	var temp_end = end_position
+	end_position = start_position
+	start_position = temp_end
 
 func _on_hurt_box_area_entered(area: Area2D) -> void:
 	if area == $hit_box:
 		return
 	$hit_box.set_deferred("monitorable", false)
-	isDead = true
+	is_dead = true
 	animations.play("death")
 	await animations.animation_finished
 	queue_free()

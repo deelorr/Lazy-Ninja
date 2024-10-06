@@ -3,7 +3,7 @@ extends Control
 signal opened
 signal closed
 
-var isOpen = false
+var isOpen: bool = false
 
 @onready var inventory: Inventory = preload("res://resources/inventory/player_inventory.tres")
 @onready var slots: Array = $NinePatchRect/GridContainer.get_children()

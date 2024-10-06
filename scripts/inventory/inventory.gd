@@ -1,6 +1,5 @@
-extends Resource
-
 class_name Inventory
+extends Resource
 
 signal updated
 
