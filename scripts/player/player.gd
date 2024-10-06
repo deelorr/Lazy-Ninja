@@ -9,6 +9,7 @@ signal healthChanged
 @onready var effects = $EffectsPlayer
 @onready var hurt_box = $hurt_box
 @onready var hurt_timer = $hurt_timer
+@onready var weapon = $weapon
 
 @export var max_health: int = 3
 @onready var current_health: int = max_health
@@ -17,7 +18,9 @@ signal healthChanged
 
 @export var inventory: Inventory
 
+var last_anim_direction = "down"
 var isHurt = false
+var isAttacking = false
 
 func _ready():
 	effects.play("RESET")
@@ -35,8 +38,21 @@ func _physics_process(_delta):
 func handle_input():
 	var move_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	velocity = move_direction * speed
+	
+	if Input.is_action_just_pressed("attack"):
+		attack()
+		
+func attack():
+	animations.play("attack_" + last_anim_direction)
+	isAttacking = true
+	weapon.visible = true
+	await animations.animation_finished
+	weapon.visible = false
+	isAttacking = false
 
 func update_animation():
+	if isAttacking:
+		return
 	if velocity.length() == 0:
 		if animations.is_playing():
 			animations.stop()
@@ -47,6 +63,7 @@ func update_animation():
 		elif velocity.y < 0: direction = "up"
 
 		animations.play("walk_" + direction)
+		last_anim_direction = direction
 
 func handleCollision():
 	for i in get_slide_collision_count():
