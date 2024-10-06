@@ -1,13 +1,15 @@
 extends CharacterBody2D
 
-@export var speed = 50
-@export var limit = 0.5
+@export var speed: int = 50
+@export var limit: float = 0.5
 @export var end_point: Marker2D
 
 @onready var animations = $AnimationPlayer
 
 var start_position
 var end_position
+
+var isDead = false
 
 func _ready():
 	start_position = position
@@ -37,6 +39,17 @@ func update_animation():
 		animations.play("walk_" + direction)
 
 func _physics_process(_delta):
+	if isDead: return
 	update_velocity()
 	move_and_slide()
 	update_animation()
+
+
+func _on_hurt_box_area_entered(area: Area2D) -> void:
+	if area == $hit_box:
+		return
+	$hit_box.set_deferred("monitorable", false)
+	isDead = true
+	animations.play("death")
+	await animations.animation_finished
+	queue_free()
