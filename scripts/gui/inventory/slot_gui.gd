@@ -29,4 +29,4 @@ func take_item():
 	return item
 
 func is_empty():
-	return !item_stack_gui
+	return item_stack_gui == null || item_stack_gui.inventory_slot.amount == 0
