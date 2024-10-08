@@ -17,4 +17,3 @@ func update():
 		amount_label.text = str(inventory_slot.amount)
 	else:
 		amount_label.visible = false
-	
