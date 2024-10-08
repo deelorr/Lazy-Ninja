@@ -5,6 +5,8 @@ var player: Player
 var last_scene_name: String
 var scene_dir_path: String = "res://scenes/maps/"
 
+var first_load: bool = true
+
 func change_scene(from_scene, to_scene_name):
 	last_scene_name = from_scene.name
 	player = from_scene.player

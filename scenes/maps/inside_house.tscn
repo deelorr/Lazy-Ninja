@@ -1,12 +1,16 @@
-[gd_scene load_steps=14 format=3 uid="uid://6o8v72jsa5h1"]
+[gd_scene load_steps=18 format=3 uid="uid://6o8v72jsa5h1"]
 
-[ext_resource type="Script" path="res://scripts/scenes/base_scene.gd" id="1_bjx3h"]
 [ext_resource type="Texture2D" uid="uid://yqjhon6jwyfs" path="res://art/tilesets/floor.png" id="1_iunt8"]
+[ext_resource type="Script" path="res://scripts/scenes/inside_house.gd" id="1_wyhd5"]
 [ext_resource type="Texture2D" uid="uid://db0ofsi30xfjk" path="res://art/tilesets/house elements.png" id="2_w771l"]
 [ext_resource type="Texture2D" uid="uid://dgif58s51ttk0" path="res://art/tilesets/house.png" id="3_ctps4"]
 [ext_resource type="Texture2D" uid="uid://cp641bt8pa8ol" path="res://art/tilesets/walls.png" id="4_lqv6r"]
 [ext_resource type="PackedScene" uid="uid://blt4seqeee2mk" path="res://scenes/maps/scene_trigger.tscn" id="6_ohnnk"]
+[ext_resource type="Script" path="res://scripts/gui/canvas_layer.gd" id="6_swgp2"]
+[ext_resource type="PackedScene" uid="uid://cytnun4f64ouu" path="res://scenes/gui/hearts_container.tscn" id="7_3kkcc"]
 [ext_resource type="PackedScene" uid="uid://cw32y4dbgj36m" path="res://scenes/characters/player.tscn" id="7_uxh8i"]
+[ext_resource type="PackedScene" uid="uid://77s2jr485rus" path="res://scenes/gui/inventory/inventory_gui.tscn" id="8_7ivxg"]
+[ext_resource type="Script" path="res://scripts/player/follow_cam.gd" id="11_h1g35"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qk7by"]
 texture = ExtResource("1_iunt8")
@@ -1205,7 +1209,7 @@ sources/3 = SubResource("TileSetAtlasSource_ppe3n")
 size = Vector2(34, 12)
 
 [node name="InsideHouse" type="Node2D"]
-script = ExtResource("1_bjx3h")
+script = ExtResource("1_wyhd5")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_rg55s")
@@ -1217,10 +1221,34 @@ layer_1/y_sort_enabled = true
 layer_1/z_index = 1
 layer_1/tile_data = PackedInt32Array(65545, 196609, 7, 65544, 196609, 7, 131083, 1, 7, 65540, 1, 7, 65539, 1, 7, 131074, 1, 7, 262154, 131073, 9, 327690, 131073, 9)
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 3
+script = ExtResource("6_swgp2")
+
+[node name="hearts_container" parent="CanvasLayer" instance=ExtResource("7_3kkcc")]
+layout_direction = 3
+anchors_preset = 0
+anchor_left = 0.0
+anchor_right = 0.0
+grow_horizontal = 1
+
+[node name="InventoryGUI" parent="CanvasLayer" instance=ExtResource("8_7ivxg")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -40.0
+offset_right = 64.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="entrance_markers" type="Node2D" parent="."]
 position = Vector2(79, 90)
 
-[node name="any" type="Marker2D" parent="entrance_markers"]
+[node name="enter_house" type="Marker2D" parent="entrance_markers"]
 
 [node name="SceneTrigger" parent="." instance=ExtResource("6_ohnnk")]
 position = Vector2(70, 104)
@@ -1231,3 +1259,14 @@ position = Vector2(10, 4)
 shape = SubResource("RectangleShape2D_o26dl")
 
 [node name="Player" parent="." instance=ExtResource("7_uxh8i")]
+
+[node name="follow_cam" type="Camera2D" parent="." node_paths=PackedStringArray("tilemap", "follow_node")]
+position = Vector2(160, 90)
+limit_left = 0
+limit_top = 0
+limit_right = 640
+limit_bottom = 368
+position_smoothing_speed = 3.0
+script = ExtResource("11_h1g35")
+tilemap = NodePath("../TileMap")
+follow_node = NodePath(".")
