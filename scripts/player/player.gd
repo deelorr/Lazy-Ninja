@@ -20,6 +20,7 @@ var is_hurt: bool = false
 var is_attacking: bool = false
 
 func _ready():
+	inventory.use_item.connect(use_item)
 	effects.play("RESET")
 
 func _physics_process(_delta):
@@ -83,3 +84,15 @@ func hurt_by_enemy_area(area):
 func _on_hurt_box_area_entered(area):
 	if area.has_method("collect"):
 		area.collect(inventory)
+		
+func increase_health(amount: int):
+	current_health += amount
+	current_health = min(max_health, current_health)
+	
+	health_changed.emit(current_health)
+	
+func use_item(item: InventoryItem):
+	if not item.can_be_used(self):
+		return
+	item.use(self)
+	inventory.remove_last_used_item()

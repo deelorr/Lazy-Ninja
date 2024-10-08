@@ -39,6 +39,7 @@ func update():
 		var inventorySlot: InventorySlot = inventory.slots[i]
 		
 		if !inventorySlot.item:
+			slots[i].clear()
 			continue
 		
 		var itemStackGUI: ItemStackGUI = slots[i].item_stack_gui
@@ -150,7 +151,7 @@ func put_item_back():
 	locked = false  # Unlock after operation is complete
 	
 
-func _input(event):
+func _input(_event):
 	if item_in_hand && !locked && Input.is_action_just_pressed("right_click"):
 		put_item_back()
 		
