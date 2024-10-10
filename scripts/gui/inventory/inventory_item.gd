@@ -6,9 +6,8 @@ extends Resource
 @export var max_per_stack: int
 
 
-func use(player):
+func use(_player):
 	pass
 
-func can_be_used(player: Player):
+func can_be_used(_player: Player):
 	return true
-	
