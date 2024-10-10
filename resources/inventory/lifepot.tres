@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://cb3twnsxpcqgv"]
+[gd_resource type="Resource" script_class="HealthItem" load_steps=3 format=3 uid="uid://cb3twnsxpcqgv"]
 
 [ext_resource type="Script" path="res://scripts/gui/inventory/health_item.gd" id="1_cma8a"]
 [ext_resource type="Texture2D" uid="uid://d2kctnknmnwsm" path="res://art/items/LifePot.png" id="2_yogyp"]
