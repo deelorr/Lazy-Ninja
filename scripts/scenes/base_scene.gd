@@ -21,13 +21,15 @@ func _ready():
 		position_player()
 
 func position_player():
+	var markers = entrance_markers.get_children()
 	var last_scene = scene_manager.last_scene_name.to_lower().replace('_', '').replace(' ', '')
 	if last_scene.is_empty():
+		print_debug("last scene was empty, setting to world")
 		last_scene = "world"
 	print_debug("Last scene: ", last_scene)
-	for entrance in entrance_markers.get_children():
-		var entrance_name = entrance.name.to_lower().replace('_', '').replace(' ', '')
-		print_debug("Entrance name: ", entrance_name)
-		if entrance is Marker2D:
-			player.global_position = entrance.global_position
-			break  # Optional: Exit loop once the correct entrance is found
+	print_debug("Markers:", markers)
+	for marker in markers:
+		if marker.name == scene_manager.marker:
+			player.global_position = marker.global_position
+			print_debug("Player moved to marker:", marker.name)
+			break

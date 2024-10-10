@@ -2716,7 +2716,6 @@ position = Vector2(60, -87)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 3
-visible = false
 script = ExtResource("10_wu4s8")
 
 [node name="hearts_container" parent="CanvasLayer" instance=ExtResource("7_b21lc")]
@@ -2764,6 +2763,7 @@ position = Vector2(160, -109)
 [node name="SceneTrigger" parent="." instance=ExtResource("14_rmnrq")]
 position = Vector2(416, 170)
 connected_scene = "inside_house"
+connected_marker = "enter_house"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SceneTrigger"]
 z_index = 2
@@ -2790,12 +2790,13 @@ follow_node = NodePath("../Player")
 polygon = PackedVector2Array(1, 0, 672, 0, 672, 352, 0, 352, 0, 0, 0, -13, -12, -13, -12, 361, 684, 360, 684, -13, 1, -13)
 
 [node name="SceneTrigger2" parent="." instance=ExtResource("14_rmnrq")]
-position = Vector2(557, 59)
-connected_scene = "inside_house"
+position = Vector2(575, 56)
+connected_scene = "inside_store"
+connected_marker = "enter_store"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SceneTrigger2"]
 z_index = 1
-position = Vector2(19, -5)
+position = Vector2(1, -1)
 shape = SubResource("RectangleShape2D_y0fnt")
 
 [connection signal="closed" from="CanvasLayer/InventoryGUI" to="." method="_on_inventory_gui_closed"]
