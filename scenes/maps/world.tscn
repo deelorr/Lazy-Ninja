@@ -2716,6 +2716,7 @@ position = Vector2(60, -87)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 3
+visible = false
 script = ExtResource("10_wu4s8")
 
 [node name="hearts_container" parent="CanvasLayer" instance=ExtResource("7_b21lc")]
@@ -2771,7 +2772,7 @@ position = Vector2(0, -1.5)
 shape = SubResource("RectangleShape2D_rp0h4")
 
 [node name="Player" parent="." instance=ExtResource("1_33q1i")]
-position = Vector2(160, 90)
+position = Vector2(418, 211)
 
 [node name="follow_cam" type="Camera2D" parent="." node_paths=PackedStringArray("tilemap", "follow_node")]
 position = Vector2(160, 90)
