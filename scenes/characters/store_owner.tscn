@@ -2,24 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://641a0fatdw5i" path="res://art/enemies/store_owner_sprites.png" id="1_3kwwm"]
 [ext_resource type="Script" path="res://scripts/store_owner.gd" id="1_kgjyf"]
-[ext_resource type="Texture2D" uid="uid://cl2nduvpidcyv" path="res://DialogInfo.png" id="3_mfude"]
-
-[sub_resource type="Animation" id="Animation_r1rbi"]
-resource_name = "bubble_pop_up"
-length = 0.5
-step = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("bubble:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
+[ext_resource type="Texture2D" uid="uid://cyn86gtgvj0g3" path="res://DialogInfo.png" id="3_mfude"]
 
 [sub_resource type="Animation" id="Animation_2glv3"]
 length = 0.001
@@ -51,6 +34,23 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_r1rbi"]
+resource_name = "bubble_pop_up"
+length = 0.5
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bubble:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_klx4r"]

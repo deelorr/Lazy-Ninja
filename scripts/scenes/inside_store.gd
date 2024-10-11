@@ -10,5 +10,8 @@ func _ready():
 	hearts_container.update_hearts(player.current_health)
 	player.health_changed.connect(hearts_container.update_hearts)
 
-func _process(_delta):
-	pass
+func _on_store_menu_gui_closed() -> void:
+	get_tree().paused = false
+
+func _on_store_menu_gui_opened() -> void:
+	get_tree().paused = true
