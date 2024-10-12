@@ -19,6 +19,8 @@ var last_anim_direction: String = "down"
 var is_hurt: bool = false
 var is_attacking: bool = false
 
+var gold: int = 150
+
 func _ready():
 	inventory.use_item.connect(use_item)
 	effects.play("RESET")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bi1v3lsgao0wn"]
+[gd_scene load_steps=34 format=3 uid="uid://bi1v3lsgao0wn"]
 
 [ext_resource type="PackedScene" uid="uid://cw32y4dbgj36m" path="res://scenes/characters/player.tscn" id="1_33q1i"]
 [ext_resource type="Texture2D" uid="uid://jtuqvr1lwjq7" path="res://art/tilesets/ground.png" id="1_crrrf"]
@@ -19,6 +19,8 @@
 [ext_resource type="PackedScene" uid="uid://77s2jr485rus" path="res://scenes/gui/inventory/inventory_gui.tscn" id="11_jg4rn"]
 [ext_resource type="PackedScene" uid="uid://cf71ab0m6youu" path="res://scenes/gui/hotbar.tscn" id="12_tiks5"]
 [ext_resource type="PackedScene" uid="uid://blt4seqeee2mk" path="res://scenes/maps/scene_trigger.tscn" id="14_rmnrq"]
+[ext_resource type="Script" path="res://scripts/gui/gold_gui.gd" id="17_bpw6n"]
+[ext_resource type="Texture2D" uid="uid://b7ynlectloe2s" path="res://art/gui/gold.png" id="18_wdqks"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0qkei"]
 texture = ExtResource("1_crrrf")
@@ -2716,7 +2718,6 @@ position = Vector2(60, -87)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 3
-visible = false
 script = ExtResource("10_wu4s8")
 
 [node name="hearts_container" parent="CanvasLayer" instance=ExtResource("7_b21lc")]
@@ -2751,6 +2752,25 @@ offset_right = 58.0
 offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 0
+
+[node name="Gold" type="HBoxContainer" parent="CanvasLayer"]
+offset_right = 73.0
+offset_bottom = 23.0
+scale = Vector2(0.4, 0.4)
+script = ExtResource("17_bpw6n")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Gold"]
+self_modulate = Color(1, 1, 0.301961, 0.776471)
+layout_mode = 2
+texture = ExtResource("18_wdqks")
+
+[node name="Label" type="Label" parent="CanvasLayer/Gold"]
+layout_mode = 2
+text = "Gold:"
+
+[node name="gold_label" type="Label" parent="CanvasLayer/Gold"]
+layout_mode = 2
+text = "100"
 
 [node name="entrance_markers" type="Node2D" parent="."]
 position = Vector2(416, 189)
