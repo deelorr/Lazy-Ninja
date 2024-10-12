@@ -12,6 +12,7 @@ script = ExtResource("1_dp7sk")
 
 [node name="Container" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(116, 20)
+layout_mode = 0
 offset_right = 116.0
 offset_bottom = 20.0
 

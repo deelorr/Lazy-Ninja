@@ -1,0 +1,74 @@
+[gd_scene load_steps=6 format=3 uid="uid://de4i75octoy82"]
+
+[ext_resource type="Texture2D" uid="uid://ckokdgtal17wq" path="res://art/gui/InventoryRect.png" id="1_3ce7w"]
+[ext_resource type="Script" path="res://scripts/gui/gold_gui.gd" id="2_j1cif"]
+[ext_resource type="Texture2D" uid="uid://b7ynlectloe2s" path="res://art/gui/gold.png" id="3_ls2q0"]
+[ext_resource type="Script" path="res://scripts/gui/health_gui.gd" id="4_ch061"]
+[ext_resource type="Texture2D" uid="uid://cq6yg7kccbf4m" path="res://art/gui/Heart (2).png" id="5_iokv2"]
+
+[node name="StatPanel" type="NinePatchRect"]
+offset_right = 69.0
+offset_bottom = 35.0
+texture = ExtResource("1_3ce7w")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = -9.5
+offset_right = 126.0
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.35, 0.35)
+
+[node name="Gold" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+script = ExtResource("2_j1cif")
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Gold"]
+self_modulate = Color(1, 1, 0.301961, 0.776471)
+layout_mode = 2
+texture = ExtResource("3_ls2q0")
+
+[node name="Label" type="Label" parent="VBoxContainer/Gold"]
+layout_mode = 2
+text = "Gold:"
+
+[node name="gold_label" type="Label" parent="VBoxContainer/Gold"]
+layout_mode = 2
+text = "100"
+
+[node name="Health" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+script = ExtResource("4_ch061")
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Health"]
+self_modulate = Color(1, 1, 0.301961, 0.776471)
+layout_mode = 2
+texture = ExtResource("5_iokv2")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Health"]
+layout_mode = 2
+text = "HP: "
+
+[node name="Label2" type="Label" parent="VBoxContainer/Health"]
+layout_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/Health/Label2"]
+layout_mode = 2
+offset_left = -2.0
+offset_top = 3.42857
+offset_right = 90.0
+offset_bottom = 24.4286
+max_value = 3.0
+show_percentage = false

@@ -8,9 +8,9 @@ var isOpen: bool = false
 func open():
 	visible = true
 	isOpen = true
-	emit_signal("opened")
+	opened.emit()
 	
 func close():
 	visible = false
 	isOpen = false
-	emit_signal("closed")
+	closed.emit()
