@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://6o8v72jsa5h1"]
+[gd_scene load_steps=20 format=3 uid="uid://6o8v72jsa5h1"]
 
 [ext_resource type="Texture2D" uid="uid://yqjhon6jwyfs" path="res://art/tilesets/floor.png" id="1_iunt8"]
 [ext_resource type="Script" path="res://scripts/scenes/inside_house.gd" id="1_wyhd5"]
@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://cytnun4f64ouu" path="res://scenes/gui/hearts_container.tscn" id="7_3kkcc"]
 [ext_resource type="PackedScene" uid="uid://cw32y4dbgj36m" path="res://scenes/characters/player.tscn" id="7_uxh8i"]
 [ext_resource type="PackedScene" uid="uid://77s2jr485rus" path="res://scenes/gui/inventory/inventory_gui.tscn" id="8_7ivxg"]
+[ext_resource type="PackedScene" uid="uid://de4i75octoy82" path="res://scenes/gui/stat_panel.tscn" id="9_313l7"]
+[ext_resource type="Script" path="res://scripts/gui/stat_panel.gd" id="10_hw6b2"]
 [ext_resource type="Script" path="res://scripts/player/follow_cam.gd" id="11_h1g35"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qk7by"]
@@ -1244,6 +1246,9 @@ offset_right = 64.0
 offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="StatPanel" parent="CanvasLayer" instance=ExtResource("9_313l7")]
+script = ExtResource("10_hw6b2")
 
 [node name="entrance_markers" type="Node2D" parent="."]
 position = Vector2(79, 90)

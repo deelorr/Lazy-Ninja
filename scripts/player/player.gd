@@ -1,7 +1,8 @@
 class_name Player
 extends CharacterBody2D
 
-signal health_changed
+signal health_changed(new_health: int)
+signal gold_changed(new_gold: int)
 
 @export var speed: int = 35
 @export var max_health: int = 3
@@ -98,3 +99,16 @@ func use_item(item: InventoryItem):
 		return
 	item.use(self)
 	inventory.remove_last_used_item()
+
+func change_health(amount: int):
+	current_health += amount
+	current_health = clamp(current_health, 0, max_health)
+	health_changed.emit(current_health)
+
+func change_gold(amount: int):
+	gold += amount
+	gold_changed.emit(gold)
+
+func _unhandled_input(event):
+	if event.is_action_pressed("action"):
+		change_gold(10)

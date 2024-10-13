@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c3o11evahvoud"]
+[gd_scene load_steps=21 format=3 uid="uid://c3o11evahvoud"]
 
 [ext_resource type="Script" path="res://scripts/scenes/inside_house.gd" id="1_5hnq3"]
 [ext_resource type="Texture2D" uid="uid://yqjhon6jwyfs" path="res://art/tilesets/floor.png" id="2_4do0k"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://cytnun4f64ouu" path="res://scenes/gui/hearts_container.tscn" id="7_iv3qi"]
 [ext_resource type="PackedScene" uid="uid://77s2jr485rus" path="res://scenes/gui/inventory/inventory_gui.tscn" id="8_wyk7p"]
 [ext_resource type="PackedScene" uid="uid://blt4seqeee2mk" path="res://scenes/maps/scene_trigger.tscn" id="9_cs0xv"]
+[ext_resource type="PackedScene" uid="uid://de4i75octoy82" path="res://scenes/gui/stat_panel.tscn" id="9_ux0qw"]
+[ext_resource type="Script" path="res://scripts/gui/stat_panel.gd" id="10_3l2nc"]
 [ext_resource type="PackedScene" uid="uid://cw32y4dbgj36m" path="res://scenes/characters/player.tscn" id="10_lsbwn"]
 [ext_resource type="Script" path="res://scripts/player/follow_cam.gd" id="11_mvrf7"]
 [ext_resource type="PackedScene" uid="uid://ma54ampl27ky" path="res://scenes/characters/store_owner.tscn" id="12_xjrcs"]
@@ -1246,6 +1248,9 @@ offset_right = 64.0
 offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="StatPanel" parent="CanvasLayer" instance=ExtResource("9_ux0qw")]
+script = ExtResource("10_3l2nc")
 
 [node name="entrance_markers" type="Node2D" parent="."]
 position = Vector2(79, 90)
