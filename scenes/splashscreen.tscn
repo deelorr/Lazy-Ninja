@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://bfodgvl4miv4o"]
 
-[ext_resource type="Script" path="res://scripts/splashscreen.gd" id="1_431rh"]
-[ext_resource type="Texture2D" uid="uid://dwu3bcxsc2ylt" path="res://art/game by lorch.png" id="2_sao63"]
-[ext_resource type="Texture2D" uid="uid://btd4krghe8kvj" path="res://art/lazy ninja.png" id="3_8xtwj"]
+[ext_resource type="Script" path="res://scripts/scenes/splashscreen.gd" id="1_431rh"]
+[ext_resource type="Texture2D" uid="uid://dwu3bcxsc2ylt" path="res://art/extras/game by lorch.png" id="2_sao63"]
+[ext_resource type="Texture2D" uid="uid://btd4krghe8kvj" path="res://art/extras/lazy ninja.png" id="3_8xtwj"]
 
 [sub_resource type="Animation" id="Animation_1jfcq"]
 resource_name = "fade_in"

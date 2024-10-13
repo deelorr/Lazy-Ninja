@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://641a0fatdw5i" path="res://art/enemies/store_owner_sprites.png" id="1_3kwwm"]
 [ext_resource type="Script" path="res://scripts/store_owner.gd" id="1_kgjyf"]
-[ext_resource type="Texture2D" uid="uid://cyn86gtgvj0g3" path="res://DialogInfo.png" id="3_mfude"]
+[ext_resource type="Texture2D" uid="uid://cyn86gtgvj0g3" path="res://art/extras/DialogInfo.png" id="3_mfude"]
 
 [sub_resource type="Animation" id="Animation_2glv3"]
 length = 0.001

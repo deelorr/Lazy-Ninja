@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dwu3bcxsc2ylt"
-path="res://.godot/imported/game by lorch.png-eb778940ee87f58fa88b79cb6a9a005d.ctex"
+path="res://.godot/imported/game by lorch.png-da5f08942aec0de504d2cff67e9f90b1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/game by lorch.png"
-dest_files=["res://.godot/imported/game by lorch.png-eb778940ee87f58fa88b79cb6a9a005d.ctex"]
+source_file="res://art/extras/game by lorch.png"
+dest_files=["res://.godot/imported/game by lorch.png-da5f08942aec0de504d2cff67e9f90b1.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgif58s51ttk0"
-path="res://.godot/imported/house.png-d036941960abe63beca58a042fe9d81b.ctex"
+uid="uid://btd4krghe8kvj"
+path="res://.godot/imported/lazy ninja.png-e9d605fc65e147b7aea5e22a8108ccb5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/tilesets/house.png"
-dest_files=["res://.godot/imported/house.png-d036941960abe63beca58a042fe9d81b.ctex"]
+source_file="res://art/extras/lazy ninja.png"
+dest_files=["res://.godot/imported/lazy ninja.png-e9d605fc65e147b7aea5e22a8108ccb5.ctex"]
 
 [params]
 

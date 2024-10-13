@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/scenes/inside_house.gd" id="1_5hnq3"]
 [ext_resource type="Texture2D" uid="uid://yqjhon6jwyfs" path="res://art/tilesets/floor.png" id="2_4do0k"]
 [ext_resource type="Texture2D" uid="uid://db0ofsi30xfjk" path="res://art/tilesets/house elements.png" id="3_jtrho"]
-[ext_resource type="Texture2D" uid="uid://dgif58s51ttk0" path="res://art/tilesets/house.png" id="4_2v4o5"]
+[ext_resource type="Texture2D" uid="uid://dgif58s51ttk0" path="res://art/tilesets/buildings.png" id="4_2v4o5"]
 [ext_resource type="Texture2D" uid="uid://cp641bt8pa8ol" path="res://art/tilesets/walls.png" id="5_2tn16"]
 [ext_resource type="Script" path="res://scripts/gui/canvas_layer.gd" id="6_ujtml"]
 [ext_resource type="PackedScene" uid="uid://cytnun4f64ouu" path="res://scenes/gui/hearts_container.tscn" id="7_iv3qi"]
@@ -1213,6 +1213,7 @@ size = Vector2(34, 11)
 script = ExtResource("1_5hnq3")
 
 [node name="TileMap" type="TileMap" parent="."]
+y_sort_enabled = true
 tile_set = SubResource("TileSet_rg55s")
 format = 2
 layer_0/name = "background"
@@ -1222,7 +1223,7 @@ layer_1/y_sort_enabled = true
 layer_1/z_index = 1
 layer_1/tile_data = PackedInt32Array(327682, 1900546, 15, 327691, 1114114, 13, 262155, 1179650, 13, 327681, 1, 7, 262145, 1, 7, 196613, 1114114, 18, 131079, 1048578, 18, 65544, 1900546, 11, 65546, 1900546, 11, 65537, 2097154, 17, 196609, 2097154, 17, 131075, 1048578, 18)
 layer_2/name = "counter"
-layer_2/z_index = 1
+layer_2/z_index = 2
 layer_2/tile_data = PackedInt32Array(65543, 917506, 17, 131079, 917506, 17, 65539, 1376258, 12, 131075, 1376258, 12)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://yqjhon6jwyfs" path="res://art/tilesets/floor.png" id="1_iunt8"]
 [ext_resource type="Script" path="res://scripts/scenes/inside_house.gd" id="1_wyhd5"]
 [ext_resource type="Texture2D" uid="uid://db0ofsi30xfjk" path="res://art/tilesets/house elements.png" id="2_w771l"]
-[ext_resource type="Texture2D" uid="uid://dgif58s51ttk0" path="res://art/tilesets/house.png" id="3_ctps4"]
+[ext_resource type="Texture2D" uid="uid://dgif58s51ttk0" path="res://art/tilesets/buildings.png" id="3_ctps4"]
 [ext_resource type="Texture2D" uid="uid://cp641bt8pa8ol" path="res://art/tilesets/walls.png" id="4_lqv6r"]
 [ext_resource type="PackedScene" uid="uid://blt4seqeee2mk" path="res://scenes/maps/scene_trigger.tscn" id="6_ohnnk"]
 [ext_resource type="Script" path="res://scripts/gui/canvas_layer.gd" id="6_swgp2"]
@@ -1214,6 +1214,7 @@ size = Vector2(34, 12)
 script = ExtResource("1_wyhd5")
 
 [node name="TileMap" type="TileMap" parent="."]
+y_sort_enabled = true
 tile_set = SubResource("TileSet_rg55s")
 format = 2
 layer_0/name = "background"

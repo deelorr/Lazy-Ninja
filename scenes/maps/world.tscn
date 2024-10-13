@@ -10,14 +10,14 @@
 [ext_resource type="PackedScene" uid="uid://b2blmb7y86f78" path="res://scenes/items/Collectables/lifepot.tscn" id="5_k76w3"]
 [ext_resource type="PackedScene" uid="uid://bi3sw8caf5ubs" path="res://scenes/items/Collectables/Sword.tscn" id="6_h7t66"]
 [ext_resource type="PackedScene" uid="uid://cytnun4f64ouu" path="res://scenes/gui/hearts_container.tscn" id="7_b21lc"]
-[ext_resource type="Texture2D" uid="uid://dgif58s51ttk0" path="res://art/tilesets/house.png" id="7_kmdpc"]
+[ext_resource type="Texture2D" uid="uid://dgif58s51ttk0" path="res://art/tilesets/buildings.png" id="7_kmdpc"]
 [ext_resource type="Texture2D" uid="uid://0qc3452mjill" path="res://art/tilesets/water.png" id="8_du033"]
 [ext_resource type="Texture2D" uid="uid://cd1fctwfog8wt" path="res://art/tilesets/animated_sprites/anim_water.png" id="9_pgi3e"]
 [ext_resource type="Texture2D" uid="uid://dnx4jlfjv8rt6" path="res://art/tilesets/ground_transparent.png" id="10_3wuk1"]
 [ext_resource type="Script" path="res://scripts/gui/canvas_layer.gd" id="10_wu4s8"]
 [ext_resource type="Texture2D" uid="uid://842gat1qraly" path="res://art/tilesets/animated_sprites/quicksand.png" id="11_itwi6"]
 [ext_resource type="PackedScene" uid="uid://77s2jr485rus" path="res://scenes/gui/inventory/inventory_gui.tscn" id="11_jg4rn"]
-[ext_resource type="PackedScene" uid="uid://cf71ab0m6youu" path="res://scenes/gui/hotbar.tscn" id="12_tiks5"]
+[ext_resource type="PackedScene" uid="uid://cf71ab0m6youu" path="res://scenes/gui/inventory/hotbar.tscn" id="12_tiks5"]
 [ext_resource type="PackedScene" uid="uid://blt4seqeee2mk" path="res://scenes/maps/scene_trigger.tscn" id="14_rmnrq"]
 [ext_resource type="PackedScene" uid="uid://de4i75octoy82" path="res://scenes/gui/stat_panel.tscn" id="17_buchr"]
 [ext_resource type="Script" path="res://scripts/gui/stat_panel.gd" id="18_f5ug1"]
@@ -2674,44 +2674,44 @@ layer_5/tile_data = PackedInt32Array(131107, 1245188, 0, 589850, 4, 0)
 
 [node name="Slimes" type="Node" parent="TileMap"]
 
-[node name="Slime" parent="TileMap/Slimes" node_paths=PackedStringArray("end_point") instance=ExtResource("4_rnf6u")]
+[node name="Slime" parent="TileMap/Slimes" node_paths=PackedStringArray("end_marker") instance=ExtResource("4_rnf6u")]
 position = Vector2(193, 54)
-end_point = NodePath("Marker2D")
+end_marker = NodePath("Marker2D")
 
 [node name="Marker2D" type="Marker2D" parent="TileMap/Slimes/Slime"]
 position = Vector2(-4, 97)
 
-[node name="Slime2" parent="TileMap/Slimes" node_paths=PackedStringArray("end_point") instance=ExtResource("4_rnf6u")]
+[node name="Slime2" parent="TileMap/Slimes" node_paths=PackedStringArray("end_marker") instance=ExtResource("4_rnf6u")]
 position = Vector2(290, 170)
-end_point = NodePath("Marker2D")
+end_marker = NodePath("Marker2D")
 
 [node name="Marker2D" type="Marker2D" parent="TileMap/Slimes/Slime2"]
 position = Vector2(12, -119)
 
-[node name="Slime3" parent="TileMap/Slimes" node_paths=PackedStringArray("end_point") instance=ExtResource("4_rnf6u")]
+[node name="Slime3" parent="TileMap/Slimes" node_paths=PackedStringArray("end_marker") instance=ExtResource("4_rnf6u")]
 position = Vector2(280, 248)
-end_point = NodePath("Marker2D")
+end_marker = NodePath("Marker2D")
 
 [node name="Marker2D" type="Marker2D" parent="TileMap/Slimes/Slime3"]
 position = Vector2(100, 32)
 
-[node name="Slime4" parent="TileMap/Slimes" node_paths=PackedStringArray("end_point") instance=ExtResource("4_rnf6u")]
+[node name="Slime4" parent="TileMap/Slimes" node_paths=PackedStringArray("end_marker") instance=ExtResource("4_rnf6u")]
 position = Vector2(81, 255)
-end_point = NodePath("Marker2D")
+end_marker = NodePath("Marker2D")
 
 [node name="Marker2D" type="Marker2D" parent="TileMap/Slimes/Slime4"]
 position = Vector2(-50, -92)
 
-[node name="Slime5" parent="TileMap/Slimes" node_paths=PackedStringArray("end_point") instance=ExtResource("4_rnf6u")]
+[node name="Slime5" parent="TileMap/Slimes" node_paths=PackedStringArray("end_marker") instance=ExtResource("4_rnf6u")]
 position = Vector2(610, 224)
-end_point = NodePath("Marker2D")
+end_marker = NodePath("Marker2D")
 
 [node name="Marker2D" type="Marker2D" parent="TileMap/Slimes/Slime5"]
 position = Vector2(-33, 81)
 
-[node name="Slime6" parent="TileMap/Slimes" node_paths=PackedStringArray("end_point") instance=ExtResource("4_rnf6u")]
+[node name="Slime6" parent="TileMap/Slimes" node_paths=PackedStringArray("end_marker") instance=ExtResource("4_rnf6u")]
 position = Vector2(439, 318)
-end_point = NodePath("Marker2D")
+end_marker = NodePath("Marker2D")
 
 [node name="Marker2D" type="Marker2D" parent="TileMap/Slimes/Slime6"]
 position = Vector2(60, -87)

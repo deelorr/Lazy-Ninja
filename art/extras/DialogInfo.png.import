@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://btd4krghe8kvj"
-path="res://.godot/imported/lazy ninja.png-59b218b23c78771d299d1575526d5850.ctex"
+uid="uid://cyn86gtgvj0g3"
+path="res://.godot/imported/DialogInfo.png-e3d335d6c2b2b7080ba6a39b487720a0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/lazy ninja.png"
-dest_files=["res://.godot/imported/lazy ninja.png-59b218b23c78771d299d1575526d5850.ctex"]
+source_file="res://art/extras/DialogInfo.png"
+dest_files=["res://.godot/imported/DialogInfo.png-e3d335d6c2b2b7080ba6a39b487720a0.ctex"]
 
 [params]
 

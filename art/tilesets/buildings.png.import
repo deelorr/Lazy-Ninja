@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cyn86gtgvj0g3"
-path="res://.godot/imported/DialogInfo.png-87ce43e48e55dad72d095e784406deb4.ctex"
+uid="uid://dgif58s51ttk0"
+path="res://.godot/imported/buildings.png-6907099c310e3b255ae10def5d0113f5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://DialogInfo.png"
-dest_files=["res://.godot/imported/DialogInfo.png-87ce43e48e55dad72d095e784406deb4.ctex"]
+source_file="res://art/tilesets/buildings.png"
+dest_files=["res://.godot/imported/buildings.png-6907099c310e3b255ae10def5d0113f5.ctex"]
 
 [params]
 

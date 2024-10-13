@@ -20,13 +20,6 @@ func _ready():
 	update()
 
 func connect_slots():
-	#for i in range(slots.size()):
-		#var slot = slots[i]
-		#slot.index = i
-		#
-		#var callable = Callable(on_slot_clicked)
-		#callable = callable.bind(slot)
-		#slot.pressed.connect(callable)
 	for i in range(slots.size()):
 		var slot = slots[i]
 		slot.index = i
@@ -54,7 +47,7 @@ func open():
 	visible = true
 	isOpen = true
 	opened.emit()
-	
+
 func close():
 	visible = false
 	isOpen = false
@@ -63,69 +56,71 @@ func close():
 func on_slot_clicked(slot):
 	if locked:
 		return
+
 	if slot.is_empty():
-		if !item_in_hand:
-			return
+		handle_empty_slot_click(slot)
+	else:
+		handle_non_empty_slot_click(slot)
+
+func handle_empty_slot_click(slot):
+	if item_in_hand:
 		insert_item_in_slot(slot)
-		return
-		
-	if !item_in_hand:
+
+func handle_non_empty_slot_click(slot):
+	if not item_in_hand:
 		take_item_from_slot(slot)
-		return
-		
-	if slot.item_stack_gui.inventory_slot.item.name == item_in_hand.inventory_slot.item.name:
+	elif can_stack_items(slot):
 		stack_items(slot)
-		return
-	
-	swap_item(slot)
-	
+	else:
+		swap_item(slot)
+
+func can_stack_items(slot) -> bool:
+	return slot.item_stack_gui.inventory_slot.item.name == item_in_hand.inventory_slot.item.name
+
 func take_item_from_slot(slot):
 	item_in_hand = slot.take_item()
 	add_child(item_in_hand)
 	update_item_in_hand()
-	
 	old_index = slot.index
-	
+
 func insert_item_in_slot(slot):
 	var item = item_in_hand
 	remove_child(item_in_hand)
 	item_in_hand = null
 	slot.insert(item)
-	
 	old_index = -1
-	
+
 func swap_item(slot):
 	var temp_item = slot.take_item()
-	
 	insert_item_in_slot(slot)
-	
 	item_in_hand = temp_item
 	add_child(item_in_hand)
 	update_item_in_hand()
-	
+
 func stack_items(slot):
 	var slot_item: ItemStackGUI = slot.item_stack_gui
-	var max_amount = slot_item.inventory_slot.item.max_per_stack
 	var total_amount = slot_item.inventory_slot.amount + item_in_hand.inventory_slot.amount
-	
+	var max_amount = slot_item.inventory_slot.item.max_per_stack
+
 	if slot_item.inventory_slot.amount == max_amount:
 		swap_item(slot)
 		return
-		
+
+	add_items_to_slot(slot_item, total_amount, max_amount)
+	slot_item.update()
+	if item_in_hand:
+		item_in_hand.update()
+
+func add_items_to_slot(slot_item, total_amount, max_amount):
 	if total_amount <= max_amount:
 		slot_item.inventory_slot.amount = total_amount
 		remove_child(item_in_hand)
 		item_in_hand = null
 		old_index = -1
-	
 	else:
 		slot_item.inventory_slot.amount = max_amount
 		item_in_hand.inventory_slot.amount = total_amount - max_amount
-	
-	slot_item.update()
-	if item_in_hand:
-			item_in_hand.update()
-	
+
 func update_item_in_hand():
 	if !item_in_hand:
 		return
@@ -149,7 +144,6 @@ func put_item_back():
 	
 	insert_item_in_slot(target_slot)
 	locked = false  # Unlock after operation is complete
-	
 
 func _input(_event):
 	if item_in_hand && !locked && Input.is_action_just_pressed("right_click"):
