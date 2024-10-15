@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://ck78uu30262eo"]
+
+[ext_resource type="Script" path="res://scripts/items/weapons/sword.gd" id="1_jyvgi"]
+[ext_resource type="Texture2D" uid="uid://c8ifb2o1s6aq0" path="res://art/items/Axe.png" id="2_e8l43"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k5c1w"]
+size = Vector2(10, 6)
+
+[node name="axe" type="Area2D"]
+visible = false
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_jyvgi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -9)
+shape = SubResource("RectangleShape2D_k5c1w")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -6)
+texture = ExtResource("2_e8l43")
