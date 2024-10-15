@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="StoreInventoryItem" load_steps=3 format=3 uid="uid://expm4waepiku"]
+
+[ext_resource type="Script" path="res://scripts/gui/store_inventory/store_inventory_item.gd" id="1_cl0w1"]
+[ext_resource type="Texture2D" uid="uid://d2kctnknmnwsm" path="res://art/items/LifePot.png" id="2_hg1o4"]
+
+[resource]
+script = ExtResource("1_cl0w1")
+name = "Lifepot"
+texture = ExtResource("2_hg1o4")
+max_per_stack = 5
+price = 10

@@ -1826,6 +1826,7 @@ texture = ExtResource("2_kudlv")
 0:2/size_in_atlas = Vector2i(4, 3)
 0:2/0 = 0
 0:2/0/y_sort_origin = 22
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(30.736, 12.918, 32.1305, 22.3089, 0.140308, 22.5895, -30.4468, 23.1508, -28.9542, 14.2544)
 0:5/size_in_atlas = Vector2i(4, 3)
 0:5/0 = 0
 0:5/0/y_sort_origin = 22
@@ -1840,7 +1841,7 @@ texture = ExtResource("3_ksm4w")
 0:0/animation_frame_3/duration = 0.5
 0:0/0 = 0
 0:0/0/y_sort_origin = 7
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5.875, 1.75, 6.25, 1.75, 2.25, 8, -1.75, 8)
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-1.94454, 4.94975, 2.2981, 4.59619, 1.76777, 8, -1.41421, 8)
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_scq58"]
 resource_name = "Collectables"
@@ -1861,8 +1862,11 @@ texture = ExtResource("7_kmdpc")
 12:0/0 = 0
 16:0/size_in_atlas = Vector2i(3, 3)
 16:0/0 = 0
+16:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 19:0/size_in_atlas = Vector2i(4, 3)
 19:0/0 = 0
+19:0/0/y_sort_origin = 22
+19:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(30.7274, 2.38523, 32.1305, 22.3089, 16.1354, 22.0283, 15.0129, 7.15569, 0.420925, 8, 0.140308, 22.5895, -30.4468, 23.1508, -31.5692, 4.34954)
 23:0/size_in_atlas = Vector2i(3, 3)
 23:0/0 = 0
 
@@ -2670,7 +2674,7 @@ layer_4/tile_data = PackedInt32Array(1048584, 3, 65536, 1245202, 3, 65536, 11796
 layer_5/name = "buildings"
 layer_5/y_sort_enabled = true
 layer_5/z_index = 1
-layer_5/tile_data = PackedInt32Array(131107, 1245188, 0, 589850, 4, 0)
+layer_5/tile_data = PackedInt32Array(131107, 1245188, 0, 589851, 4, 0)
 
 [node name="Slimes" type="Node" parent="TileMap"]
 
@@ -2686,7 +2690,7 @@ position = Vector2(290, 170)
 end_marker = NodePath("Marker2D")
 
 [node name="Marker2D" type="Marker2D" parent="TileMap/Slimes/Slime2"]
-position = Vector2(12, -119)
+position = Vector2(15, -81)
 
 [node name="Slime3" parent="TileMap/Slimes" node_paths=PackedStringArray("end_marker") instance=ExtResource("4_rnf6u")]
 position = Vector2(280, 248)
@@ -2760,13 +2764,13 @@ script = ExtResource("18_f5ug1")
 position = Vector2(416, 189)
 
 [node name="exit_house" type="Marker2D" parent="entrance_markers"]
-position = Vector2(0, 1)
+position = Vector2(16, 1)
 
 [node name="exit_store" type="Marker2D" parent="entrance_markers"]
 position = Vector2(160, -109)
 
 [node name="SceneTrigger" parent="." instance=ExtResource("14_rmnrq")]
-position = Vector2(416, 170)
+position = Vector2(432, 170)
 connected_scene = "inside_house"
 connected_marker = "enter_house"
 

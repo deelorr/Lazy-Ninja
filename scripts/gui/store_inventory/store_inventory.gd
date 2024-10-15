@@ -1,14 +1,14 @@
-class_name Inventory
+class_name StoreInventory
 extends Resource
 
 signal updated
 signal use_item
 
-@export var slots: Array[InventorySlot]
+@export var slots: Array[StoreInventorySlot]
 var index_of_last_used_item: int = -1
 
 # Insert an item into the inventory, either stacking it or placing it in a new slot
-func insert(item: InventoryItem):
+func insert(item: StoreInventoryItem):
 	if try_stack_item(item):
 		return
 	place_item_in_empty_slot(item)
@@ -16,7 +16,7 @@ func insert(item: InventoryItem):
 	updated.emit()
 
 # Tries to stack the item in an existing slot
-func try_stack_item(item: InventoryItem) -> bool:
+func try_stack_item(item: StoreInventoryItem) -> bool:
 	for slot in slots:
 		if slot.item == item and slot.amount < item.max_per_stack:
 			slot.amount += 1
@@ -25,7 +25,7 @@ func try_stack_item(item: InventoryItem) -> bool:
 	return false
 
 # Finds an empty slot and places the item there
-func place_item_in_empty_slot(item: InventoryItem):
+func place_item_in_empty_slot(item: StoreInventoryItem):
 	for i in range(slots.size()):
 		if !slots[i].item:
 			slots[i].item = item
@@ -34,18 +34,18 @@ func place_item_in_empty_slot(item: InventoryItem):
 			return
 
 # Remove the item from the specified slot
-func remove_slot(inventory_slot: InventorySlot):
+func remove_slot(inventory_slot: StoreInventorySlot):
 	var index = slots.find(inventory_slot)
 	if index >= 0:
 		remove_at_index(index)
 
 # Removes the item at a specific index
 func remove_at_index(index: int):
-	slots[index] = InventorySlot.new()
+	slots[index] = StoreInventorySlot.new()
 	updated.emit()
 
 # Insert an item at a specific index in the inventory
-func insert_slot(index: int, inventory_slot: InventorySlot):
+func insert_slot(index: int, inventory_slot: StoreInventorySlot):
 	slots[index] = inventory_slot
 	updated.emit()
 
