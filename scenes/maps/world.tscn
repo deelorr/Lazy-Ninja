@@ -2725,6 +2725,7 @@ process_mode = 3
 script = ExtResource("10_wu4s8")
 
 [node name="hearts_container" parent="CanvasLayer" instance=ExtResource("7_b21lc")]
+visible = false
 layout_direction = 3
 anchors_preset = 0
 anchor_left = 0.0
@@ -2799,6 +2800,7 @@ follow_node = NodePath("../Player")
 polygon = PackedVector2Array(1, 0, 672, 0, 672, 352, 0, 352, 0, 0, 0, -13, -12, -13, -12, 361, 684, 360, 684, -13, 1, -13)
 
 [node name="SceneTrigger2" parent="." instance=ExtResource("14_rmnrq")]
+z_index = 1
 position = Vector2(575, 56)
 connected_scene = "inside_store"
 connected_marker = "enter_store"

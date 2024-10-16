@@ -1229,6 +1229,7 @@ process_mode = 3
 script = ExtResource("6_swgp2")
 
 [node name="hearts_container" parent="CanvasLayer" instance=ExtResource("7_3kkcc")]
+visible = false
 layout_direction = 3
 anchors_preset = 0
 anchor_left = 0.0
