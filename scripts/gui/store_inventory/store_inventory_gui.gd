@@ -13,10 +13,29 @@ var item_in_hand: StoreItemStackGUI
 var old_index: int = -1
 var locked: bool = false
 
+var player = null
+var player_inventory: Inventory = null
+
 func _ready():
 	connect_slots()
 	inventory.updated.connect(update)
 	update()
+	
+	if scene_manager.player != null:
+		player = scene_manager.player
+		player_inventory = player.inventory
+		print("Player inventory initialized:", player_inventory)
+	else:
+		print("no player found, waiting for signal")
+		scene_manager.player_changed.connect(_on_player_changed)
+		
+func _on_player_changed(new_player):
+	player = new_player
+	player_inventory = player.inventory
+	print("Player inventory updated:", player_inventory)
+	
+func _process(delta: float) -> void:
+	print(player.inventory)
 
 func connect_slots():
 	for i in range(slots.size()):
