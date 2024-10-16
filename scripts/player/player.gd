@@ -24,6 +24,7 @@ var gold: int = 150
 
 func _ready():
 	inventory.use_item.connect(use_item)
+	weapon.disable()
 	effects.play("RESET")
 
 func _physics_process(_delta):

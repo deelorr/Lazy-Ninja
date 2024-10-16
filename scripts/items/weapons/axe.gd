@@ -4,6 +4,8 @@ extends Area2D
 
 func enable():
 	shape.disabled = false
-	
+	#visible = true
+
 func disable():
 	shape.disabled = true
+	#visible = false

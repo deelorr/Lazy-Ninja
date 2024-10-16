@@ -1,10 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://cw32y4dbgj36m"]
+[gd_scene load_steps=23 format=3 uid="uid://cw32y4dbgj36m"]
 
 [ext_resource type="Texture2D" uid="uid://cdkfsmeq0yn4y" path="res://art/player/player_sprites.png" id="1_3lps0"]
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_xum27"]
 [ext_resource type="Resource" uid="uid://dvw7wrxslo3yr" path="res://resources/inventory/player_inventory.tres" id="2_c7tpp"]
 [ext_resource type="Script" path="res://scripts/player/weapon_node.gd" id="4_fk1a3"]
 [ext_resource type="PackedScene" uid="uid://bylldbpasc02w" path="res://scenes/items/Weapons/sword.tscn" id="4_gaop7"]
+[ext_resource type="PackedScene" uid="uid://ck78uu30262eo" path="res://scenes/items/Weapons/axe.tscn" id="5_y8ti1"]
 
 [sub_resource type="Animation" id="Animation_60f7p"]
 length = 0.001
@@ -435,5 +436,8 @@ rotation = 2.0944
 script = ExtResource("4_fk1a3")
 
 [node name="sword" parent="weapon" instance=ExtResource("4_gaop7")]
+
+[node name="axe" parent="weapon" instance=ExtResource("5_y8ti1")]
+visible = true
 
 [connection signal="area_entered" from="hurt_box" to="." method="_on_hurt_box_area_entered"]
