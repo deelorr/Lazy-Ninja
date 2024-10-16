@@ -1,4 +1,4 @@
-extends "res://scripts/items/collectable.gd"
+extends "res://scripts/items/collectables/collectable.gd"
 
 @onready var animations = $AnimationPlayer
 

@@ -17,7 +17,7 @@ func _ready():
 	else:
 		weapon = null
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("switch_weapon"):
 		change_active_weapon((active_weapon_index + 1) % weapons.size())
 
