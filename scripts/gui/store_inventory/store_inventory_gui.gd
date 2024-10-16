@@ -5,7 +5,7 @@ signal closed
 
 var isOpen: bool = false
 
-@onready var inventory: StoreInventory = preload("res://resources/store_inventory/store_inventory.tres")
+@onready var inventory: StoreInventory = preload("res://resources/inventory/store_inventory.tres")
 @onready var itemStackGUIClass = preload("res://scenes/gui/store_inventory/store_item_stack_gui.tscn")
 @onready var slots: Array = $NinePatchRect/GridContainer.get_children()
 

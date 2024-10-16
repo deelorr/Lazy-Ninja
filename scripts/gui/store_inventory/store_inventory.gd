@@ -8,7 +8,7 @@ signal use_item
 var index_of_last_used_item: int = -1
 
 # Insert an item into the inventory, either stacking it or placing it in a new slot
-func insert(item: StoreInventoryItem):
+func insert(item: InventoryItem):
 	if try_stack_item(item):
 		return
 	place_item_in_empty_slot(item)
@@ -16,7 +16,7 @@ func insert(item: StoreInventoryItem):
 	updated.emit()
 
 # Tries to stack the item in an existing slot
-func try_stack_item(item: StoreInventoryItem) -> bool:
+func try_stack_item(item: InventoryItem) -> bool:
 	for slot in slots:
 		if slot.item == item and slot.amount < item.max_per_stack:
 			slot.amount += 1
@@ -25,7 +25,7 @@ func try_stack_item(item: StoreInventoryItem) -> bool:
 	return false
 
 # Finds an empty slot and places the item there
-func place_item_in_empty_slot(item: StoreInventoryItem):
+func place_item_in_empty_slot(item: InventoryItem):
 	for i in range(slots.size()):
 		if !slots[i].item:
 			slots[i].item = item

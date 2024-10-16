@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=3 format=3 uid="uid://cs3dwdv0ffoes"]
+
+[ext_resource type="Script" path="res://scripts/gui/inventory/inventory_item.gd" id="1_dr2qf"]
+[ext_resource type="Texture2D" uid="uid://c8ifb2o1s6aq0" path="res://art/items/Axe.png" id="2_obixm"]
+
+[resource]
+script = ExtResource("1_dr2qf")
+name = "Axe"
+texture = ExtResource("2_obixm")
+max_per_stack = 1
+price = 20

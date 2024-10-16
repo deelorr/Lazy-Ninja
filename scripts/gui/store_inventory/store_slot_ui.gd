@@ -2,7 +2,7 @@ extends Button
 
 @onready var background_sprite: Sprite2D = $background
 @onready var container: CenterContainer = $CenterContainer
-@onready var inventory = preload("res://resources/store_inventory/store_inventory.tres")
+@onready var inventory = preload("res://resources/inventory/store_inventory.tres")
 
 var item_stack_gui: StoreItemStackGUI
 var index: int
