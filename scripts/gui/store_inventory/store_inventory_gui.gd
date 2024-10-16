@@ -33,9 +33,6 @@ func _on_player_changed(new_player):
 	player = new_player
 	player_inventory = player.inventory
 	print("Player inventory updated:", player_inventory)
-	
-func _process(delta: float) -> void:
-	print(player.inventory)
 
 func connect_slots():
 	for i in range(slots.size()):
