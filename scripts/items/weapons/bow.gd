@@ -5,6 +5,7 @@ extends Node2D
 @export var fire_rate: float = 0.5  # Time between shots
 @export var arrow_offset: Vector2 = Vector2(-5, 10)  # Position where the arrow spawns relative to the bow
 @onready var shape = $CollisionShape2D
+@onready var arrow_count: int = 5
 
 var can_fire: bool = true
 
@@ -22,11 +23,13 @@ func disable():
 	visible = false
 
 func shoot(target_position: Vector2):
-	if not can_fire:
+	if not can_fire or arrow_count <= 0:
 		return
 
 	can_fire = false
 	$can_fire_timer.start(fire_rate)
+	
+	arrow_count -= 1
 
 	var direction = (target_position - global_position).normalized()
 
