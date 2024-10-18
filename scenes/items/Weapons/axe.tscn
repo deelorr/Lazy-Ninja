@@ -7,7 +7,6 @@
 size = Vector2(10, 6)
 
 [node name="axe" type="Area2D"]
-visible = false
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_7u21b")

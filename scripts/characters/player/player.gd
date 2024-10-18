@@ -16,6 +16,8 @@ signal gold_changed(new_gold: int)
 @onready var weapon = $weapon
 @onready var current_health: int = max_health
 
+var bow
+
 var last_anim_direction: String = "down"
 var is_hurt: bool = false
 var is_attacking: bool = false
@@ -26,6 +28,9 @@ func _ready():
 	inventory.use_item.connect(use_item)
 	weapon.disable()
 	effects.play("RESET")
+	bow = weapon.bow
+	if bow == null:
+		print("Error: 'bow' prop not found under 'weapon' ")
 
 func _physics_process(_delta):
 	handle_input()
@@ -43,6 +48,10 @@ func handle_input():
 	
 	if Input.is_action_just_pressed("attack"):
 		attack()
+		
+	if Input.is_action_pressed("ranged_attack"):
+		var mouse_position = get_global_mouse_position()
+		bow.shoot(mouse_position)
 
 func update_animation():
 	if is_attacking:
@@ -60,8 +69,13 @@ func update_animation():
 		last_anim_direction = direction
 
 func attack():
-	animations.play("attack_" + last_anim_direction)
+	
+	if is_attacking:
+		return
+		
 	is_attacking = true
+	animations.play("attack_" + last_anim_direction)
+	#is_attacking = true
 	weapon.enable()
 	await animations.animation_finished
 	weapon.disable()
@@ -110,6 +124,6 @@ func change_gold(amount: int):
 	gold += amount
 	gold_changed.emit(gold)
 
-func _unhandled_input(event):
-	if event.is_action_pressed("action"):
-		change_gold(10)
+#func _unhandled_input(event):
+	#if event.is_action_pressed("action"):
+		#change_gold(10)
