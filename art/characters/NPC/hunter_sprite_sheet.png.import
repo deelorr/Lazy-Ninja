@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmk7pat2vxge0"
-path="res://.godot/imported/green_slime_sprites.png-5b9a8da19512a56e569822ff1309682b.ctex"
+uid="uid://bnx508tyv8spx"
+path="res://.godot/imported/hunter_sprite_sheet.png-460965af6e0cfe9b0f633b179e5e4ea2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/enemies/green_slime_sprites.png"
-dest_files=["res://.godot/imported/green_slime_sprites.png-5b9a8da19512a56e569822ff1309682b.ctex"]
+source_file="res://art/characters/NPC/hunter_sprite_sheet.png"
+dest_files=["res://.godot/imported/hunter_sprite_sheet.png-460965af6e0cfe9b0f633b179e5e4ea2.ctex"]
 
 [params]
 

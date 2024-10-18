@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmpwxneat8j66"]
+
+[ext_resource type="Texture2D" uid="uid://bnx508tyv8spx" path="res://art/characters/NPC/hunter_sprite_sheet.png" id="1_vaquc"]
+
+[node name="hunter" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_vaquc")
+hframes = 4
+vframes = 7

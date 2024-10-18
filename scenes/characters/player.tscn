@@ -1,6 +1,6 @@
 [gd_scene load_steps=24 format=3 uid="uid://cw32y4dbgj36m"]
 
-[ext_resource type="Texture2D" uid="uid://cdkfsmeq0yn4y" path="res://art/player/player_sprites.png" id="1_3lps0"]
+[ext_resource type="Texture2D" uid="uid://cdkfsmeq0yn4y" path="res://art/characters/player/player_sprites.png" id="1_3lps0"]
 [ext_resource type="Script" path="res://scripts/characters/player/player.gd" id="1_xum27"]
 [ext_resource type="Resource" uid="uid://dvw7wrxslo3yr" path="res://resources/inventory/player_inventory.tres" id="2_c7tpp"]
 [ext_resource type="Script" path="res://scripts/characters/player/weapon_node.gd" id="4_fk1a3"]

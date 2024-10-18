@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://641a0fatdw5i"
-path="res://.godot/imported/store_owner_sprites.png-3171052c8f3e47f6f2723d8d3e482dab.ctex"
+path="res://.godot/imported/store_owner_sprites.png-04a1e001d489733d15301dac8e974f69.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/enemies/store_owner_sprites.png"
-dest_files=["res://.godot/imported/store_owner_sprites.png-3171052c8f3e47f6f2723d8d3e482dab.ctex"]
+source_file="res://art/characters/NPC/store_owner_sprites.png"
+dest_files=["res://.godot/imported/store_owner_sprites.png-04a1e001d489733d15301dac8e974f69.ctex"]
 
 [params]
 
