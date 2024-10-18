@@ -39,6 +39,8 @@ func change_active_weapon(new_index: int):
 		active_weapon_index = new_index
 		#enable the newly selected weapon
 		weapon = weapons[active_weapon_index]
+		scene_manager.player.current_weapon = weapon.name
+		print(scene_manager.player.current_weapon)
 
 func enable():
 	if !weapon:

@@ -16,6 +16,8 @@ signal gold_changed(new_gold: int)
 @onready var weapon = $weapon
 @onready var current_health: int = max_health
 
+var current_weapon = ""
+
 var bow
 
 var last_anim_direction: String = "down"
@@ -48,10 +50,11 @@ func handle_input():
 	
 	if Input.is_action_just_pressed("attack"):
 		attack()
-		
-	if Input.is_action_pressed("ranged_attack"):
-		var mouse_position = get_global_mouse_position()
-		bow.shoot(mouse_position)
+	
+	if current_weapon == "bow":
+		if Input.is_action_pressed("ranged_attack"):
+			var mouse_position = get_global_mouse_position()
+			bow.shoot(mouse_position)
 
 func update_animation():
 	if is_attacking:
