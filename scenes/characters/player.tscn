@@ -437,8 +437,10 @@ rotation = 2.0944
 script = ExtResource("4_fk1a3")
 
 [node name="sword" parent="weapon" instance=ExtResource("4_gaop7")]
+visible = false
 
 [node name="axe" parent="weapon" instance=ExtResource("5_y8ti1")]
+visible = false
 
 [node name="bow" parent="weapon" instance=ExtResource("7_wg64x")]
 
