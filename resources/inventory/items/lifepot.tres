@@ -9,4 +9,4 @@ health_increase = 1
 name = "Lifepot"
 texture = ExtResource("2_lnjbi")
 max_per_stack = 5
-price = 5
+price = 10

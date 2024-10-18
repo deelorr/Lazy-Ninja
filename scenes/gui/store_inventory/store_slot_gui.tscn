@@ -24,9 +24,9 @@ offset_bottom = 20.0
 [node name="CenterContainer2" type="HBoxContainer" parent="."]
 layout_mode = 2
 offset_left = 2.0
-offset_top = 19.0
+offset_top = 20.0
 offset_right = 72.0
-offset_bottom = 45.0
+offset_bottom = 46.0
 scale = Vector2(0.23, 0.23)
 
 [node name="price" type="Label" parent="CenterContainer2"]
@@ -35,4 +35,3 @@ text = "Price:"
 
 [node name="price_label" type="Label" parent="CenterContainer2"]
 layout_mode = 2
-text = "10"

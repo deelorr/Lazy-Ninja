@@ -8,4 +8,4 @@ script = ExtResource("1_dr2qf")
 name = "Axe"
 texture = ExtResource("2_obixm")
 max_per_stack = 1
-price = 20
+price = 15
