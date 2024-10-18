@@ -17,13 +17,10 @@ signal gold_changed(new_gold: int)
 @onready var current_health: int = max_health
 
 var current_weapon = ""
-
 var bow
-
 var last_anim_direction: String = "down"
 var is_hurt: bool = false
 var is_attacking: bool = false
-
 var gold: int = 150
 
 func _ready():
@@ -38,7 +35,6 @@ func _physics_process(_delta):
 	handle_input()
 	move_and_slide()
 	update_animation()
-	
 	if !is_hurt:
 		for area in hurt_box.get_overlapping_areas():
 			if area.name == "hit_box":
@@ -47,14 +43,26 @@ func _physics_process(_delta):
 func handle_input():
 	var move_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	velocity = move_direction * speed
-	
 	if Input.is_action_just_pressed("attack"):
 		attack()
-	
 	if current_weapon == "bow":
-		if Input.is_action_pressed("ranged_attack"):
-			var mouse_position = get_global_mouse_position()
-			bow.shoot(mouse_position)
+		if Input.is_action_pressed("aim_bow"):
+			aim_bow()
+		elif Input.is_action_just_released("aim_bow"):
+			fire_bow()
+		else:
+			weapon.bow.stop_aiming()
+
+func aim_bow():
+	var mouse_position = get_global_mouse_position()
+	var direction = (mouse_position - weapon.global_position).normalized()
+	weapon.bow.rotation = direction.angle()
+	weapon.bow.aim()
+
+func fire_bow():
+	var mouse_position = get_global_mouse_position()
+	weapon.bow.shoot(mouse_position)
+	weapon.bow.stop_aiming()
 
 func update_animation():
 	if is_attacking:
@@ -67,18 +75,14 @@ func update_animation():
 		if velocity.x < 0: direction = "left"
 		elif velocity.x > 0: direction = "right"
 		elif velocity.y < 0: direction = "up"
-		
 		animations.play("walk_" + direction)
 		last_anim_direction = direction
 
 func attack():
-	
 	if is_attacking:
 		return
-		
 	is_attacking = true
 	animations.play("attack_" + last_anim_direction)
-	#is_attacking = true
 	weapon.enable()
 	await animations.animation_finished
 	weapon.disable()
@@ -105,13 +109,12 @@ func hurt_by_enemy_area(area):
 func _on_hurt_box_area_entered(area):
 	if area.has_method("collect"):
 		area.collect(inventory)
-		
+
 func increase_health(amount: int):
 	current_health += amount
 	current_health = min(max_health, current_health)
-	
 	health_changed.emit(current_health)
-	
+
 func use_item(item: InventoryItem):
 	if not item.can_be_used(self):
 		return
@@ -126,7 +129,3 @@ func change_health(amount: int):
 func change_gold(amount: int):
 	gold += amount
 	gold_changed.emit(gold)
-
-#func _unhandled_input(event):
-	#if event.is_action_pressed("action"):
-		#change_gold(10)

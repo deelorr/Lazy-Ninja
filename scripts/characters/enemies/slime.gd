@@ -32,7 +32,6 @@ func update_animation():
 		if animations.is_playing():
 			animations.stop()
 		return
-
 	animations.play("walk_" + get_direction())
 
 func get_direction() -> String:

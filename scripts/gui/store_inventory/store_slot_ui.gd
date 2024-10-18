@@ -11,19 +11,14 @@ func insert(isg: StoreItemStackGUI):
 	item_stack_gui = isg
 	background_sprite.frame = 1
 	container.add_child(item_stack_gui)
-	
 	if !item_stack_gui.inventory_slot || inventory.slots[index] == item_stack_gui.inventory_slot:
 		return
-		
 	inventory.insert_slot(index, item_stack_gui.inventory_slot)
 
 func take_item():
 	var item = item_stack_gui
-	
 	inventory.remove_slot(item_stack_gui.inventory_slot)
-	
 	clear()
-	
 	return item
 
 func is_empty():
