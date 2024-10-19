@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Quest" load_steps=3 format=3 uid="uid://bpowu2i37drr2"]
+
+[ext_resource type="Resource" uid="uid://cb3twnsxpcqgv" path="res://resources/inventory/items/lifepot.tres" id="1_mmog1"]
+[ext_resource type="Script" path="res://scripts/quests/quest.gd" id="2_w6cfy"]
+
+[resource]
+script = ExtResource("2_w6cfy")
+quest_id = 0
+title = "Kill Da Slimez"
+description = "Kill 5 Slimez"
+objectives = [{
+"completed": false,
+"description": "kill 5 slimez"
+}, {
+"completed": false,
+"description": "return to the hunter"
+}]
+rewards = {
+"Items": ExtResource("1_mmog1"),
+"XP": 10
+}

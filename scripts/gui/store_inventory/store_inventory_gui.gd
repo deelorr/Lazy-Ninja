@@ -68,7 +68,7 @@ func on_slot_clicked(slot):
 	else:
 		handle_non_empty_slot_click(slot)
 
-func handle_empty_slot_click(slot):
+func handle_empty_slot_click(_slot):
 	print("empty slot")
 	return
 
