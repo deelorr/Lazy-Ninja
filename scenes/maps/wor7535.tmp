@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://cytnun4f64ouu" path="res://scenes/gui/scrapped/hearts_container.tscn" id="7_b21lc"]
 [ext_resource type="Texture2D" uid="uid://dgif58s51ttk0" path="res://art/tilesets/buildings.png" id="7_kmdpc"]
 [ext_resource type="Texture2D" uid="uid://0qc3452mjill" path="res://art/tilesets/water.png" id="8_du033"]
-[ext_resource type="PackedScene" uid="uid://ck78uu30262eo" path="res://scenes/items/weapons/axe.tscn" id="8_pe2y3"]
+[ext_resource type="PackedScene" uid="uid://ck78uu30262eo" path="res://scenes/items/weapons2/axe.tscn" id="8_pe2y3"]
 [ext_resource type="Texture2D" uid="uid://cd1fctwfog8wt" path="res://art/tilesets/animated_sprites/anim_water.png" id="9_pgi3e"]
 [ext_resource type="Texture2D" uid="uid://cfvjiywa411sn" path="res://art/tilesets/TilesetRelief.png" id="9_xu1qr"]
 [ext_resource type="Texture2D" uid="uid://dnx4jlfjv8rt6" path="res://art/tilesets/ground_transparent.png" id="10_3wuk1"]

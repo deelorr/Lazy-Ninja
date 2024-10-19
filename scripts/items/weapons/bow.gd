@@ -13,7 +13,7 @@ var can_fire: bool = true
 var is_aiming: bool = false
 
 func _ready():
-	arrow_scene = preload("res://scenes/items/Weapons/arrow.tscn")
+	arrow_scene = preload("res://scenes/items/weapons/arrow.tscn")
 	arrow_count_changed.emit(arrow_count)
 	visible = false
 

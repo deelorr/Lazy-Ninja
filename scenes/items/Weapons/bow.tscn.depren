@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://c041wyp0jflut"]
+
+[ext_resource type="Script" path="res://scripts/items/weapons/bow.gd" id="1_g4nf4"]
+[ext_resource type="Texture2D" uid="uid://dckpv7sajwumi" path="res://art/items/Bow.png" id="1_gei5u"]
+[ext_resource type="PackedScene" uid="uid://dlbf3vagww5rl" path="res://scenes/items/weapons2/arrow.tscn" id="3_thmde"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xana0"]
+size = Vector2(13, 5)
+
+[node name="bow" type="Area2D"]
+script = ExtResource("1_g4nf4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_gei5u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -0.5)
+shape = SubResource("RectangleShape2D_xana0")
+
+[node name="Area2D" parent="." instance=ExtResource("3_thmde")]
+
+[node name="can_fire_timer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="timeout" from="can_fire_timer" to="." method="_on_can_fire_timer_timeout"]
