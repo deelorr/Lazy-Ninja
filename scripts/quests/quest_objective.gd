@@ -1,11 +1,17 @@
+# QuestObjective.gd
 extends Resource
 class_name QuestObjective
 
-@export var description: String = ""
-@export var completed: bool = false
-@export var type: String = ""  # e.g., "kill", "collect", "return"
-@export var target: String = ""  # e.g., "slime", "hunter_npc"
-@export var target_count: int = 0  # Relevant for "kill" type
-var current_count: int = 0  # Relevant for "kill" type
+enum ObjectiveType {
+	KILL,
+	COLLECT,
+	TALK,
+}
 
-# For "return" type, you might not need current_count
+@export var type: String = "kill"  # e.g., "kill", "collect", etc.
+@export var target: String = ""
+@export var target_count: int = 1
+var current_count: int = 0
+var completed: bool = false
+var active: bool = false
+@export var description: String = "Describe the objective here."

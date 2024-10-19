@@ -11,10 +11,7 @@ func _on_area_2d_body_entered(body) -> void:
 		_interact_with_player(body)
 		quest_manager.add_quest(kill_da_slimez)
 
-func _on_area_2d_body_exited(body: Node2D) -> void:
-	pass # Replace with function body.
-
-func _interact_with_player(player: Player):
+func _interact_with_player(_player: Player):
 	# Check if the player has an active quest that requires returning to this NPC
 	for quest in quest_manager.active_quests.values():
 		for i in range(quest.objectives.size()):

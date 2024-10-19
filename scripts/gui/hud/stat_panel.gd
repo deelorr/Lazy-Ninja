@@ -18,7 +18,7 @@ func _ready():
 	else:
 		print("StatPanel: Waiting for player_changed signal")
 		
-func _process(delta):
+func _process(_delta):
 	update_quest_panel()
 
 func _on_player_changed(new_player):
