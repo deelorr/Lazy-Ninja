@@ -16,10 +16,6 @@ signal gold_changed(new_gold: int)
 @onready var weapon = $weapon
 @onready var current_health: int = max_health
 
-#constant kill counter
-var slime_kill_count = 0
-
-
 var current_weapon = ""
 var bow
 var last_anim_direction: String = "down"
@@ -28,16 +24,6 @@ var is_attacking: bool = false
 var gold: int = 150
 
 func _ready():
-	#assign new quest at start for now
-	#var kill_da_slimez = preload("res://resources/quests/kill_da_slimez.tres")
-	#quest_manager.add_quest(kill_da_slimez)
-	##print("Quest Title:", quest_manager.active_quests[0].title)
-	#print("Goal 1:", quest_manager.active_quests[0].objectives[0].description)
-	#print("Done", quest_manager.active_quests[0].objectives[0].completed)
-	#print("Goal 2:", quest_manager.active_quests[0].objectives[1].description)
-	#print("Done", quest_manager.active_quests[0].objectives[1].completed)
-	#print("Rewards:", quest_manager.active_quests[0].rewards)
-	
 	inventory.use_item.connect(use_item)
 	weapon.disable()
 	effects.play("RESET")

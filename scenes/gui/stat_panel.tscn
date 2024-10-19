@@ -5,8 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://cq6yg7kccbf4m" path="res://art/gui/Heart (2).png" id="5_iokv2"]
 
 [node name="StatPanel" type="NinePatchRect"]
-offset_right = 69.0
-offset_bottom = 35.0
+offset_right = 83.0
+offset_bottom = 71.0
 texture = ExtResource("1_3ce7w")
 patch_margin_left = 6
 patch_margin_top = 6
@@ -20,10 +20,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -27.0
-offset_top = -9.5
-offset_right = 126.0
-offset_bottom = 42.5
+offset_left = -27.5
+offset_top = -29.0
+offset_right = 125.5
+offset_bottom = 134.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.35, 0.35)
@@ -67,4 +67,24 @@ offset_top = 3.42857
 offset_right = 90.0
 offset_bottom = 24.4286
 max_value = 3.0
+show_percentage = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="active_quest" type="Label" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Active Quest:"
+
+[node name="quest_details" type="VBoxContainer" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="quest_title" type="Label" parent="VBoxContainer/VBoxContainer/quest_details"]
+layout_mode = 2
+
+[node name="quest_objective" type="Label" parent="VBoxContainer/VBoxContainer/quest_details"]
+layout_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/VBoxContainer/quest_details"]
+layout_mode = 2
 show_percentage = false

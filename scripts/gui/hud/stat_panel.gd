@@ -2,6 +2,10 @@ extends NinePatchRect
 
 @onready var gold_label = $VBoxContainer/Gold/gold_label
 @onready var health_bar = $VBoxContainer/Health/Label2/ProgressBar
+@onready var quest_title = $VBoxContainer/VBoxContainer/quest_details/quest_title
+@onready var quest_objective = $VBoxContainer/VBoxContainer/quest_details/quest_objective
+@onready var quest_progress = $VBoxContainer/VBoxContainer/quest_details/ProgressBar
+#@onready var active_quests = quest_manager.active_quests
 
 var player: Player = null
 
@@ -13,6 +17,9 @@ func _ready():
 		_on_player_changed(scene_manager.player)
 	else:
 		print("StatPanel: Waiting for player_changed signal")
+		
+func _process(delta):
+	update_quest_panel()
 
 func _on_player_changed(new_player):
 	if player and is_instance_valid(player):
@@ -45,3 +52,15 @@ func update_health(health: int, max_health: int):
 func update_gold():
 	if player:
 		gold_label.text = str(player.gold)
+		
+func update_quest_panel():
+	quest_progress.visible = false
+	if quest_manager.active_quests.size() > 0:
+		var quest = quest_manager.active_quests.values()[0]
+		quest_title.text = quest.title
+		var objective = quest.objectives[0]
+		quest_objective.text = objective.description
+		quest_progress.visible = true
+		quest_progress.value = objective.current_count
+		quest_progress.max_value = objective.target_count
+		

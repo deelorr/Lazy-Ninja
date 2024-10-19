@@ -12,8 +12,7 @@ signal quest_completed(quest_id)
 signal quest_failed(quest_id)
 
 func _ready():
-	# Optionally load quests here or via editor
-	pass
+	Global.connect("enemy_killed", Callable(_on_enemy_killed))
 
 func add_quest(quest: Quest):
 	if not active_quests.has(quest.quest_id):
@@ -52,3 +51,7 @@ func fail_quest(quest_id: int):
 		active_quests[quest_id].fail_quest()
 	else:
 		print("Quest with ID %d not found." % quest_id)
+		
+func _on_enemy_killed(enemy_type):
+	for quest in active_quests.values():
+		quest.on_enemy_killed(enemy_type)

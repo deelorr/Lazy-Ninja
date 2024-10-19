@@ -14,7 +14,7 @@ enum Status {
 @export var quest_id: int
 @export var title: String = "New Quest"
 @export var description: String = "Describe the quest here."
-@export var objectives: Array = []
+@export var objectives: Array[QuestObjective] = []
 @export var rewards: Dictionary = {}
 var status: int = Status.NOT_STARTED
 
@@ -72,3 +72,15 @@ func grant_rewards():
 	for key in rewards.keys():
 		print("Granting %s: %s" % [key, rewards[key]])
 	# Example: Add experience, items, etc.
+	
+func on_enemy_killed(enemy_type):
+	#Check if the quest is currently active
+	if status != Status.IN_PROGRESS:
+		return # If the quest is not in progress, there's no need to update anything
+	for i in range(objectives.size()):
+		var obj = objectives[i]
+		if obj.type == "kill" and obj.target == enemy_type and not obj.completed:
+			obj.current_count += 1
+			print("Objective %d progress: %d / %d" % [i, obj.current_count, obj.target_count])
+			if obj.current_count >= obj.target_count:
+				complete_objective(i)
