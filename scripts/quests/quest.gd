@@ -18,17 +18,14 @@ enum Status {
 var status: int = Status.NOT_STARTED
 
 # Track the current objective index
-var current_objective_index: int = -1  # -1 indicates no objective is active yet
+#var current_objective_index: int = -1  # -1 indicates no objective is active yet
 
 # Signals
 signal quest_started(quest_id)
 signal quest_updated(quest_id, status)
 signal quest_completed(quest_id)
 signal quest_failed(quest_id)
-
-
 signal current_objective_changed(quest_id, description)
-
 
 # Methods
 func start_quest():
@@ -40,11 +37,11 @@ func start_quest():
 		activate_next_objective()
 
 func activate_next_objective():
-	current_objective_index += 1
-	if current_objective_index < objectives.size():
-		var obj = objectives[current_objective_index]
+	quest_manager.current_objective_index += 1
+	if quest_manager.current_objective_index < objectives.size():
+		var obj = objectives[quest_manager.current_objective_index]
 		obj.active = true
-		print("Objective %d Activated: %s" % [current_objective_index + 1, obj.description])
+		print("Objective %d Activated: %s" % [quest_manager.current_objective_index, obj.description])
 		emit_signal("current_objective_changed", quest_id, obj.description)  # Emit quest_id
 	else:
 		# All objectives completed
@@ -55,8 +52,8 @@ func complete_objective(objective_index: int):
 		print("Quest is not in progress.")
 		return
 
-	if objective_index != current_objective_index:
-		print("Cannot complete objective %d. Current active objective is %d." % [objective_index, current_objective_index])
+	if objective_index != quest_manager.current_objective_index:
+		print("Cannot complete objective %d. Current active objective is %d." % [objective_index, quest_manager.current_objective_index])
 		return
 
 	var obj = objectives[objective_index]
@@ -66,7 +63,7 @@ func complete_objective(objective_index: int):
 
 	obj.completed = true
 	obj.active = false
-	print("Objective %d Completed: %s" % [objective_index + 1, obj.description])
+	print("Objective %d Completed: %s" % [objective_index, obj.description])
 
 	emit_signal("quest_updated", quest_id, status)
 
@@ -87,22 +84,24 @@ func complete_quest():
 	grant_rewards()
 
 func grant_rewards():
-	# Implement reward granting logic here
 	for key in rewards.keys():
 		if key == "XP":
 			scene_manager.player.add_xp(rewards[key])
-		print("Granting %s: %s" % [key, rewards[key]])
-	# Example: Add experience, items, etc.
+		elif key == "Items":
+			scene_manager.player.inventory.insert(rewards[key])
+			print(rewards[key].name, " inserted into Inventory")
+		else:
+			print("Granting %s: %s" % [key, rewards[key]])
 
 func on_enemy_killed(enemy_type):
 	# Check if the quest is currently active
 	if status != Status.IN_PROGRESS:
 		return  # If the quest is not in progress, there's no need to update anything
-	if current_objective_index == -1 or current_objective_index >= objectives.size():
+	if quest_manager.current_objective_index == -1 or quest_manager.current_objective_index >= objectives.size():
 		return  # No active objective
-	var obj = objectives[current_objective_index]
+	var obj = objectives[quest_manager.current_objective_index]
 	if obj.type == "kill" and obj.target == enemy_type and not obj.completed:
 		obj.current_count += 1
-		print("Objective %d progress: %d / %d" % [current_objective_index + 1, obj.current_count, obj.target_count])
+		print("Objective %d progress: %d / %d" % [quest_manager.current_objective_index, obj.current_count, obj.target_count])
 		if obj.current_count >= obj.target_count:
-			complete_objective(current_objective_index)
+			complete_objective(quest_manager.current_objective_index)

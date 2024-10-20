@@ -20,6 +20,6 @@ func _interact_with_player(_player: Player):
 			if obj.type == "return" and obj.target == npc_id and not obj.completed:
 				# Mark the return objective as complete
 				quest.complete_objective(i)
-				print("Returned to Hunter: Objective %d completed." % (i + 1))
+				#print("Returned to Hunter: Objective %d completed." % (i + 1))
 				# Optionally, notify the player or grant rewards
 				return

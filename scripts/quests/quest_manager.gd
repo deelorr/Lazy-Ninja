@@ -10,10 +10,9 @@ signal quest_started(quest_id)
 signal quest_updated(quest_id, status)
 signal quest_completed(quest_id)
 signal quest_failed(quest_id)
-
-
 signal current_objective_changed(quest_id, description)
 
+var current_objective_index: int = -1  # -1 indicates no objective is active yet
 
 func _ready():
 	Global.connect("enemy_killed", Callable(_on_enemy_killed))
