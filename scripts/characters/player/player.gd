@@ -4,6 +4,9 @@ extends CharacterBody2D
 signal health_changed(new_health: int)
 signal gold_changed(new_gold: int)
 
+signal xp_changed(new_xp, total_xp)
+signal level_up(new_level)
+
 @export var speed: int = 35
 @export var max_health: int = 3
 @export var knockback_power: int = 500
@@ -22,6 +25,36 @@ var last_anim_direction: String = "down"
 var is_hurt: bool = false
 var is_attacking: bool = false
 var gold: int = 150
+
+var current_xp: int = 0
+var current_level: int = 1
+var xp_for_next_level: int = 100  # Initial XP required for level 2
+
+func calculate_xp_for_level(level: int) -> int:
+	#XP required increases by 50 each level
+	return 100 + (level - 1) * 50
+	
+func add_xp(amount: int):
+	current_xp += amount
+	emit_signal("xp_changed", current_xp, xp_for_next_level)
+	print("Added XP: %d. Total XP: %d / %d" % [amount, current_xp, xp_for_next_level])
+	check_level_up()
+	
+func check_level_up():
+	while current_xp >= xp_for_next_level:
+		current_xp -= xp_for_next_level
+		current_level += 1
+		emit_signal("level_up", current_level)
+		print("Leveled Up! New Level: %d" % current_level)
+		# Update XP required for the next level
+		xp_for_next_level = calculate_xp_for_level(current_level)
+
+func get_player_info() -> Dictionary:
+	return {
+		"level": current_level,
+		"current_xp": current_xp,
+		"xp_for_next_level": xp_for_next_level
+	}
 
 func _ready():
 	inventory.use_item.connect(use_item)

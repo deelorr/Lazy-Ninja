@@ -6,19 +6,17 @@
 
 [sub_resource type="Resource" id="Resource_ne3lh"]
 script = ExtResource("1_6x5eq")
-description = "Kill 5 Slime"
-completed = false
 type = "kill"
 target = "slime"
 target_count = 5
+description = "Kill 5 Slime"
 
 [sub_resource type="Resource" id="Resource_lkcw5"]
 script = ExtResource("1_6x5eq")
-description = "Return to Hunter"
-completed = false
 type = "return"
 target = "hunter_npc"
-target_count = 0
+target_count = 1
+description = "Return to Hunter"
 
 [resource]
 script = ExtResource("2_w6cfy")
@@ -28,5 +26,5 @@ description = "Kill 5 Slimez"
 objectives = [SubResource("Resource_ne3lh"), SubResource("Resource_lkcw5")]
 rewards = {
 "Items": ExtResource("1_mmog1"),
-"XP": 10
+"XP": 100
 }

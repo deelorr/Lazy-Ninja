@@ -84,6 +84,8 @@ func complete_quest():
 func grant_rewards():
 	# Implement reward granting logic here
 	for key in rewards.keys():
+		if key == "XP":
+			scene_manager.player.add_xp(rewards[key])
 		print("Granting %s: %s" % [key, rewards[key]])
 	# Example: Add experience, items, etc.
 
