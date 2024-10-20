@@ -7,7 +7,7 @@ class_name HunterNPC
 var kill_da_slimez = preload("res://resources/quests/kill_da_slimez.tres")
 
 func _on_area_2d_body_entered(body) -> void:
-	if body is CharacterBody2D:
+	if body is Player:
 		_interact_with_player(body)
 		if not quest_manager.active_quests.has(kill_da_slimez.quest_id):
 			quest_manager.add_quest(kill_da_slimez)

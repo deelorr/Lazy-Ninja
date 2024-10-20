@@ -57,4 +57,5 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 	animations.play("death")
 	await animations.animation_finished
 	Global.enemy_killed.emit("slime")
+	scene_manager.player.add_xp(100)
 	queue_free()

@@ -6,6 +6,7 @@ extends NinePatchRect
 @onready var quest_objective = $QuestPanel/Quests/quest_details/quest_objective
 @onready var quest_progress = $QuestPanel/Quests/quest_details/ProgressBar
 @onready var quest_panel = $QuestPanel
+@onready var level_label = $Stats/Level/level_label
 
 var player: Player = null
 
@@ -26,6 +27,7 @@ func _ready():
 
 func _process(_delta):
 	update_quest_panel()
+	update_level()
 	#update_quest_description()
 
 func _on_player_changed(new_player):
@@ -74,6 +76,9 @@ func update_quest_panel():
 			quest_progress.max_value = objective.target_count
 		else:
 			quest_panel.visible = false
+			
+func update_level():
+	level_label.text = str(player.current_level)
 
 #func update_quest_description():
 	#if quest_manager.active_quests.size() > 0:

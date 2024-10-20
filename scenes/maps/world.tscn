@@ -3016,7 +3016,7 @@ end_marker = NodePath("Marker2D")
 position = Vector2(-114, 60)
 
 [node name="hunter" parent="TileMap" instance=ExtResource("16_5287r")]
-position = Vector2(345, 54)
+position = Vector2(396, 129)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 3
