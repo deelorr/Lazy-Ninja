@@ -11,6 +11,10 @@ signal quest_updated(quest_id, status)
 signal quest_completed(quest_id)
 signal quest_failed(quest_id)
 
+
+signal current_objective_changed(quest_id, description)
+
+
 func _ready():
 	Global.connect("enemy_killed", Callable(_on_enemy_killed))
 
@@ -21,6 +25,7 @@ func add_quest(quest: Quest):
 		quest.connect("quest_updated", Callable(self, "_on_quest_updated"))
 		quest.connect("quest_completed", Callable(self, "_on_quest_completed"))
 		quest.connect("quest_failed", Callable(self, "_on_quest_failed"))
+		quest.connect("current_objective_changed", Callable(self, "_on_current_objective_changed"))
 		quest.start_quest()
 	else:
 		print("Quest with ID %d already exists." % quest.quest_id)
@@ -55,3 +60,6 @@ func fail_quest(quest_id: int):
 func _on_enemy_killed(enemy_type):
 	for quest in active_quests.values():
 		quest.on_enemy_killed(enemy_type)
+		
+func _on_current_objective_changed(quest_id, description):
+	current_objective_changed.emit(quest_id, description)

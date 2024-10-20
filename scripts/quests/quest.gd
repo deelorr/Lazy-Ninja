@@ -26,6 +26,10 @@ signal quest_updated(quest_id, status)
 signal quest_completed(quest_id)
 signal quest_failed(quest_id)
 
+
+signal current_objective_changed(quest_id, description)
+
+
 # Methods
 func start_quest():
 	if status == Status.NOT_STARTED:
@@ -39,8 +43,9 @@ func activate_next_objective():
 	current_objective_index += 1
 	if current_objective_index < objectives.size():
 		var obj = objectives[current_objective_index]
-		obj.active = true  # Assuming QuestObjective has an 'active' property
+		obj.active = true
 		print("Objective %d Activated: %s" % [current_objective_index + 1, obj.description])
+		emit_signal("current_objective_changed", quest_id, obj.description)  # Emit quest_id
 	else:
 		# All objectives completed
 		complete_quest()
@@ -93,10 +98,8 @@ func on_enemy_killed(enemy_type):
 	# Check if the quest is currently active
 	if status != Status.IN_PROGRESS:
 		return  # If the quest is not in progress, there's no need to update anything
-
 	if current_objective_index == -1 or current_objective_index >= objectives.size():
 		return  # No active objective
-
 	var obj = objectives[current_objective_index]
 	if obj.type == "kill" and obj.target == enemy_type and not obj.completed:
 		obj.current_count += 1

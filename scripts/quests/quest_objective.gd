@@ -15,3 +15,8 @@ var current_count: int = 0
 var completed: bool = false
 var active: bool = false
 @export var description: String = "Describe the objective here."
+
+
+func activate():
+	# Logic when the objective becomes active
+	pass

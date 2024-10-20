@@ -56,12 +56,5 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 	is_dead = true
 	animations.play("death")
 	await animations.animation_finished
-	
 	Global.enemy_killed.emit("slime")
-	
-	#scene_manager.player.slime_kill_count += 1
-	#if scene_manager.player.slime_kill_count > 5:
-		#scene_manager.player.slime_kill_count = 0
-	#print(scene_manager.player.slime_kill_count)
-	
 	queue_free()

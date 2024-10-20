@@ -5,62 +5,55 @@
 [ext_resource type="Texture2D" uid="uid://cq6yg7kccbf4m" path="res://art/gui/Heart (2).png" id="5_iokv2"]
 
 [node name="StatPanel" type="NinePatchRect"]
-offset_right = 83.0
-offset_bottom = 71.0
+offset_right = 78.0
+offset_bottom = 35.0
 texture = ExtResource("1_3ce7w")
 patch_margin_left = 6
 patch_margin_top = 6
 patch_margin_right = 6
 patch_margin_bottom = 6
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -27.5
-offset_top = -29.0
-offset_right = 125.5
-offset_bottom = 134.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Stats" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 188.0
+offset_bottom = 62.0
 scale = Vector2(0.35, 0.35)
 
-[node name="Gold" type="HBoxContainer" parent="VBoxContainer"]
+[node name="Gold" type="HBoxContainer" parent="Stats"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Gold"]
+[node name="TextureRect" type="TextureRect" parent="Stats/Gold"]
 self_modulate = Color(1, 1, 0.301961, 0.776471)
 layout_mode = 2
 texture = ExtResource("3_ls2q0")
 
-[node name="Label" type="Label" parent="VBoxContainer/Gold"]
+[node name="Label" type="Label" parent="Stats/Gold"]
 layout_mode = 2
 text = "Gold:"
 
-[node name="gold_label" type="Label" parent="VBoxContainer/Gold"]
+[node name="gold_label" type="Label" parent="Stats/Gold"]
 layout_mode = 2
 text = "100"
 
-[node name="Health" type="HBoxContainer" parent="VBoxContainer"]
+[node name="Health" type="HBoxContainer" parent="Stats"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Health"]
+[node name="TextureRect" type="TextureRect" parent="Stats/Health"]
 self_modulate = Color(1, 1, 0.301961, 0.776471)
 layout_mode = 2
 texture = ExtResource("5_iokv2")
 expand_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/Health"]
+[node name="Label" type="Label" parent="Stats/Health"]
 layout_mode = 2
 text = "HP: "
 
-[node name="Label2" type="Label" parent="VBoxContainer/Health"]
+[node name="Label2" type="Label" parent="Stats/Health"]
 layout_mode = 2
 
-[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/Health/Label2"]
+[node name="ProgressBar" type="ProgressBar" parent="Stats/Health/Label2"]
 layout_mode = 2
 offset_left = -2.0
 offset_top = 3.42857
@@ -69,22 +62,41 @@ offset_bottom = 24.4286
 max_value = 3.0
 show_percentage = false
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+[node name="QuestPanel" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_top = 36.0
+offset_right = 78.0
+offset_bottom = 71.0
+texture = ExtResource("1_3ce7w")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="Quests" type="VBoxContainer" parent="QuestPanel"]
+layout_mode = 2
+offset_left = 8.0
+offset_top = 7.0
+offset_right = 188.0
+offset_bottom = 92.0
+scale = Vector2(0.35, 0.35)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="QuestPanel/Quests"]
 layout_mode = 2
 
-[node name="active_quest" type="Label" parent="VBoxContainer/VBoxContainer"]
+[node name="Active Quest" type="Label" parent="QuestPanel/Quests/HBoxContainer"]
 layout_mode = 2
-text = "Active Quest:"
+text = "Quest:"
 
-[node name="quest_details" type="VBoxContainer" parent="VBoxContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="quest_title" type="Label" parent="VBoxContainer/VBoxContainer/quest_details"]
+[node name="quest_title" type="Label" parent="QuestPanel/Quests/HBoxContainer"]
 layout_mode = 2
 
-[node name="quest_objective" type="Label" parent="VBoxContainer/VBoxContainer/quest_details"]
+[node name="quest_details" type="VBoxContainer" parent="QuestPanel/Quests"]
 layout_mode = 2
 
-[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/VBoxContainer/quest_details"]
+[node name="quest_objective" type="Label" parent="QuestPanel/Quests/quest_details"]
+layout_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="QuestPanel/Quests/quest_details"]
 layout_mode = 2
 show_percentage = false

@@ -1,15 +1,21 @@
 extends NinePatchRect
 
-@onready var gold_label = $VBoxContainer/Gold/gold_label
-@onready var health_bar = $VBoxContainer/Health/Label2/ProgressBar
-@onready var quest_title = $VBoxContainer/VBoxContainer/quest_details/quest_title
-@onready var quest_objective = $VBoxContainer/VBoxContainer/quest_details/quest_objective
-@onready var quest_progress = $VBoxContainer/VBoxContainer/quest_details/ProgressBar
-#@onready var active_quests = quest_manager.active_quests
+@onready var gold_label = $Stats/Gold/gold_label
+@onready var health_bar = $Stats/Health/Label2/ProgressBar
+@onready var quest_title = $QuestPanel/Quests/HBoxContainer/quest_title
+@onready var quest_objective = $QuestPanel/Quests/quest_details/quest_objective
+@onready var quest_progress = $QuestPanel/Quests/quest_details/ProgressBar
+@onready var quest_panel = $QuestPanel
 
 var player: Player = null
 
 func _ready():
+	if quest_manager:
+		quest_manager.connect("current_objective_changed", Callable(self, "_on_current_objective_changed"))
+		print("Connected to QuestManager's current_objective_changed signal.")
+	else:
+		print("Error: QuestManager node not found.")
+	quest_panel.visible = false
 	#connect to player_changed signal
 	scene_manager.player_changed.connect(_on_player_changed)
 	#check if player is already set
@@ -17,9 +23,10 @@ func _ready():
 		_on_player_changed(scene_manager.player)
 	else:
 		print("StatPanel: Waiting for player_changed signal")
-		
+
 func _process(_delta):
 	update_quest_panel()
+	#update_quest_description()
 
 func _on_player_changed(new_player):
 	if player and is_instance_valid(player):
@@ -52,10 +59,11 @@ func update_health(health: int, max_health: int):
 func update_gold():
 	if player:
 		gold_label.text = str(player.gold)
-		
+
 func update_quest_panel():
 	quest_progress.visible = false
 	if quest_manager.active_quests.size() > 0:
+		quest_panel.visible = true
 		var quest = quest_manager.active_quests.values()[0]
 		quest_title.text = quest.title
 		var objective = quest.objectives[0]
@@ -63,4 +71,14 @@ func update_quest_panel():
 		quest_progress.visible = true
 		quest_progress.value = objective.current_count
 		quest_progress.max_value = objective.target_count
-		
+
+#func update_quest_description():
+	#if quest_manager.active_quests.size() > 0:
+		#var quest = quest_manager.active_quests.values()[0]
+		#var objective = quest.objectives[0]
+		#if quest_manager.active_quests.values()[0].objectives[0].completed == true:
+			#objective = quest.objectives[1]
+
+func _on_current_objective_changed(quest_id, description):
+	print("Received current_objective_changed signal for Quest ID %d: %s" % [quest_id, description])
+	quest_objective.text = description
