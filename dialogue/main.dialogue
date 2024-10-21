@@ -14,6 +14,7 @@ elif quest_manager.quest_dialog_point == "in_progress":
 
 elif quest_manager.quest_dialog_point == "finishing":
 	Hunter: Thank you! Here's a Lifepot!
+	set quest_manager.quest_dialog_point = "complete"
 
 elif quest_manager.quest_dialog_point == "complete":
 	Hunter: Thanks again for taking out those slimes!

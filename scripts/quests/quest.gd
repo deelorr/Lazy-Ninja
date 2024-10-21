@@ -1,7 +1,6 @@
 extends Resource
 class_name Quest
 
-# Enumeration for quest status
 enum Status {
 	NOT_STARTED,
 	IN_PROGRESS,
@@ -9,22 +8,20 @@ enum Status {
 	FAILED
 }
 
-# Quest properties
 @export var quest_id: int
 @export var title: String = "New Quest"
 @export var description: String = "Describe the quest here."
 @export var objectives: Array[QuestObjective] = []
 @export var rewards: Dictionary = {}
+
 var status: int = Status.NOT_STARTED
 
-# Signals
 signal quest_started(quest_id)
 signal quest_updated(quest_id, status)
 signal quest_completed(quest_id)
 signal quest_failed(quest_id)
 signal current_objective_changed(quest_id, description)
 
-# Methods
 func start_quest():
 	if status == Status.NOT_STARTED:
 		status = Status.IN_PROGRESS
@@ -42,7 +39,7 @@ func activate_next_objective():
 		print("Objective %d Activated: %s" % [quest_manager.current_objective_index, obj.description])
 		emit_signal("current_objective_changed", quest_id, obj.description)  # Emit quest_id
 	else:
-		# All objectives completed
+		#all objectives completed
 		complete_quest()
 
 func complete_objective(objective_index: int):
@@ -80,7 +77,6 @@ func complete_quest():
 	emit_signal("quest_updated", quest_id, status)
 	print("Quest Completed: %s" % title)
 	grant_rewards()
-	quest_manager.quest_dialog_point = "complete"
 
 func grant_rewards():
 	for key in rewards.keys():
@@ -93,14 +89,15 @@ func grant_rewards():
 			print("Granting %s: %s" % [key, rewards[key]])
 
 func on_enemy_killed(enemy_type):
-	# Check if the quest is currently active
 	if status != Status.IN_PROGRESS:
-		return  # If the quest is not in progress, there's no need to update anything
+		return
 	if quest_manager.current_objective_index == -1 or quest_manager.current_objective_index >= objectives.size():
-		return  # No active objective
+		return
 	var obj = objectives[quest_manager.current_objective_index]
 	if obj.type == "kill" and obj.target == enemy_type and not obj.completed:
 		obj.current_count += 1
 		print("Objective %d progress: %d / %d" % [quest_manager.current_objective_index, obj.current_count, obj.target_count])
 		if obj.current_count >= obj.target_count:
 			complete_objective(quest_manager.current_objective_index)
+			if quest_manager.current_objective_index >= objectives.size() -1:
+				quest_manager.quest_dialog_point = "finishing"

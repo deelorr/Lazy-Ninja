@@ -17,17 +17,19 @@ func _on_dialogue_ended(resource):
 	if quest_manager.quest_dialog_point == "started":
 		quest_manager.add_quest(kill_da_slimez)
 		quest_manager.quest_dialog_point = "in_progress"
-	elif quest_manager.quest_dialog_point == "finishing":
-		quest_manager.quest_dialog_point = "complete"  # Corrected assignment operator
+	if quest_manager.quest_dialog_point == "finishing":
+		quest_manager.quest_dialog_point = "complete"
 
 func _interact_with_player(_player: Player):
-	# Check if the player has an active quest that requires returning to this NPC
 	for quest in quest_manager.active_quests.values():
-		for i in range(quest.objectives.size()):
-			var obj = quest.objectives[i]
-			if obj.type == "return" and obj.target == npc_id and not obj.completed:
-				# Mark the return objective as complete
-				quest.complete_objective(i)
-				
-				quest_manager.quest_dialog_point = "finishing"
-				return
+		if quest.status == quest.Status.IN_PROGRESS:
+			for i in range(quest.objectives.size()):
+				var obj = quest.objectives[i]
+				if obj.type == "return" and obj.target == npc_id and not obj.completed:
+					quest.complete_objective(i)
+					return
+		elif quest.status == quest.Status.COMPLETED:
+			#do not reset quest_dialog_point if it's already 'complete'
+			if quest_manager.quest_dialog_point != "complete":
+				print("Quest is completed. quest_dialog_point is '%s'" % quest_manager.quest_dialog_point)
+			return
