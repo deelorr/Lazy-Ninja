@@ -12,6 +12,9 @@ if quest_manager.quest_dialog_point == "not_started":
 elif quest_manager.quest_dialog_point == "in_progress":
 	Hunter: How's the slime hunting going?
 
+elif quest_manager.quest_dialog_point == "finishing":
+	Hunter: Thank you! Here's a Lifepot!
+
 elif quest_manager.quest_dialog_point == "complete":
 	Hunter: Thanks again for taking out those slimes!
 
