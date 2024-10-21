@@ -17,9 +17,6 @@ enum Status {
 @export var rewards: Dictionary = {}
 var status: int = Status.NOT_STARTED
 
-# Track the current objective index
-#var current_objective_index: int = -1  # -1 indicates no objective is active yet
-
 # Signals
 signal quest_started(quest_id)
 signal quest_updated(quest_id, status)
@@ -35,6 +32,7 @@ func start_quest():
 		emit_signal("quest_updated", quest_id, status)
 		print("Quest Started: %s" % title)
 		activate_next_objective()
+		quest_manager.quest_dialog_point = "started"
 
 func activate_next_objective():
 	quest_manager.current_objective_index += 1
@@ -82,6 +80,7 @@ func complete_quest():
 	emit_signal("quest_updated", quest_id, status)
 	print("Quest Completed: %s" % title)
 	grant_rewards()
+	quest_manager.quest_dialog_point = "complete"
 
 func grant_rewards():
 	for key in rewards.keys():

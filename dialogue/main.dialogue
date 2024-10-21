@@ -1,0 +1,21 @@
+~ start
+Hunter: Hey Ninja!
+
+if quest_manager.quest_dialog_point == "not_started":
+	Hunter: Can you take out 5 slime for me?
+	- Yes
+		set quest_manager.quest_dialog_point = "started"
+		Hunter: Thank you!
+	- No
+		Hunter: OK. Let me know if you change your mind!
+
+elif quest_manager.quest_dialog_point == "in_progress":
+	Hunter: How's the slime hunting going?
+
+elif quest_manager.quest_dialog_point == "complete":
+	Hunter: Thanks again for taking out those slimes!
+
+else:
+	Hunter: GoogleyMoogley...
+
+=> END!

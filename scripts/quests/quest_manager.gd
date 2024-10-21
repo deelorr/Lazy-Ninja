@@ -5,6 +5,9 @@ class_name QuestManager
 # Dictionary to hold active quests, key is quest_id
 var active_quests: Dictionary = {}
 
+#global for dialogue
+var quest_dialog_point: String = "not_started" # "not_started", started", "in_progress", "finishing", "complete"
+
 # Signals
 signal quest_started(quest_id)
 signal quest_updated(quest_id, status)
@@ -12,7 +15,7 @@ signal quest_completed(quest_id)
 signal quest_failed(quest_id)
 signal current_objective_changed(quest_id, description)
 
-var current_objective_index: int = -1  # -1 indicates no objective is active yet
+var current_objective_index: int = -1  #no objective active yet
 
 func _ready():
 	Global.connect("enemy_killed", Callable(_on_enemy_killed))
@@ -37,12 +40,14 @@ func _on_quest_updated(quest_id, status):
 
 func _on_quest_completed(quest_id):
 	emit_signal("quest_completed", quest_id)
-	# Optionally remove completed quests
+	
+	#remove completed quests
 	# active_quests.erase(quest_id)
 
 func _on_quest_failed(quest_id):
 	emit_signal("quest_failed", quest_id)
-	# Optionally handle failed quests
+	
+	#handle failed quests
 
 func complete_objective(quest_id: int, objective_index: int):
 	if active_quests.has(quest_id):
