@@ -8,7 +8,7 @@ var kill_da_slimez = preload("res://resources/quests/kill_da_slimez.tres")
 
 func _on_area_2d_body_entered(body) -> void:
 	if body is Player:
-		DialogueManager.show_dialogue_balloon(load("res://dialogue/main.dialogue"), "start")
+		DialogueManager.show_dialogue_balloon(load("res://dialogue/hunter.dialogue"), "start")
 		DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 		_interact_with_player(body)
 

@@ -6,6 +6,7 @@ var store_open: bool = false
 
 func _physics_process(_delta: float) -> void:
 	if Global.in_shop_range == true and Input.is_action_just_pressed("action"):
+		DialogueManager.show_dialogue_balloon(load("res://dialogue/store_owner.dialogue"), "start")
 		toggle_store()
 
 func toggle_store():
