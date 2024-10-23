@@ -7,10 +7,10 @@ var active_quests: Dictionary = {}
 #global for dialogue
 var quest_dialog_point: String = "not_started" # "not_started", started", "in_progress", "finishing", "complete"
 
-signal quest_started(quest_id)
-signal quest_updated(quest_id, status)
-signal quest_completed(quest_id)
-signal quest_failed(quest_id)
+#signal quest_started(quest_id)
+#signal quest_updated(quest_id, status)
+#signal quest_completed(quest_id)
+#signal quest_failed(quest_id)
 signal current_objective_changed(quest_id, description)
 
 var current_objective_index: int = -1
@@ -21,11 +21,11 @@ func _ready():
 func add_quest(quest: Quest):
 	if not active_quests.has(quest.quest_id):
 		active_quests[quest.quest_id] = quest
-		quest.connect("quest_started", Callable(self, "_on_quest_started"))
-		quest.connect("quest_updated", Callable(self, "_on_quest_updated"))
-		quest.connect("quest_completed", Callable(self, "_on_quest_completed"))
-		quest.connect("quest_failed", Callable(self, "_on_quest_failed"))
-		quest.connect("current_objective_changed", Callable(self, "_on_current_objective_changed"))
+		#quest.connect("quest_started", Callable(self, "_on_quest_started"))
+		#quest.connect("quest_updated", Callable(self, "_on_quest_updated"))
+		#quest.connect("quest_completed", Callable(self, "_on_quest_completed"))
+		#quest.connect("quest_failed", Callable(self, "_on_quest_failed"))
+		#quest.connect("current_objective_changed", Callable(self, "_on_current_objective_changed"))
 		quest.start_quest()
 	else:
 		print("Quest with ID %d already exists." % quest.quest_id)

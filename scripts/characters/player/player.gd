@@ -4,8 +4,8 @@ extends CharacterBody2D
 signal health_changed(new_health: int)
 signal gold_changed(new_gold: int)
 
-signal xp_changed(new_xp, total_xp)
-signal level_up(new_level)
+#signal xp_changed(new_xp, total_xp)
+#signal level_up(new_level)
 
 @export var speed: int = 35
 @export var max_health: int = 3
@@ -36,15 +36,15 @@ func calculate_xp_for_level(level: int) -> int:
 	
 func add_xp(amount: int):
 	current_xp += amount
-	emit_signal("xp_changed", current_xp, xp_for_next_level)
-	print("Added XP: %d. Total XP: %d / %d" % [amount, current_xp, xp_for_next_level])
+	#emit_signal("xp_changed", current_xp, xp_for_next_level)
+	print("Added XP: ", amount , " Total XP: " , current_xp, "/", xp_for_next_level)
 	check_level_up()
 	
 func check_level_up():
 	while current_xp >= xp_for_next_level:
 		current_xp -= xp_for_next_level
 		current_level += 1
-		emit_signal("level_up", current_level)
+		#emit_signal("level_up", current_level)
 		print("Leveled Up! New Level: %d" % current_level)
 		# Update XP required for the next level
 		xp_for_next_level = calculate_xp_for_level(current_level)

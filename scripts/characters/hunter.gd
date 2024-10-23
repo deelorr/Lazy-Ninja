@@ -12,7 +12,7 @@ func _on_area_2d_body_entered(body) -> void:
 		DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 		_interact_with_player(body)
 
-func _on_dialogue_ended(resource):
+func _on_dialogue_ended(_sresource):
 	DialogueManager.dialogue_ended.disconnect(Callable(self, "_on_dialogue_ended"))
 	if quest_manager.quest_dialog_point == "started":
 		quest_manager.add_quest(kill_da_slimez)

@@ -16,17 +16,17 @@ enum Status {
 
 var status: int = Status.NOT_STARTED
 
-signal quest_started(quest_id)
-signal quest_updated(quest_id, status)
-signal quest_completed(quest_id)
-signal quest_failed(quest_id)
-signal current_objective_changed(quest_id, description)
+#signal quest_started(quest_id)
+#signal quest_updated(quest_id, status)
+#signal quest_completed(quest_id)
+#signal quest_failed(quest_id)
+#signal current_objective_changed(quest_id, description)
 
 func start_quest():
 	if status == Status.NOT_STARTED:
 		status = Status.IN_PROGRESS
-		emit_signal("quest_started", quest_id)
-		emit_signal("quest_updated", quest_id, status)
+		#emit_signal("quest_started", quest_id)
+		#emit_signal("quest_updated", quest_id, status)
 		print("Quest Started: %s" % title)
 		activate_next_objective()
 		quest_manager.quest_dialog_point = "started"
@@ -37,7 +37,7 @@ func activate_next_objective():
 		var obj = objectives[quest_manager.current_objective_index]
 		obj.active = true
 		print("Objective %d Activated: %s" % [quest_manager.current_objective_index, obj.description])
-		emit_signal("current_objective_changed", quest_id, obj.description)  # Emit quest_id
+		#emit_signal("current_objective_changed", quest_id, obj.description)  # Emit quest_id
 	else:
 		#all objectives completed
 		complete_quest()
@@ -60,7 +60,7 @@ func complete_objective(objective_index: int):
 	obj.active = false
 	print("Objective %d Completed: %s" % [objective_index, obj.description])
 
-	emit_signal("quest_updated", quest_id, status)
+	#emit_signal("quest_updated", quest_id, status)
 
 	activate_next_objective()
 
@@ -73,8 +73,8 @@ func fail_quest():
 
 func complete_quest():
 	status = Status.COMPLETED
-	emit_signal("quest_completed", quest_id)
-	emit_signal("quest_updated", quest_id, status)
+	#emit_signal("quest_completed", quest_id)
+	#emit_signal("quest_updated", quest_id, status)
 	print("Quest Completed: %s" % title)
 	grant_rewards()
 
