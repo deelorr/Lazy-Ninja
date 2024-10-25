@@ -29,14 +29,14 @@ func start_quest():
 		#emit_signal("quest_updated", quest_id, status)
 		print("Quest Started: %s" % title)
 		activate_next_objective()
-		quest_manager.quest_dialog_point = "started"
+		QuestManager.quest_dialog_point = "started"
 
 func activate_next_objective():
-	quest_manager.current_objective_index += 1
-	if quest_manager.current_objective_index < objectives.size():
-		var obj = objectives[quest_manager.current_objective_index]
+	QuestManager.current_objective_index += 1
+	if QuestManager.current_objective_index < objectives.size():
+		var obj = objectives[QuestManager.current_objective_index]
 		obj.active = true
-		print("Objective %d Activated: %s" % [quest_manager.current_objective_index, obj.description])
+		print("Objective %d Activated: %s" % [QuestManager.current_objective_index, obj.description])
 		#emit_signal("current_objective_changed", quest_id, obj.description)  # Emit quest_id
 	else:
 		#all objectives completed
@@ -47,8 +47,8 @@ func complete_objective(objective_index: int):
 		print("Quest is not in progress.")
 		return
 
-	if objective_index != quest_manager.current_objective_index:
-		print("Cannot complete objective %d. Current active objective is %d." % [objective_index, quest_manager.current_objective_index])
+	if objective_index != QuestManager.current_objective_index:
+		print("Cannot complete objective %d. Current active objective is %d." % [objective_index, QuestManager.current_objective_index])
 		return
 
 	var obj = objectives[objective_index]
@@ -81,9 +81,9 @@ func complete_quest():
 func grant_rewards():
 	for key in rewards.keys():
 		if key == "XP":
-			scene_manager.player.add_xp(rewards[key])
+			SceneManager.player.add_xp(rewards[key])
 		elif key == "Items":
-			scene_manager.player.inventory.insert(rewards[key])
+			SceneManager.player.inventory.insert(rewards[key])
 			print(rewards[key].name, " inserted into Inventory")
 		else:
 			print("Granting %s: %s" % [key, rewards[key]])
@@ -91,13 +91,13 @@ func grant_rewards():
 func on_enemy_killed(enemy_type):
 	if status != Status.IN_PROGRESS:
 		return
-	if quest_manager.current_objective_index == -1 or quest_manager.current_objective_index >= objectives.size():
+	if QuestManager.current_objective_index == -1 or QuestManager.current_objective_index >= objectives.size():
 		return
-	var obj = objectives[quest_manager.current_objective_index]
+	var obj = objectives[QuestManager.current_objective_index]
 	if obj.type == "kill" and obj.target == enemy_type and not obj.completed:
 		obj.current_count += 1
-		print("Objective %d progress: %d / %d" % [quest_manager.current_objective_index, obj.current_count, obj.target_count])
+		print("Objective %d progress: %d / %d" % [QuestManager.current_objective_index, obj.current_count, obj.target_count])
 		if obj.current_count >= obj.target_count:
-			complete_objective(quest_manager.current_objective_index)
-			if quest_manager.current_objective_index >= objectives.size() -1:
-				quest_manager.quest_dialog_point = "finishing"
+			complete_objective(QuestManager.current_objective_index)
+			if QuestManager.current_objective_index >= objectives.size() -1:
+				QuestManager.quest_dialog_point = "finishing"

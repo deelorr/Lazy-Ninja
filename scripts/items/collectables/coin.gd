@@ -1,7 +1,7 @@
 extends "res://scripts/items/collectables/collectable.gd"
 
 @onready var animations = $AnimationPlayer
-@onready var player = scene_manager.player
+@onready var player = SceneManager.player
 
 func _physics_process(_delta):
 	animations.play("idle")

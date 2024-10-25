@@ -19,13 +19,13 @@ func _ready():
 	inventory.updated.connect(update)
 	update()
 	
-	if scene_manager.player != null:
-		player = scene_manager.player
+	if SceneManager.player != null:
+		player = SceneManager.player
 		player_inventory = player.inventory
 		#print_debug("Player inventory found", player_inventory)
 	else:
 		print_debug("no player found, waiting for signal")
-		scene_manager.player_changed.connect(_on_player_changed)
+		SceneManager.player_changed.connect(_on_player_changed)
 
 func _on_player_changed(new_player):
 	player = new_player

@@ -12,17 +12,17 @@ var player: Player = null
 
 func _ready():
 	#connect to current_objective_changed signal
-	if quest_manager:
-		quest_manager.connect("current_objective_changed", Callable(self, "_on_current_objective_changed"))
+	if QuestManager:
+		QuestManager.connect("current_objective_changed", Callable(self, "_on_current_objective_changed"))
 	else:
 		print_debug("Error: QuestManager node not found.")
 	quest_panel.visible = false
 	#connect to player_changed signal
-	scene_manager.player_changed.connect(_on_player_changed)
+	SceneManager.player_changed.connect(_on_player_changed)
 	#check if player is already set
-	if scene_manager.player:
-		player = scene_manager.player
-		_on_player_changed(scene_manager.player)
+	if SceneManager.player:
+		player = SceneManager.player
+		_on_player_changed(SceneManager.player)
 		#print_debug("set player to global")
 	else:
 		pass
@@ -64,12 +64,12 @@ func update_gold():
 
 func update_quest_panel():
 	quest_progress.visible = false
-	if quest_manager.active_quests.size() > 0:
+	if QuestManager.active_quests.size() > 0:
 		quest_panel.visible = true
-		var quest = quest_manager.active_quests.values()[0]
+		var quest = QuestManager.active_quests.values()[0]
 		quest_title.text = quest.title
-		if quest_manager.current_objective_index < quest.objectives.size():
-			var objective = quest.objectives[quest_manager.current_objective_index]
+		if QuestManager.current_objective_index < quest.objectives.size():
+			var objective = quest.objectives[QuestManager.current_objective_index]
 			quest_objective.text = objective.description
 			quest_progress.visible = true
 			quest_progress.value = objective.current_count

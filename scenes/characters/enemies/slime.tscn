@@ -370,12 +370,8 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_tg31k")
 
 [node name="direction_timer" type="Timer" parent="."]
-wait_time = 2.0
-one_shot = true
-
-[node name="idle_timer" type="Timer" parent="."]
+wait_time = 3.0
 one_shot = true
 
 [connection signal="area_entered" from="hurt_box" to="." method="_on_hurt_box_area_entered"]
 [connection signal="timeout" from="direction_timer" to="." method="_on_direction_timer_timeout"]
-[connection signal="timeout" from="idle_timer" to="." method="_on_idle_timer_timeout"]

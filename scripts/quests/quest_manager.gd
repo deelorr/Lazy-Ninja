@@ -1,5 +1,5 @@
 extends Node
-class_name QuestManager
+#class_name QuestManager
 
 #key is quest_id
 var active_quests: Dictionary = {}

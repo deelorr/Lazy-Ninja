@@ -7,4 +7,4 @@ var scene_folder = "res://scenes/maps/"
 
 func _on_body_entered(body):
 	if body is Player:
-		scene_manager.change_scene(get_tree().current_scene, connected_scene, connected_marker)
+		SceneManager.change_scene(get_tree().current_scene, connected_scene, connected_marker)

@@ -1,4 +1,4 @@
-class_name SceneManager
+#class_name SceneManager
 extends Node
 
 #added signal for player change
