@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7rko6"]
 size = Vector2(12, 4)
 
-[node name="arrow" type="Area2D"]
+[node name="arrow" type="Area2D" groups=["weapon"]]
 collision_layer = 4
 collision_mask = 4
 script = ExtResource("1_vlpn0")
