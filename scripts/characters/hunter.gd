@@ -7,24 +7,26 @@ class_name HunterNPC
 @onready var dialogue_manager: DialogueManager = DialogueManager
 @onready var quest_manager: QuestManager = QuestManager
 @onready var hunter_dialogue: Resource = preload("res://dialogue/hunter.dialogue")
+@onready var first_quest: Quest = preload("res://resources/quests/kill_da_slimez.tres")
 
-var kill_da_slimez = preload("res://resources/quests/kill_da_slimez.tres")
-
-func _on_area_2d_body_entered(body: Node) -> void:
-	if body is Player:
+func _on_area_2d_body_entered(player) -> void:
+	if player.is_in_group("player"):
 		DialogueManager.show_dialogue_balloon(hunter_dialogue, "start")
+		#connect dialogue_ended signal so when dialogue ends, _on_dialogue_ended is called
 		DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
-		_interact_with_player(body)
 
-func _on_dialogue_ended(_sresource):
+
+func _on_dialogue_ended(_resource: DialogueResource):
+	#disconnect so doesnt trigger multiple times
 	DialogueManager.dialogue_ended.disconnect(Callable(self, "_on_dialogue_ended"))
 	if QuestManager.quest_dialog_point == "started":
-		QuestManager.add_quest(kill_da_slimez)
+		QuestManager.add_quest(first_quest)
 		QuestManager.quest_dialog_point = "in_progress"
 	if QuestManager.quest_dialog_point == "finishing":
 		QuestManager.quest_dialog_point = "complete"
+	update_quests()
 
-func _interact_with_player(_player: Player):
+func update_quests():
 	for quest in QuestManager.active_quests.values():
 		if quest.status == quest.Status.IN_PROGRESS:
 			for i in range(quest.objectives.size()):
@@ -35,5 +37,5 @@ func _interact_with_player(_player: Player):
 		elif quest.status == quest.Status.COMPLETED:
 			#do not reset quest_dialog_point if it's already 'complete'
 			if QuestManager.quest_dialog_point != "complete":
-				print("Quest is completed. quest_dialog_point is '%s'" % QuestManager.quest_dialog_point)
+				print_debug("Quest completed, but quest_dialog_point is ", QuestManager.quest_dialog_point)
 			return
