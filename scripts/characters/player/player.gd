@@ -24,7 +24,7 @@ var bow
 var last_anim_direction: String = "down"
 var is_hurt: bool = false
 var is_attacking: bool = false
-var gold: int = 150
+var gold: int = 50
 
 var current_xp: int = 0
 var current_level: int = 1

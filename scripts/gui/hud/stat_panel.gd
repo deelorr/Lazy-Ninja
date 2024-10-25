@@ -11,42 +11,42 @@ extends NinePatchRect
 var player: Player = null
 
 func _ready():
+	#connect to current_objective_changed signal
 	if quest_manager:
 		quest_manager.connect("current_objective_changed", Callable(self, "_on_current_objective_changed"))
-		print("Connected to QuestManager's current_objective_changed signal.")
 	else:
-		print("Error: QuestManager node not found.")
+		print_debug("Error: QuestManager node not found.")
 	quest_panel.visible = false
 	#connect to player_changed signal
 	scene_manager.player_changed.connect(_on_player_changed)
 	#check if player is already set
 	if scene_manager.player:
+		player = scene_manager.player
 		_on_player_changed(scene_manager.player)
+		#print_debug("set player to global")
 	else:
-		print("StatPanel: Waiting for player_changed signal")
+		pass
+		#print_debug("StatPanel: Waiting for player_changed signal")
 
 func _process(_delta):
 	update_quest_panel()
 	update_level()
-	#update_quest_description()
 
 func _on_player_changed(new_player):
 	if player and is_instance_valid(player):
-		# Disconnect previous signals
+		#disconnect previous signals
 		if player.health_changed.is_connected(_on_health_changed):
 			player.health_changed.disconnect(_on_health_changed)
 		if player.gold_changed.is_connected(_on_gold_changed):
 			player.gold_changed.disconnect(_on_gold_changed)
 	player = new_player
 	if player:
-		# Connect to player's signals using Godot 4.3 syntax
 		player.health_changed.connect(_on_health_changed)
 		player.gold_changed.connect(_on_gold_changed)
-		# Update UI elements
 		update_health(player.current_health, player.max_health)
 		update_gold()
 	else:
-		print("StatPanel: Player reference is null in _on_player_changed")
+		print_debug("StatPanel: Player reference is null in _on_player_changed")
 
 func _on_health_changed(new_health):
 	update_health(new_health, player.max_health)
@@ -76,17 +76,10 @@ func update_quest_panel():
 			quest_progress.max_value = objective.target_count
 		else:
 			quest_panel.visible = false
-			
+
 func update_level():
 	level_label.text = str(player.current_level)
 
-#func update_quest_description():
-	#if quest_manager.active_quests.size() > 0:
-		#var quest = quest_manager.active_quests.values()[0]
-		#var objective = quest.objectives[0]
-		#if quest_manager.active_quests.values()[0].objectives[0].completed == true:
-			#objective = quest.objectives[1]
-
 func _on_current_objective_changed(quest_id, description):
-	print("Received current_objective_changed signal for Quest ID %d: %s" % [quest_id, description])
+	print_debug("Received current_objective_changed signal for Quest ID %d: %s" % [quest_id, description])
 	quest_objective.text = description

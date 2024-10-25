@@ -7,9 +7,9 @@ extends BaseScene
 func _ready():
 	super._ready()
 	camera.follow_node = local_player
-	hearts_container.set_max_hearts(local_player.max_health)
-	hearts_container.update_hearts(local_player.current_health)
-	local_player.health_changed.connect(hearts_container.update_hearts)
+	#hearts_container.set_max_hearts(local_player.max_health)
+	#hearts_container.update_hearts(local_player.current_health)
+	#local_player.health_changed.connect(hearts_container.update_hearts)
 
 func _process(_delta):
 	pass

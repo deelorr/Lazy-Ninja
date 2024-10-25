@@ -22,15 +22,15 @@ func _ready():
 	if scene_manager.player != null:
 		player = scene_manager.player
 		player_inventory = player.inventory
-		print("Player inventory initialized:", player_inventory)
+		#print_debug("Player inventory found", player_inventory)
 	else:
-		print("no player found, waiting for signal")
+		print_debug("no player found, waiting for signal")
 		scene_manager.player_changed.connect(_on_player_changed)
 
 func _on_player_changed(new_player):
 	player = new_player
 	player_inventory = player.inventory
-	print("Player inventory updated:", player_inventory)
+	print_debug("Player inventory updated:", player_inventory)
 
 func connect_slots():
 	for i in range(slots.size()):
