@@ -5,12 +5,10 @@ extends Node
 @onready var entrance_markers: Node2D = $entrance_markers
 
 func _ready():
-	
 	if SceneManager.first_load:
 		if local_player:
-			if local_player:
-				SceneManager.player = local_player
-				SceneManager.player_changed.emit(local_player)
+			SceneManager.player = local_player
+			SceneManager.player_changed.emit(local_player)
 		SceneManager.first_load = false
 	else:
 		if SceneManager.player:
@@ -20,6 +18,7 @@ func _ready():
 			add_child(local_player)
 		position_local_player()
 		SceneManager.player_changed.emit(local_player)
+
 
 func position_local_player():
 	var markers = entrance_markers.get_children()

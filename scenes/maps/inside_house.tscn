@@ -1226,7 +1226,6 @@ layer_1/tile_data = PackedInt32Array(65545, 196609, 7, 65544, 196609, 7, 131083,
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 3
-visible = false
 script = ExtResource("6_swgp2")
 
 [node name="hearts_container" parent="CanvasLayer" instance=ExtResource("7_3kkcc")]
@@ -1268,7 +1267,7 @@ position = Vector2(10, 4)
 shape = SubResource("RectangleShape2D_o26dl")
 
 [node name="Player" parent="." instance=ExtResource("7_uxh8i")]
-position = Vector2(116, 53)
+position = Vector2(100, 47)
 
 [node name="follow_cam" type="Camera2D" parent="." node_paths=PackedStringArray("tilemap", "follow_node")]
 position = Vector2(160, 90)
@@ -1279,4 +1278,4 @@ limit_bottom = 368
 position_smoothing_speed = 3.0
 script = ExtResource("11_h1g35")
 tilemap = NodePath("../TileMap")
-follow_node = NodePath(".")
+follow_node = NodePath("../Player")

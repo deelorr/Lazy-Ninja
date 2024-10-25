@@ -78,7 +78,7 @@ func handle_non_empty_slot_click(slot):
 	var price = item.price
 	if player.gold >= price:
 		player.gold -= price
-		player.gold_changed.emit(player.gold)
+		#player.gold_changed.emit(player.gold)
 		player_inventory.insert(item)
 		inventory_slot.amount -= 1
 		if inventory_slot.amount <= 0:

@@ -11,48 +11,19 @@ extends NinePatchRect
 var player: Player = null
 
 func _ready():
-	#connect to current_objective_changed signal
+	player = SceneManager.player
 	if QuestManager:
 		QuestManager.connect("current_objective_changed", Callable(self, "_on_current_objective_changed"))
 	else:
 		print_debug("Error: QuestManager node not found.")
 	quest_panel.visible = false
-	#connect to player_changed signal
-	SceneManager.player_changed.connect(_on_player_changed)
-	#check if player is already set
-	if SceneManager.player:
-		player = SceneManager.player
-		_on_player_changed(SceneManager.player)
-		#print_debug("set player to global")
-	else:
-		pass
-		#print_debug("StatPanel: Waiting for player_changed signal")
 
 func _process(_delta):
-	update_quest_panel()
-	update_level()
-
-func _on_player_changed(new_player):
-	if player and is_instance_valid(player):
-		#disconnect previous signals
-		if player.health_changed.is_connected(_on_health_changed):
-			player.health_changed.disconnect(_on_health_changed)
-		if player.gold_changed.is_connected(_on_gold_changed):
-			player.gold_changed.disconnect(_on_gold_changed)
-	player = new_player
 	if player:
-		player.health_changed.connect(_on_health_changed)
-		player.gold_changed.connect(_on_gold_changed)
-		update_health(player.current_health, player.max_health)
+		update_quest_panel()
+		update_level()
 		update_gold()
-	else:
-		print_debug("StatPanel: Player reference is null in _on_player_changed")
-
-func _on_health_changed(new_health):
-	update_health(new_health, player.max_health)
-
-func _on_gold_changed(_new_gold):
-	update_gold()
+		update_health(player.current_health, player.max_health)
 
 func update_health(health: int, max_health: int):
 	health_bar.value = health
@@ -78,7 +49,8 @@ func update_quest_panel():
 			quest_panel.visible = false
 
 func update_level():
-	level_label.text = str(player.current_level)
+	if player:
+		level_label.text = str(player.current_level)
 
 func _on_current_objective_changed(quest_id, description):
 	print_debug("Received current_objective_changed signal for Quest ID %d: %s" % [quest_id, description])

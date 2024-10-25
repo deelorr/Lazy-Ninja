@@ -1,11 +1,7 @@
 class_name Player
 extends CharacterBody2D
 
-signal health_changed(new_health: int)
-signal gold_changed(new_gold: int)
-
-#signal xp_changed(new_xp, total_xp)
-#signal level_up(new_level)
+#signal health_changed(new_health: int)
 
 @export var speed: int = 35
 @export var max_health: int = 3
@@ -17,7 +13,7 @@ signal gold_changed(new_gold: int)
 @onready var hurt_box = $hurt_box
 @onready var hurt_timer = $hurt_timer
 @onready var weapon = $weapon
-@onready var current_health: int = max_health
+@onready var current_health: int
 
 var current_weapon = ""
 var bow
@@ -28,35 +24,10 @@ var gold: int = 50
 
 var current_xp: int = 0
 var current_level: int = 1
-var xp_for_next_level: int = 100  # Initial XP required for level 2
-
-func calculate_xp_for_level(level: int) -> int:
-	#XP required increases by 50 each level
-	return 100 + (level - 1) * 50
-	
-func add_xp(amount: int):
-	current_xp += amount
-	#emit_signal("xp_changed", current_xp, xp_for_next_level)
-	print("Added XP: ", amount , " Total XP: " , current_xp, "/", xp_for_next_level)
-	check_level_up()
-	
-func check_level_up():
-	while current_xp >= xp_for_next_level:
-		current_xp -= xp_for_next_level
-		current_level += 1
-		#emit_signal("level_up", current_level)
-		print("Leveled Up! New Level: %d" % current_level)
-		# Update XP required for the next level
-		xp_for_next_level = calculate_xp_for_level(current_level)
-
-func get_player_info() -> Dictionary:
-	return {
-		"level": current_level,
-		"current_xp": current_xp,
-		"xp_for_next_level": xp_for_next_level
-	}
+var xp_for_next_level: int = 100
 
 func _ready():
+	current_health = max_health
 	inventory.use_item.connect(use_item)
 	weapon.disable()
 	effects.play("RESET")
@@ -72,6 +43,30 @@ func _physics_process(_delta):
 		for area in hurt_box.get_overlapping_areas():
 			if area.name == "hit_box":
 				hurt_by_enemy_area(area)
+
+func calculate_xp_for_level(level: int) -> int:
+	#xp required increases by 50 each level
+	return 100 + (level - 1) * 50
+	
+func add_xp(amount: int):
+	current_xp += amount
+	print("Added XP: ", amount , " Total XP: " , current_xp, "/", xp_for_next_level)
+	check_level_up()
+	
+func check_level_up():
+	while current_xp >= xp_for_next_level:
+		current_xp -= xp_for_next_level
+		current_level += 1
+		print("Leveled Up! New Level: %d" % current_level)
+		#update xp required for the next level
+		xp_for_next_level = calculate_xp_for_level(current_level)
+
+func get_player_info() -> Dictionary:
+	return {
+		"level": current_level,
+		"current_xp": current_xp,
+		"xp_for_next_level": xp_for_next_level
+	}
 
 func handle_input():
 	var move_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
@@ -130,7 +125,7 @@ func hurt_by_enemy_area(area):
 	current_health -= 1
 	if current_health < 0:
 		current_health = max_health
-	health_changed.emit(current_health)
+	#health_changed.emit(current_health)
 	is_hurt = true
 	knockback(area.get_parent().velocity)
 	effects.play("hurt_blink")
@@ -146,7 +141,7 @@ func _on_hurt_box_area_entered(area):
 func increase_health(amount: int):
 	current_health += amount
 	current_health = min(max_health, current_health)
-	health_changed.emit(current_health)
+	#health_changed.emit(current_health)
 
 func use_item(item: InventoryItem):
 	if not item.can_be_used(self):
@@ -154,11 +149,5 @@ func use_item(item: InventoryItem):
 	item.use(self)
 	inventory.remove_last_used_item()
 
-func change_health(amount: int):
-	current_health += amount
-	current_health = clamp(current_health, 0, max_health)
-	health_changed.emit(current_health)
-
 func change_gold(amount: int):
 	gold += amount
-	gold_changed.emit(gold)
