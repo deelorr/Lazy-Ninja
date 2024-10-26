@@ -1465,9 +1465,9 @@ texture = ExtResource("1_crrrf")
 texture = ExtResource("2_kudlv")
 0:0/size_in_atlas = Vector2i(2, 2)
 0:0/0 = 0
-0:0/0/texture_origin = Vector2i(-7, 7)
-0:0/0/y_sort_origin = 8
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(13.5862, 1.55907, 19.8225, -0.8909, 19.8225, 3.78632, 18.2634, 7.12719, 5.56812, 8, -3.56359, 8, -5.56812, 5.34539, -5.34539, 0.445448, 4.89994, 2.6727)
+0:0/0/texture_origin = Vector2i(-8, 8)
+0:0/0/y_sort_origin = 7
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4.45449, -4.89994, 19.8225, -5.79084, 20.9361, 4.67722, 8, 8, -4.67722, 4.67722)
 2:0/0 = 0
 3:0/0 = 0
 4:0/0 = 0
@@ -1600,7 +1600,7 @@ texture = ExtResource("2_kudlv")
 2:8/0 = 0
 2:8/0/texture_origin = Vector2i(-7, 7)
 2:8/0/y_sort_origin = 2
-2:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(17.818, -6.90446, 19.8225, -0.8909, 17.818, 1.33635, 5.44661, 3.15761, -4.67722, 1.55907, -8, 0.890898, -4.89994, -5.34539, 6.01357, -4.00904)
+2:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5.12267, -10.9135, 17.1498, -11.8044, 20.0452, -0.222725, 5.56812, 5.56812, -6.01357, 0.222725)
 4:8/0 = 0
 4:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 5:8/0 = 0
@@ -1816,8 +1816,8 @@ texture = ExtResource("2_kudlv")
 0:5/0 = 0
 0:5/0/texture_origin = Vector2i(8, 0)
 0:5/0/y_sort_origin = 22
-0:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-33.3125, 10.8125, -14.5625, 10.9375, -14.4375, 21.9375, -27.9375, 23.5625, -37.0625, 20.8125)
-0:5/0/physics_layer_1/polygon_0/points = PackedVector2Array(-1.9375, 9.1875, 16.9375, 10.3125, 20.1875, 20.9375, 9.6875, 23.0625, -2.0625, 20.6875)
+0:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-33.7323, 10.715, -16.6677, 11.5087, -15.874, 21.4299, -26.9858, 22.6205, -36.1134, 21.4299)
+0:5/0/physics_layer_1/polygon_0/points = PackedVector2Array(0.31498, 11.0243, 19.2138, 10.3943, 20.1587, 21.7336, -0.31498, 21.4187)
 17:10/size_in_atlas = Vector2i(4, 3)
 17:10/0 = 0
 
@@ -1925,6 +1925,9 @@ texture = ExtResource("4_rdm17")
 10:2/0 = 0
 0:3/size_in_atlas = Vector2i(2, 2)
 0:3/0 = 0
+0:3/0/texture_origin = Vector2i(1, 7)
+0:3/0/y_sort_origin = -7
+0:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 6, -8, 6)
 2:3/size_in_atlas = Vector2i(2, 2)
 2:3/0 = 0
 4:3/size_in_atlas = Vector2i(2, 2)
@@ -3032,7 +3035,6 @@ layer_6/tile_data = PackedInt32Array(131107, 1245188, 0, 196612, 4, 0, 131094, 5
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 3
-visible = false
 script = ExtResource("10_wu4s8")
 
 [node name="hearts_container" parent="CanvasLayer" instance=ExtResource("7_b21lc")]
@@ -3106,6 +3108,7 @@ z_index = 1
 position = Vector2(404, 145)
 
 [node name="boundaries" type="StaticBody2D" parent="."]
+visible = false
 z_index = 2
 position = Vector2(16, 16)
 collision_layer = 7
