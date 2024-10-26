@@ -1,12 +1,12 @@
 extends NinePatchRect
 
-@onready var gold_label = $Stats/Gold/gold_label
-@onready var health_bar = $Stats/Health/Label2/ProgressBar
-@onready var quest_title = $QuestPanel/Quests/HBoxContainer/quest_title
-@onready var quest_objective = $QuestPanel/Quests/quest_details/quest_objective
-@onready var quest_progress = $QuestPanel/Quests/quest_details/ProgressBar
-@onready var quest_panel = $QuestPanel
-@onready var level_label = $Stats/Level/level_label
+@onready var gold_label: Label = $Stats/Gold/gold_label
+@onready var health_bar: ProgressBar = $Stats/Health/Label2/ProgressBar
+@onready var quest_title: Label = $QuestPanel/Quests/HBoxContainer/quest_title
+@onready var quest_objective: Label = $QuestPanel/Quests/quest_details/quest_objective
+@onready var quest_progress: ProgressBar = $QuestPanel/Quests/quest_details/ProgressBar
+@onready var quest_panel: NinePatchRect = $QuestPanel
+@onready var level_label: Label = $Stats/Level/level_label
 
 var player: Player = null
 

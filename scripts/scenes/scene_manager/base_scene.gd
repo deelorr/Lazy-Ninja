@@ -1,5 +1,5 @@
-class_name BaseScene
 extends Node
+class_name BaseScene
 
 @onready var player: Player
 @onready var entrance_markers: Node2D = $entrance_markers

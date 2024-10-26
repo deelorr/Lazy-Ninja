@@ -3,15 +3,13 @@ extends Control
 signal opened
 signal closed
 
-var isOpen: bool = false
-
 @onready var inventory: StoreInventory = preload("res://resources/inventory/store_inventory.tres")
-@onready var itemStackGUIClass = preload("res://scenes/gui/store_inventory/store_item_stack_gui.tscn")
+@onready var itemStackGUIClass: PackedScene = preload("res://scenes/gui/store_inventory/store_item_stack_gui.tscn")
 @onready var slots: Array = $NinePatchRect/GridContainer.get_children()
 
+var isOpen: bool = false
 var item_in_hand: StoreItemStackGUI
-
-var player = null
+var player: Player = null
 var player_inventory: Inventory = null
 
 func _ready():
@@ -22,7 +20,6 @@ func _ready():
 	if SceneManager.player != null:
 		player = SceneManager.player
 		player_inventory = player.inventory
-		#print_debug("Player inventory found", player_inventory)
 	else:
 		print_debug("no player found, waiting for signal")
 		SceneManager.player_changed.connect(_on_player_changed)
@@ -78,7 +75,6 @@ func handle_non_empty_slot_click(slot):
 	var price = item.price
 	if player.gold >= price:
 		player.gold -= price
-		#player.gold_changed.emit(player.gold)
 		player_inventory.insert(item)
 		inventory_slot.amount -= 1
 		if inventory_slot.amount <= 0:

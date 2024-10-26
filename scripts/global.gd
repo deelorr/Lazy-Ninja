@@ -1,5 +1,4 @@
 extends Node
-class_name EventBus
 
 signal enemy_killed(enemy_type)
 

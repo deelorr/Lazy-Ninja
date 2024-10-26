@@ -1,5 +1,4 @@
 extends CharacterBody2D
-
 class_name HunterNPC
 
 @export var npc_id: String = "hunter_npc"
@@ -14,7 +13,6 @@ func _on_area_2d_body_entered(player) -> void:
 		DialogueManager.show_dialogue_balloon(hunter_dialogue, "start")
 		#connect dialogue_ended signal so when dialogue ends, _on_dialogue_ended is called
 		DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
-
 
 func _on_dialogue_ended(_resource: DialogueResource):
 	#disconnect so doesnt trigger multiple times
