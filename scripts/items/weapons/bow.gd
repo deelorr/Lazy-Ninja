@@ -25,6 +25,7 @@ func stop_aiming():
 	is_aiming = false
 	visible = false
 	rotation = 0
+	position = Vector2.ZERO  # Reset position to the player's origin
 
 func enable():
 	shape.disabled = false

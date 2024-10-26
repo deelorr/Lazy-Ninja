@@ -9,6 +9,7 @@ class_name Player
 @export var max_health: int = 3             # Maximum health
 @export var knockback_power: int = 500      # Power of knockback when hit
 @export var inventory: Inventory            # Reference to the player's inventory
+@export var bow_distance_from_player: float = 10.0  # Adjust as needed
 
 # =========================
 # === Node References ===
@@ -122,10 +123,14 @@ func handle_input():
 # Functions for aiming and firing the bow
 # =========================
 func aim_bow():
-	# Calculate the direction to aim the bow based on the mouse position
+	# Calculate the direction vector from the player to the mouse
 	var mouse_position = get_global_mouse_position()
-	var direction = (mouse_position - weapon.global_position).normalized()
+	var direction = (mouse_position - global_position).normalized()
+	# Set the bow's position to rotate around the player at a fixed distance
+	weapon.bow.position = direction * bow_distance_from_player
+	# Rotate the bow to face the mouse cursor
 	weapon.bow.rotation = direction.angle()
+	# Call the aim function on the bow
 	weapon.bow.aim()
 
 func fire_bow():
