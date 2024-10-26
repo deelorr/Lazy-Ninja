@@ -19,7 +19,7 @@ func _init() -> void:
 func change_scene(from_scene, to_scene_name, connected_marker):
 	last_scene_name = from_scene.name
 	marker = connected_marker
-	player = from_scene.local_player
+	player = from_scene.player
 	#emit signal to update player
 	player_changed.emit(player)
 	player.get_parent().remove_child(player)
