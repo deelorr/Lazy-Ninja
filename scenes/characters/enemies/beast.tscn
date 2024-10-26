@@ -198,7 +198,6 @@ _data = {
 radius = 59.0339
 
 [node name="Beast" type="CharacterBody2D" groups=["beast"]]
-z_index = 1
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_xse7b")

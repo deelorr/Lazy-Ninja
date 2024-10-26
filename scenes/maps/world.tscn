@@ -1,7 +1,7 @@
-[gd_scene load_steps=43 format=3 uid="uid://bi1v3lsgao0wn"]
+[gd_scene load_steps=42 format=3 uid="uid://bi1v3lsgao0wn"]
 
+[ext_resource type="Script" path="res://scripts/scenes/maps/world.gd" id="1_crjkk"]
 [ext_resource type="Texture2D" uid="uid://jtuqvr1lwjq7" path="res://art/tilesets/ground.png" id="1_crrrf"]
-[ext_resource type="Script" path="res://scripts/scenes/scene_manager/base_scene.gd" id="1_swuug"]
 [ext_resource type="Texture2D" uid="uid://becag4plihry" path="res://art/tilesets/nature.png" id="2_kudlv"]
 [ext_resource type="Texture2D" uid="uid://duq3rnujqw5h7" path="res://art/tilesets/animated_sprites/anim_flower.png" id="3_ksm4w"]
 [ext_resource type="Texture2D" uid="uid://ctm10no46jhh2" path="res://art/tilesets/TilesetReliefDetail.png" id="4_0taxg"]
@@ -25,7 +25,6 @@
 [ext_resource type="PackedScene" uid="uid://bmpwxneat8j66" path="res://scenes/characters/hunter.tscn" id="16_5287r"]
 [ext_resource type="PackedScene" uid="uid://de4i75octoy82" path="res://scenes/gui/stat_panel.tscn" id="17_buchr"]
 [ext_resource type="Script" path="res://scripts/gui/hud/stat_panel.gd" id="18_f5ug1"]
-[ext_resource type="PackedScene" uid="uid://bkq7avfjqqqxh" path="res://scenes/characters/enemies/beast.tscn" id="27_ngqv1"]
 [ext_resource type="PackedScene" uid="uid://be5nryp8gacni" path="res://scenes/maps/slime_cave.tscn" id="27_srog0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0qkei"]
@@ -2998,7 +2997,7 @@ size = Vector2(16, 10)
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
-script = ExtResource("1_swuug")
+script = ExtResource("1_crjkk")
 
 [node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true
@@ -3128,16 +3127,6 @@ shape = SubResource("RectangleShape2D_y0fnt")
 [node name="slime_cave" parent="." instance=ExtResource("27_srog0")]
 z_index = 1
 position = Vector2(264, 41)
-
-[node name="Beast" parent="." instance=ExtResource("27_ngqv1")]
-z_index = 0
-y_sort_enabled = false
-position = Vector2(505, 236)
-
-[node name="Beast2" parent="." instance=ExtResource("27_ngqv1")]
-z_index = 0
-y_sort_enabled = false
-position = Vector2(427, 268)
 
 [connection signal="closed" from="CanvasLayer/InventoryGUI" to="." method="_on_inventory_gui_closed"]
 [connection signal="opened" from="CanvasLayer/InventoryGUI" to="." method="_on_inventory_gui_opened"]
