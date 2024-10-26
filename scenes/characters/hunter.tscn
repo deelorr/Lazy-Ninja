@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bmpwxneat8j66"]
 
-[ext_resource type="Script" path="res://scripts/characters/hunter.gd" id="1_8lk4c"]
+[ext_resource type="Script" path="res://scripts/characters/npc/hunter.gd" id="1_8lk4c"]
 [ext_resource type="Texture2D" uid="uid://bnx508tyv8spx" path="res://art/characters/NPC/hunter_sprite_sheet.png" id="1_vaquc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2hfh5"]

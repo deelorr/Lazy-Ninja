@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://bi1v3lsgao0wn"]
+[gd_scene load_steps=43 format=3 uid="uid://bi1v3lsgao0wn"]
 
 [ext_resource type="Texture2D" uid="uid://jtuqvr1lwjq7" path="res://art/tilesets/ground.png" id="1_crrrf"]
 [ext_resource type="Script" path="res://scripts/scenes/scene_manager/base_scene.gd" id="1_swuug"]
@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://bmpwxneat8j66" path="res://scenes/characters/hunter.tscn" id="16_5287r"]
 [ext_resource type="PackedScene" uid="uid://de4i75octoy82" path="res://scenes/gui/stat_panel.tscn" id="17_buchr"]
 [ext_resource type="Script" path="res://scripts/gui/hud/stat_panel.gd" id="18_f5ug1"]
+[ext_resource type="PackedScene" uid="uid://bkq7avfjqqqxh" path="res://scenes/characters/enemies/beast.tscn" id="27_ngqv1"]
 [ext_resource type="PackedScene" uid="uid://be5nryp8gacni" path="res://scenes/maps/slime_cave.tscn" id="27_srog0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0qkei"]
@@ -3127,6 +3128,9 @@ shape = SubResource("RectangleShape2D_y0fnt")
 [node name="slime_cave" parent="." instance=ExtResource("27_srog0")]
 z_index = 1
 position = Vector2(264, 41)
+
+[node name="Beast" parent="." instance=ExtResource("27_ngqv1")]
+position = Vector2(505, 236)
 
 [connection signal="closed" from="CanvasLayer/InventoryGUI" to="." method="_on_inventory_gui_closed"]
 [connection signal="opened" from="CanvasLayer/InventoryGUI" to="." method="_on_inventory_gui_opened"]
