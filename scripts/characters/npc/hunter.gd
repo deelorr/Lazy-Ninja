@@ -7,12 +7,26 @@ class_name HunterNPC
 @onready var quest_manager: QuestManager = QuestManager
 @onready var hunter_dialogue: Resource = preload("res://dialogue/hunter.dialogue")
 @onready var first_quest: Quest = preload("res://resources/quests/kill_da_slimez.tres")
+@onready var animations: AnimationPlayer = $AnimationPlayer
+
+var player_in_area: bool = false
+
+func _ready() -> void:
+	set_process(true)  # Ensure _process is called
+	
+func _physics_process(_delta):
+	if player_in_area and Input.is_action_just_pressed("action"):
+		start_dialogue()
 
 func _on_area_2d_body_entered(player) -> void:
 	if player.is_in_group("player"):
-		DialogueManager.show_dialogue_balloon(hunter_dialogue, "start")
-		#connect dialogue_ended signal so when dialogue ends, _on_dialogue_ended is called
-		DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
+		player_in_area = true
+		animations.play("bubble_pop_up")
+
+func start_dialogue():
+	DialogueManager.show_dialogue_balloon(hunter_dialogue, "start")
+	#connect dialogue_ended signal so when dialogue ends, _on_dialogue_ended is called
+	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 
 func _on_dialogue_ended(_resource: DialogueResource):
 	#disconnect so doesnt trigger multiple times
@@ -37,3 +51,8 @@ func update_quests():
 			if QuestManager.quest_dialog_point != "complete":
 				print_debug("Quest completed, but quest_dialog_point is ", QuestManager.quest_dialog_point)
 			return
+
+func _on_area_2d_body_exited(body):
+	if body.is_in_group("player"):
+		player_in_area = false
+		animations.play("bubble_pop_down")

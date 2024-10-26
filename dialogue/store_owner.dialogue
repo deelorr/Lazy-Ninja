@@ -1,5 +1,7 @@
 ~ start
-
 Store Owner: Welcome in!
+=> END
 
+~ goodbye
+Store Owner: Come back soon!
 => END
