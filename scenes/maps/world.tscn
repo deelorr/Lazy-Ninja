@@ -3130,9 +3130,13 @@ z_index = 1
 position = Vector2(264, 41)
 
 [node name="Beast" parent="." instance=ExtResource("27_ngqv1")]
+z_index = 0
+y_sort_enabled = false
 position = Vector2(505, 236)
 
 [node name="Beast2" parent="." instance=ExtResource("27_ngqv1")]
+z_index = 0
+y_sort_enabled = false
 position = Vector2(427, 268)
 
 [connection signal="closed" from="CanvasLayer/InventoryGUI" to="." method="_on_inventory_gui_closed"]

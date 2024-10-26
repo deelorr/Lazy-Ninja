@@ -44,13 +44,13 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 	if not area.is_in_group("weapon"):
 		return
 
-	$hurt_box.set_deferred("monitorable", false)  # Prevents further collision detection
+	$hit_box.set_deferred("monitorable", false)  # Prevents further collision detection
 	is_dead = true
 	animation_player.play("death")
 	await animation_player.animation_finished  # Wait for the death animation to finish
 	Global.enemy_killed.emit("beast")
 	Global.beast_count -= 1
-	print("slime destroyed", Global.beast_count, "/", Global.max_beasts)
+	print("beast destroyed", Global.beast_count, "/", Global.max_beasts)
 	SceneManager.player.add_xp(5)
 	queue_free()  # Remove the enemy
 
