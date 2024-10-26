@@ -1,30 +1,34 @@
-extends BaseScene
+extends Area2D
 
 @onready var beast_scene: PackedScene = preload("res://scenes/characters/enemies/beast.tscn")
-@onready var spawn_area: Area2D = $spawn_area
-@onready var collision_polygon: CollisionPolygon2D = $spawn_area/CollisionPolygon2D
+@onready var collision_polygon: CollisionPolygon2D = $CollisionPolygon2D
 
 func _ready():
-	super._ready()
 	randomize()
 	spawn_enemies(3)
 
 func spawn_enemies(count: int) -> void:
+	#get parent node to ensure enemies are added to map
+	var parent_node = self.get_parent()
 	for i in range(count):
 		var beast_instance = beast_scene.instantiate()
-		beast_instance.position = get_random_position()
-		add_child(beast_instance)
-		Global.beast_count += 1
+		var spawn_pos = get_random_position()
+		beast_instance.position = spawn_pos
+		if parent_node:
+			parent_node.add_child.call_deferred(beast_instance)
+			Global.beast_count += 1
+		else:
+			print("Error: No parent node found.")
 
 func get_random_position() -> Vector2:
 	if collision_polygon and collision_polygon.polygon.size() > 0:
-		return get_random_point_in_polygon(collision_polygon.polygon)
-
-	#no polygon, return the spawn_area position
-	return spawn_area.global_position
+		var random_pos = get_random_point_in_polygon(collision_polygon.polygon)
+		return random_pos
+	#no valid polygon
+	print("No polygon found, returning global position: ", self.global_position)
+	return self.global_position
 
 func get_random_point_in_polygon(points: Array) -> Vector2:
-	# Calculate a random point within the polygon using a bounding box approach
 	var min_x = INF
 	var max_x = -INF
 	var min_y = INF
@@ -45,16 +49,19 @@ func get_random_point_in_polygon(points: Array) -> Vector2:
 		)
 
 		if is_point_in_polygon(random_point, points):
-			return spawn_area.global_position + random_point.rotated(spawn_area.rotation)
+			var adjusted_point = self.global_position + random_point.rotated(self.rotation)
+			print("Valid point found: ", adjusted_point)
+			return adjusted_point
 
-	# Fallback to spawn_area position if no valid point is found
-	return spawn_area.global_position
+	# Fallback to global position if no valid point is found
+	print("No valid point found, using fallback global position.")
+	return self.global_position
 
 func is_point_in_polygon(point: Vector2, polygon: Array) -> bool:
 	var n = polygon.size()
 	var inside = false
 	var j = n - 1
-	
+
 	for i in range(n):
 		var vi = polygon[i]
 		var vj = polygon[j]

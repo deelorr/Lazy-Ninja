@@ -1,7 +1,7 @@
-[gd_scene load_steps=42 format=3 uid="uid://bi1v3lsgao0wn"]
+[gd_scene load_steps=43 format=3 uid="uid://bi1v3lsgao0wn"]
 
-[ext_resource type="Script" path="res://scripts/scenes/maps/world.gd" id="1_crjkk"]
 [ext_resource type="Texture2D" uid="uid://jtuqvr1lwjq7" path="res://art/tilesets/ground.png" id="1_crrrf"]
+[ext_resource type="Script" path="res://scripts/scenes/scene_manager/base_scene.gd" id="1_uu85d"]
 [ext_resource type="Texture2D" uid="uid://becag4plihry" path="res://art/tilesets/nature.png" id="2_kudlv"]
 [ext_resource type="Texture2D" uid="uid://duq3rnujqw5h7" path="res://art/tilesets/animated_sprites/anim_flower.png" id="3_ksm4w"]
 [ext_resource type="Texture2D" uid="uid://ctm10no46jhh2" path="res://art/tilesets/TilesetReliefDetail.png" id="4_0taxg"]
@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://bmpwxneat8j66" path="res://scenes/characters/hunter.tscn" id="16_5287r"]
 [ext_resource type="PackedScene" uid="uid://de4i75octoy82" path="res://scenes/gui/stat_panel.tscn" id="17_buchr"]
 [ext_resource type="Script" path="res://scripts/gui/hud/stat_panel.gd" id="18_f5ug1"]
+[ext_resource type="PackedScene" uid="uid://bp8d5fmlfog07" path="res://scenes/maps/spawn_area.tscn" id="27_7giur"]
 [ext_resource type="PackedScene" uid="uid://be5nryp8gacni" path="res://scenes/maps/slime_cave.tscn" id="27_srog0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0qkei"]
@@ -3000,7 +3001,7 @@ size = Vector2(16, 10)
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
-script = ExtResource("1_crjkk")
+script = ExtResource("1_uu85d")
 
 [node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true
@@ -3074,6 +3075,20 @@ grow_vertical = 0
 [node name="StatPanel" parent="CanvasLayer" instance=ExtResource("17_buchr")]
 script = ExtResource("18_f5ug1")
 
+[node name="follow_cam" type="Camera2D" parent="." node_paths=PackedStringArray("tilemap")]
+position = Vector2(176, 106)
+limit_left = 0
+limit_top = 0
+limit_right = 640
+limit_bottom = 368
+position_smoothing_speed = 3.0
+script = ExtResource("5_708fr")
+tilemap = NodePath("../TileMap")
+
+[node name="hunter" parent="." instance=ExtResource("16_5287r")]
+z_index = 1
+position = Vector2(404, 145)
+
 [node name="entrance_markers" type="Node2D" parent="."]
 position = Vector2(432, 205)
 
@@ -3093,30 +3108,6 @@ z_index = 2
 position = Vector2(0, -1.5)
 shape = SubResource("RectangleShape2D_rp0h4")
 
-[node name="follow_cam" type="Camera2D" parent="." node_paths=PackedStringArray("tilemap")]
-position = Vector2(176, 106)
-limit_left = 0
-limit_top = 0
-limit_right = 640
-limit_bottom = 368
-position_smoothing_speed = 3.0
-script = ExtResource("5_708fr")
-tilemap = NodePath("../TileMap")
-
-[node name="hunter" parent="." instance=ExtResource("16_5287r")]
-z_index = 1
-position = Vector2(404, 145)
-
-[node name="boundaries" type="StaticBody2D" parent="."]
-visible = false
-z_index = 2
-position = Vector2(16, 16)
-collision_layer = 7
-collision_mask = 7
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="boundaries"]
-polygon = PackedVector2Array(17, 30, 240, 30, 240, 16, 256, 16, 256, 30, 657, 30, 658, 328, 16, 328, 15, 30, 15, -12, -12, -12, -12, 361, 684, 360, 684, -13, 17, -12)
-
 [node name="SceneTrigger2" parent="." instance=ExtResource("14_rmnrq")]
 z_index = 1
 position = Vector2(591, 71)
@@ -3132,13 +3123,19 @@ shape = SubResource("RectangleShape2D_y0fnt")
 z_index = 1
 position = Vector2(264, 41)
 
-[node name="spawn_area" type="Area2D" parent="."]
-position = Vector2(467, 278)
+[node name="spawn_area" parent="." instance=ExtResource("27_7giur")]
+z_index = 1
+position = Vector2(470, 279)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="spawn_area"]
-position = Vector2(-1.18944, 0.278717)
-scale = Vector2(1.01056, 0.995084)
-polygon = PackedVector2Array(70, -58, 47, 27, -72, 30, -48, -59)
+[node name="boundaries" type="StaticBody2D" parent="."]
+visible = false
+z_index = 2
+position = Vector2(16, 16)
+collision_layer = 7
+collision_mask = 7
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="boundaries"]
+polygon = PackedVector2Array(17, 30, 240, 30, 240, 16, 256, 16, 256, 30, 657, 30, 658, 328, 16, 328, 15, 30, 15, -12, -12, -12, -12, 361, 684, 360, 684, -13, 17, -12)
 
 [connection signal="closed" from="CanvasLayer/InventoryGUI" to="." method="_on_inventory_gui_closed"]
 [connection signal="opened" from="CanvasLayer/InventoryGUI" to="." method="_on_inventory_gui_opened"]

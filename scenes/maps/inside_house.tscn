@@ -400,7 +400,8 @@ texture = ExtResource("2_w771l")
 3:7/size_in_atlas = Vector2i(1, 2)
 3:7/0 = 0
 3:7/0/texture_origin = Vector2i(0, 8)
-3:7/0/y_sort_origin = 14
+3:7/0/y_sort_origin = 7
+3:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 6, -8, 5.875)
 4:7/0 = 0
 5:7/0 = 0
 6:7/0 = 0
@@ -423,6 +424,7 @@ texture = ExtResource("2_w771l")
 1:9/0 = 0
 2:9/0 = 0
 2:9/0/y_sort_origin = 6
+2:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5.25, -2.5, 5.5, -2.75, 4, 8, -4.5, 8)
 3:9/0 = 0
 4:9/0 = 0
 5:9/0 = 0
@@ -462,7 +464,8 @@ texture = ExtResource("2_w771l")
 0:7/size_in_atlas = Vector2i(1, 2)
 0:7/0 = 0
 0:7/0/texture_origin = Vector2i(0, 8)
-0:7/0/y_sort_origin = 12
+0:7/0/y_sort_origin = 6
+0:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -2.75, 5.625, -2.625, 5.75, 6.75, -6.125, 6.5)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kxsfc"]
 texture = ExtResource("3_ctps4")
@@ -1201,6 +1204,7 @@ texture = ExtResource("4_lqv6r")
 9:10/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_rg55s"]
+physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_qk7by")
 sources/1 = SubResource("TileSetAtlasSource_53tpr")
 sources/2 = SubResource("TileSetAtlasSource_kxsfc")
@@ -1210,6 +1214,7 @@ sources/3 = SubResource("TileSetAtlasSource_ppe3n")
 size = Vector2(34, 12)
 
 [node name="InsideHouse" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_jwdfx")
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -1225,6 +1230,7 @@ layer_1/tile_data = PackedInt32Array(65545, 196609, 7, 65544, 196609, 7, 131083,
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 3
+visible = false
 script = ExtResource("6_swgp2")
 
 [node name="hearts_container" parent="CanvasLayer" instance=ExtResource("7_3kkcc")]
@@ -1274,3 +1280,8 @@ limit_bottom = 368
 position_smoothing_speed = 3.0
 script = ExtResource("11_h1g35")
 tilemap = NodePath("../TileMap")
+
+[node name="boundaries" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="boundaries"]
+polygon = PackedVector2Array(194, 14, 194, 98, 99, 98, 99, 108, 62, 108, 62, 98, 14, 98, 14, 16, 0, 16, 0, 115, 205, 115, 205, -2, 0, -2, 0, 14, 14, 14)

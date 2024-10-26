@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://bp8d5fmlfog07"]
+
+[ext_resource type="Script" path="res://scripts/scenes/maps/spawn_area.gd" id="1_rdawj"]
+
+[node name="spawn_area" type="Area2D"]
+position = Vector2(467, 278)
+script = ExtResource("1_rdawj")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-1.18944, 0.278717)
+scale = Vector2(1.01056, 0.995084)
+polygon = PackedVector2Array(70, -58, 47, 27, -72, 30, -48, -59)
