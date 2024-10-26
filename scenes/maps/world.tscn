@@ -3032,6 +3032,7 @@ layer_6/tile_data = PackedInt32Array(131107, 1245188, 0, 196612, 4, 0, 131094, 5
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 3
+visible = false
 script = ExtResource("10_wu4s8")
 
 [node name="hearts_container" parent="CanvasLayer" instance=ExtResource("7_b21lc")]
@@ -3127,6 +3128,14 @@ shape = SubResource("RectangleShape2D_y0fnt")
 [node name="slime_cave" parent="." instance=ExtResource("27_srog0")]
 z_index = 1
 position = Vector2(264, 41)
+
+[node name="spawn_area" type="Area2D" parent="."]
+position = Vector2(467, 278)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="spawn_area"]
+position = Vector2(-1.18944, 0.278717)
+scale = Vector2(1.01056, 0.995084)
+polygon = PackedVector2Array(70, -58, 47, 27, -72, 30, -48, -59)
 
 [connection signal="closed" from="CanvasLayer/InventoryGUI" to="." method="_on_inventory_gui_closed"]
 [connection signal="opened" from="CanvasLayer/InventoryGUI" to="." method="_on_inventory_gui_opened"]
