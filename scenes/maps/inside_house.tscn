@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://6o8v72jsa5h1"]
+[gd_scene load_steps=19 format=3 uid="uid://6o8v72jsa5h1"]
 
 [ext_resource type="Texture2D" uid="uid://yqjhon6jwyfs" path="res://art/tilesets/floor.png" id="1_iunt8"]
 [ext_resource type="Script" path="res://scripts/scenes/maps/inside_house.gd" id="1_wyhd5"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://blt4seqeee2mk" path="res://scenes/maps/scene_trigger.tscn" id="6_ohnnk"]
 [ext_resource type="Script" path="res://scripts/gui/hud/canvas_layer.gd" id="6_swgp2"]
 [ext_resource type="PackedScene" uid="uid://cytnun4f64ouu" path="res://scenes/gui/scrapped/hearts_container.tscn" id="7_3kkcc"]
-[ext_resource type="PackedScene" uid="uid://cw32y4dbgj36m" path="res://scenes/characters/player.tscn" id="7_uxh8i"]
 [ext_resource type="PackedScene" uid="uid://77s2jr485rus" path="res://scenes/gui/inventory/inventory_gui.tscn" id="8_7ivxg"]
 [ext_resource type="PackedScene" uid="uid://de4i75octoy82" path="res://scenes/gui/stat_panel.tscn" id="9_313l7"]
 [ext_resource type="Script" path="res://scripts/gui/hud/stat_panel.gd" id="10_hw6b2"]
@@ -1266,10 +1265,7 @@ connected_marker = "exit_house"
 position = Vector2(10, 4)
 shape = SubResource("RectangleShape2D_o26dl")
 
-[node name="Player" parent="." instance=ExtResource("7_uxh8i")]
-position = Vector2(100, 47)
-
-[node name="follow_cam" type="Camera2D" parent="." node_paths=PackedStringArray("tilemap", "follow_node")]
+[node name="follow_cam" type="Camera2D" parent="." node_paths=PackedStringArray("tilemap")]
 position = Vector2(160, 90)
 limit_left = 0
 limit_top = 0
@@ -1278,4 +1274,3 @@ limit_bottom = 368
 position_smoothing_speed = 3.0
 script = ExtResource("11_h1g35")
 tilemap = NodePath("../TileMap")
-follow_node = NodePath("../Player")

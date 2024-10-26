@@ -1,6 +1,5 @@
-[gd_scene load_steps=43 format=3 uid="uid://bi1v3lsgao0wn"]
+[gd_scene load_steps=42 format=3 uid="uid://bi1v3lsgao0wn"]
 
-[ext_resource type="PackedScene" uid="uid://cw32y4dbgj36m" path="res://scenes/characters/player.tscn" id="1_33q1i"]
 [ext_resource type="Texture2D" uid="uid://jtuqvr1lwjq7" path="res://art/tilesets/ground.png" id="1_crrrf"]
 [ext_resource type="Script" path="res://scripts/scenes/maps/world.gd" id="1_hjtei"]
 [ext_resource type="Texture2D" uid="uid://becag4plihry" path="res://art/tilesets/nature.png" id="2_kudlv"]
@@ -3091,10 +3090,7 @@ z_index = 2
 position = Vector2(0, -1.5)
 shape = SubResource("RectangleShape2D_rp0h4")
 
-[node name="Player" parent="." instance=ExtResource("1_33q1i")]
-position = Vector2(109, 108)
-
-[node name="follow_cam" type="Camera2D" parent="." node_paths=PackedStringArray("tilemap", "follow_node")]
+[node name="follow_cam" type="Camera2D" parent="." node_paths=PackedStringArray("tilemap")]
 position = Vector2(176, 106)
 limit_left = 0
 limit_top = 0
@@ -3103,7 +3099,6 @@ limit_bottom = 368
 position_smoothing_speed = 3.0
 script = ExtResource("5_708fr")
 tilemap = NodePath("../TileMap")
-follow_node = NodePath("../Player")
 
 [node name="hunter" parent="." instance=ExtResource("16_5287r")]
 z_index = 1

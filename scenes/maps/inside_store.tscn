@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://c3o11evahvoud"]
+[gd_scene load_steps=25 format=3 uid="uid://c3o11evahvoud"]
 
 [ext_resource type="Script" path="res://scripts/scenes/maps/inside_house.gd" id="1_5hnq3"]
 [ext_resource type="Texture2D" uid="uid://yqjhon6jwyfs" path="res://art/tilesets/floor.png" id="2_4do0k"]
@@ -13,7 +13,6 @@
 [ext_resource type="PackedScene" uid="uid://blt4seqeee2mk" path="res://scenes/maps/scene_trigger.tscn" id="9_cs0xv"]
 [ext_resource type="PackedScene" uid="uid://de4i75octoy82" path="res://scenes/gui/stat_panel.tscn" id="9_ux0qw"]
 [ext_resource type="Script" path="res://scripts/gui/hud/stat_panel.gd" id="10_3l2nc"]
-[ext_resource type="PackedScene" uid="uid://cw32y4dbgj36m" path="res://scenes/characters/player.tscn" id="10_lsbwn"]
 [ext_resource type="PackedScene" uid="uid://dbejya73te6nu" path="res://scenes/gui/store_inventory/store_inventory_gui.tscn" id="11_7ck3x"]
 [ext_resource type="Script" path="res://scripts/characters/player/follow_cam.gd" id="11_mvrf7"]
 [ext_resource type="PackedScene" uid="uid://ma54ampl27ky" path="res://scenes/characters/store_owner.tscn" id="12_xjrcs"]
@@ -1949,8 +1948,6 @@ grow_vertical = 2
 position = Vector2(79, 90)
 
 [node name="enter_store" type="Marker2D" parent="entrance_markers"]
-
-[node name="Player" parent="." instance=ExtResource("10_lsbwn")]
 
 [node name="follow_cam" type="Camera2D" parent="." node_paths=PackedStringArray("tilemap", "follow_node")]
 position = Vector2(160, 90)
