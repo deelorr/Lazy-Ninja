@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_12"
+type="Resource"
+uid="uid://sidfp13lrbnt"
+path="res://.godot/imported/armory_owner.dialogue-2cb75eb9e371f88a3681ef65055dba3d.tres"
+
+[deps]
+
+source_file="res://dialogue/armory_owner.dialogue"
+dest_files=["res://.godot/imported/armory_owner.dialogue-2cb75eb9e371f88a3681ef65055dba3d.tres"]
+
+[params]
+
+defaults=true

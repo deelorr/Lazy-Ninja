@@ -1,24 +1,24 @@
-[gd_scene load_steps=25 format=3 uid="uid://c3o11evahvoud"]
+[gd_scene load_steps=25 format=3 uid="uid://cxdbvymjgk6cu"]
 
-[ext_resource type="Script" path="res://scripts/scenes/scene_manager/base_scene.gd" id="1_knhba"]
-[ext_resource type="Texture2D" uid="uid://yqjhon6jwyfs" path="res://art/tilesets/floor.png" id="2_4do0k"]
-[ext_resource type="Texture2D" uid="uid://db0ofsi30xfjk" path="res://art/tilesets/house elements.png" id="3_jtrho"]
-[ext_resource type="Texture2D" uid="uid://dgif58s51ttk0" path="res://art/tilesets/buildings.png" id="4_2v4o5"]
-[ext_resource type="Texture2D" uid="uid://cp641bt8pa8ol" path="res://art/tilesets/walls.png" id="5_2tn16"]
-[ext_resource type="Texture2D" uid="uid://cxg6fosuiwyov" path="res://art/effects/fire.png" id="6_i3bpj"]
-[ext_resource type="Script" path="res://scripts/gui/hud/canvas_layer.gd" id="6_ujtml"]
-[ext_resource type="Texture2D" uid="uid://kldl1gjhswy0" path="res://art/tilesets/buildings_t.png" id="7_afkma"]
-[ext_resource type="PackedScene" uid="uid://cytnun4f64ouu" path="res://scenes/gui/scrapped/hearts_container.tscn" id="7_iv3qi"]
-[ext_resource type="PackedScene" uid="uid://77s2jr485rus" path="res://scenes/gui/inventory/inventory_gui.tscn" id="8_wyk7p"]
-[ext_resource type="PackedScene" uid="uid://blt4seqeee2mk" path="res://scenes/maps/scene_trigger.tscn" id="9_cs0xv"]
-[ext_resource type="PackedScene" uid="uid://de4i75octoy82" path="res://scenes/gui/stat_panel.tscn" id="9_ux0qw"]
-[ext_resource type="Script" path="res://scripts/gui/hud/stat_panel.gd" id="10_3l2nc"]
-[ext_resource type="PackedScene" uid="uid://dbejya73te6nu" path="res://scenes/gui/store_inventory/store_inventory_gui.tscn" id="11_7ck3x"]
-[ext_resource type="Script" path="res://scripts/characters/player/follow_cam.gd" id="11_mvrf7"]
-[ext_resource type="PackedScene" uid="uid://ma54ampl27ky" path="res://scenes/characters/store_owner.tscn" id="12_xjrcs"]
+[ext_resource type="Script" path="res://scripts/scenes/scene_manager/base_scene.gd" id="1_r40tg"]
+[ext_resource type="Texture2D" uid="uid://yqjhon6jwyfs" path="res://art/tilesets/floor.png" id="2_ag74h"]
+[ext_resource type="Texture2D" uid="uid://db0ofsi30xfjk" path="res://art/tilesets/house elements.png" id="3_1anjt"]
+[ext_resource type="Texture2D" uid="uid://dgif58s51ttk0" path="res://art/tilesets/buildings.png" id="4_31udp"]
+[ext_resource type="Texture2D" uid="uid://cp641bt8pa8ol" path="res://art/tilesets/walls.png" id="5_a4xgw"]
+[ext_resource type="Texture2D" uid="uid://cxg6fosuiwyov" path="res://art/effects/fire.png" id="6_r187j"]
+[ext_resource type="Texture2D" uid="uid://kldl1gjhswy0" path="res://art/tilesets/buildings_t.png" id="7_elcxx"]
+[ext_resource type="Script" path="res://scripts/gui/hud/canvas_layer.gd" id="8_58k5b"]
+[ext_resource type="PackedScene" uid="uid://cytnun4f64ouu" path="res://scenes/gui/scrapped/hearts_container.tscn" id="9_x7di4"]
+[ext_resource type="PackedScene" uid="uid://77s2jr485rus" path="res://scenes/gui/inventory/inventory_gui.tscn" id="10_mfffp"]
+[ext_resource type="PackedScene" uid="uid://de4i75octoy82" path="res://scenes/gui/stat_panel.tscn" id="11_dx57x"]
+[ext_resource type="Script" path="res://scripts/gui/hud/stat_panel.gd" id="12_5m5s5"]
+[ext_resource type="PackedScene" uid="uid://dbejya73te6nu" path="res://scenes/gui/store_inventory/store_inventory_gui.tscn" id="13_t4qdn"]
+[ext_resource type="Script" path="res://scripts/characters/player/follow_cam.gd" id="14_cdug3"]
+[ext_resource type="PackedScene" uid="uid://blt4seqeee2mk" path="res://scenes/maps/scene_trigger.tscn" id="15_175b3"]
+[ext_resource type="PackedScene" uid="uid://dmuw8hpuyqjpi" path="res://scenes/characters/armory_owner.tscn" id="16_poi4a"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qk7by"]
-texture = ExtResource("2_4do0k")
+texture = ExtResource("2_ag74h")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -315,7 +315,7 @@ texture = ExtResource("2_4do0k")
 19:16/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_53tpr"]
-texture = ExtResource("3_jtrho")
+texture = ExtResource("3_1anjt")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -470,7 +470,7 @@ texture = ExtResource("3_jtrho")
 0:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5.1875, -1.375, 6.1875, -0.875, 5.4375, 5, -0.0625, 8, -5.6875, 4.25)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kxsfc"]
-texture = ExtResource("4_2v4o5")
+texture = ExtResource("4_31udp")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -1125,7 +1125,7 @@ texture = ExtResource("4_2v4o5")
 31:22/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ppe3n"]
-texture = ExtResource("5_2tn16")
+texture = ExtResource("5_a4xgw")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -1210,7 +1210,7 @@ texture = ExtResource("5_2tn16")
 9:10/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dpvm2"]
-texture = ExtResource("6_i3bpj")
+texture = ExtResource("6_r187j")
 2:5/animation_separation = Vector2i(5, 0)
 2:5/animation_frame_0/duration = 0.2
 2:5/animation_frame_1/duration = 0.2
@@ -1221,7 +1221,7 @@ texture = ExtResource("6_i3bpj")
 2:5/0/z_index = -1
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4un8s"]
-texture = ExtResource("7_afkma")
+texture = ExtResource("7_elcxx")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -1886,7 +1886,7 @@ size = Vector2(34, 8)
 
 [node name="InsideStore" type="Node2D"]
 y_sort_enabled = true
-script = ExtResource("1_knhba")
+script = ExtResource("1_r40tg")
 
 [node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true
@@ -1894,19 +1894,21 @@ tile_set = SubResource("TileSet_rg55s")
 format = 2
 layer_0/name = "background"
 layer_0/tile_data = PackedInt32Array(0, 327683, 0, 1, 524291, 0, 2, 524291, 0, 3, 524291, 0, 4, 524291, 0, 5, 524291, 0, 6, 524291, 0, 7, 524291, 0, 8, 524291, 0, 9, 524291, 0, 10, 524291, 0, 11, 524291, 0, 12, 589827, 0, 65548, 589827, 1, 131084, 589827, 1, 196620, 589827, 1, 262156, 589827, 1, 327692, 589827, 1, 393228, 589827, 4, 393227, 524291, 4, 393226, 524291, 4, 393225, 524291, 4, 393224, 524291, 4, 393223, 524291, 4, 393222, 458755, 4, 393216, 327683, 4, 393217, 524291, 4, 327680, 327683, 1, 262144, 327683, 1, 196608, 327683, 1, 131072, 327683, 1, 65536, 327683, 1, 393219, 393219, 4, 393218, 524291, 4, 65537, 786432, 1, 65539, 786432, 1, 131075, 786432, 1, 131076, 786432, 1, 131077, 786432, 1, 131078, 786432, 1, 131079, 786432, 1, 131080, 786432, 1, 131081, 786432, 1, 131083, 786432, 1, 196619, 786432, 1, 262155, 786432, 1, 327691, 786432, 1, 327690, 786432, 1, 262154, 786432, 1, 196618, 786432, 1, 131082, 786432, 1, 65543, 786432, 1, 65542, 786432, 1, 131073, 786432, 1, 196609, 786432, 1, 262145, 786432, 1, 327681, 786432, 1, 327682, 786432, 1, 327683, 786432, 1, 327684, 786432, 1, 327685, 786432, 1, 327686, 786432, 1, 327687, 786432, 1, 327688, 786432, 1, 327689, 786432, 1, 262153, 786432, 1, 196617, 786432, 1, 196616, 786432, 1, 196615, 786432, 1, 196614, 786432, 1, 196613, 786432, 1, 196612, 786432, 1, 262148, 786432, 1, 262147, 786432, 1, 262149, 786432, 1, 262150, 786432, 1, 262151, 786432, 1, 262152, 786432, 1, 262146, 786432, 1, 196610, 786432, 1, 131074, 786432, 1, 196611, 786432, 1, 65540, 786432, 1, 65541, 786432, 1, 65538, 786432, 1, 65547, 786432, 1, 65546, 786432, 1, 65545, 786432, 1, 65544, 786432, 1)
-layer_1/name = "items"
-layer_1/y_sort_enabled = true
+layer_1/name = "fire"
 layer_1/z_index = 1
-layer_1/tile_data = PackedInt32Array(327681, 1, 7, 262145, 1, 7, 196613, 1114114, 18, 131079, 1048578, 18, 131075, 1048578, 18)
-layer_2/name = "counter"
-layer_2/z_index = 2
-layer_2/tile_data = PackedInt32Array(65539, 1376258, 12, 131075, 1376258, 12, 131079, 1114114, 13, 65543, 1179650, 13)
+layer_1/tile_data = PackedInt32Array(65544, 131077, 5, 65546, 131077, 5)
+layer_2/name = "items"
+layer_2/y_sort_enabled = true
+layer_2/z_index = 1
+layer_2/tile_data = PackedInt32Array(196613, 1114114, 18, 131079, 1048578, 18, 131075, 1048578, 18, 65544, 1900552, 11, 65546, 1900552, 11)
+layer_3/name = "counter"
+layer_3/z_index = 2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 3
-script = ExtResource("6_ujtml")
+script = ExtResource("8_58k5b")
 
-[node name="hearts_container" parent="CanvasLayer" instance=ExtResource("7_iv3qi")]
+[node name="hearts_container" parent="CanvasLayer" instance=ExtResource("9_x7di4")]
 visible = false
 layout_direction = 3
 anchors_preset = 0
@@ -1914,7 +1916,7 @@ anchor_left = 0.0
 anchor_right = 0.0
 grow_horizontal = 1
 
-[node name="InventoryGUI" parent="CanvasLayer" instance=ExtResource("8_wyk7p")]
+[node name="InventoryGUI" parent="CanvasLayer" instance=ExtResource("10_mfffp")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1927,10 +1929,10 @@ offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="StatPanel" parent="CanvasLayer" instance=ExtResource("9_ux0qw")]
-script = ExtResource("10_3l2nc")
+[node name="StatPanel" parent="CanvasLayer" instance=ExtResource("11_dx57x")]
+script = ExtResource("12_5m5s5")
 
-[node name="StoreInventoryGUI" parent="CanvasLayer" instance=ExtResource("11_7ck3x")]
+[node name="StoreInventoryGUI" parent="CanvasLayer" instance=ExtResource("13_t4qdn")]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -1947,7 +1949,7 @@ grow_vertical = 2
 [node name="entrance_markers" type="Node2D" parent="."]
 position = Vector2(79, 90)
 
-[node name="enter_store" type="Marker2D" parent="entrance_markers"]
+[node name="enter_armory" type="Marker2D" parent="entrance_markers"]
 
 [node name="follow_cam" type="Camera2D" parent="." node_paths=PackedStringArray("tilemap", "follow_node")]
 position = Vector2(160, 90)
@@ -1956,19 +1958,19 @@ limit_top = 0
 limit_right = 640
 limit_bottom = 368
 position_smoothing_speed = 3.0
-script = ExtResource("11_mvrf7")
+script = ExtResource("14_cdug3")
 tilemap = NodePath("../TileMap")
 follow_node = NodePath(".")
 
-[node name="SceneTrigger" parent="." instance=ExtResource("9_cs0xv")]
+[node name="SceneTrigger" parent="." instance=ExtResource("15_175b3")]
 connected_scene = "town"
-connected_marker = "exit_store"
+connected_marker = "exit_armory"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SceneTrigger"]
 position = Vector2(80, 102)
 shape = SubResource("RectangleShape2D_dvdxw")
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("12_xjrcs")]
+[node name="ArmoryOwner" parent="." instance=ExtResource("16_poi4a")]
 position = Vector2(88, 42)
 
 [node name="boundaries" type="StaticBody2D" parent="."]

@@ -1230,7 +1230,6 @@ layer_1/tile_data = PackedInt32Array(65545, 196609, 7, 65544, 196609, 7, 131083,
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 3
-visible = false
 script = ExtResource("6_swgp2")
 
 [node name="hearts_container" parent="CanvasLayer" instance=ExtResource("7_3kkcc")]
