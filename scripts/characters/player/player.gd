@@ -31,6 +31,7 @@ var bow                                     # Reference to the bow weapon
 var last_anim_direction: String = "down"    # Last direction the player was facing
 var is_hurt: bool = false                   # Flag to check if the player is hurt
 var is_attacking: bool = false              # Flag to check if the player is attacking
+var is_jumping: bool = false
 var gold: int = 50                          # Amount of gold the player has
 
 # =========================
@@ -145,13 +146,30 @@ func fire_bow():
 # =========================
 func update_animation():
 	# If the player is attacking, don't change the animation
-	if is_attacking:
+	if is_attacking or is_jumping:
 		return
 
 	# Stop animation if the player is not moving
 	if velocity.length() == 0:
 		if animations.is_playing():
 			animations.stop()
+			
+		if Input.is_action_just_pressed("jump"):
+			is_jumping = true
+			# Determine the direction for the jump animation
+			if last_anim_direction == "left":
+				animations.play("jump_left")
+			elif last_anim_direction == "right":
+				animations.play("jump_right")
+			elif last_anim_direction == "up":
+				animations.play("jump_up")
+			else:  # Default to "down" if no direction set
+				animations.play("jump_down")
+				
+			await animations.animation_finished
+			is_jumping = false
+			return
+			
 	else:
 		# Determine the direction of movement
 		var direction = "down"
