@@ -5,33 +5,34 @@ class_name Player
 # === Exported Variables ===
 # Variables that can be set from the Godot editor
 # =========================
+@export var current_health: int             # Current health of the player
 @export var speed: int = 35                 # Player movement speed
 @export var max_health: int = 3             # Maximum health
 @export var knockback_power: int = 500      # Power of knockback when hit
 @export var inventory: Inventory            # Reference to the player's inventory
-@export var bow_distance_from_player: float = 10.0  # Adjust as needed
+@export var bow_gap: float = 30.0           # Adjust as needed
 
 # =========================
 # === Node References ===
 # Nodes fetched when the scene is ready
 # =========================
-@onready var animations = $AnimationPlayer      # AnimationPlayer node
-@onready var effects = $EffectsPlayer           # EffectsPlayer node for visual effects
-@onready var hurt_box = $hurt_box               # Area2D node for detecting hurt collisions
-@onready var hurt_timer = $hurt_timer           # Timer node for invincibility frames
-@onready var weapon = $weapon                   # Node for weapon handling
-@onready var current_health: int                # Current health of the player
+@onready var animations: AnimationPlayer = $AnimationPlayer      # AnimationPlayer node
+@onready var effects: AnimationPlayer = $EffectsPlayer           # EffectsPlayer node for visual effects
+@onready var hurt_box: Area2D = $hurt_box                        # Area2D node for detecting hurt collisions
+@onready var hurt_timer: Timer = $hurt_timer                     # Timer node for invincibility frames
+@onready var weapon: Node2D = $weapon                            # Node for weapon handling
+@onready var bow: Area2D = $weapon/BowPivot/bow                  # Node for bow
+@onready var bow_pivot: Node2D = $weapon/BowPivot                # Node for bow rotation
 
 # =========================
 # === State Variables ===
 # Variables to keep track of the player's state
 # =========================
-var current_weapon = ""                     # Currently equipped weapon
-var bow                                     # Reference to the bow weapon
+var current_weapon: String = "sword"        # Currently equipped weapon
 var last_anim_direction: String = "down"    # Last direction the player was facing
 var is_hurt: bool = false                   # Flag to check if the player is hurt
 var is_attacking: bool = false              # Flag to check if the player is attacking
-var is_jumping: bool = false
+var is_jumping: bool = false                # Flag to check if the player is jumping
 var gold: int = 50                          # Amount of gold the player has
 
 # =========================
@@ -47,22 +48,10 @@ var xp_for_next_level: int = 100            # Experience points needed for the n
 # Function called when the node enters the scene tree
 # =========================
 func _ready():
-	# Set current health to maximum health at the start
 	current_health = max_health
-
-	# Connect the inventory's use_item signal to the use_item function
-	inventory.use_item.connect(use_item)
-
-	# Disable weapon interactions at the start
-	weapon.disable()
-
-	# Reset any ongoing effects
+	inventory.use_item.connect(use_item)  #connect the inventory's use_item signal to the use_item function
+	weapon.disable()  #disable weapon interactions at the start
 	effects.play("RESET")
-
-	# Get a reference to the bow weapon
-	bow = weapon.bow
-	if bow == null:
-		print("Error: 'bow' prop not found under 'weapon' ")
 
 # =========================
 # === Physics Processing ===
@@ -72,7 +61,6 @@ func _physics_process(_delta):
 	handle_input()          # Handle player input
 	move_and_slide()        # Move the player
 	update_animation()      # Update animations based on movement
-
 	# Check for collisions with enemy hitboxes if the player is not hurt
 	if !is_hurt:
 		for area in hurt_box.get_overlapping_areas():
@@ -89,10 +77,9 @@ func check_level_up():
 		current_xp -= xp_for_next_level
 		current_level += 1
 		print("Leveled Up! New Level: %d" % current_level)
-
 		# Update the experience required for the next level
 		xp_for_next_level = calculate_xp_for_level(current_level)
-
+		
 func calculate_xp_for_level(level: int) -> int:
 	# Experience required increases by 50 each level
 	return 100 + (level - 1) * 50
@@ -102,16 +89,12 @@ func calculate_xp_for_level(level: int) -> int:
 # Functions to handle player input
 # =========================
 func handle_input():
-	# Get movement input from the player
 	var move_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	velocity = move_direction * speed
 
-	# Check if the attack button was just pressed
-	if Input.is_action_just_pressed("attack"):
-		attack()
-
-	# Handle bow aiming and firing if the bow is equipped
 	if current_weapon == "bow":
+		if Input.is_action_just_pressed("attack"):
+			return
 		if Input.is_action_pressed("aim_bow"):
 			aim_bow()
 		elif Input.is_action_just_released("aim_bow"):
@@ -119,26 +102,24 @@ func handle_input():
 		else:
 			weapon.bow.stop_aiming()
 
+	if Input.is_action_just_pressed("attack"):
+		attack()
+
 # =========================
 # === Bow Mechanics ===
 # Functions for aiming and firing the bow
 # =========================
+
 func aim_bow():
-	# Calculate the direction vector from the player to the mouse
 	var mouse_position = get_global_mouse_position()
-	var direction = (mouse_position - global_position).normalized()
-	# Set the bow's position to rotate around the player at a fixed distance
-	weapon.bow.position = direction * bow_distance_from_player
-	# Rotate the bow to face the mouse cursor
-	weapon.bow.rotation = direction.angle()
-	# Call the aim function on the bow
-	weapon.bow.aim()
+	bow_pivot.look_at(mouse_position)
+	bow.visible = true
+	bow.aim()
 
 func fire_bow():
-	# Fire the bow towards the mouse position
 	var mouse_position = get_global_mouse_position()
-	weapon.bow.shoot(mouse_position)
-	weapon.bow.stop_aiming()
+	bow.shoot(mouse_position)
+	bow.stop_aiming()
 
 # =========================
 # === Animation Handling ===
@@ -153,7 +134,7 @@ func update_animation():
 	if velocity.length() == 0:
 		if animations.is_playing():
 			animations.stop()
-			
+
 		if Input.is_action_just_pressed("jump"):
 			is_jumping = true
 			# Determine the direction for the jump animation
@@ -165,11 +146,11 @@ func update_animation():
 				animations.play("jump_up")
 			else:  # Default to "down" if no direction set
 				animations.play("jump_down")
-				
+
 			await animations.animation_finished
 			is_jumping = false
 			return
-			
+
 	else:
 		# Determine the direction of movement
 		var direction = "down"
@@ -248,6 +229,7 @@ func hurt_by_enemy_area(area):
 # === Collision Handling ===
 # Function for when the player enters an area
 # =========================
+
 func _on_hurt_box_area_entered(area):
 	# If the area has a collect method, collect the item
 	if area.has_method("collect"):

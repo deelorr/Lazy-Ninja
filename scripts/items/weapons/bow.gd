@@ -24,8 +24,8 @@ func aim():
 func stop_aiming():
 	is_aiming = false
 	visible = false
-	rotation = 0
-	position = Vector2.ZERO  # Reset position to the player's origin
+	# Reset the BowPivot rotation if needed
+	get_parent().rotation = 0
 
 func enable():
 	shape.disabled = false
@@ -42,14 +42,19 @@ func shoot(target_position: Vector2):
 	$can_fire_timer.start(fire_rate)
 	arrow_count -= 1
 	emit_signal("arrow_count_changed", arrow_count)
-	var direction = (target_position - global_position).normalized()
+	
+	# Use Bow's global position
+	var bow_global_position = global_position
+	var direction = (target_position - bow_global_position).normalized()
 	var arrow_spawn_offset = direction * 20
-	var arrow_position = global_position + arrow_spawn_offset
+	var arrow_position = bow_global_position + arrow_spawn_offset
+	
 	var arrow = arrow_scene.instantiate()
 	arrow.position = arrow_position
 	arrow.rotation = direction.angle()
 	arrow.direction = direction
 	get_tree().current_scene.add_child(arrow)
+
 
 func _on_can_fire_timer_timeout():
 	can_fire = true
