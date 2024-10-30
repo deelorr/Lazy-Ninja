@@ -25,7 +25,7 @@ func stop_aiming():
 	is_aiming = false
 	visible = false
 	# Reset the BowPivot rotation if needed
-	get_parent().rotation = 0
+	#get_parent().rotation = 0
 
 func enable():
 	shape.disabled = false

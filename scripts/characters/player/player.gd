@@ -21,8 +21,7 @@ class_name Player
 @onready var hurt_box: Area2D = $hurt_box                        # Area2D node for detecting hurt collisions
 @onready var hurt_timer: Timer = $hurt_timer                     # Timer node for invincibility frames
 @onready var weapon: Node2D = $weapon                            # Node for weapon handling
-@onready var bow: Area2D = $weapon/BowPivot/bow                  # Node for bow
-@onready var bow_pivot: Node2D = $weapon/BowPivot                # Node for bow rotation
+@onready var bow: Area2D = $weapon/bow                           # Node for bow
 
 # =========================
 # === State Variables ===
@@ -100,7 +99,7 @@ func handle_input():
 		elif Input.is_action_just_released("aim_bow"):
 			fire_bow()
 		else:
-			weapon.bow.stop_aiming()
+			bow.stop_aiming()
 
 	if Input.is_action_just_pressed("attack"):
 		attack()
@@ -112,7 +111,7 @@ func handle_input():
 
 func aim_bow():
 	var mouse_position = get_global_mouse_position()
-	bow_pivot.look_at(mouse_position)
+	bow.look_at(mouse_position)
 	bow.visible = true
 	bow.aim()
 
