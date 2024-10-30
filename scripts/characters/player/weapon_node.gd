@@ -40,7 +40,7 @@ func change_active_weapon(new_index: int):
 			print("Current Weapon: ", SceneManager.player.current_weapon.capitalize())
 
 func enable():
-	if !weapon:
+	if not weapon:
 		return
 	weapon.enable()
 

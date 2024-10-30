@@ -19,11 +19,12 @@ func _ready():
 
 func aim():
 	is_aiming = true
-	visible = true
+	#visible = true
 
 func stop_aiming():
 	is_aiming = false
-	visible = false
+	#visible = false
+	rotation = 0
 	# Reset the BowPivot rotation if needed
 	#get_parent().rotation = 0
 
