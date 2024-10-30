@@ -34,7 +34,7 @@ func disable():
 	shape.disabled = true
 	visible = false
 
-func shoot(target_position: Vector2):
+func throw(target_position: Vector2):
 	if not can_fire or arrow_count <= 0:
 		return
 	can_fire = false

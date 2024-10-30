@@ -19,8 +19,8 @@ class_name Player
 @onready var effects: AnimationPlayer = $EffectsPlayer           # EffectsPlayer node for visual effects
 @onready var hurt_box: Area2D = $hurt_box                        # Area2D node for detecting hurt collisions
 @onready var hurt_timer: Timer = $hurt_timer                     # Timer node for invincibility frames
-@onready var weapon: Node2D = $weapon                            # Node for weapon handling
-@onready var bow: Area2D = $weapon/bow                           # Node for bow
+@onready var weapon_node: Node2D = $weapon                       # Node for weapon handling
+@onready var ninja_star_weapon: Area2D = $weapon/bow                           # Node for bow
 
 # =========================
 # === State Variables ===
@@ -48,7 +48,7 @@ var xp_for_next_level: int = 100            # Experience points needed for the n
 func _ready():
 	current_health = max_health
 	inventory.use_item.connect(use_item)  #connect the inventory's use_item signal to the use_item function
-	weapon.disable()  #disable weapon interactions at the start
+	weapon_node.disable()  #disable weapon interactions at the start
 	effects.play("RESET")
 
 # =========================
@@ -94,11 +94,11 @@ func handle_input():
 		if Input.is_action_just_pressed("attack"):
 			return
 		if Input.is_action_pressed("aim_bow"):
-			aim_bow()
+			aim_ninja_star()
 		elif Input.is_action_just_released("aim_bow"):
-			fire_bow()
+			throw_ninja_star()
 		else:
-			bow.stop_aiming()
+			ninja_star_weapon.stop_aiming()
 
 	if Input.is_action_just_pressed("attack"):
 		attack()
@@ -108,25 +108,23 @@ func handle_input():
 # Functions for aiming and firing the bow
 # =========================
 
-func aim_bow():
+func aim_ninja_star():
 	var mouse_position = get_global_mouse_position()
 	var hurt_box_position = hurt_box.global_position
 	var direction = (mouse_position - hurt_box_position).normalized()
 
 	# Calculate the bow's global position
-	var bow_global_position = hurt_box_position + direction
-	bow.global_position = bow_global_position
+	var ninja_star_weapon_global_position = hurt_box_position + direction
+	ninja_star_weapon.global_position = ninja_star_weapon_global_position
 
 	# Rotate the bow to face the mouse
-	bow.rotation = direction.angle()
-	bow.aim()
+	ninja_star_weapon.rotation = direction.angle()
+	ninja_star_weapon.aim()
 
-
-
-func fire_bow():
+func throw_ninja_star():
 	var mouse_position = get_global_mouse_position()
-	bow.shoot(mouse_position)
-	bow.stop_aiming()
+	ninja_star_weapon.throw(mouse_position)
+	ninja_star_weapon.stop_aiming()
 
 # =========================
 # === Animation Handling ===
@@ -187,13 +185,13 @@ func attack():
 	animations.play("attack_" + last_anim_direction)
 
 	# Enable the weapon's hitbox
-	weapon.enable()
+	weapon_node.enable()
 
 	# Wait for the animation to finish
 	await animations.animation_finished
 
 	# Disable the weapon's hitbox
-	weapon.disable()
+	weapon_node.disable()
 	is_attacking = false
 
 # =========================
