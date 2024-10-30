@@ -20,8 +20,6 @@ func _ready():
 func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("switch_weapon"):
 		change_active_weapon((active_weapon_index + 1) % weapons.size())
-	if SceneManager.player.current_weapon == "bow":
-		enable()
 
 func change_active_weapon(new_index: int):
 	if new_index != active_weapon_index and new_index >= 0 and new_index < weapons.size():

@@ -7,7 +7,7 @@ signal arrow_count_changed(new_count: int)
 @export var arrow_offset: Vector2 = Vector2(-5, 10)
 
 @onready var shape = $CollisionShape2D
-@onready var arrow_count: int = 5
+@onready var arrow_count: int = 50
 
 var can_fire: bool = true
 var is_aiming: bool = false
