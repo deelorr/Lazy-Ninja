@@ -111,9 +111,19 @@ func handle_input():
 
 func aim_bow():
 	var mouse_position = get_global_mouse_position()
-	bow.look_at(mouse_position)
-	bow.visible = true
+	var hurt_box_position = hurt_box.global_position
+	var direction = (mouse_position - hurt_box_position).normalized()
+	var bow_distance = 15  # Adjust as needed for how far the bow should be from the player
+
+	# Calculate the bow's global position
+	var bow_global_position = hurt_box_position + direction * bow_distance
+	bow.global_position = bow_global_position
+
+	# Rotate the bow to face the mouse
+	bow.rotation = direction.angle()
 	bow.aim()
+
+
 
 func fire_bow():
 	var mouse_position = get_global_mouse_position()

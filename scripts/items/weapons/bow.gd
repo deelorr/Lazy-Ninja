@@ -19,14 +19,12 @@ func _ready():
 
 func aim():
 	is_aiming = true
-	#visible = true
 
 func stop_aiming():
 	is_aiming = false
-	#visible = false
 	rotation = 0
-	# Reset the BowPivot rotation if needed
-	#get_parent().rotation = 0
+	# Reset the bow's global position to its default position
+	global_position = get_parent().global_position  # Assuming the parent is the player or weapon node
 
 func enable():
 	shape.disabled = false
