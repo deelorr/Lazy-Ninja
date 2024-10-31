@@ -1,9 +1,12 @@
 extends Area2D
 
+@onready var animations: AnimationPlayer = $AnimationPlayer
+
 var speed: float = 800.0
-var direction: Vector2 = Vector2.RIGHT
+var direction: Vector2
 
 func _physics_process(delta):
+	animations.play("spin")
 	position += direction * speed * delta
 	if is_out_of_bounds():
 		queue_free()

@@ -7,7 +7,7 @@ signal ninja_star_count_changed(new_count: int)
 
 var can_throw: bool = true
 var is_aiming: bool = false
-var ninja_star_count: int = 10
+var ninja_star_count: int = 25
 var fire_rate: float = 0.3 
 var shuriken_spawn_offset: int = 15 #distance from center
 
@@ -28,7 +28,7 @@ func throw(target_position: Vector2):
 	ninja_star_count -= 1
 	emit_signal("ninja_star_count_changed", ninja_star_count)
 	
-	# Calculate the direction and position for the shuriken
+	#get direction and position for the shuriken
 	var direction = (target_position - global_position).normalized()
 	var spawn_offset = direction * shuriken_spawn_offset
 	var shuriken_position = global_position + spawn_offset
