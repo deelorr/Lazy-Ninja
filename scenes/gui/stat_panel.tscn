@@ -8,7 +8,7 @@
 [node name="StatPanel" type="NinePatchRect"]
 offset_left = 1.0
 offset_top = 1.0
-offset_right = 51.0
+offset_right = 62.0
 offset_bottom = 26.0
 texture = ExtResource("1_3ce7w")
 patch_margin_left = 6
@@ -21,8 +21,8 @@ script = ExtResource("2_5mxqg")
 layout_mode = 0
 offset_left = 6.0
 offset_top = 6.0
-offset_right = 158.0
-offset_bottom = 60.0
+offset_right = 202.0
+offset_bottom = 58.0
 scale = Vector2(0.25, 0.25)
 
 [node name="Health" type="HBoxContainer" parent="Stats"]
@@ -43,10 +43,9 @@ layout_mode = 2
 
 [node name="ProgressBar" type="ProgressBar" parent="Stats/Health/Label2"]
 layout_mode = 2
-offset_left = -2.0
-offset_top = 3.42857
-offset_right = 90.0
-offset_bottom = 24.4286
+offset_left = 42.0
+offset_right = 132.0
+offset_bottom = 20.0
 max_value = 3.0
 show_percentage = false
 
@@ -64,42 +63,13 @@ text = "Level:"
 [node name="level_label" type="Label" parent="Stats/Level"]
 layout_mode = 2
 
-[node name="QuestPanel" type="NinePatchRect" parent="."]
-layout_mode = 0
-offset_left = 261.0
-offset_top = 151.0
-offset_right = 318.0
-offset_bottom = 178.0
-texture = ExtResource("1_3ce7w")
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 6
-patch_margin_bottom = 6
-
-[node name="Quests" type="VBoxContainer" parent="QuestPanel"]
-layout_mode = 2
-offset_left = 6.0
-offset_top = 6.0
-offset_right = 186.0
-offset_bottom = 70.0
-scale = Vector2(0.25, 0.25)
-
-[node name="HBoxContainer" type="HBoxContainer" parent="QuestPanel/Quests"]
+[node name="Label" type="Label" parent="Stats/Level"]
 layout_mode = 2
 
-[node name="Active Quest" type="Label" parent="QuestPanel/Quests/HBoxContainer"]
+[node name="ProgressBar" type="ProgressBar" parent="Stats/Level/Label"]
 layout_mode = 2
-text = "Quest:"
-
-[node name="quest_title" type="Label" parent="QuestPanel/Quests/HBoxContainer"]
-layout_mode = 2
-
-[node name="quest_details" type="VBoxContainer" parent="QuestPanel/Quests"]
-layout_mode = 2
-
-[node name="quest_objective" type="Label" parent="QuestPanel/Quests/quest_details"]
-layout_mode = 2
-
-[node name="ProgressBar" type="ProgressBar" parent="QuestPanel/Quests/quest_details"]
-layout_mode = 2
+offset_left = 22.0
+offset_top = 1.0
+offset_right = 112.0
+offset_bottom = 21.0
 show_percentage = false

@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://cok1fy1chnj"]
+
+[ext_resource type="Texture2D" uid="uid://ckokdgtal17wq" path="res://art/gui/InventoryRect.png" id="1_55or1"]
+[ext_resource type="Script" path="res://scripts/gui/hud/quest_panel.gd" id="2_yqlv1"]
+
+[node name="QuestPanel" type="NinePatchRect"]
+offset_left = 261.0
+offset_top = 151.0
+offset_right = 318.0
+offset_bottom = 178.0
+texture = ExtResource("1_55or1")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+script = ExtResource("2_yqlv1")
+
+[node name="Quests" type="VBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 186.0
+offset_bottom = 70.0
+scale = Vector2(0.25, 0.25)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Quests"]
+layout_mode = 2
+
+[node name="Active Quest" type="Label" parent="Quests/HBoxContainer"]
+layout_mode = 2
+text = "Quest:"
+
+[node name="quest_title" type="Label" parent="Quests/HBoxContainer"]
+layout_mode = 2
+
+[node name="quest_details" type="VBoxContainer" parent="Quests"]
+layout_mode = 2
+
+[node name="quest_objective" type="Label" parent="Quests/quest_details"]
+layout_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="Quests/quest_details"]
+layout_mode = 2
+show_percentage = false

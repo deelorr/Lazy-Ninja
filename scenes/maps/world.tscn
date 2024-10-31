@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://bi1v3lsgao0wn"]
+[gd_scene load_steps=42 format=3 uid="uid://bi1v3lsgao0wn"]
 
 [ext_resource type="Texture2D" uid="uid://jtuqvr1lwjq7" path="res://art/tilesets/ground.png" id="1_crrrf"]
 [ext_resource type="Script" path="res://scripts/scenes/scene_manager/base_scene.gd" id="1_uu85d"]
@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://blt4seqeee2mk" path="res://scenes/maps/scene_trigger.tscn" id="14_rmnrq"]
 [ext_resource type="PackedScene" uid="uid://bmpwxneat8j66" path="res://scenes/characters/hunter.tscn" id="16_5287r"]
 [ext_resource type="PackedScene" uid="uid://de4i75octoy82" path="res://scenes/gui/stat_panel.tscn" id="17_buchr"]
+[ext_resource type="PackedScene" uid="uid://cok1fy1chnj" path="res://scenes/gui/quest_panel.tscn" id="21_13eca"]
 [ext_resource type="PackedScene" uid="uid://bp8d5fmlfog07" path="res://scenes/maps/spawn_area.tscn" id="27_7giur"]
 [ext_resource type="PackedScene" uid="uid://be5nryp8gacni" path="res://scenes/maps/slime_cave.tscn" id="27_srog0"]
 
@@ -3056,13 +3057,19 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -43.0
-offset_top = -24.0
+offset_top = -23.0
 offset_right = 83.0
-offset_bottom = 6.0
+offset_bottom = 7.0
 grow_horizontal = 2
 grow_vertical = 0
 
 [node name="StatPanel" parent="CanvasLayer" instance=ExtResource("17_buchr")]
+
+[node name="QuestPanel" parent="CanvasLayer" instance=ExtResource("21_13eca")]
+offset_left = 262.0
+offset_top = 152.0
+offset_right = 319.0
+offset_bottom = 179.0
 
 [node name="follow_cam" type="Camera2D" parent="." node_paths=PackedStringArray("tilemap")]
 position = Vector2(148, 90)
