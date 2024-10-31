@@ -1,4 +1,5 @@
 extends Area2D
+class_name Weapon
 
 @onready var shape = $CollisionShape2D
 

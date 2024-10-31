@@ -20,7 +20,7 @@ class_name Player
 @onready var hurt_box: Area2D = $hurt_box                        # Area2D node for detecting hurt collisions
 @onready var hurt_timer: Timer = $hurt_timer                     # Timer node for invincibility frames
 @onready var weapon_node: Node2D = $weapon                       # Node for weapon handling
-@onready var ninja_star_weapon: Area2D = $weapon/bow                           # Node for bow
+@onready var ninja_star_weapon: Area2D = $weapon/bow             # Node for bow
 
 # =========================
 # === State Variables ===

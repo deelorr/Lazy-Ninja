@@ -19,7 +19,7 @@ shape = SubResource("RectangleShape2D_xana0")
 
 [node name="Area2D" parent="." instance=ExtResource("3_thmde")]
 
-[node name="can_fire_timer" type="Timer" parent="."]
+[node name="can_throw_timer" type="Timer" parent="."]
 wait_time = 2.0
 
-[connection signal="timeout" from="can_fire_timer" to="." method="_on_can_fire_timer_timeout"]
+[connection signal="timeout" from="can_throw_timer" to="." method="_on_can_throw_timer_timeout"]
