@@ -52,17 +52,38 @@ func calculate_xp_for_level(level: int) -> int:
 func handle_input():
 	var move_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	velocity = move_direction * speed
+	
 	if current_weapon == "shuriken":
-		if Input.is_action_just_pressed("attack"):
-			return
-		if Input.is_action_pressed("throw_shuriken"):
+		if Input.is_action_pressed("attack"):
 			aim_shuriken()
-		elif Input.is_action_just_released("throw_shuriken"):
+		elif Input.is_action_just_released("attack"):
+			var mouse_position = get_global_mouse_position()
+			var player_position = global_position
+			var direction_vector = (mouse_position - player_position).normalized()
+			last_anim_direction = get_direction_from_vector(direction_vector)
 			throw_shuriken()
 		else:
 			shuriken.stop_aiming()
-	if Input.is_action_just_pressed("attack"):
-		attack()
+	
+	else:
+		if Input.is_action_just_pressed("attack"):
+			var mouse_position = get_global_mouse_position()
+			var player_position = global_position
+			var direction_vector = (mouse_position - player_position).normalized()
+			last_anim_direction = get_direction_from_vector(direction_vector)
+			attack()
+
+func get_direction_from_vector(direction_vector: Vector2) -> String:
+	if abs(direction_vector.x) > abs(direction_vector.y):
+		if direction_vector.x > 0:
+			return "right"
+		else:
+			return "left"
+	else:
+		if direction_vector.y > 0:
+			return "down"
+		else:
+			return "up"
 
 func aim_shuriken():
 	var mouse_position = get_global_mouse_position()
@@ -76,6 +97,7 @@ func aim_shuriken():
 func throw_shuriken():
 	var mouse_position = get_global_mouse_position()
 	shuriken.throw(mouse_position)
+	animations.play("attack_" + last_anim_direction)
 	shuriken.stop_aiming()
 
 func update_animation():

@@ -3,10 +3,9 @@ extends Node
 signal player_changed(new_player)
 
 var player: Player = null
-var last_scene_name: String
+var last_scene_name: String = ""
 var scene_dir_path: String = "res://scenes/maps/"
 var marker: String
-var first_load: bool = true
 
 func _init() -> void:
 	if player == null:
