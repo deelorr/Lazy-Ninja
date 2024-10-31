@@ -4,6 +4,7 @@ signal ninja_star_count_changed(new_count: int)
 
 @onready var shuriken_scene: PackedScene = preload("res://scenes/items/weapons/shuriken_star.tscn")
 @onready var can_fire_timer: Timer = $can_throw_timer
+@onready var star: Area2D = $shuriken_star
 
 var can_throw: bool = true
 var is_aiming: bool = false
@@ -12,6 +13,7 @@ var fire_rate: float = 0.3
 var shuriken_spawn_offset: int = 15 #distance from center
 
 func _ready():
+	star.disable() #disable star at start
 	ninja_star_count_changed.emit(ninja_star_count)
 
 func aim():

@@ -1,4 +1,4 @@
-extends Area2D
+extends Weapon
 
 @onready var animations: AnimationPlayer = $AnimationPlayer
 

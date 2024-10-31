@@ -13,6 +13,7 @@ script = ExtResource("1_is6dt")
 shape = SubResource("CircleShape2D_dpvkl")
 
 [node name="shuriken_star" parent="." instance=ExtResource("3_s5oe8")]
+visible = false
 
 [node name="can_throw_timer" type="Timer" parent="."]
 wait_time = 2.0
