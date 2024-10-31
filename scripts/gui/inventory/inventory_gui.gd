@@ -10,14 +10,25 @@ var isOpen: bool = false
 @onready var hotbar_slots: Array = $NinePatchRect/HBoxContainer.get_children()
 @onready var slots: Array = hotbar_slots + $NinePatchRect/GridContainer.get_children()
 
+@onready var gold_label: Label = $NinePatchRect/VBoxContainer/Gold/gold_label
+
+var player: Player = null
 var item_in_hand: ItemStackGUI
 var old_index: int = -1
 var locked: bool = false
 
 func _ready():
+	player = SceneManager.player
 	connect_slots()
 	inventory.updated.connect(update)
 	update()
+	
+func _process(_delta):
+	update_gold()
+	
+func update_gold():
+	if player:
+		gold_label.text = str(player.gold)
 
 func connect_slots():
 	for i in range(slots.size()):

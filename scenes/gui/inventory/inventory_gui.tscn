@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://77s2jr485rus"]
+[gd_scene load_steps=5 format=3 uid="uid://77s2jr485rus"]
 
 [ext_resource type="Script" path="res://scripts/gui/inventory/inventory_gui.gd" id="1_gepbl"]
 [ext_resource type="Texture2D" uid="uid://ckokdgtal17wq" path="res://art/gui/InventoryRect.png" id="1_x7j4v"]
 [ext_resource type="PackedScene" uid="uid://bfw6ierk6qtyn" path="res://scenes/gui/inventory/slot_gui.tscn" id="2_q4nbq"]
+[ext_resource type="Texture2D" uid="uid://b7ynlectloe2s" path="res://art/gui/gold.png" id="3_xdr2s"]
 
 [node name="InventoryGUI" type="Control"]
 custom_minimum_size = Vector2(128, 80)
@@ -14,24 +15,48 @@ script = ExtResource("1_gepbl")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 0
-offset_right = 130.0
-offset_bottom = 86.0
+offset_right = 167.0
+offset_bottom = 91.0
 texture = ExtResource("1_x7j4v")
 patch_margin_left = 6
 patch_margin_top = 6
 patch_margin_right = 6
 patch_margin_bottom = 6
 
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect"]
+layout_mode = 1
+offset_left = 7.0
+offset_top = 8.0
+offset_right = 108.0
+offset_bottom = 32.0
+scale = Vector2(0.35, 0.35)
+
+[node name="Gold" type="HBoxContainer" parent="NinePatchRect/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="NinePatchRect/VBoxContainer/Gold"]
+self_modulate = Color(1, 1, 0.301961, 0.776471)
+layout_mode = 2
+texture = ExtResource("3_xdr2s")
+
+[node name="Label" type="Label" parent="NinePatchRect/VBoxContainer/Gold"]
+layout_mode = 2
+text = "Gold:"
+
+[node name="gold_label" type="Label" parent="NinePatchRect/VBoxContainer/Gold"]
+layout_mode = 2
+text = "100"
+
 [node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect"]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -58.0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -123.0
 offset_top = 7.0
-offset_right = 58.0
+offset_right = -7.0
 offset_bottom = 27.0
-grow_horizontal = 2
+grow_horizontal = 0
 
 [node name="Slot" parent="NinePatchRect/HBoxContainer" instance=ExtResource("2_q4nbq")]
 layout_mode = 2
@@ -50,16 +75,16 @@ layout_mode = 2
 
 [node name="GridContainer" type="GridContainer" parent="NinePatchRect"]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
+anchors_preset = 3
+anchor_left = 1.0
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -58.0
+offset_left = -123.0
 offset_top = -51.0
-offset_right = 58.0
+offset_right = -7.0
 offset_bottom = -7.0
-grow_horizontal = 2
+grow_horizontal = 0
 grow_vertical = 0
 columns = 5
 

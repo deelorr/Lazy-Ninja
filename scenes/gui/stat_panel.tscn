@@ -7,7 +7,7 @@
 
 [node name="StatPanel" type="NinePatchRect"]
 offset_right = 78.0
-offset_bottom = 44.0
+offset_bottom = 34.0
 texture = ExtResource("1_3ce7w")
 patch_margin_left = 6
 patch_margin_top = 6
@@ -23,6 +23,7 @@ offset_bottom = 62.0
 scale = Vector2(0.35, 0.35)
 
 [node name="Gold" type="HBoxContainer" parent="Stats"]
+visible = false
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="Stats/Gold"]
@@ -79,9 +80,10 @@ layout_mode = 2
 
 [node name="QuestPanel" type="NinePatchRect" parent="."]
 layout_mode = 0
-offset_top = 45.0
-offset_right = 78.0
-offset_bottom = 80.0
+offset_left = 242.0
+offset_top = 145.0
+offset_right = 320.0
+offset_bottom = 180.0
 texture = ExtResource("1_3ce7w")
 patch_margin_left = 6
 patch_margin_top = 6
