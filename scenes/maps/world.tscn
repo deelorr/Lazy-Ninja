@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://bi1v3lsgao0wn"]
+[gd_scene load_steps=41 format=3 uid="uid://bi1v3lsgao0wn"]
 
 [ext_resource type="Texture2D" uid="uid://jtuqvr1lwjq7" path="res://art/tilesets/ground.png" id="1_crrrf"]
 [ext_resource type="Script" path="res://scripts/scenes/scene_manager/base_scene.gd" id="1_uu85d"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" path="res://scripts/characters/player/follow_cam.gd" id="5_708fr"]
 [ext_resource type="PackedScene" uid="uid://b2blmb7y86f78" path="res://scenes/items/collectables/lifepot.tscn" id="5_k76w3"]
 [ext_resource type="PackedScene" uid="uid://bi3sw8caf5ubs" path="res://scenes/items/collectables/Sword.tscn" id="6_h7t66"]
-[ext_resource type="PackedScene" uid="uid://cytnun4f64ouu" path="res://scenes/gui/scrapped/hearts_container.tscn" id="7_b21lc"]
 [ext_resource type="Texture2D" uid="uid://dgif58s51ttk0" path="res://art/tilesets/buildings.png" id="7_kmdpc"]
 [ext_resource type="Texture2D" uid="uid://0qc3452mjill" path="res://art/tilesets/water.png" id="8_du033"]
 [ext_resource type="PackedScene" uid="uid://ck78uu30262eo" path="res://scenes/items/weapons/axe.tscn" id="8_pe2y3"]
@@ -24,7 +23,6 @@
 [ext_resource type="PackedScene" uid="uid://blt4seqeee2mk" path="res://scenes/maps/scene_trigger.tscn" id="14_rmnrq"]
 [ext_resource type="PackedScene" uid="uid://bmpwxneat8j66" path="res://scenes/characters/hunter.tscn" id="16_5287r"]
 [ext_resource type="PackedScene" uid="uid://de4i75octoy82" path="res://scenes/gui/stat_panel.tscn" id="17_buchr"]
-[ext_resource type="Script" path="res://scripts/gui/hud/stat_panel.gd" id="18_f5ug1"]
 [ext_resource type="PackedScene" uid="uid://bp8d5fmlfog07" path="res://scenes/maps/spawn_area.tscn" id="27_7giur"]
 [ext_resource type="PackedScene" uid="uid://be5nryp8gacni" path="res://scenes/maps/slime_cave.tscn" id="27_srog0"]
 
@@ -3038,24 +3036,16 @@ layer_6/tile_data = PackedInt32Array(196612, 4, 0, 131094, 589828, 10, 131095, 6
 process_mode = 3
 script = ExtResource("10_wu4s8")
 
-[node name="hearts_container" parent="CanvasLayer" instance=ExtResource("7_b21lc")]
-visible = false
-layout_direction = 3
-anchors_preset = 0
-anchor_left = 0.0
-anchor_right = 0.0
-grow_horizontal = 1
-
 [node name="InventoryGUI" parent="CanvasLayer" instance=ExtResource("11_jg4rn")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -64.0
-offset_top = -40.0
-offset_right = 64.0
-offset_bottom = 40.0
+offset_left = -61.0
+offset_top = -43.0
+offset_right = 106.0
+offset_bottom = 48.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -3065,18 +3055,17 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -58.0
-offset_top = -23.0
-offset_right = 58.0
-offset_bottom = -3.0
+offset_left = -43.0
+offset_top = -24.0
+offset_right = 83.0
+offset_bottom = 6.0
 grow_horizontal = 2
 grow_vertical = 0
 
 [node name="StatPanel" parent="CanvasLayer" instance=ExtResource("17_buchr")]
-script = ExtResource("18_f5ug1")
 
 [node name="follow_cam" type="Camera2D" parent="." node_paths=PackedStringArray("tilemap")]
-position = Vector2(176, 106)
+position = Vector2(148, 90)
 limit_left = 0
 limit_top = 0
 limit_right = 640
@@ -3134,6 +3123,3 @@ collision_mask = 7
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="boundaries"]
 polygon = PackedVector2Array(17, 30, 240, 30, 240, 16, 256, 16, 256, 30, 657, 30, 658, 190, 687, 190, 687, 215, 658, 215, 658, 328, 16, 328, 15, 30, 15, -12, -12, -12, -12, 361, 704, 359, 704, -13, 17, -12)
-
-[connection signal="closed" from="CanvasLayer/InventoryGUI" to="." method="_on_inventory_gui_closed"]
-[connection signal="opened" from="CanvasLayer/InventoryGUI" to="." method="_on_inventory_gui_opened"]

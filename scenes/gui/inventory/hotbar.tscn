@@ -1,36 +1,57 @@
-[gd_scene load_steps=4 format=3 uid="uid://cf71ab0m6youu"]
+[gd_scene load_steps=5 format=3 uid="uid://cf71ab0m6youu"]
 
 [ext_resource type="PackedScene" uid="uid://bw5yl2fsxryg3" path="res://scenes/gui/inventory/hotbar_slot.tscn" id="1_4nalo"]
 [ext_resource type="Script" path="res://scripts/gui/inventory/hotbar.gd" id="1_dp7sk"]
+[ext_resource type="Texture2D" uid="uid://ckokdgtal17wq" path="res://art/gui/InventoryRect.png" id="2_wg21a"]
 [ext_resource type="Texture2D" uid="uid://b3kvjg7wihv2" path="res://art/gui/hotbar_selector.png" id="3_wq7ny"]
 
 [node name="Hotbar" type="Panel"]
 self_modulate = Color(1, 1, 1, 0)
-offset_right = 116.0
-offset_bottom = 20.0
+offset_right = 126.0
+offset_bottom = 30.0
+scale = Vector2(0.75, 0.75)
 script = ExtResource("1_dp7sk")
 
-[node name="Container" type="HBoxContainer" parent="."]
-custom_minimum_size = Vector2(116, 20)
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 0
-offset_right = 116.0
-offset_bottom = 20.0
+offset_right = 126.0
+offset_bottom = 30.0
+texture = ExtResource("2_wg21a")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
 
-[node name="HotbarSlot" parent="Container" instance=ExtResource("1_4nalo")]
+[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -58.0
+offset_top = -10.0
+offset_right = 58.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HotbarSlot" parent="NinePatchRect/HBoxContainer" instance=ExtResource("1_4nalo")]
 layout_mode = 2
 
-[node name="HotbarSlot2" parent="Container" instance=ExtResource("1_4nalo")]
+[node name="HotbarSlot2" parent="NinePatchRect/HBoxContainer" instance=ExtResource("1_4nalo")]
 layout_mode = 2
 
-[node name="HotbarSlot3" parent="Container" instance=ExtResource("1_4nalo")]
+[node name="HotbarSlot3" parent="NinePatchRect/HBoxContainer" instance=ExtResource("1_4nalo")]
 layout_mode = 2
 
-[node name="HotbarSlot4" parent="Container" instance=ExtResource("1_4nalo")]
+[node name="HotbarSlot4" parent="NinePatchRect/HBoxContainer" instance=ExtResource("1_4nalo")]
 layout_mode = 2
 
-[node name="HotbarSlot5" parent="Container" instance=ExtResource("1_4nalo")]
+[node name="HotbarSlot5" parent="NinePatchRect/HBoxContainer" instance=ExtResource("1_4nalo")]
 layout_mode = 2
 
 [node name="Selector" type="Sprite2D" parent="."]
+position = Vector2(5, 5)
 texture = ExtResource("3_wq7ny")
 centered = false

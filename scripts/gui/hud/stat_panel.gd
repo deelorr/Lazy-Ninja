@@ -1,6 +1,5 @@
 extends NinePatchRect
 
-@onready var gold_label: Label = $Stats/Gold/gold_label
 @onready var health_bar: ProgressBar = $Stats/Health/Label2/ProgressBar
 @onready var quest_title: Label = $QuestPanel/Quests/HBoxContainer/quest_title
 @onready var quest_objective: Label = $QuestPanel/Quests/quest_details/quest_objective
@@ -22,16 +21,11 @@ func _process(_delta):
 	if player:
 		update_quest_panel()
 		update_level()
-		update_gold()
 		update_health(player.current_health, player.max_health)
 
 func update_health(health: int, max_health: int):
 	health_bar.value = health
 	health_bar.max_value = max_health
-
-func update_gold():
-	if player:
-		gold_label.text = str(player.gold)
 
 func update_quest_panel():
 	quest_progress.visible = false

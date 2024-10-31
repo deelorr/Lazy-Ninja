@@ -1,7 +1,7 @@
 extends Panel
 
 @onready var inventory: Inventory = preload("res://resources/inventory/player_inventory.tres")
-@onready var slots: Array = $Container.get_children()
+@onready var slots: Array = $NinePatchRect/HBoxContainer.get_children()
 @onready var selector: Sprite2D = $Selector
 
 var currently_selected: int = 0
