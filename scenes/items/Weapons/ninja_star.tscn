@@ -1,19 +1,19 @@
 [gd_scene load_steps=4 format=3 uid="uid://dlbf3vagww5rl"]
 
-[ext_resource type="Script" path="res://scripts/items/weapons/arrow.gd" id="1_vlpn0"]
-[ext_resource type="Texture2D" uid="uid://c5sccpci7nasp" path="res://art/items/Shuriken.png" id="2_ou5ou"]
+[ext_resource type="Script" path="res://scripts/items/weapons/ninja_star.gd" id="1_nb12y"]
+[ext_resource type="Texture2D" uid="uid://c5sccpci7nasp" path="res://art/items/Shuriken.png" id="2_km6bu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7rko6"]
 size = Vector2(12, 4)
 
-[node name="arrow" type="Area2D" groups=["weapon"]]
+[node name="ninja_star" type="Area2D" groups=["weapon"]]
 scale = Vector2(0.75, 0.75)
 collision_layer = 4
 collision_mask = 4
-script = ExtResource("1_vlpn0")
+script = ExtResource("1_nb12y")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_ou5ou")
+texture = ExtResource("2_km6bu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_7rko6")

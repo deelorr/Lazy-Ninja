@@ -25,13 +25,10 @@ func change_active_weapon(new_index: int):
 	if new_index != active_weapon_index and new_index >= 0 and new_index < weapons.size():
 		# Disable the currently active weapon
 		weapons[active_weapon_index].disable()
-		
 		# Update to the new active weapon index
 		active_weapon_index = new_index
-		
 		# Set the new active weapon
 		weapon = weapons[active_weapon_index]
-
 		# Set the current weapon for the player
 		if weapon:
 			SceneManager.player.current_weapon = weapon.name
@@ -43,6 +40,6 @@ func enable():
 	weapon.enable()
 
 func disable():
-	if !weapon:
+	if not weapon:
 		return
 	weapon.disable()

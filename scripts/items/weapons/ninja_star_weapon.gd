@@ -2,12 +2,12 @@ extends Weapon
 
 signal ninja_star_count_changed(new_count: int)
 
-@onready var ninja_star_scene: PackedScene = preload("res://scenes/items/weapons/arrow.tscn")
+@onready var ninja_star_scene: PackedScene = preload("res://scenes/items/weapons/ninja_star.tscn")
 @onready var can_fire_timer: Timer = $can_throw_timer
 
 var can_throw: bool = true
 var is_aiming: bool = false
-var ninja_star_count: int = 5
+var ninja_star_count: int = 10
 var fire_rate: float = 0.3 
 
 func _ready():
