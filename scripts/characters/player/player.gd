@@ -5,9 +5,9 @@ class_name Player
 # === Exported Variables ===
 # Variables that can be set from the Godot editor
 # =========================
+@export var max_health: int = 3             # Maximum health
 @export var current_health: int             # Current health of the player
 @export var speed: int = 35                 # Player movement speed
-@export var max_health: int = 3             # Maximum health
 @export var knockback_power: int = 500      # Power of knockback when hit
 @export var inventory: Inventory            # Reference to the player's inventory
 
@@ -20,7 +20,7 @@ class_name Player
 @onready var hurt_box: Area2D = $hurt_box                        # Area2D node for detecting hurt collisions
 @onready var hurt_timer: Timer = $hurt_timer                     # Timer node for invincibility frames
 @onready var weapon_node: Node2D = $weapon                       # Node for weapon handling
-@onready var ninja_star_weapon: Area2D = $weapon/ninja_star_weapon           # Node for bow
+@onready var shuriken: Area2D = $weapon/shuriken                 # Node for bow
 
 # =========================
 # === State Variables ===
@@ -48,8 +48,8 @@ var xp_for_next_level: int = 100            # Experience points needed for the n
 func _ready():
 	current_health = max_health
 	inventory.use_item.connect(use_item)  #connect the inventory's use_item signal to the use_item function
-	weapon_node.disable()  #disable weapon interactions at the start
-	effects.play("RESET")
+	weapon_node.disable()  #disable weapon at the start
+	#effects.play("RESET")
 
 # =========================
 # === Physics Processing ===
@@ -89,17 +89,15 @@ func calculate_xp_for_level(level: int) -> int:
 func handle_input():
 	var move_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	velocity = move_direction * speed
-
-	if current_weapon == "ninja_star_weapon":
+	if current_weapon == "shuriken":
 		if Input.is_action_just_pressed("attack"):
 			return
-		if Input.is_action_pressed("aim_bow"):
-			aim_ninja_star()
-		elif Input.is_action_just_released("aim_bow"):
-			throw_ninja_star()
+		if Input.is_action_pressed("throw_shuriken"):
+			aim_shuriken()
+		elif Input.is_action_just_released("throw_shuriken"):
+			throw_shuriken()
 		else:
-			ninja_star_weapon.stop_aiming()
-
+			shuriken.stop_aiming()
 	if Input.is_action_just_pressed("attack"):
 		attack()
 
@@ -108,23 +106,21 @@ func handle_input():
 # Functions for aiming and firing the bow
 # =========================
 
-func aim_ninja_star():
+func aim_shuriken():
 	var mouse_position = get_global_mouse_position()
 	var hurt_box_position = hurt_box.global_position
 	var direction = (mouse_position - hurt_box_position).normalized()
-
 	# Calculate the bow's global position
-	var ninja_star_weapon_global_position = hurt_box_position + direction
-	ninja_star_weapon.global_position = ninja_star_weapon_global_position
-
+	var shuriken_global_position = hurt_box_position + direction
+	shuriken.global_position = shuriken_global_position
 	# Rotate the bow to face the mouse
-	ninja_star_weapon.rotation = direction.angle()
-	ninja_star_weapon.aim()
+	shuriken.rotation = direction.angle()
+	shuriken.aim()
 
-func throw_ninja_star():
+func throw_shuriken():
 	var mouse_position = get_global_mouse_position()
-	ninja_star_weapon.throw(mouse_position)
-	ninja_star_weapon.stop_aiming()
+	shuriken.throw(mouse_position)
+	shuriken.stop_aiming()
 
 # =========================
 # === Animation Handling ===

@@ -3108,12 +3108,12 @@ z_index = 2
 position = Vector2(0, -1.5)
 shape = SubResource("RectangleShape2D_rp0h4")
 
-[node name="SceneTrigger3" parent="." instance=ExtResource("14_rmnrq")]
+[node name="SceneTrigger2" parent="." instance=ExtResource("14_rmnrq")]
 position = Vector2(660, 214)
 connected_scene = "town"
 connected_marker = "enter_town"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SceneTrigger3"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SceneTrigger2"]
 z_index = 1
 position = Vector2(35, 5)
 shape = SubResource("RectangleShape2D_38moa")

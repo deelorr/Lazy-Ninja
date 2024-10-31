@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://scripts/characters/player/weapon_node.gd" id="4_fk1a3"]
 [ext_resource type="PackedScene" uid="uid://bylldbpasc02w" path="res://scenes/items/weapons/sword.tscn" id="4_gaop7"]
 [ext_resource type="PackedScene" uid="uid://ck78uu30262eo" path="res://scenes/items/weapons/axe.tscn" id="5_y8ti1"]
-[ext_resource type="PackedScene" uid="uid://c041wyp0jflut" path="res://scenes/items/weapons/ninja_star_weapon.tscn" id="7_wg64x"]
+[ext_resource type="PackedScene" uid="uid://c041wyp0jflut" path="res://scenes/items/weapons/shuriken.tscn" id="7_wg64x"]
 
 [sub_resource type="Animation" id="Animation_60f7p"]
 length = 0.001
@@ -475,7 +475,7 @@ size = Vector2(14, 4)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ccuuy"]
 radius = 6.0
-height = 16.0
+height = 14.0
 
 [sub_resource type="Animation" id="Animation_anj34"]
 length = 0.001
@@ -548,7 +548,7 @@ position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_pv273")
 
 [node name="hurt_box" type="Area2D" parent="."]
-position = Vector2(0, -3)
+position = Vector2(0, -5)
 collision_layer = 0
 collision_mask = 5
 
@@ -573,8 +573,8 @@ script = ExtResource("4_fk1a3")
 
 [node name="axe" parent="weapon" groups=["weapon"] instance=ExtResource("5_y8ti1")]
 
-[node name="ninja_star_weapon" parent="weapon" groups=["weapon"] instance=ExtResource("7_wg64x")]
-position = Vector2(6.3176, 3.73391)
-rotation = -2.02459
+[node name="shuriken" parent="weapon" instance=ExtResource("7_wg64x")]
+position = Vector2(0.401956, 6.69615)
+rotation = -0.523599
 
 [connection signal="area_entered" from="hurt_box" to="." method="_on_hurt_box_area_entered"]

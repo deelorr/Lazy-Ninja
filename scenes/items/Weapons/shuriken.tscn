@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://c041wyp0jflut"]
+
+[ext_resource type="Script" path="res://scripts/items/weapons/shuriken.gd" id="1_is6dt"]
+[ext_resource type="PackedScene" uid="uid://dlbf3vagww5rl" path="res://scenes/items/weapons/shuriken_star.tscn" id="3_s5oe8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dpvkl"]
+radius = 2.0
+
+[node name="shuriken" type="Area2D" groups=["weapon"]]
+script = ExtResource("1_is6dt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_dpvkl")
+
+[node name="shuriken_star" parent="." instance=ExtResource("3_s5oe8")]
+
+[node name="can_throw_timer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="timeout" from="can_throw_timer" to="." method="_on_can_throw_timer_timeout"]

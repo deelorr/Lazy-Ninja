@@ -2,13 +2,14 @@ extends Weapon
 
 signal ninja_star_count_changed(new_count: int)
 
-@onready var ninja_star_scene: PackedScene = preload("res://scenes/items/weapons/ninja_star.tscn")
+@onready var shuriken_scene: PackedScene = preload("res://scenes/items/weapons/shuriken_star.tscn")
 @onready var can_fire_timer: Timer = $can_throw_timer
 
 var can_throw: bool = true
 var is_aiming: bool = false
 var ninja_star_count: int = 10
 var fire_rate: float = 0.3 
+var shuriken_spawn_offset: int = 15 #distance from center
 
 func _ready():
 	ninja_star_count_changed.emit(ninja_star_count)
@@ -27,17 +28,15 @@ func throw(target_position: Vector2):
 	ninja_star_count -= 1
 	emit_signal("ninja_star_count_changed", ninja_star_count)
 	
-	# Use Bow's global position
-	var ninja_star_weapon_global_position = global_position
-	var direction = (target_position - ninja_star_weapon_global_position).normalized()
-	var ninja_star_spawn_offset = direction * 15
-	var ninja_star_position = ninja_star_weapon_global_position + ninja_star_spawn_offset
-	
-	var ninja_star = ninja_star_scene.instantiate()
-	ninja_star.position = ninja_star_position
-	ninja_star.rotation = direction.angle()
-	ninja_star.direction = direction
-	get_tree().current_scene.add_child(ninja_star)
+	# Calculate the direction and position for the shuriken
+	var direction = (target_position - global_position).normalized()
+	var spawn_offset = direction * shuriken_spawn_offset
+	var shuriken_position = global_position + spawn_offset
+	var shuriken_star = shuriken_scene.instantiate()
+	shuriken_star.position = shuriken_position
+	shuriken_star.look_at(target_position)
+	shuriken_star.direction = direction
+	get_tree().current_scene.add_child(shuriken_star)
 
 func _on_can_throw_timer_timeout():
 	can_throw = true
