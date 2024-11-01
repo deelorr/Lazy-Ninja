@@ -33,7 +33,7 @@ func get_direction():
 func _on_hurt_box_area_entered(area: Area2D) -> void:
 	if not area.is_in_group("weapon"):
 		return
-	$hit_box.set_deferred("monitorable", false) #prevents collsion after death
+	$hit_box.set_deferred("monitorable", false)
 	is_dead = true
 	animation_player.play("death")
 	await animation_player.animation_finished

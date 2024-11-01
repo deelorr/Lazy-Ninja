@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var direction_timer: Timer = $direction_timer
 
+var current_health: int = 2
 var is_dead: bool = false
 var is_chasing: bool = false
 var player: Player = null
@@ -39,15 +40,17 @@ func get_direction() -> String:
 func _on_hurt_box_area_entered(area: Area2D) -> void:
 	if not area.is_in_group("weapon"):
 		return
-	$hit_box.set_deferred("monitorable", false)
-	is_dead = true
-	animation_player.play("death")
-	await animation_player.animation_finished
-	Global.enemy_killed.emit("beast")
-	Global.beast_count -= 1
-	print("beast destroyed", Global.beast_count, "/", Global.max_beasts)
-	SceneManager.player.add_xp(5)
-	queue_free()
+	current_health -= 1
+	if current_health <= 0:
+		$hit_box.set_deferred("monitorable", false)
+		is_dead = true
+		animation_player.play("death")
+		await animation_player.animation_finished
+		Global.enemy_killed.emit("beast")
+		Global.beast_count -= 1
+		print("beast destroyed", Global.beast_count, "/", Global.max_beasts)
+		SceneManager.player.add_xp(10)
+		queue_free()
 
 func _on_direction_timer_timeout() -> void:
 	if not is_chasing:
