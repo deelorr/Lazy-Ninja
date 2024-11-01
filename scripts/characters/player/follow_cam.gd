@@ -1,7 +1,8 @@
 extends Camera2D
 
 @export var tilemap: TileMap
-@export var follow_node: Player
+
+@onready var follow_node: Player = SceneManager.player
 
 func _ready():
 	var map_rect = tilemap.get_used_rect()

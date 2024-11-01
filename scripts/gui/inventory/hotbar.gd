@@ -6,7 +6,6 @@ extends Panel
 
 var currently_selected: int = 0
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	update()
 	inventory.updated.connect(update)
@@ -23,6 +22,5 @@ func move_selector():
 func _unhandled_input(event):
 	if event.is_action_pressed("use_item"):
 		inventory.use_item_at_index(currently_selected)
-		
 	if event.is_action_pressed("move_selector"):
 		move_selector()

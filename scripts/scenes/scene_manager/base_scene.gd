@@ -9,7 +9,6 @@ func _ready():
 	if player:
 		add_child(player)
 		position_local_player()
-		SceneManager.player_changed.emit(player)
 		camera.follow_node = player
 
 func position_local_player():

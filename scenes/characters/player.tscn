@@ -1,8 +1,7 @@
-[gd_scene load_steps=28 format=3 uid="uid://cw32y4dbgj36m"]
+[gd_scene load_steps=27 format=3 uid="uid://cw32y4dbgj36m"]
 
 [ext_resource type="Texture2D" uid="uid://cdkfsmeq0yn4y" path="res://art/characters/player/player_sprites.png" id="1_3lps0"]
 [ext_resource type="Script" path="res://scripts/characters/player/player.gd" id="1_xum27"]
-[ext_resource type="Resource" uid="uid://dvw7wrxslo3yr" path="res://resources/inventory/player_inventory.tres" id="2_c7tpp"]
 [ext_resource type="Script" path="res://scripts/characters/player/weapon_node.gd" id="4_fk1a3"]
 [ext_resource type="PackedScene" uid="uid://bylldbpasc02w" path="res://scenes/items/weapons/sword.tscn" id="4_gaop7"]
 [ext_resource type="PackedScene" uid="uid://ck78uu30262eo" path="res://scenes/items/weapons/axe.tscn" id="5_y8ti1"]
@@ -521,7 +520,6 @@ z_index = 1
 collision_layer = 9
 script = ExtResource("1_xum27")
 speed = 100
-inventory = ExtResource("2_c7tpp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 clip_children = 2

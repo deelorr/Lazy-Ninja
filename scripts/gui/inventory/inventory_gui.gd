@@ -3,22 +3,19 @@ extends Control
 signal opened
 signal closed
 
-var isOpen: bool = false
-
 @onready var inventory: Inventory = preload("res://resources/inventory/player_inventory.tres")
 @onready var itemStackGUIClass = preload("res://scenes/gui/inventory/item_stack_gui.tscn")
 @onready var hotbar_slots: Array = $NinePatchRect/HBoxContainer.get_children()
 @onready var slots: Array = hotbar_slots + $NinePatchRect/GridContainer.get_children()
-
+@onready var player: Player = SceneManager.player
 @onready var gold_label: Label = $NinePatchRect/VBoxContainer/Gold/gold_label
 
-var player: Player = null
 var item_in_hand: ItemStackGUI
 var old_index: int = -1
 var locked: bool = false
+var isOpen: bool = false
 
 func _ready():
-	player = SceneManager.player
 	connect_slots()
 	inventory.updated.connect(update)
 	update()
