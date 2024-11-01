@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://14mnf4mhdij4"]
+[gd_scene load_steps=36 format=3 uid="uid://14mnf4mhdij4"]
 
 [ext_resource type="Texture2D" uid="uid://jtuqvr1lwjq7" path="res://art/tilesets/ground.png" id="1_1wufp"]
 [ext_resource type="Script" path="res://scripts/scenes/scene_manager/base_scene.gd" id="1_i2ele"]
@@ -6,10 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://ctm10no46jhh2" path="res://art/tilesets/TilesetReliefDetail.png" id="3_0em2e"]
 [ext_resource type="Texture2D" uid="uid://cxoq8wlar5k2u" path="res://art/tilesets/TilesetElement.png" id="4_01ln3"]
 [ext_resource type="Texture2D" uid="uid://duq3rnujqw5h7" path="res://art/tilesets/animated_sprites/anim_flower.png" id="5_tvhvb"]
-[ext_resource type="PackedScene" uid="uid://b2blmb7y86f78" path="res://scenes/items/collectables/lifepot.tscn" id="6_nqj8l"]
-[ext_resource type="PackedScene" uid="uid://bi3sw8caf5ubs" path="res://scenes/items/collectables/Sword.tscn" id="7_bm2he"]
-[ext_resource type="PackedScene" uid="uid://ck78uu30262eo" path="res://scenes/items/weapons/axe.tscn" id="8_yn5ij"]
-[ext_resource type="PackedScene" uid="uid://buthmqfo85e7v" path="res://scenes/items/collectables/coin.tscn" id="9_li2p6"]
+[ext_resource type="PackedScene" uid="uid://b2blmb7y86f78" path="res://scenes/items/Collectables/Lifepot.tscn" id="6_nqj8l"]
+[ext_resource type="PackedScene" uid="uid://bi3sw8caf5ubs" path="res://scenes/items/Collectables/Sword.tscn" id="7_bm2he"]
+[ext_resource type="PackedScene" uid="uid://ck78uu30262eo" path="res://scenes/items/Weapons/axe.tscn" id="8_yn5ij"]
+[ext_resource type="PackedScene" uid="uid://buthmqfo85e7v" path="res://scenes/items/Collectables/coin.tscn" id="9_li2p6"]
 [ext_resource type="Texture2D" uid="uid://dgif58s51ttk0" path="res://art/tilesets/buildings.png" id="10_gckao"]
 [ext_resource type="Texture2D" uid="uid://0qc3452mjill" path="res://art/tilesets/water.png" id="11_hqj31"]
 [ext_resource type="Texture2D" uid="uid://cfvjiywa411sn" path="res://art/tilesets/TilesetRelief.png" id="12_58va6"]
@@ -17,12 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://dnx4jlfjv8rt6" path="res://art/tilesets/ground_transparent.png" id="14_lp78b"]
 [ext_resource type="Texture2D" uid="uid://842gat1qraly" path="res://art/tilesets/animated_sprites/quicksand.png" id="15_d1cxr"]
 [ext_resource type="PackedScene" uid="uid://blt4seqeee2mk" path="res://scenes/maps/scene_trigger.tscn" id="16_3jarj"]
-[ext_resource type="Script" path="res://scripts/gui/hud/canvas_layer.gd" id="17_tvace"]
-[ext_resource type="PackedScene" uid="uid://cytnun4f64ouu" path="res://scenes/gui/scrapped/hearts_container.tscn" id="18_vgapo"]
-[ext_resource type="PackedScene" uid="uid://77s2jr485rus" path="res://scenes/gui/inventory/inventory_gui.tscn" id="19_1cpng"]
-[ext_resource type="PackedScene" uid="uid://cf71ab0m6youu" path="res://scenes/gui/inventory/hotbar.tscn" id="20_tbgkv"]
-[ext_resource type="PackedScene" uid="uid://de4i75octoy82" path="res://scenes/gui/stat_panel.tscn" id="21_d16yi"]
-[ext_resource type="Script" path="res://scripts/gui/hud/stat_panel.gd" id="22_7yro2"]
+[ext_resource type="PackedScene" uid="uid://bm0pod17s368c" path="res://scenes/gui/HUD.tscn" id="17_badmg"]
 [ext_resource type="Script" path="res://scripts/characters/player/follow_cam.gd" id="23_n31kn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ii38o"]
@@ -3179,46 +3174,7 @@ layer_6/y_sort_enabled = true
 layer_6/z_index = 1
 layer_6/tile_data = PackedInt32Array(458771, 1048580, 0, 393229, 786436, 0, 393239, 1638404, 7, 393222, 1245188, 0, 589852, 1507332, 0)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-process_mode = 3
-script = ExtResource("17_tvace")
-
-[node name="hearts_container" parent="CanvasLayer" instance=ExtResource("18_vgapo")]
-visible = false
-layout_direction = 3
-anchors_preset = 0
-anchor_left = 0.0
-anchor_right = 0.0
-grow_horizontal = 1
-
-[node name="InventoryGUI" parent="CanvasLayer" instance=ExtResource("19_1cpng")]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -64.0
-offset_top = -40.0
-offset_right = 64.0
-offset_bottom = 40.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Hotbar" parent="CanvasLayer" instance=ExtResource("20_tbgkv")]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -58.0
-offset_top = -23.0
-offset_right = 58.0
-offset_bottom = -3.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="StatPanel" parent="CanvasLayer" instance=ExtResource("21_d16yi")]
-script = ExtResource("22_7yro2")
+[node name="HUD" parent="." instance=ExtResource("17_badmg")]
 
 [node name="follow_cam" type="Camera2D" parent="." node_paths=PackedStringArray("tilemap")]
 position = Vector2(176, 106)

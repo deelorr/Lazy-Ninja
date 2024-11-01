@@ -3,9 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://cdkfsmeq0yn4y" path="res://art/characters/player/player_sprites.png" id="1_3lps0"]
 [ext_resource type="Script" path="res://scripts/characters/player/player.gd" id="1_xum27"]
 [ext_resource type="Script" path="res://scripts/characters/player/weapon_node.gd" id="4_fk1a3"]
-[ext_resource type="PackedScene" uid="uid://bylldbpasc02w" path="res://scenes/items/weapons/sword.tscn" id="4_gaop7"]
-[ext_resource type="PackedScene" uid="uid://ck78uu30262eo" path="res://scenes/items/weapons/axe.tscn" id="5_y8ti1"]
-[ext_resource type="PackedScene" uid="uid://c041wyp0jflut" path="res://scenes/items/weapons/shuriken.tscn" id="7_wg64x"]
+[ext_resource type="PackedScene" uid="uid://bylldbpasc02w" path="res://scenes/items/Weapons/sword.tscn" id="4_gaop7"]
+[ext_resource type="PackedScene" uid="uid://ck78uu30262eo" path="res://scenes/items/Weapons/axe.tscn" id="5_y8ti1"]
+[ext_resource type="PackedScene" uid="uid://c041wyp0jflut" path="res://scenes/items/Weapons/shuriken.tscn" id="7_wg64x"]
 
 [sub_resource type="Animation" id="Animation_60f7p"]
 length = 0.001

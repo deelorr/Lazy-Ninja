@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://bi1v3lsgao0wn"]
+[gd_scene load_steps=38 format=3 uid="uid://bi1v3lsgao0wn"]
 
 [ext_resource type="Texture2D" uid="uid://jtuqvr1lwjq7" path="res://art/tilesets/ground.png" id="1_crrrf"]
 [ext_resource type="Script" path="res://scripts/scenes/scene_manager/base_scene.gd" id="1_uu85d"]
@@ -7,23 +7,19 @@
 [ext_resource type="Texture2D" uid="uid://ctm10no46jhh2" path="res://art/tilesets/TilesetReliefDetail.png" id="4_0taxg"]
 [ext_resource type="Texture2D" uid="uid://cxoq8wlar5k2u" path="res://art/tilesets/TilesetElement.png" id="4_rdm17"]
 [ext_resource type="Script" path="res://scripts/characters/player/follow_cam.gd" id="5_708fr"]
-[ext_resource type="PackedScene" uid="uid://b2blmb7y86f78" path="res://scenes/items/collectables/lifepot.tscn" id="5_k76w3"]
-[ext_resource type="PackedScene" uid="uid://bi3sw8caf5ubs" path="res://scenes/items/collectables/Sword.tscn" id="6_h7t66"]
+[ext_resource type="PackedScene" uid="uid://b2blmb7y86f78" path="res://scenes/items/Collectables/Lifepot.tscn" id="5_k76w3"]
+[ext_resource type="PackedScene" uid="uid://bi3sw8caf5ubs" path="res://scenes/items/Collectables/Sword.tscn" id="6_h7t66"]
 [ext_resource type="Texture2D" uid="uid://dgif58s51ttk0" path="res://art/tilesets/buildings.png" id="7_kmdpc"]
 [ext_resource type="Texture2D" uid="uid://0qc3452mjill" path="res://art/tilesets/water.png" id="8_du033"]
-[ext_resource type="PackedScene" uid="uid://ck78uu30262eo" path="res://scenes/items/weapons/axe.tscn" id="8_pe2y3"]
-[ext_resource type="PackedScene" uid="uid://buthmqfo85e7v" path="res://scenes/items/collectables/coin.tscn" id="9_23hvr"]
+[ext_resource type="PackedScene" uid="uid://ck78uu30262eo" path="res://scenes/items/Weapons/axe.tscn" id="8_pe2y3"]
+[ext_resource type="PackedScene" uid="uid://buthmqfo85e7v" path="res://scenes/items/Collectables/coin.tscn" id="9_23hvr"]
 [ext_resource type="Texture2D" uid="uid://cd1fctwfog8wt" path="res://art/tilesets/animated_sprites/anim_water.png" id="9_pgi3e"]
 [ext_resource type="Texture2D" uid="uid://cfvjiywa411sn" path="res://art/tilesets/TilesetRelief.png" id="9_xu1qr"]
 [ext_resource type="Texture2D" uid="uid://dnx4jlfjv8rt6" path="res://art/tilesets/ground_transparent.png" id="10_3wuk1"]
-[ext_resource type="Script" path="res://scripts/gui/hud/canvas_layer.gd" id="10_wu4s8"]
 [ext_resource type="Texture2D" uid="uid://842gat1qraly" path="res://art/tilesets/animated_sprites/quicksand.png" id="11_itwi6"]
-[ext_resource type="PackedScene" uid="uid://77s2jr485rus" path="res://scenes/gui/inventory/inventory_gui.tscn" id="11_jg4rn"]
-[ext_resource type="PackedScene" uid="uid://cf71ab0m6youu" path="res://scenes/gui/inventory/hotbar.tscn" id="12_tiks5"]
 [ext_resource type="PackedScene" uid="uid://blt4seqeee2mk" path="res://scenes/maps/scene_trigger.tscn" id="14_rmnrq"]
 [ext_resource type="PackedScene" uid="uid://bmpwxneat8j66" path="res://scenes/characters/hunter.tscn" id="16_5287r"]
-[ext_resource type="PackedScene" uid="uid://de4i75octoy82" path="res://scenes/gui/stat_panel.tscn" id="17_buchr"]
-[ext_resource type="PackedScene" uid="uid://cok1fy1chnj" path="res://scenes/gui/quest_panel.tscn" id="21_13eca"]
+[ext_resource type="PackedScene" uid="uid://bm0pod17s368c" path="res://scenes/gui/HUD.tscn" id="17_nck1a"]
 [ext_resource type="PackedScene" uid="uid://bp8d5fmlfog07" path="res://scenes/maps/spawn_area.tscn" id="27_7giur"]
 [ext_resource type="PackedScene" uid="uid://be5nryp8gacni" path="res://scenes/maps/slime_cave.tscn" id="27_srog0"]
 
@@ -3033,47 +3029,7 @@ layer_6/y_sort_enabled = true
 layer_6/z_index = 1
 layer_6/tile_data = PackedInt32Array(196612, 4, 0, 131094, 589828, 10, 131095, 655364, 10, 131096, 655364, 10, 131097, 655364, 10, 131098, 655364, 10, 131099, 655364, 10, 131100, 655364, 10, 131101, 655364, 10, 131102, 655364, 10, 131103, 655364, 10, 131104, 655364, 10, 458784, 655364, 10, 458783, 655364, 10, 458782, 655364, 10, 458781, 655364, 10, 458780, 786436, 12, 458778, 655364, 12, 458777, 655364, 10, 458776, 655364, 10, 458775, 655364, 10, 458774, 589828, 12, 393238, 589828, 11, 327702, 589828, 11, 262166, 589828, 11, 196630, 589828, 11, 393243, 720900, 11, 393244, 786436, 11, 393242, 655364, 11, 458789, 851972, 12, 393253, 851972, 11, 327717, 851972, 11, 262181, 851972, 11, 196645, 851972, 11, 131109, 851972, 10, 131108, 655364, 10, 131107, 655364, 10, 131106, 655364, 10, 131105, 655364, 10, 458788, 655364, 10, 458787, 655364, 10, 458786, 655364, 10, 458785, 655364, 10)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-process_mode = 3
-script = ExtResource("10_wu4s8")
-
-[node name="InventoryGUI" parent="CanvasLayer" instance=ExtResource("11_jg4rn")]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -61.0
-offset_top = -43.0
-offset_right = 106.0
-offset_bottom = 48.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Hotbar" parent="CanvasLayer" instance=ExtResource("12_tiks5")]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -43.0
-offset_top = -23.0
-offset_right = 83.0
-offset_bottom = 7.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="StatPanel" parent="CanvasLayer" instance=ExtResource("17_buchr")]
-offset_left = 293.0
-offset_top = 127.0
-offset_right = 319.0
-offset_bottom = 179.0
-
-[node name="QuestPanel" parent="CanvasLayer" instance=ExtResource("21_13eca")]
-offset_left = 236.0
-offset_top = 152.0
-offset_right = 293.0
-offset_bottom = 179.0
+[node name="HUD" parent="." instance=ExtResource("17_nck1a")]
 
 [node name="follow_cam" type="Camera2D" parent="." node_paths=PackedStringArray("tilemap")]
 position = Vector2(148, 90)

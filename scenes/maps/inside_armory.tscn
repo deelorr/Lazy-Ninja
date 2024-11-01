@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cxdbvymjgk6cu"]
+[gd_scene load_steps=20 format=3 uid="uid://cxdbvymjgk6cu"]
 
 [ext_resource type="Script" path="res://scripts/scenes/scene_manager/base_scene.gd" id="1_r40tg"]
 [ext_resource type="Texture2D" uid="uid://yqjhon6jwyfs" path="res://art/tilesets/floor.png" id="2_ag74h"]
@@ -7,12 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cp641bt8pa8ol" path="res://art/tilesets/walls.png" id="5_a4xgw"]
 [ext_resource type="Texture2D" uid="uid://cxg6fosuiwyov" path="res://art/effects/fire.png" id="6_r187j"]
 [ext_resource type="Texture2D" uid="uid://kldl1gjhswy0" path="res://art/tilesets/buildings_t.png" id="7_elcxx"]
-[ext_resource type="Script" path="res://scripts/gui/hud/canvas_layer.gd" id="8_58k5b"]
-[ext_resource type="PackedScene" uid="uid://cytnun4f64ouu" path="res://scenes/gui/scrapped/hearts_container.tscn" id="9_x7di4"]
-[ext_resource type="PackedScene" uid="uid://77s2jr485rus" path="res://scenes/gui/inventory/inventory_gui.tscn" id="10_mfffp"]
-[ext_resource type="PackedScene" uid="uid://de4i75octoy82" path="res://scenes/gui/stat_panel.tscn" id="11_dx57x"]
-[ext_resource type="Script" path="res://scripts/gui/hud/stat_panel.gd" id="12_5m5s5"]
-[ext_resource type="PackedScene" uid="uid://dbejya73te6nu" path="res://scenes/gui/store_inventory/store_inventory_gui.tscn" id="13_t4qdn"]
+[ext_resource type="PackedScene" uid="uid://bm0pod17s368c" path="res://scenes/gui/HUD.tscn" id="8_2oocy"]
 [ext_resource type="Script" path="res://scripts/characters/player/follow_cam.gd" id="14_cdug3"]
 [ext_resource type="PackedScene" uid="uid://blt4seqeee2mk" path="res://scenes/maps/scene_trigger.tscn" id="15_175b3"]
 [ext_resource type="PackedScene" uid="uid://dmuw8hpuyqjpi" path="res://scenes/characters/armory_owner.tscn" id="16_poi4a"]
@@ -1904,54 +1899,14 @@ layer_2/tile_data = PackedInt32Array(196613, 1114114, 18, 131079, 1048578, 18, 1
 layer_3/name = "counter"
 layer_3/z_index = 2
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-process_mode = 3
-script = ExtResource("8_58k5b")
-
-[node name="hearts_container" parent="CanvasLayer" instance=ExtResource("9_x7di4")]
-visible = false
-layout_direction = 3
-anchors_preset = 0
-anchor_left = 0.0
-anchor_right = 0.0
-grow_horizontal = 1
-
-[node name="InventoryGUI" parent="CanvasLayer" instance=ExtResource("10_mfffp")]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -64.0
-offset_top = -40.0
-offset_right = 64.0
-offset_bottom = 40.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="StatPanel" parent="CanvasLayer" instance=ExtResource("11_dx57x")]
-script = ExtResource("12_5m5s5")
-
-[node name="StoreInventoryGUI" parent="CanvasLayer" instance=ExtResource("13_t4qdn")]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -64.0
-offset_top = -40.0
-offset_right = 64.0
-offset_bottom = 40.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="HUD" parent="." instance=ExtResource("8_2oocy")]
 
 [node name="entrance_markers" type="Node2D" parent="."]
 position = Vector2(79, 90)
 
 [node name="enter_armory" type="Marker2D" parent="entrance_markers"]
 
-[node name="follow_cam" type="Camera2D" parent="." node_paths=PackedStringArray("tilemap", "follow_node")]
+[node name="follow_cam" type="Camera2D" parent="." node_paths=PackedStringArray("tilemap")]
 position = Vector2(160, 90)
 limit_left = 0
 limit_top = 0
@@ -1960,7 +1915,6 @@ limit_bottom = 368
 position_smoothing_speed = 3.0
 script = ExtResource("14_cdug3")
 tilemap = NodePath("../TileMap")
-follow_node = NodePath(".")
 
 [node name="SceneTrigger" parent="." instance=ExtResource("15_175b3")]
 connected_scene = "town"

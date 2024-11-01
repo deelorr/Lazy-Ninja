@@ -1,16 +1,12 @@
-[gd_scene load_steps=19 format=3 uid="uid://6o8v72jsa5h1"]
+[gd_scene load_steps=15 format=3 uid="uid://6o8v72jsa5h1"]
 
 [ext_resource type="Texture2D" uid="uid://yqjhon6jwyfs" path="res://art/tilesets/floor.png" id="1_iunt8"]
 [ext_resource type="Script" path="res://scripts/scenes/scene_manager/base_scene.gd" id="1_jwdfx"]
 [ext_resource type="Texture2D" uid="uid://db0ofsi30xfjk" path="res://art/tilesets/house elements.png" id="2_w771l"]
 [ext_resource type="Texture2D" uid="uid://dgif58s51ttk0" path="res://art/tilesets/buildings.png" id="3_ctps4"]
 [ext_resource type="Texture2D" uid="uid://cp641bt8pa8ol" path="res://art/tilesets/walls.png" id="4_lqv6r"]
+[ext_resource type="PackedScene" uid="uid://bm0pod17s368c" path="res://scenes/gui/HUD.tscn" id="6_6wukh"]
 [ext_resource type="PackedScene" uid="uid://blt4seqeee2mk" path="res://scenes/maps/scene_trigger.tscn" id="6_ohnnk"]
-[ext_resource type="Script" path="res://scripts/gui/hud/canvas_layer.gd" id="6_swgp2"]
-[ext_resource type="PackedScene" uid="uid://cytnun4f64ouu" path="res://scenes/gui/scrapped/hearts_container.tscn" id="7_3kkcc"]
-[ext_resource type="PackedScene" uid="uid://77s2jr485rus" path="res://scenes/gui/inventory/inventory_gui.tscn" id="8_7ivxg"]
-[ext_resource type="PackedScene" uid="uid://de4i75octoy82" path="res://scenes/gui/stat_panel.tscn" id="9_313l7"]
-[ext_resource type="Script" path="res://scripts/gui/hud/stat_panel.gd" id="10_hw6b2"]
 [ext_resource type="Script" path="res://scripts/characters/player/follow_cam.gd" id="11_h1g35"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qk7by"]
@@ -1228,33 +1224,8 @@ layer_1/y_sort_enabled = true
 layer_1/z_index = 1
 layer_1/tile_data = PackedInt32Array(65545, 196609, 7, 65544, 196609, 7, 131083, 1, 7, 65540, 1, 7, 65539, 1, 7, 131074, 1, 7, 262154, 131073, 9, 327690, 131073, 9)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-process_mode = 3
-script = ExtResource("6_swgp2")
-
-[node name="hearts_container" parent="CanvasLayer" instance=ExtResource("7_3kkcc")]
+[node name="HUD" parent="." instance=ExtResource("6_6wukh")]
 visible = false
-layout_direction = 3
-anchors_preset = 0
-anchor_left = 0.0
-anchor_right = 0.0
-grow_horizontal = 1
-
-[node name="InventoryGUI" parent="CanvasLayer" instance=ExtResource("8_7ivxg")]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -64.0
-offset_top = -40.0
-offset_right = 64.0
-offset_bottom = 40.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="StatPanel" parent="CanvasLayer" instance=ExtResource("9_313l7")]
-script = ExtResource("10_hw6b2")
 
 [node name="entrance_markers" type="Node2D" parent="."]
 position = Vector2(79, 90)
