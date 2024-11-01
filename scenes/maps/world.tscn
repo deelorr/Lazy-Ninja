@@ -3064,11 +3064,15 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="StatPanel" parent="CanvasLayer" instance=ExtResource("17_buchr")]
+offset_left = 293.0
+offset_top = 127.0
+offset_right = 319.0
+offset_bottom = 179.0
 
 [node name="QuestPanel" parent="CanvasLayer" instance=ExtResource("21_13eca")]
-offset_left = 262.0
+offset_left = 236.0
 offset_top = 152.0
-offset_right = 319.0
+offset_right = 293.0
 offset_bottom = 179.0
 
 [node name="follow_cam" type="Camera2D" parent="." node_paths=PackedStringArray("tilemap")]
