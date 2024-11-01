@@ -3037,7 +3037,7 @@ limit_left = 0
 limit_top = 0
 limit_right = 640
 limit_bottom = 368
-position_smoothing_speed = 3.0
+position_smoothing_speed = 2.0
 script = ExtResource("5_708fr")
 tilemap = NodePath("../TileMap")
 
