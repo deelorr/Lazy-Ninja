@@ -20,7 +20,7 @@ func _process(_delta):
 
 func _input(event):
 	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_WHEEL_UP and zoom.x > min_zoom:
+		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN and zoom.x > min_zoom:
 			zoom -= Vector2(zoom_step, zoom_step)
-		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN and zoom.x < max_zoom:
+		elif event.button_index == MOUSE_BUTTON_WHEEL_UP and zoom.x < max_zoom:
 			zoom += Vector2(zoom_step, zoom_step)
