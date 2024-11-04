@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@onready var store_gui: Control = $"../CanvasLayer/StoreInventoryGUI"
+@onready var store_gui: Control = $"../HUD/StoreInventoryGUI"
 @onready var armory_owner_dialogue: Resource = preload("res://dialogue/armory_owner.dialogue")
 @onready var animations: AnimationPlayer = $AnimationPlayer
 

@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bm0pod17s368c"]
+[gd_scene load_steps=7 format=3 uid="uid://bm0pod17s368c"]
 
 [ext_resource type="Script" path="res://scripts/gui/hud/canvas_layer.gd" id="1_e7oad"]
 [ext_resource type="PackedScene" uid="uid://77s2jr485rus" path="res://scenes/gui/inventory/inventory_gui.tscn" id="2_yy873"]
+[ext_resource type="PackedScene" uid="uid://dbejya73te6nu" path="res://scenes/gui/store_inventory/store_inventory_gui.tscn" id="3_b0evs"]
 [ext_resource type="PackedScene" uid="uid://cf71ab0m6youu" path="res://scenes/gui/inventory/hotbar.tscn" id="3_q8jf0"]
 [ext_resource type="PackedScene" uid="uid://de4i75octoy82" path="res://scenes/gui/stat_panel.tscn" id="4_c4hd3"]
 [ext_resource type="PackedScene" uid="uid://cok1fy1chnj" path="res://scenes/gui/quest_panel.tscn" id="5_qcw0o"]
@@ -22,6 +23,13 @@ offset_right = 106.0
 offset_bottom = 48.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="StoreInventoryGUI" parent="." instance=ExtResource("3_b0evs")]
+visible = false
+offset_left = 92.0
+offset_top = 46.0
+offset_right = 220.0
+offset_bottom = 126.0
 
 [node name="Hotbar" parent="." instance=ExtResource("3_q8jf0")]
 anchors_preset = 7
