@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://i6kopxypc54a"]
+
+[ext_resource type="Shader" path="res://shaders/lightning.gdshader" id="1_ru61n"]
+
+[sub_resource type="Gradient" id="Gradient_v2pej"]
+offsets = PackedFloat32Array(0.428571, 0.527473, 0.631868)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 0.219608, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_uj1xd"]
+gradient = SubResource("Gradient_v2pej")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_n0ytt"]
+seed = 3
+frequency = 0.0056
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ax61q"]
+noise = SubResource("FastNoiseLite_n0ytt")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jkldo"]
+shader = ExtResource("1_ru61n")
+shader_parameter/width = 0.03
+shader_parameter/fix_start = true
+shader_parameter/fix_end = true
+shader_parameter/inverted = true
+shader_parameter/line_gradient = SubResource("GradientTexture2D_uj1xd")
+shader_parameter/speed = 0.694
+shader_parameter/variation = 0.073
+shader_parameter/scale = 11.359
+shader_parameter/repeats = 0.6
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_ax61q")
+
+[node name="ColorRect" type="ColorRect"]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_jkldo")
+offset_left = -20.0
+offset_top = -27.0
+offset_right = 20.0
+offset_bottom = 13.0
+color = Color(1, 0, 0, 0)
