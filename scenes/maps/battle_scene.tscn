@@ -1,0 +1,143 @@
+[gd_scene load_steps=6 format=3 uid="uid://xl26l7hf0gov"]
+
+[ext_resource type="PackedScene" uid="uid://cfavffqss21j7" path="res://scenes/characters/generic_character.tscn" id="1_y6jkw"]
+[ext_resource type="Texture2D" uid="uid://najt8l70oxnb" path="res://art/characters/player/player_face.png" id="2_dlawu"]
+[ext_resource type="Texture2D" uid="uid://b58rre26m8irs" path="res://art/characters/enemies/green_slime_face.png" id="2_oav14"]
+[ext_resource type="Script" path="res://scenes/maps/enemy_team.gd" id="3_28j8d"]
+[ext_resource type="Script" path="res://scripts/gui/battle_buttons.gd" id="3_l3paw"]
+
+[node name="battle_scene" type="Node2D"]
+
+[node name="player_team" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 128.0
+offset_top = 8.0
+offset_right = 128.0
+offset_bottom = 8.0
+
+[node name="player" parent="player_team" instance=ExtResource("1_y6jkw")]
+layout_mode = 0
+offset_left = -120.0
+offset_top = 8.0
+offset_right = -74.0
+offset_bottom = 54.0
+icon = ExtResource("2_dlawu")
+
+[node name="player2" parent="player_team" instance=ExtResource("1_y6jkw")]
+layout_mode = 0
+offset_left = -56.0
+offset_top = 8.0
+offset_right = -10.0
+offset_bottom = 54.0
+
+[node name="player3" parent="player_team" instance=ExtResource("1_y6jkw")]
+layout_mode = 0
+offset_left = -88.0
+offset_top = 56.0
+offset_right = -42.0
+offset_bottom = 102.0
+
+[node name="player4" parent="player_team" instance=ExtResource("1_y6jkw")]
+layout_mode = 0
+offset_left = -120.0
+offset_top = 104.0
+offset_right = -74.0
+offset_bottom = 150.0
+
+[node name="player5" parent="player_team" instance=ExtResource("1_y6jkw")]
+layout_mode = 0
+offset_left = -56.0
+offset_top = 104.0
+offset_right = -10.0
+offset_bottom = 150.0
+
+[node name="enemy_team" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 320.0
+offset_top = 8.0
+offset_right = 320.0
+offset_bottom = 8.0
+script = ExtResource("3_28j8d")
+
+[node name="enemy" parent="enemy_team" instance=ExtResource("1_y6jkw")]
+layout_mode = 0
+offset_left = -120.0
+offset_top = 8.0
+offset_right = -74.0
+offset_bottom = 54.0
+icon = ExtResource("2_oav14")
+
+[node name="enemy2" parent="enemy_team" instance=ExtResource("1_y6jkw")]
+layout_mode = 0
+offset_left = -56.0
+offset_top = 8.0
+offset_right = -10.0
+offset_bottom = 54.0
+icon = ExtResource("2_oav14")
+
+[node name="enemy3" parent="enemy_team" instance=ExtResource("1_y6jkw")]
+layout_mode = 0
+offset_left = -88.0
+offset_top = 56.0
+offset_right = -42.0
+offset_bottom = 102.0
+icon = ExtResource("2_oav14")
+
+[node name="enemy4" parent="enemy_team" instance=ExtResource("1_y6jkw")]
+layout_mode = 0
+offset_left = -120.0
+offset_top = 104.0
+offset_right = -74.0
+offset_bottom = 150.0
+icon = ExtResource("2_oav14")
+
+[node name="enemy5" parent="enemy_team" instance=ExtResource("1_y6jkw")]
+layout_mode = 0
+offset_left = -56.0
+offset_top = 104.0
+offset_right = -10.0
+offset_bottom = 150.0
+icon = ExtResource("2_oav14")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="battle_menu" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -112.0
+offset_top = -44.0
+offset_right = -112.0
+offset_bottom = -44.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="VBoxContainer" parent="CanvasLayer/battle_menu"]
+layout_mode = 1
+offset_left = 72.0
+offset_top = -112.0
+offset_right = 149.0
+offset_bottom = 1.0
+theme_override_constants/separation = 10
+script = ExtResource("3_l3paw")
+
+[node name="Attack" type="Button" parent="CanvasLayer/battle_menu/HBoxContainer"]
+layout_mode = 2
+text = "Attack"
+
+[node name="Item" type="Button" parent="CanvasLayer/battle_menu/HBoxContainer"]
+layout_mode = 2
+text = "Use Item"
+
+[node name="Run" type="Button" parent="CanvasLayer/battle_menu/HBoxContainer"]
+layout_mode = 2
+text = "Run!"
+
+[connection signal="pressed" from="CanvasLayer/battle_menu/HBoxContainer/Attack" to="player_team/player" method="_on_attack_pressed"]
+[connection signal="pressed" from="CanvasLayer/battle_menu/HBoxContainer/Item" to="player_team/player" method="_on_item_pressed"]
+[connection signal="pressed" from="CanvasLayer/battle_menu/HBoxContainer/Run" to="player_team/player" method="_on_run_pressed"]
