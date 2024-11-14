@@ -12,6 +12,7 @@ class_name Player
 @onready var hurt_timer: Timer = $hurt_timer
 @onready var weapon_node: Node2D = $weapon
 @onready var shuriken: Area2D = $weapon/shuriken
+@onready var shuriken_noise: AudioStreamPlayer2D = $shuriken_noise
 
 var current_health: int = max_health
 var current_weapon: String = "sword"
@@ -29,6 +30,10 @@ func _ready():
 	weapon_node.disable()  #disable weapon collision at start
 
 func _physics_process(_delta):
+	#esc to quit for now
+	if Input.is_action_just_pressed("ui_cancel"):
+		get_tree().quit()
+	
 	handle_input()
 	update_animation()
 	if !is_hurt:
@@ -93,6 +98,7 @@ func aim_shuriken():
 func throw_shuriken():
 	var mouse_position = get_global_mouse_position()
 	shuriken.throw(mouse_position)
+	shuriken_noise.play()
 	animations.play("attack_" + last_anim_direction)
 	shuriken.stop_aiming()
 

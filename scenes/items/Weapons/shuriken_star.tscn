@@ -46,6 +46,7 @@ _data = {
 }
 
 [node name="shuriken_star" type="Area2D" groups=["weapon"]]
+z_index = 2
 scale = Vector2(0.75, 0.75)
 collision_layer = 4
 collision_mask = 4
