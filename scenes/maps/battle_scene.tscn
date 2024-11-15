@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://xl26l7hf0gov"]
+[gd_scene load_steps=7 format=3 uid="uid://xl26l7hf0gov"]
 
 [ext_resource type="Script" path="res://scripts/player_team.gd" id="1_8v5ih"]
 [ext_resource type="Script" path="res://scripts/battle_manager.gd" id="1_viphm"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://najt8l70oxnb" path="res://art/characters/player/player_face.png" id="2_dlawu"]
 [ext_resource type="Texture2D" uid="uid://b58rre26m8irs" path="res://art/characters/enemies/green_slime_face.png" id="2_oav14"]
 [ext_resource type="Script" path="res://scripts/enemy_team.gd" id="3_28j8d"]
-[ext_resource type="Script" path="res://scripts/gui/battle_buttons.gd" id="3_l3paw"]
 
 [node name="battle_scene" type="Node2D"]
 script = ExtResource("1_viphm")
@@ -17,92 +16,66 @@ anchors_preset = 0
 offset_left = 128.0
 offset_top = 8.0
 offset_right = 128.0
-offset_bottom = 8.0
+offset_bottom = 48.0
 script = ExtResource("1_8v5ih")
 
-[node name="player" parent="player_team" instance=ExtResource("1_y6jkw")]
+[node name="GridContainer" type="GridContainer" parent="player_team"]
 layout_mode = 0
 offset_left = -120.0
-offset_top = 8.0
-offset_right = -74.0
-offset_bottom = 54.0
+offset_right = -62.0
+offset_bottom = 70.0
+columns = 2
+
+[node name="player" parent="player_team/GridContainer" instance=ExtResource("1_y6jkw")]
+layout_mode = 2
 icon = ExtResource("2_dlawu")
 
-[node name="slot_1" parent="player_team" instance=ExtResource("1_y6jkw")]
-layout_mode = 0
-offset_left = -56.0
-offset_top = 8.0
-offset_right = -10.0
-offset_bottom = 54.0
+[node name="slot_1" parent="player_team/GridContainer" instance=ExtResource("1_y6jkw")]
+layout_mode = 2
 
-[node name="slot_2" parent="player_team" instance=ExtResource("1_y6jkw")]
-layout_mode = 0
-offset_left = -88.0
-offset_top = 56.0
-offset_right = -42.0
-offset_bottom = 102.0
+[node name="slot_2" parent="player_team/GridContainer" instance=ExtResource("1_y6jkw")]
+layout_mode = 2
 
-[node name="slot_3" parent="player_team" instance=ExtResource("1_y6jkw")]
-layout_mode = 0
-offset_left = -120.0
-offset_top = 104.0
-offset_right = -74.0
-offset_bottom = 150.0
+[node name="slot_3" parent="player_team/GridContainer" instance=ExtResource("1_y6jkw")]
+layout_mode = 2
 
-[node name="slot_4" parent="player_team" instance=ExtResource("1_y6jkw")]
-layout_mode = 0
-offset_left = -56.0
-offset_top = 104.0
-offset_right = -10.0
-offset_bottom = 150.0
+[node name="slot_4" parent="player_team/GridContainer" instance=ExtResource("1_y6jkw")]
+layout_mode = 2
 
 [node name="enemy_team" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 320.0
+offset_left = 128.0
 offset_top = 8.0
-offset_right = 320.0
-offset_bottom = 8.0
+offset_right = 128.0
+offset_bottom = 48.0
 script = ExtResource("3_28j8d")
 
-[node name="enemy_1" parent="enemy_team" instance=ExtResource("1_y6jkw")]
+[node name="GridContainer" type="GridContainer" parent="enemy_team"]
 layout_mode = 0
-offset_left = -120.0
-offset_top = 8.0
-offset_right = -74.0
-offset_bottom = 54.0
+offset_left = 88.0
+offset_right = 184.0
+offset_bottom = 146.0
+columns = 2
+
+[node name="enemy_1" parent="enemy_team/GridContainer" instance=ExtResource("1_y6jkw")]
+layout_mode = 2
 icon = ExtResource("2_oav14")
 
-[node name="enemy_2" parent="enemy_team" instance=ExtResource("1_y6jkw")]
-layout_mode = 0
-offset_left = -56.0
-offset_top = 8.0
-offset_right = -10.0
-offset_bottom = 54.0
+[node name="enemy_2" parent="enemy_team/GridContainer" instance=ExtResource("1_y6jkw")]
+layout_mode = 2
 icon = ExtResource("2_oav14")
 
-[node name="enemy_3" parent="enemy_team" instance=ExtResource("1_y6jkw")]
-layout_mode = 0
-offset_left = -88.0
-offset_top = 56.0
-offset_right = -42.0
-offset_bottom = 102.0
+[node name="enemy_3" parent="enemy_team/GridContainer" instance=ExtResource("1_y6jkw")]
+layout_mode = 2
 icon = ExtResource("2_oav14")
 
-[node name="enemy_4" parent="enemy_team" instance=ExtResource("1_y6jkw")]
-layout_mode = 0
-offset_left = -120.0
-offset_top = 104.0
-offset_right = -74.0
-offset_bottom = 150.0
+[node name="enemy_4" parent="enemy_team/GridContainer" instance=ExtResource("1_y6jkw")]
+layout_mode = 2
 icon = ExtResource("2_oav14")
 
-[node name="enemy_5" parent="enemy_team" instance=ExtResource("1_y6jkw")]
-layout_mode = 0
-offset_left = -56.0
-offset_top = 104.0
-offset_right = -10.0
-offset_bottom = 150.0
+[node name="enemy_5" parent="enemy_team/GridContainer" instance=ExtResource("1_y6jkw")]
+layout_mode = 2
 icon = ExtResource("2_oav14")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -128,7 +101,6 @@ offset_top = -112.0
 offset_right = 149.0
 offset_bottom = 1.0
 theme_override_constants/separation = 10
-script = ExtResource("3_l3paw")
 
 [node name="Attack" type="Button" parent="CanvasLayer/battle_menu/VBoxContainer"]
 layout_mode = 2
@@ -142,6 +114,6 @@ text = "Use Item"
 layout_mode = 2
 text = "Run!"
 
-[connection signal="pressed" from="CanvasLayer/battle_menu/VBoxContainer/Attack" to="CanvasLayer/battle_menu/VBoxContainer" method="_on_attack_pressed"]
-[connection signal="pressed" from="CanvasLayer/battle_menu/VBoxContainer/Item" to="CanvasLayer/battle_menu/VBoxContainer" method="_on_item_pressed"]
-[connection signal="pressed" from="CanvasLayer/battle_menu/VBoxContainer/Run" to="CanvasLayer/battle_menu/VBoxContainer" method="_on_run_pressed"]
+[connection signal="pressed" from="CanvasLayer/battle_menu/VBoxContainer/Attack" to="." method="_on_attack_pressed"]
+[connection signal="pressed" from="CanvasLayer/battle_menu/VBoxContainer/Item" to="." method="_on_item_pressed"]
+[connection signal="pressed" from="CanvasLayer/battle_menu/VBoxContainer/Run" to="." method="_on_run_pressed"]

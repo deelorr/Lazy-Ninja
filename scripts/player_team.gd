@@ -6,6 +6,3 @@ extends Control
 
 func _ready():
 	player_team[0] = player
-
-func _process(delta):
-	pass
