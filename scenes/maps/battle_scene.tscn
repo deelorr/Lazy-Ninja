@@ -1,11 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://xl26l7hf0gov"]
+[gd_scene load_steps=6 format=3 uid="uid://xl26l7hf0gov"]
 
-[ext_resource type="Script" path="res://scripts/player_team.gd" id="1_8v5ih"]
 [ext_resource type="Script" path="res://scripts/battle_manager.gd" id="1_viphm"]
 [ext_resource type="PackedScene" uid="uid://cfavffqss21j7" path="res://scenes/characters/generic_character.tscn" id="1_y6jkw"]
 [ext_resource type="Texture2D" uid="uid://najt8l70oxnb" path="res://art/characters/player/player_face.png" id="2_dlawu"]
 [ext_resource type="Texture2D" uid="uid://b58rre26m8irs" path="res://art/characters/enemies/green_slime_face.png" id="2_oav14"]
-[ext_resource type="Script" path="res://scripts/enemy_team.gd" id="3_28j8d"]
 [ext_resource type="PackedScene" uid="uid://c5phbysi2r2uj" path="res://scenes/gui/pop_up_text.tscn" id="7_63i37"]
 
 [node name="battle_scene" type="Node2D"]
@@ -18,7 +16,6 @@ offset_left = 3.0
 offset_top = 3.0
 offset_right = 107.0
 offset_bottom = 179.0
-script = ExtResource("1_8v5ih")
 
 [node name="GridContainer" type="GridContainer" parent="player_team"]
 layout_mode = 0
@@ -28,23 +25,23 @@ theme_override_constants/h_separation = 12
 theme_override_constants/v_separation = 10
 columns = 2
 
-[node name="GenericCharacterTile" parent="player_team/GridContainer" instance=ExtResource("1_y6jkw")]
+[node name="Player_1" parent="player_team/GridContainer" instance=ExtResource("1_y6jkw")]
 layout_mode = 2
 icon = ExtResource("2_dlawu")
 
-[node name="GenericCharacterTile2" parent="player_team/GridContainer" instance=ExtResource("1_y6jkw")]
+[node name="Player_2" parent="player_team/GridContainer" instance=ExtResource("1_y6jkw")]
 layout_mode = 2
 icon = ExtResource("2_dlawu")
 
-[node name="GenericCharacterTile3" parent="player_team/GridContainer" instance=ExtResource("1_y6jkw")]
+[node name="Player_3" parent="player_team/GridContainer" instance=ExtResource("1_y6jkw")]
 layout_mode = 2
 icon = ExtResource("2_dlawu")
 
-[node name="GenericCharacterTile4" parent="player_team/GridContainer" instance=ExtResource("1_y6jkw")]
+[node name="Player_4" parent="player_team/GridContainer" instance=ExtResource("1_y6jkw")]
 layout_mode = 2
 icon = ExtResource("2_dlawu")
 
-[node name="GenericCharacterTile5" parent="player_team/GridContainer" instance=ExtResource("1_y6jkw")]
+[node name="Player_5" parent="player_team/GridContainer" instance=ExtResource("1_y6jkw")]
 layout_mode = 2
 icon = ExtResource("2_dlawu")
 
@@ -90,7 +87,6 @@ offset_left = 215.0
 offset_top = 3.0
 offset_right = 319.0
 offset_bottom = 163.0
-script = ExtResource("3_28j8d")
 
 [node name="GridContainer" type="GridContainer" parent="enemy_team"]
 layout_mode = 1
@@ -100,35 +96,43 @@ theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
 columns = 2
 
-[node name="GenericCharacterTile" parent="enemy_team/GridContainer" instance=ExtResource("1_y6jkw")]
+[node name="Enemy_1" parent="enemy_team/GridContainer" instance=ExtResource("1_y6jkw")]
 layout_mode = 2
 icon = ExtResource("2_oav14")
 
-[node name="GenericCharacterTile2" parent="enemy_team/GridContainer" instance=ExtResource("1_y6jkw")]
+[node name="Enemy_2" parent="enemy_team/GridContainer" instance=ExtResource("1_y6jkw")]
 layout_mode = 2
 icon = ExtResource("2_oav14")
 
-[node name="GenericCharacterTile3" parent="enemy_team/GridContainer" instance=ExtResource("1_y6jkw")]
+[node name="Enemy_3" parent="enemy_team/GridContainer" instance=ExtResource("1_y6jkw")]
 layout_mode = 2
 icon = ExtResource("2_oav14")
 
-[node name="GenericCharacterTile4" parent="enemy_team/GridContainer" instance=ExtResource("1_y6jkw")]
+[node name="Enemy_4" parent="enemy_team/GridContainer" instance=ExtResource("1_y6jkw")]
 layout_mode = 2
 icon = ExtResource("2_oav14")
 
-[node name="GenericCharacterTile6" parent="enemy_team/GridContainer" instance=ExtResource("1_y6jkw")]
+[node name="Enemy_5" parent="enemy_team/GridContainer" instance=ExtResource("1_y6jkw")]
 layout_mode = 2
-
-[node name="GenericCharacterTile5" parent="enemy_team/GridContainer" instance=ExtResource("1_y6jkw")]
-layout_mode = 2
-icon = ExtResource("2_oav14")
 
 [node name="PopUpText" parent="." instance=ExtResource("7_63i37")]
 offset_left = 55.0
 offset_top = 145.0
 offset_right = 210.0
 offset_bottom = 170.0
+text = "Pop Up Bar"
+horizontal_alignment = 1
 
+[connection signal="pressed" from="player_team/GridContainer/Player_1" to="." method="_on_player_1_pressed"]
+[connection signal="pressed" from="player_team/GridContainer/Player_2" to="." method="_on_player_2_pressed"]
+[connection signal="pressed" from="player_team/GridContainer/Player_3" to="." method="_on_player_3_pressed"]
+[connection signal="pressed" from="player_team/GridContainer/Player_4" to="." method="_on_player_4_pressed"]
+[connection signal="pressed" from="player_team/GridContainer/Player_5" to="." method="_on_player_5_pressed"]
 [connection signal="pressed" from="battle_menu/VBoxContainer/Attack" to="." method="_on_attack_pressed"]
 [connection signal="pressed" from="battle_menu/VBoxContainer/Item" to="." method="_on_item_pressed"]
 [connection signal="pressed" from="battle_menu/VBoxContainer/Run" to="." method="_on_run_pressed"]
+[connection signal="pressed" from="enemy_team/GridContainer/Enemy_1" to="." method="_on_enemy_1_pressed"]
+[connection signal="pressed" from="enemy_team/GridContainer/Enemy_2" to="." method="_on_enemy_2_pressed"]
+[connection signal="pressed" from="enemy_team/GridContainer/Enemy_3" to="." method="_on_enemy_3_pressed"]
+[connection signal="pressed" from="enemy_team/GridContainer/Enemy_4" to="." method="_on_enemy_4_pressed"]
+[connection signal="pressed" from="enemy_team/GridContainer/Enemy_5" to="." method="_on_enemy_5_pressed"]

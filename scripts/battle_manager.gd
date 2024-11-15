@@ -1,57 +1,64 @@
 extends Node2D
 
-var player_team: Array = []
-var enemy_team: Array = []
 var is_player_turn: bool = true
+var is_selecting_enemy: bool = false
 
 @onready var attack_button: Button = $battle_menu/VBoxContainer/Attack
 @onready var item_button: Button = $battle_menu/VBoxContainer/Item
 @onready var run_button: Button = $battle_menu/VBoxContainer/Run
+@onready var player_team: Array = $player_team/GridContainer.get_children()
+@onready var enemy_team:Array = $enemy_team/GridContainer.get_children()
 
 func _ready():
+	attack_button.disabled = true
+	item_button.disabled = true
+	run_button.disabled = true
 	randomize()
-	player_team = $player_team.get_children()
-	PopUpText.show_popup("loaded player team")
-	await PopUpText.popup_finished
-	enemy_team = $enemy_team.get_children()
-	PopUpText.show_popup("loaded enemy team")
-	await PopUpText.popup_finished
+	# Connect the enemy_selected signal from each enemy
+	for enemy in enemy_team:
+		enemy.connect("enemy_selected",Callable(self, "_on_enemy_selected"))
 	start_battle()
 
 func start_battle():
+	PopUpText.show_popup("Flipping Coin")
+	await PopUpText.popup_finished
 	var coin_toss = randi() % 2
 	is_player_turn = coin_toss == 0
 	if is_player_turn:
-		print("Player's turn")
+		PopUpText.show_popup("Player Goes First!")
+		await PopUpText.popup_finished
 		start_player_turn()
 	else:
-		print("Enemy's turn")
+		PopUpText.show_popup("Enemy Goes First!")
+		await PopUpText.popup_finished
 		start_enemy_turn()
 
 func start_player_turn():
 	# Enable buttons for the player
-	attack_button.disabled = false
-	item_button.disabled = false
-	run_button.disabled = false
-	print("Choose an action!")
+	enable_buttons()
+	PopUpText.show_popup("Choose an action!")
+	await PopUpText.popup_finished
 
 func end_player_turn():
 	is_player_turn = false
-	attack_button.disabled = true
-	item_button.disabled = true
-	run_button.disabled = true
+	disable_buttons()
 	start_enemy_turn()
 
 func start_enemy_turn():
-	print("Enemy's turn...")
+	PopUpText.show_popup("Enemy's turn...")
+	await PopUpText.popup_finished
+
 	await get_tree().create_timer(1.0).timeout
-	#var target = player_team[randi() % player_team.size()]
-	#target.take_damage(10)
-	print("Enemy attacked!")
-	#if target.health <= 0:
-		#check_battle_end()
-	#else:
-	end_enemy_turn()
+	var target = player_team[randi() % player_team.size()]
+	target.take_damage(10)
+	
+	PopUpText.show_popup("Enemy attacked!")
+	await PopUpText.popup_finished
+	
+	if target.health <= 0:
+		check_battle_end()
+	else:
+		end_enemy_turn()
 
 func end_enemy_turn():
 	is_player_turn = true
@@ -65,20 +72,43 @@ func check_battle_end():
 
 func _on_attack_pressed():
 	if is_player_turn:
-		#var target = enemy_team[0]  # Example: attack the first enemy
-		#target.take_damage(15)
-		print("Attacked enemy!")
-		#if target.health <= 0:
-			#enemy_team.erase(target)
-			#target.queue_free()
+		is_selecting_enemy = true
+		PopUpText.show_popup("Click on an enemy to attack")
+		await PopUpText.popup_finished
+
+func _on_enemy_selected(enemy):
+	print("selected", enemy)
+	if is_selecting_enemy:
+		is_selecting_enemy = false
+		var damage_amount = 15
+		enemy.take_damage(damage_amount)
+		PopUpText.show_popup(["Attacked", enemy.name, "for", damage_amount, "damage!"])
+		await PopUpText.popup_finished
+		if enemy.health <= 0:
+			enemy_team.erase(enemy)
+			enemy.queue_free()
 		check_battle_end()
 		end_player_turn()
 
 func _on_item_pressed():
-	print("Item used!")
+	PopUpText.show_popup("Item used!")
+	await PopUpText.popup_finished
 	# Add item logic here
 	end_player_turn()
 
 func _on_run_pressed():
-	print("Trying to run...")
+	PopUpText.show_popup("Trying to run...")
+	await PopUpText.popup_finished
 	# Add run logic here
+	end_player_turn()
+
+func enable_buttons():
+	attack_button.disabled = false
+	item_button.disabled = false
+	run_button.disabled = false
+	
+func disable_buttons():
+	attack_button.disabled = true
+	item_button.disabled = true
+	run_button.disabled = true
+	

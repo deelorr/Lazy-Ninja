@@ -4,16 +4,28 @@ signal popup_finished
 
 var log: Array = []  # To store all messages
 
-@export var display_time: float = 2.0  # Time the popup stays visible
+@export var display_time: float = 1.0  # Time the popup stays visible
 @export var fade_duration: float = 0.5  # Duration of fade-in and fade-out
-@export var move_distance: Vector2 = Vector2(55, -95)  # Movement distance for pop-up effect
+#@export var move_distance: Vector2 = Vector2(55, -95)  # Movement distance for pop-up effect
 
 func _ready():
 	# Initially hide the label
 	visible = false
 	modulate.a = 0.0  # Set opacity to 0
 
-func show_popup(text: String) -> void:
+func show_popup(varargs) -> void:
+	if typeof(varargs) == TYPE_STRING:  # Single string input
+		varargs = [varargs]
+	elif typeof(varargs) != TYPE_ARRAY:  # Ensure it's an array
+		varargs = [str(varargs)]
+	
+	# Concatenate arguments into a single string
+	var text = ""
+	for arg in varargs:
+		text += str(arg) + " "
+	text = text.strip_edges()  # Remove extra spaces at the start or end
+
+	# Existing popup logic
 	self.text = text  # Set the label text
 	visible = true
 	position = Vector2(55, 145)  # Ensure it starts at the correct position
