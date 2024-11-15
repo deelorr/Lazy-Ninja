@@ -124,11 +124,10 @@ layout_mode = 2
 icon = ExtResource("2_oav14")
 
 [node name="PopUpText" parent="." instance=ExtResource("7_63i37")]
-offset_left = 79.0
-offset_top = 146.0
-offset_right = 165.0
-offset_bottom = 169.0
-text = "Hey you"
+offset_left = 55.0
+offset_top = 145.0
+offset_right = 210.0
+offset_bottom = 170.0
 
 [connection signal="pressed" from="battle_menu/VBoxContainer/Attack" to="." method="_on_attack_pressed"]
 [connection signal="pressed" from="battle_menu/VBoxContainer/Item" to="." method="_on_item_pressed"]

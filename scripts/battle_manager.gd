@@ -8,20 +8,14 @@ var is_player_turn: bool = true
 @onready var item_button: Button = $battle_menu/VBoxContainer/Item
 @onready var run_button: Button = $battle_menu/VBoxContainer/Run
 
-
-# Example in any script
-#func some_function():
-	#PopUpText.show_pop_up("What up bitch")
-
 func _ready():
 	randomize()
 	player_team = $player_team.get_children()
-	print("loaded player team")
+	PopUpText.show_popup("loaded player team")
+	await PopUpText.popup_finished
 	enemy_team = $enemy_team.get_children()
-	print("loaded enemy team")
-	#some_function()
-	PopUpText.show_popup("Hey there!")
-
+	PopUpText.show_popup("loaded enemy team")
+	await PopUpText.popup_finished
 	start_battle()
 
 func start_battle():
