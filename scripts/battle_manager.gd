@@ -4,9 +4,14 @@ var player_team: Array = []
 var enemy_team: Array = []
 var is_player_turn: bool = true
 
-@onready var attack_button: Button = $CanvasLayer/battle_menu/VBoxContainer/Attack
-@onready var item_button: Button = $CanvasLayer/battle_menu/VBoxContainer/Item
-@onready var run_button: Button = $CanvasLayer/battle_menu/VBoxContainer/Run
+@onready var attack_button: Button = $battle_menu/VBoxContainer/Attack
+@onready var item_button: Button = $battle_menu/VBoxContainer/Item
+@onready var run_button: Button = $battle_menu/VBoxContainer/Run
+
+
+# Example in any script
+#func some_function():
+	#PopUpText.show_pop_up("What up bitch")
 
 func _ready():
 	randomize()
@@ -14,6 +19,9 @@ func _ready():
 	print("loaded player team")
 	enemy_team = $enemy_team.get_children()
 	print("loaded enemy team")
+	#some_function()
+	PopUpText.show_popup("Hey there!")
+
 	start_battle()
 
 func start_battle():
@@ -43,13 +51,13 @@ func end_player_turn():
 func start_enemy_turn():
 	print("Enemy's turn...")
 	await get_tree().create_timer(1.0).timeout
-	var target = player_team[randi() % player_team.size()]
-	target.take_damage(10)
+	#var target = player_team[randi() % player_team.size()]
+	#target.take_damage(10)
 	print("Enemy attacked!")
-	if target.health <= 0:
-		check_battle_end()
-	else:
-		end_enemy_turn()
+	#if target.health <= 0:
+		#check_battle_end()
+	#else:
+	end_enemy_turn()
 
 func end_enemy_turn():
 	is_player_turn = true
@@ -63,13 +71,13 @@ func check_battle_end():
 
 func _on_attack_pressed():
 	if is_player_turn:
-		var target = enemy_team[0]  # Example: attack the first enemy
-		target.take_damage(15)
+		#var target = enemy_team[0]  # Example: attack the first enemy
+		#target.take_damage(15)
 		print("Attacked enemy!")
-		if target.health <= 0:
-			enemy_team.erase(target)
-			target.queue_free()
-			check_battle_end()
+		#if target.health <= 0:
+			#enemy_team.erase(target)
+			#target.queue_free()
+		check_battle_end()
 		end_player_turn()
 
 func _on_item_pressed():
