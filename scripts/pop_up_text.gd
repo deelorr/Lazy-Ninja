@@ -40,4 +40,4 @@ func show_popup(varargs) -> void:
 	await tween.finished
 
 	visible = false  # Hide the label after fading out
-	emit_signal("popup_finished")
+	popup_finished.emit()

@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://3eqc08h0iue7"]
+[gd_scene load_steps=16 format=3 uid="uid://3eqc08h0iue7"]
 
 [ext_resource type="Texture2D" uid="uid://dmk7pat2vxge0" path="res://art/characters/enemies/green_slime_sprites.png" id="1_lcs5v"]
 [ext_resource type="Script" path="res://scripts/characters/enemies/slime.gd" id="1_r3w0l"]
 [ext_resource type="Texture2D" uid="uid://cjjwa6vwoi6i5" path="res://art/effects/smoke.png" id="3_cwgt1"]
+[ext_resource type="PackedScene" uid="uid://blt4seqeee2mk" path="res://scenes/maps/scene_trigger.tscn" id="4_jy4hh"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lai3o"]
 radius = 4.0
@@ -322,6 +323,9 @@ height = 16.0
 radius = 7.0
 height = 20.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_u4dcs"]
+radius = 18.0
+
 [node name="Slime" type="CharacterBody2D" groups=["slime"]]
 z_index = 1
 collision_layer = 2
@@ -372,6 +376,15 @@ shape = SubResource("CapsuleShape2D_tg31k")
 [node name="direction_timer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
+
+[node name="SceneTrigger" parent="." instance=ExtResource("4_jy4hh")]
+position = Vector2(-50, 143.5)
+connected_scene = "battle_scene"
+connected_marker = "exit_house"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SceneTrigger"]
+position = Vector2(50, -150.5)
+shape = SubResource("CircleShape2D_u4dcs")
 
 [connection signal="area_entered" from="hurt_box" to="." method="_on_hurt_box_area_entered"]
 [connection signal="timeout" from="direction_timer" to="." method="_on_direction_timer_timeout"]

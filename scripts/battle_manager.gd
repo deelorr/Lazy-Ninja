@@ -1,4 +1,4 @@
-extends Node2D
+extends BaseScene
 
 var is_player_turn: bool = true
 var is_selecting_enemy: bool = false
@@ -11,15 +11,16 @@ var is_selecting_enemy: bool = false
 
 func _ready():
 	randomize()
+	player_team[0] = player
 	connect_signals()
 	disable_buttons()
 	start_battle()
 
 func connect_signals():
-	for player in player_team: #connect the player_selected signal from each player
-		player.connect("player_selected",Callable(self, "_on_player_selected"))
-	for enemy in enemy_team: #connect the enemy_selected signal from each enemy
-		enemy.connect("enemy_selected",Callable(self, "_on_enemy_selected"))
+	for p in player_team: #connect the player_selected signal from each player
+		p.connect("player_selected",Callable(self, "_on_player_selected"))
+	for e in enemy_team: #connect the enemy_selected signal from each enemy
+		e.connect("enemy_selected",Callable(self, "_on_enemy_selected"))
 
 func start_battle():
 	PopUpText.show_popup("Flipping Coin...")
@@ -41,6 +42,7 @@ func start_battle():
 
 func start_player_turn():
 	enable_buttons()
+	SceneManager.get_current_scenes()
 	PopUpText.show_popup("Choose an action!")
 	await PopUpText.popup_finished
 
@@ -51,11 +53,12 @@ func _on_attack_pressed():
 		await PopUpText.popup_finished
 
 func _on_enemy_selected(enemy):
-	print("selected", enemy)
 	if is_selecting_enemy:
 		is_selecting_enemy = false
 		var damage_amount = 15
-		enemy.take_damage(damage_amount)
+		enemy.take_damage(damage_amount)  # Ensure this handles death
+		if enemy.current_health <= 0:
+			enemy.die()  # Call a method to handle removal
 		PopUpText.show_popup(["Attacked", enemy.name, "for", damage_amount, "damage!"])
 		await PopUpText.popup_finished
 		clean_up_teams()
@@ -82,17 +85,14 @@ func end_player_turn():
 func start_enemy_turn():
 	PopUpText.show_popup("Enemy's turn...")
 	await PopUpText.popup_finished
-	# Decide on the target
 	var target = select_enemy_target()
-	print("selected", target)
-
 	if target == null:
 		check_battle_end()
 		return
-	# Example: Perform a normal attack
-	var damage = 10  # AI's base attack damage
-	target.take_damage(damage)
-	# Display feedback
+	var damage = 10
+	target.current_health -= damage
+	if target.current_health <= 0:
+		target.die()  # Handle player removal
 	PopUpText.show_popup(["Enemy attacked", target.name, "for", damage, "damage!"])
 	await PopUpText.popup_finished
 	clean_up_teams()
@@ -109,11 +109,11 @@ func select_enemy_target():
 
 	# Now proceed to select the target
 	var target = player_team[0]
-	var min_health = target.health
-	for player in player_team:
-		if player.health < min_health:
+	var min_health = target.current_health
+	for p in player_team:
+		if p.current_health < min_health:
 			target = player
-			min_health = player.health
+			min_health = player.current_health
 	return target
 
 func end_enemy_turn():
@@ -125,11 +125,13 @@ func check_battle_end():
 	if enemy_team.size() == 0:
 		PopUpText.show_popup("Player wins!")
 		await PopUpText.popup_finished
+		SceneManager.change_scene(self, SceneManager.last_scene_name, SceneManager.player_pos)
 		#get_tree().quit()
 		
 	elif player_team.size() == 0:
 		PopUpText.show_popup("Enemy wins!")
 		await PopUpText.popup_finished
+		SceneManager.change_scene(self, SceneManager.last_scene_name, SceneManager.player)
 		#get_tree().quit()
 
 func enable_buttons():

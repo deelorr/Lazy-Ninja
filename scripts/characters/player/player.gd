@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name Player
 
+signal player_selected(player_node)
+
 @export var max_health: int = 3
 @export var speed: int = 35
 @export var knockback_power: int = 500
@@ -22,7 +24,7 @@ var is_attacking: bool = false
 var is_jumping: bool = false
 var gold: int = 50
 var current_xp: int = 0
-var current_level: int = 1 
+var current_level: int = 1
 var xp_for_next_level: int = 100
 
 func _ready():
@@ -109,18 +111,18 @@ func update_animation():
 		if animations.is_playing():
 			animations.stop()
 	elif Input.is_action_just_pressed("jump"):
-			is_jumping = true
-			if last_anim_direction == "left":
-				animations.play("jump_left")
-			elif last_anim_direction == "right":
-				animations.play("jump_right")
-			elif last_anim_direction == "up":
-				animations.play("jump_up")
-			else:
-				animations.play("jump_down")
-			await animations.animation_finished
-			is_jumping = false
-			return
+		is_jumping = true
+		if last_anim_direction == "left":
+			animations.play("jump_left")
+		elif last_anim_direction == "right":
+			animations.play("jump_right")
+		elif last_anim_direction == "up":
+			animations.play("jump_up")
+		else:
+			animations.play("jump_down")
+		await animations.animation_finished
+		is_jumping = false
+		return
 	else:
 		var direction = "down"
 		if velocity.x < 0:
@@ -180,3 +182,10 @@ func add_xp(amount: int):
 	current_xp += amount
 	print("Added XP: ", amount , " Total XP: " , current_xp, "/", xp_for_next_level)
 	check_level_up()
+
+func die():
+	#if self in player_team:
+		#player_team.erase(self)
+	#elif self in enemy_team:
+		#enemy_team.erase(self)
+	queue_free()  # Free the object after removal

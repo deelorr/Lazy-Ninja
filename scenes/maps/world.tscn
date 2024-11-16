@@ -2994,7 +2994,7 @@ size = Vector2(14, 9)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_38moa"]
 size = Vector2(16, 24)
 
-[node name="World" type="Node2D"]
+[node name="world" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_uu85d")
 
