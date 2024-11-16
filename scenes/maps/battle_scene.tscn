@@ -28,22 +28,27 @@ columns = 2
 [node name="Player_1" parent="player_team/GridContainer" instance=ExtResource("1_y6jkw")]
 layout_mode = 2
 icon = ExtResource("2_dlawu")
+is_enemy = false
 
 [node name="Player_2" parent="player_team/GridContainer" instance=ExtResource("1_y6jkw")]
 layout_mode = 2
 icon = ExtResource("2_dlawu")
+is_enemy = false
 
 [node name="Player_3" parent="player_team/GridContainer" instance=ExtResource("1_y6jkw")]
 layout_mode = 2
 icon = ExtResource("2_dlawu")
+is_enemy = false
 
 [node name="Player_4" parent="player_team/GridContainer" instance=ExtResource("1_y6jkw")]
 layout_mode = 2
 icon = ExtResource("2_dlawu")
+is_enemy = false
 
 [node name="Player_5" parent="player_team/GridContainer" instance=ExtResource("1_y6jkw")]
 layout_mode = 2
 icon = ExtResource("2_dlawu")
+is_enemy = false
 
 [node name="battle_menu" type="Control" parent="."]
 layout_mode = 3
@@ -123,16 +128,6 @@ offset_bottom = 170.0
 text = "Pop Up Bar"
 horizontal_alignment = 1
 
-[connection signal="pressed" from="player_team/GridContainer/Player_1" to="." method="_on_player_1_pressed"]
-[connection signal="pressed" from="player_team/GridContainer/Player_2" to="." method="_on_player_2_pressed"]
-[connection signal="pressed" from="player_team/GridContainer/Player_3" to="." method="_on_player_3_pressed"]
-[connection signal="pressed" from="player_team/GridContainer/Player_4" to="." method="_on_player_4_pressed"]
-[connection signal="pressed" from="player_team/GridContainer/Player_5" to="." method="_on_player_5_pressed"]
 [connection signal="pressed" from="battle_menu/VBoxContainer/Attack" to="." method="_on_attack_pressed"]
 [connection signal="pressed" from="battle_menu/VBoxContainer/Item" to="." method="_on_item_pressed"]
 [connection signal="pressed" from="battle_menu/VBoxContainer/Run" to="." method="_on_run_pressed"]
-[connection signal="pressed" from="enemy_team/GridContainer/Enemy_1" to="." method="_on_enemy_1_pressed"]
-[connection signal="pressed" from="enemy_team/GridContainer/Enemy_2" to="." method="_on_enemy_2_pressed"]
-[connection signal="pressed" from="enemy_team/GridContainer/Enemy_3" to="." method="_on_enemy_3_pressed"]
-[connection signal="pressed" from="enemy_team/GridContainer/Enemy_4" to="." method="_on_enemy_4_pressed"]
-[connection signal="pressed" from="enemy_team/GridContainer/Enemy_5" to="." method="_on_enemy_5_pressed"]
