@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmwx05dbc4l0d"]
+
+[ext_resource type="Texture2D" uid="uid://najt8l70oxnb" path="res://art/characters/player/player_face.png" id="1_ne6xk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ix8s4"]
+size = Vector2(48, 48)
+
+[node name="Area2D" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(24, 24)
+shape = SubResource("RectangleShape2D_ix8s4")
+
+[node name="Button" type="Button" parent="."]
+offset_right = 48.0
+offset_bottom = 48.0
+icon = ExtResource("1_ne6xk")
+expand_icon = true
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_top = 48.0
+offset_right = 96.0
+offset_bottom = 80.0
+scale = Vector2(0.5, 0.5)

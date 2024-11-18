@@ -9,7 +9,7 @@ func _init() -> void:
 	if player == null:
 		player = preload("res://scenes/characters/player.tscn").instantiate()
 		player.position = Vector2(150,50)
-	current_scene_name = "inside_house"
+		current_scene_name = "inside_house"
 
 func change_scene(from_scene, to_scene, connected_marker):
 	last_scene_name = from_scene.name

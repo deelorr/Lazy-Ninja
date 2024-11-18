@@ -25,27 +25,7 @@ theme_override_constants/h_separation = 12
 theme_override_constants/v_separation = 10
 columns = 2
 
-[node name="Player_1" parent="player_team/GridContainer" instance=ExtResource("1_y6jkw")]
-layout_mode = 2
-icon = ExtResource("2_dlawu")
-is_enemy = false
-
-[node name="Player_2" parent="player_team/GridContainer" instance=ExtResource("1_y6jkw")]
-layout_mode = 2
-icon = ExtResource("2_dlawu")
-is_enemy = false
-
-[node name="Player_3" parent="player_team/GridContainer" instance=ExtResource("1_y6jkw")]
-layout_mode = 2
-icon = ExtResource("2_dlawu")
-is_enemy = false
-
-[node name="Player_4" parent="player_team/GridContainer" instance=ExtResource("1_y6jkw")]
-layout_mode = 2
-icon = ExtResource("2_dlawu")
-is_enemy = false
-
-[node name="Player_5" parent="player_team/GridContainer" instance=ExtResource("1_y6jkw")]
+[node name="Player" parent="player_team/GridContainer" instance=ExtResource("1_y6jkw")]
 layout_mode = 2
 icon = ExtResource("2_dlawu")
 is_enemy = false

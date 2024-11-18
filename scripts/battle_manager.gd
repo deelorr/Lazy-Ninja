@@ -6,12 +6,12 @@ var is_selecting_enemy: bool = false
 @onready var attack_button: Button = $battle_menu/VBoxContainer/Attack
 @onready var item_button: Button = $battle_menu/VBoxContainer/Item
 @onready var run_button: Button = $battle_menu/VBoxContainer/Run
-@onready var player_team: Array = $player_team/GridContainer.get_children()
+@onready var player_team: Array[CharacterBody2D] = [] #$player_team/GridContainer.get_children()
 @onready var enemy_team: Array = $enemy_team/GridContainer.get_children()
 
 func _ready():
 	randomize()
-	player_team[0] = player
+	player_team.append(player)
 	connect_signals()
 	disable_buttons()
 	start_battle()
