@@ -1,13 +1,13 @@
 extends BaseScene
 
-var is_player_turn: bool = true
-var is_selecting_enemy: bool = false
-
 @onready var attack_button: Button = $battle_menu/VBoxContainer/Attack
 @onready var item_button: Button = $battle_menu/VBoxContainer/Item
 @onready var run_button: Button = $battle_menu/VBoxContainer/Run
-@onready var player_team: Array[CharacterBody2D] = [] #$player_team/GridContainer.get_children()
-@onready var enemy_team: Array = $enemy_team/GridContainer.get_children()
+
+var is_player_turn: bool = true
+var is_selecting_enemy: bool = false
+var player_team: Array= $player_team/GridContainer.get_children()
+var enemy_team: Array = $enemy_team/GridContainer.get_children()
 
 func _ready():
 	randomize()
@@ -126,13 +126,11 @@ func check_battle_end():
 		PopUpText.show_popup("Player wins!")
 		await PopUpText.popup_finished
 		SceneManager.change_scene(self, SceneManager.last_scene_name, SceneManager.player_pos)
-		#get_tree().quit()
-		
+
 	elif player_team.size() == 0:
 		PopUpText.show_popup("Enemy wins!")
 		await PopUpText.popup_finished
 		SceneManager.change_scene(self, SceneManager.last_scene_name, SceneManager.player)
-		#get_tree().quit()
 
 func enable_buttons():
 	attack_button.disabled = false

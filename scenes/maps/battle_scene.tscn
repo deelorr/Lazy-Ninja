@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://xl26l7hf0gov"]
 
-[ext_resource type="Script" path="res://scripts/battle_manager.gd" id="1_viphm"]
+[ext_resource type="Script" path="res://scripts/battle_scene.gd" id="1_viphm"]
 [ext_resource type="PackedScene" uid="uid://cfavffqss21j7" path="res://scenes/characters/generic_character.tscn" id="1_y6jkw"]
 [ext_resource type="Texture2D" uid="uid://najt8l70oxnb" path="res://art/characters/player/player_face.png" id="2_dlawu"]
 [ext_resource type="Texture2D" uid="uid://b58rre26m8irs" path="res://art/characters/enemies/green_slime_face.png" id="2_oav14"]
