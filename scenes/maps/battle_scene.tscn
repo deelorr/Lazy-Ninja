@@ -1,9 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://xl26l7hf0gov"]
+[gd_scene load_steps=4 format=3 uid="uid://xl26l7hf0gov"]
 
 [ext_resource type="Script" path="res://scripts/battle_scene.gd" id="1_viphm"]
 [ext_resource type="PackedScene" uid="uid://cfavffqss21j7" path="res://scenes/characters/generic_character.tscn" id="1_y6jkw"]
-[ext_resource type="Texture2D" uid="uid://najt8l70oxnb" path="res://art/characters/player/player_face.png" id="2_dlawu"]
-[ext_resource type="Texture2D" uid="uid://b58rre26m8irs" path="res://art/characters/enemies/green_slime_face.png" id="2_oav14"]
 [ext_resource type="PackedScene" uid="uid://c5phbysi2r2uj" path="res://scenes/gui/pop_up_text.tscn" id="7_63i37"]
 
 [node name="battle_scene" type="Node2D"]
@@ -26,8 +24,6 @@ theme_override_constants/v_separation = 10
 columns = 2
 
 [node name="Player" parent="player_team/GridContainer" instance=ExtResource("1_y6jkw")]
-layout_mode = 2
-icon = ExtResource("2_dlawu")
 is_enemy = false
 
 [node name="battle_menu" type="Control" parent="."]
@@ -82,23 +78,18 @@ theme_override_constants/v_separation = 10
 columns = 2
 
 [node name="Enemy_1" parent="enemy_team/GridContainer" instance=ExtResource("1_y6jkw")]
-layout_mode = 2
-icon = ExtResource("2_oav14")
 
 [node name="Enemy_2" parent="enemy_team/GridContainer" instance=ExtResource("1_y6jkw")]
-layout_mode = 2
-icon = ExtResource("2_oav14")
+position = Vector2(52, 0)
 
 [node name="Enemy_3" parent="enemy_team/GridContainer" instance=ExtResource("1_y6jkw")]
-layout_mode = 2
-icon = ExtResource("2_oav14")
+position = Vector2(0, 51)
 
 [node name="Enemy_4" parent="enemy_team/GridContainer" instance=ExtResource("1_y6jkw")]
-layout_mode = 2
-icon = ExtResource("2_oav14")
+position = Vector2(52, 51)
 
 [node name="Enemy_5" parent="enemy_team/GridContainer" instance=ExtResource("1_y6jkw")]
-layout_mode = 2
+position = Vector2(0, 102)
 
 [node name="PopUpText" parent="." instance=ExtResource("7_63i37")]
 offset_left = 55.0

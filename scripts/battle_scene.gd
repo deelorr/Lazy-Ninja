@@ -6,8 +6,9 @@ extends BaseScene
 
 var is_player_turn: bool = true
 var is_selecting_enemy: bool = false
-var player_team: Array= $player_team/GridContainer.get_children()
-var enemy_team: Array = $enemy_team/GridContainer.get_children()
+
+@onready var player_team: Array= $player_team/GridContainer.get_children()
+@onready var enemy_team: Array = $enemy_team/GridContainer.get_children()
 
 func _ready():
 	randomize()
