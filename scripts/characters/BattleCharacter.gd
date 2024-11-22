@@ -31,12 +31,13 @@ func take_damage(amount: int):
 		die()
 
 func die():
-	#if self in player_team:
-		#player_team.erase(self)
-	#elif self in enemy_team:
-		#enemy_team.erase(self)
-	queue_free()  # Free the object after removal
+	if self in Global.player_team:
+		Global.player_team.erase(self)
+	elif self in Global.enemy_team:
+		Global.enemy_team.erase(self)
+	queue_free()
 	
 func update_health():
 	$ProgressBar.max_value = max_health
 	$ProgressBar.value = current_health
+	$ProgressBar/Label.text = str(current_health) + "/" + str(max_health)

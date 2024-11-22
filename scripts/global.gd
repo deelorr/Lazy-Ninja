@@ -2,6 +2,9 @@ extends Node
 
 signal enemy_killed(enemy_type)
 
+var player_team: Array
+var enemy_team: Array
+
 var slime_count: int = 0
 var max_slimes: int = 10
 
