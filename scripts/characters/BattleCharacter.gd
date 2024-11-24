@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends Button
 class_name BattleCharacter
 
 signal enemy_selected(enemy_node)
@@ -12,7 +12,7 @@ var damage: int = 10
 
 func _ready():
 	current_health = max_health
-	$Button.pressed.connect(Callable(self, "_on_pressed"))
+	pressed.connect(Callable(self, "_on_pressed"))
 	
 func _process(delta):
 	update_health()

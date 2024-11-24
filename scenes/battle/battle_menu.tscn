@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bylqb04nexnr4"]
+
+[node name="battle_menu" type="VBoxContainer"]
+custom_minimum_size = Vector2(86, 180)
+alignment = 1
+
+[node name="Attack" type="Button" parent="."]
+layout_mode = 2
+text = "Attack"
+
+[node name="Item" type="Button" parent="."]
+layout_mode = 2
+text = "Use Item"
+
+[node name="Run" type="Button" parent="."]
+layout_mode = 2
+text = "Run!"

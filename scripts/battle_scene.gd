@@ -1,14 +1,14 @@
 extends BaseScene
 
-@onready var attack_button: Button = $battle_menu/VBoxContainer/Attack
-@onready var item_button: Button = $battle_menu/VBoxContainer/Item
-@onready var run_button: Button = $battle_menu/VBoxContainer/Run
+@onready var attack_button: Button = $battle_menu/Attack
+@onready var item_button: Button = $battle_menu/Item
+@onready var run_button: Button = $battle_menu/Run
 
 var is_player_turn: bool = true
 var is_selecting_enemy: bool = false
 
-@onready var player_team: Array= $player_team/GridContainer.get_children()
-@onready var enemy_team: Array = $enemy_team/GridContainer.get_children()
+@onready var player_team: Array= $player_team.get_children()
+@onready var enemy_team: Array = $enemy_team.get_children()
 
 func _ready():
 	randomize()

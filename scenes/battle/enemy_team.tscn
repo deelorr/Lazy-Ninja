@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2qikj2ha7rj7"]
+
+[ext_resource type="PackedScene" uid="uid://cfavffqss21j7" path="res://scenes/characters/generic_character.tscn" id="1_lf3gx"]
+
+[node name="enemy_team" type="GridContainer"]
+custom_minimum_size = Vector2(100, 180)
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 17
+columns = 2
+
+[node name="Enemy" parent="." instance=ExtResource("1_lf3gx")]
+layout_mode = 2
+
+[node name="Enemy_2" parent="." instance=ExtResource("1_lf3gx")]
+layout_mode = 2
+
+[node name="Enemy_3" parent="." instance=ExtResource("1_lf3gx")]
+layout_mode = 2
+
+[node name="Enemy_4" parent="." instance=ExtResource("1_lf3gx")]
+layout_mode = 2
+
+[node name="Enemy_5" parent="." instance=ExtResource("1_lf3gx")]
+layout_mode = 2
+
+[node name="Enemy_6" parent="." instance=ExtResource("1_lf3gx")]
+layout_mode = 2

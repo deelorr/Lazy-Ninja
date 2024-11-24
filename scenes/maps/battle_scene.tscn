@@ -1,104 +1,30 @@
-[gd_scene load_steps=4 format=3 uid="uid://xl26l7hf0gov"]
+[gd_scene load_steps=5 format=3 uid="uid://xl26l7hf0gov"]
 
 [ext_resource type="Script" path="res://scripts/battle_scene.gd" id="1_viphm"]
-[ext_resource type="PackedScene" uid="uid://cfavffqss21j7" path="res://scenes/characters/generic_character.tscn" id="1_y6jkw"]
-[ext_resource type="PackedScene" uid="uid://c5phbysi2r2uj" path="res://scenes/gui/pop_up_text.tscn" id="7_63i37"]
+[ext_resource type="PackedScene" uid="uid://ctr8kfyymhvpv" path="res://scenes/battle/player_team.tscn" id="2_633wl"]
+[ext_resource type="PackedScene" uid="uid://bylqb04nexnr4" path="res://scenes/battle/battle_menu.tscn" id="3_7v6e0"]
+[ext_resource type="PackedScene" uid="uid://b2qikj2ha7rj7" path="res://scenes/battle/enemy_team.tscn" id="4_86wlw"]
 
-[node name="battle_scene" type="Node2D"]
+[node name="HBoxContainer" type="HBoxContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -90.0
+offset_right = 160.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 13
 script = ExtResource("1_viphm")
 
-[node name="player_team" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 3.0
-offset_top = 3.0
-offset_right = 107.0
-offset_bottom = 179.0
-
-[node name="GridContainer" type="GridContainer" parent="player_team"]
-layout_mode = 0
-offset_right = 104.0
-offset_bottom = 158.0
-theme_override_constants/h_separation = 12
-theme_override_constants/v_separation = 10
-columns = 2
-
-[node name="Player" parent="player_team/GridContainer" instance=ExtResource("1_y6jkw")]
-is_enemy = false
-
-[node name="battle_menu" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 48.0
-offset_top = 128.0
-offset_right = 48.0
-offset_bottom = 128.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="battle_menu"]
-layout_mode = 1
-offset_left = 72.0
-offset_top = -128.0
-offset_right = 152.0
-offset_bottom = 32.0
-theme_override_constants/separation = 10
-alignment = 1
-
-[node name="Attack" type="Button" parent="battle_menu/VBoxContainer"]
+[node name="player_team" parent="." instance=ExtResource("2_633wl")]
 layout_mode = 2
-text = "Attack"
 
-[node name="Item" type="Button" parent="battle_menu/VBoxContainer"]
+[node name="battle_menu" parent="." instance=ExtResource("3_7v6e0")]
 layout_mode = 2
-text = "Use Item"
 
-[node name="Run" type="Button" parent="battle_menu/VBoxContainer"]
+[node name="enemy_team" parent="." instance=ExtResource("4_86wlw")]
 layout_mode = 2
-text = "Run!"
-
-[node name="enemy_team" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 215.0
-offset_top = 3.0
-offset_right = 319.0
-offset_bottom = 163.0
-
-[node name="GridContainer" type="GridContainer" parent="enemy_team"]
-layout_mode = 1
-offset_right = 102.0
-offset_bottom = 158.0
-theme_override_constants/h_separation = 10
-theme_override_constants/v_separation = 10
-columns = 2
-
-[node name="Enemy_1" parent="enemy_team/GridContainer" instance=ExtResource("1_y6jkw")]
-
-[node name="Enemy_2" parent="enemy_team/GridContainer" instance=ExtResource("1_y6jkw")]
-position = Vector2(52, 0)
-
-[node name="Enemy_3" parent="enemy_team/GridContainer" instance=ExtResource("1_y6jkw")]
-position = Vector2(0, 51)
-
-[node name="Enemy_4" parent="enemy_team/GridContainer" instance=ExtResource("1_y6jkw")]
-position = Vector2(52, 51)
-
-[node name="Enemy_5" parent="enemy_team/GridContainer" instance=ExtResource("1_y6jkw")]
-position = Vector2(0, 102)
-
-[node name="PopUpText" parent="." instance=ExtResource("7_63i37")]
-offset_left = 55.0
-offset_top = 145.0
-offset_right = 210.0
-offset_bottom = 170.0
-text = "Pop Up Bar"
-horizontal_alignment = 1
-
-[connection signal="pressed" from="battle_menu/VBoxContainer/Attack" to="." method="_on_attack_pressed"]
-[connection signal="pressed" from="battle_menu/VBoxContainer/Item" to="." method="_on_item_pressed"]
-[connection signal="pressed" from="battle_menu/VBoxContainer/Run" to="." method="_on_run_pressed"]

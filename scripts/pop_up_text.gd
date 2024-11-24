@@ -23,7 +23,7 @@ func show_popup(varargs) -> void:
 	# Existing popup logic
 	self.text = text  # Set the label text
 	visible = true
-	position = Vector2(55, 145)  # Ensure it starts at the correct position
+	position = self.position  # Ensure it starts at the correct position
 	modulate.a = 0.0  # Reset opacity to fully transparent
 
 	# Fade-in animation
