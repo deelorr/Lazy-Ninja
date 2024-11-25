@@ -19,11 +19,11 @@ func _process(delta):
 
 func initialize_stats():
 	if is_enemy:
-		max_health = randf_range(30, 60)
-		damage = randf_range(5, 15)
+		max_health = int(randf_range(30, 60))
+		damage = int(randf_range(5, 15))
 	else:
-		max_health = randf_range(50, 100)
-		damage = randf_range(10, 20)
+		max_health = int(randf_range(50, 100))
+		damage = int(randf_range(10, 20))
 	current_health = max_health
 	
 func initialize_hero_stats():

@@ -7,7 +7,9 @@ extends BaseScene
 var is_player_turn: bool = false
 var is_selecting_enemy: bool = false
 var player_team: Array[BattleCharacter]
+var current_player_index: int = 0
 var enemy_team: Array[BattleCharacter]
+var current_enemy_index: int = 0
 var BattleCharacterScene = preload("res://scenes/characters/BattleCharacter.tscn")
 
 func _ready():
@@ -60,42 +62,61 @@ func start_battle():
 		start_enemy_turn()
 
 func start_player_turn():
+	is_player_turn = true
+	current_player_index = 0
 	BattleMenu.enable_buttons()
-	PopUpText.show_popup("Choose an action!")
-	await PopUpText.popup_finished
+	prompt_player_action()
+	
+func prompt_player_action():
+	# Skip any invalid (dead) players
+	while current_player_index < player_team.size() and not is_instance_valid(player_team[current_player_index]):
+		current_player_index += 1
+
+	if current_player_index < player_team.size():
+		var current_player = player_team[current_player_index]
+		PopUpText.show_popup("Choose an action for " + current_player.name)
+		await PopUpText.popup_finished
+	else:
+		end_player_turn()
 
 func _on_attack_pressed():
 	if is_player_turn:
 		is_selecting_enemy = true
-		PopUpText.show_popup("Click on an enemy to attack")
+		var current_player = player_team[current_player_index]
+		PopUpText.show_popup("Click on an enemy to attack with " + current_player.name)
 		await PopUpText.popup_finished
-		
+
 func _on_item_pressed():
 	if is_player_turn:
-		PopUpText.show_popup("Item used!")
+		var current_player = player_team[current_player_index]
+		PopUpText.show_popup(current_player.name + " used an item!")
 		await PopUpText.popup_finished
-		end_player_turn()
+		# Implement item logic here
+		current_player_index += 1
+		prompt_player_action()
+
 
 func _on_run_pressed():
 	if is_player_turn:
-		PopUpText.show_popup("Trying to run...")
+		var current_player = player_team[current_player_index]
+		PopUpText.show_popup(current_player.name + " is trying to run...")
 		await PopUpText.popup_finished
-		end_player_turn()
+		# Implement run logic here
+		current_player_index += 1
+		prompt_player_action()
 
 func _on_enemy_selected(enemy):
-	print(enemy.name, " selected!")
 	if is_selecting_enemy:
 		is_selecting_enemy = false
-		var damage_amount = 15
-		enemy.take_damage(damage_amount)  # Ensure this handles death
-		if enemy.current_health <= 0:
-			enemy.die()  # Call a method to handle removal
-		PopUpText.show_popup(["Attacked", enemy.name, "for", damage_amount, "damage!"])
+		var current_player = player_team[current_player_index]
+		enemy.take_damage(current_player.damage)
+		PopUpText.show_popup([current_player.name, " attacked ", enemy.name, " for ", str(current_player.damage), " damage!"])
 		await PopUpText.popup_finished
 		clean_up_teams()
 		check_battle_end()
-		end_player_turn()
-#
+		current_player_index += 1
+		prompt_player_action()
+
 func _on_player_selected(player):
 	print(player.name, " selected!")
 
@@ -105,38 +126,40 @@ func end_player_turn():
 	start_enemy_turn()
 
 func start_enemy_turn():
-	PopUpText.show_popup("Enemy's turn...")
-	await PopUpText.popup_finished
-	var target = select_enemy_target()
-	if target == null:
+	is_player_turn = false
+	current_enemy_index = 0
+	process_enemy_action()
+
+func process_enemy_action():
+	# Skip any invalid (dead) enemies
+	while current_enemy_index < enemy_team.size() and not is_instance_valid(enemy_team[current_enemy_index]):
+		current_enemy_index += 1
+
+	if current_enemy_index < enemy_team.size():
+		var current_enemy = enemy_team[current_enemy_index]
+		PopUpText.show_popup("Enemy's turn: " + current_enemy.name)
+		await PopUpText.popup_finished
+		var target = select_enemy_target()
+		if target == null:
+			check_battle_end()
+			return
+		var damage = current_enemy.damage
+		target.take_damage(damage)
+		PopUpText.show_popup([current_enemy.name, " attacked ", target.name, " for ", str(damage), " damage!"])
+		await PopUpText.popup_finished
+		clean_up_teams()
 		check_battle_end()
-		return
-	var damage = 10
-	target.current_health -= damage
-	if target.current_health <= 0:
-		target.die()  # Handle player removal
-	PopUpText.show_popup(["Enemy attacked", target.name, "for", damage, "damage!"])
-	await PopUpText.popup_finished
-	clean_up_teams()
-	check_battle_end()
-	end_enemy_turn()
+		current_enemy_index += 1
+		process_enemy_action()
+	else:
+		end_enemy_turn()
 
 func select_enemy_target():
-	# Clean up player_team
 	player_team = player_team.filter(func(player):
 		return is_instance_valid(player))
-
 	if player_team.is_empty():
-		return null  # No valid players left
-
-	# Now proceed to select the target
-	var target = player_team[0]
-	var min_health = target.current_health
-	for p in player_team:
-		if p.current_health < min_health:
-			target = p
-			min_health = p.current_health
-	return target
+		return null
+	return player_team[randi() % player_team.size()]
 
 func end_enemy_turn():
 	is_player_turn = true
@@ -147,12 +170,14 @@ func check_battle_end():
 	if enemy_team.size() == 0:
 		PopUpText.show_popup("Player wins!")
 		await PopUpText.popup_finished
-		SceneManager.change_scene(self, SceneManager.last_scene_name, SceneManager.player_pos)
+		#need to get back to world after
+		#SceneManager.change_scene(self, SceneManager.last_scene_name, SceneManager.player_pos)
 
 	elif player_team.size() == 0:
 		PopUpText.show_popup("Enemy wins!")
 		await PopUpText.popup_finished
-		SceneManager.change_scene(self, SceneManager.last_scene_name, SceneManager.player_pos)
+		#need to get back to world after
+		#SceneManager.change_scene(self, SceneManager.last_scene_name, SceneManager.player_pos)
 
 func clean_up_teams():
 	player_team = player_team.filter(func(player):
