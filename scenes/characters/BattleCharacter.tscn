@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://cfavffqss21j7"]
 
-[ext_resource type="Script" path="res://scripts/characters/BattleCharacter.gd" id="1_i05cx"]
-[ext_resource type="Texture2D" uid="uid://najt8l70oxnb" path="res://art/characters/player/player_face.png" id="2_8rk7h"]
+[ext_resource type="Texture2D" uid="uid://najt8l70oxnb" path="res://art/characters/player/player_face.png" id="1_804oq"]
+[ext_resource type="Script" path="res://scripts/characters/BattleCharacter.gd" id="2_ydrks"]
 
-[node name="Button" type="Button"]
+[node name="BattleCharacter" type="Button"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -15,20 +15,21 @@ offset_right = 2.0
 offset_bottom = 16.0
 grow_horizontal = 2
 grow_vertical = 2
-icon = ExtResource("2_8rk7h")
+icon = ExtResource("1_804oq")
 flat = true
 icon_alignment = 1
 vertical_icon_alignment = 0
-script = ExtResource("1_i05cx")
+script = ExtResource("2_ydrks")
 
-[node name="ProgressBar" type="ProgressBar" parent="."]
+[node name="Health" type="ProgressBar" parent="."]
+layout_mode = 0
 offset_top = 46.0
 offset_right = 92.0
 offset_bottom = 60.0
 scale = Vector2(0.5, 0.5)
 show_percentage = false
 
-[node name="Label" type="Label" parent="ProgressBar"]
+[node name="HealthLabel" type="Label" parent="Health"]
 layout_mode = 0
 offset_top = 2.0
 offset_right = 184.0

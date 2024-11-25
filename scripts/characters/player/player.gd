@@ -3,9 +3,10 @@ class_name Player
 
 signal player_selected(player_node)
 
-@export var max_health: int = 3
+@export var max_health: int = 100
 @export var speed: int = 35
 @export var knockback_power: int = 500
+@export var damage: int = 25
 
 @onready var inventory: Inventory = preload("res://resources/inventory/player_inventory.tres")
 @onready var animations: AnimationPlayer = $AnimationPlayer

@@ -21,7 +21,7 @@ SceneManager="*res://scripts/scenes/scene_manager/scene_manager.gd"
 Global="*res://scripts/global.gd"
 QuestManager="*res://scripts/quests/quest_manager.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
-PopUpText="*res://scenes/gui/pop_up_text.tscn"
+PopUpText="*res://scenes/gui/PopUpText.tscn"
 
 [display]
 

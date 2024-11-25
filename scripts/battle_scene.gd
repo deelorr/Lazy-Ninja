@@ -1,27 +1,45 @@
 extends BaseScene
 
-@onready var attack_button: Button = $battle_menu/Attack
-@onready var item_button: Button = $battle_menu/Item
-@onready var run_button: Button = $battle_menu/Run
+@onready var BattleMenu: VBoxContainer = $BattleMenu
+@onready var PlayerTeam: GridContainer = $PlayerTeam
+@onready var EnemyTeam: GridContainer = $EnemyTeam
 
-var is_player_turn: bool = true
+var is_player_turn: bool = false
 var is_selecting_enemy: bool = false
-
-@onready var player_team: Array= $player_team.get_children()
-@onready var enemy_team: Array = $enemy_team.get_children()
+var player_team: Array[BattleCharacter]
+var enemy_team: Array[BattleCharacter]
+var BattleCharacterScene = preload("res://scenes/characters/BattleCharacter.tscn")
 
 func _ready():
+	BattleMenu.disable_buttons()
+
+	player_team = []
+	for node in PlayerTeam.get_children():
+		if node is BattleCharacter:
+			var character = node as BattleCharacter
+			player_team.append(character)
+	
+	enemy_team = []
+	for node in EnemyTeam.get_children():
+		if node is BattleCharacter:
+			var character = node as BattleCharacter
+			enemy_team.append(character)
+	
 	randomize()
-	player_team.append(player)
 	connect_signals()
-	disable_buttons()
 	start_battle()
 
 func connect_signals():
 	for p in player_team: #connect the player_selected signal from each player
 		p.connect("player_selected",Callable(self, "_on_player_selected"))
+		p.connect("character_died",Callable(self, "_on_character_died"))
 	for e in enemy_team: #connect the enemy_selected signal from each enemy
 		e.connect("enemy_selected",Callable(self, "_on_enemy_selected"))
+		e.connect("character_died",Callable(self, "_on_character_died"))
+		
+	BattleMenu.connect("attack_pressed",Callable(self, "_on_attack_pressed"))
+	BattleMenu.connect("item_pressed",Callable(self, "_on_item_pressed"))
+	BattleMenu.connect("run_pressed",Callable(self, "_on_run_pressed"))
 
 func start_battle():
 	PopUpText.show_popup("Flipping Coin...")
@@ -42,8 +60,7 @@ func start_battle():
 		start_enemy_turn()
 
 func start_player_turn():
-	enable_buttons()
-	SceneManager.get_current_scenes()
+	BattleMenu.enable_buttons()
 	PopUpText.show_popup("Choose an action!")
 	await PopUpText.popup_finished
 
@@ -52,8 +69,21 @@ func _on_attack_pressed():
 		is_selecting_enemy = true
 		PopUpText.show_popup("Click on an enemy to attack")
 		await PopUpText.popup_finished
+		
+func _on_item_pressed():
+	if is_player_turn:
+		PopUpText.show_popup("Item used!")
+		await PopUpText.popup_finished
+		end_player_turn()
+
+func _on_run_pressed():
+	if is_player_turn:
+		PopUpText.show_popup("Trying to run...")
+		await PopUpText.popup_finished
+		end_player_turn()
 
 func _on_enemy_selected(enemy):
+	print(enemy.name, " selected!")
 	if is_selecting_enemy:
 		is_selecting_enemy = false
 		var damage_amount = 15
@@ -65,22 +95,13 @@ func _on_enemy_selected(enemy):
 		clean_up_teams()
 		check_battle_end()
 		end_player_turn()
-
-func _on_item_pressed():
-	PopUpText.show_popup("Item used!")
-	await PopUpText.popup_finished
-	#item logic
-	end_player_turn()
-
-func _on_run_pressed():
-	PopUpText.show_popup("Trying to run...")
-	await PopUpText.popup_finished
-	# Add run logic here
-	end_player_turn()
+#
+func _on_player_selected(player):
+	print(player.name, " selected!")
 
 func end_player_turn():
 	is_player_turn = false
-	disable_buttons()
+	BattleMenu.disable_buttons()
 	start_enemy_turn()
 
 func start_enemy_turn():
@@ -113,8 +134,8 @@ func select_enemy_target():
 	var min_health = target.current_health
 	for p in player_team:
 		if p.current_health < min_health:
-			target = player
-			min_health = player.current_health
+			target = p
+			min_health = p.current_health
 	return target
 
 func end_enemy_turn():
@@ -131,20 +152,18 @@ func check_battle_end():
 	elif player_team.size() == 0:
 		PopUpText.show_popup("Enemy wins!")
 		await PopUpText.popup_finished
-		SceneManager.change_scene(self, SceneManager.last_scene_name, SceneManager.player)
-
-func enable_buttons():
-	attack_button.disabled = false
-	item_button.disabled = false
-	run_button.disabled = false
-
-func disable_buttons():
-	attack_button.disabled = true
-	item_button.disabled = true
-	run_button.disabled = true
+		SceneManager.change_scene(self, SceneManager.last_scene_name, SceneManager.player_pos)
 
 func clean_up_teams():
 	player_team = player_team.filter(func(player):
 		return is_instance_valid(player))
 	enemy_team = enemy_team.filter(func(enemy):
 		return is_instance_valid(enemy))
+
+func _on_character_died(character):
+	if character.is_enemy:
+		enemy_team.erase(character)
+	else:
+		player_team.erase(character)
+	clean_up_teams()
+	check_battle_end()
