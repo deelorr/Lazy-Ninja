@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://bi1v3lsgao0wn"]
+[gd_scene load_steps=46 format=3 uid="uid://bi1v3lsgao0wn"]
 
 [ext_resource type="Texture2D" uid="uid://jtuqvr1lwjq7" path="res://art/tilesets/ground.png" id="1_crrrf"]
 [ext_resource type="Script" path="res://scripts/scenes/scene_manager/base_scene.gd" id="1_uu85d"]
@@ -7,21 +7,24 @@
 [ext_resource type="Texture2D" uid="uid://ctm10no46jhh2" path="res://art/tilesets/TilesetReliefDetail.png" id="4_0taxg"]
 [ext_resource type="Texture2D" uid="uid://cxoq8wlar5k2u" path="res://art/tilesets/TilesetElement.png" id="4_rdm17"]
 [ext_resource type="Script" path="res://scripts/characters/player/follow_cam.gd" id="5_708fr"]
-[ext_resource type="PackedScene" uid="uid://b2blmb7y86f78" path="res://scenes/items/Collectables/Lifepot.tscn" id="5_k76w3"]
-[ext_resource type="PackedScene" uid="uid://bi3sw8caf5ubs" path="res://scenes/items/Collectables/Sword.tscn" id="6_h7t66"]
+[ext_resource type="PackedScene" uid="uid://b2blmb7y86f78" path="res://scenes/items/collectables/lifepot.tscn" id="5_k76w3"]
 [ext_resource type="Texture2D" uid="uid://dgif58s51ttk0" path="res://art/tilesets/buildings.png" id="7_kmdpc"]
+[ext_resource type="PackedScene" uid="uid://bdt4kr6t4xynu" path="res://scenes/items/collectables/collectable.tscn" id="8_5gbpb"]
 [ext_resource type="Texture2D" uid="uid://0qc3452mjill" path="res://art/tilesets/water.png" id="8_du033"]
-[ext_resource type="PackedScene" uid="uid://ck78uu30262eo" path="res://scenes/items/Weapons/axe.tscn" id="8_pe2y3"]
-[ext_resource type="PackedScene" uid="uid://buthmqfo85e7v" path="res://scenes/items/Collectables/coin.tscn" id="9_23hvr"]
+[ext_resource type="PackedScene" uid="uid://ck78uu30262eo" path="res://scenes/items/weapons/axe.tscn" id="8_pe2y3"]
+[ext_resource type="PackedScene" uid="uid://buthmqfo85e7v" path="res://scenes/items/collectables/coin.tscn" id="9_23hvr"]
 [ext_resource type="Texture2D" uid="uid://cd1fctwfog8wt" path="res://art/tilesets/animated_sprites/anim_water.png" id="9_pgi3e"]
+[ext_resource type="Script" path="res://scripts/items/collectables/sword.gd" id="9_vc6it"]
 [ext_resource type="Texture2D" uid="uid://cfvjiywa411sn" path="res://art/tilesets/TilesetRelief.png" id="9_xu1qr"]
-[ext_resource type="Texture2D" uid="uid://dnx4jlfjv8rt6" path="res://art/tilesets/ground_transparent.png" id="10_3wuk1"]
+[ext_resource type="Texture2D" uid="uid://dnx4jlfjv8rt6" path="res://art/tilesets/ground_trans.png" id="10_3wuk1"]
+[ext_resource type="Resource" uid="uid://bw0c1ucp4jhue" path="res://resources/inventory/items/sword.tres" id="10_872mh"]
+[ext_resource type="Texture2D" uid="uid://bar267x1axvkf" path="res://art/items/Sword.png" id="11_f1ehx"]
 [ext_resource type="Texture2D" uid="uid://842gat1qraly" path="res://art/tilesets/animated_sprites/quicksand.png" id="11_itwi6"]
-[ext_resource type="PackedScene" uid="uid://blt4seqeee2mk" path="res://scenes/maps/scene_trigger.tscn" id="14_rmnrq"]
-[ext_resource type="PackedScene" uid="uid://bmpwxneat8j66" path="res://scenes/characters/hunter.tscn" id="16_5287r"]
-[ext_resource type="PackedScene" uid="uid://bm0pod17s368c" path="res://scenes/gui/HUD.tscn" id="17_nck1a"]
-[ext_resource type="PackedScene" uid="uid://bp8d5fmlfog07" path="res://scenes/maps/spawn_area.tscn" id="27_7giur"]
-[ext_resource type="PackedScene" uid="uid://be5nryp8gacni" path="res://scenes/maps/slime_cave.tscn" id="27_srog0"]
+[ext_resource type="PackedScene" uid="uid://blt4seqeee2mk" path="res://scenes/utility/scene_trigger.tscn" id="14_rmnrq"]
+[ext_resource type="PackedScene" uid="uid://bmpwxneat8j66" path="res://scenes/characters/npc/hunter.tscn" id="16_5287r"]
+[ext_resource type="PackedScene" uid="uid://bm0pod17s368c" path="res://scenes/gui/HUD/HUD.tscn" id="17_nck1a"]
+[ext_resource type="PackedScene" uid="uid://bp8d5fmlfog07" path="res://scenes/utility/spawn_area.tscn" id="27_7giur"]
+[ext_resource type="PackedScene" uid="uid://be5nryp8gacni" path="res://scenes/utility/slime_cave.tscn" id="27_srog0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h6ijd"]
 texture = ExtResource("1_crrrf")
@@ -2044,10 +2047,68 @@ texture = ExtResource("3_ksm4w")
 0:0/0/y_sort_origin = 7
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-1.94454, 4.94975, 2.2981, 4.59619, 1.76777, 8, -1.41421, 8)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rahnb"]
+resource_local_to_scene = true
+size = Vector2(4, 11)
+
+[sub_resource type="Animation" id="Animation_lfdxc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_62q5t"]
+resource_name = "spin"
+length = 0.4
+step = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8g15o"]
+_data = {
+"RESET": SubResource("Animation_lfdxc"),
+"spin": SubResource("Animation_62q5t")
+}
+
+[sub_resource type="PackedScene" id="PackedScene_kvgtq"]
+_bundled = {
+"base_scene": 0,
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"names": PackedStringArray("Sword", "script", "item_res", "CollisionShape2D", "position", "shape", "Sprite2D", "texture", "AnimationPlayer", "AnimationPlayer", "libraries"),
+"node_count": 4,
+"node_paths": [NodePath("."), NodePath("."), NodePath(".")],
+"nodes": PackedInt32Array(-1, -1, 2147483647, 0, -1, 2, 1, 1, 2, 2, 0, 1073741824, -1, 2147483647, 262147, -1, 2, 4, 3, 5, 4, 0, 1073741825, -1, 2147483647, 524294, -1, 1, 7, 5, 0, 1073741826, 0, 9, 786440, -1, 1, 10, 6, 0),
+"variants": [ExtResource("8_5gbpb"), ExtResource("9_vc6it"), ExtResource("10_872mh"), Vector2(0, -1.5), SubResource("RectangleShape2D_rahnb"), ExtResource("11_f1ehx"), {
+"": SubResource("AnimationLibrary_8g15o")
+}],
+"version": 3
+}
+
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_qwk1s"]
 resource_name = "Collectables"
 scenes/1/scene = ExtResource("5_k76w3")
-scenes/2/scene = ExtResource("6_h7t66")
+scenes/2/scene = SubResource("PackedScene_kvgtq")
 scenes/3/scene = ExtResource("8_pe2y3")
 scenes/4/scene = ExtResource("9_23hvr")
 

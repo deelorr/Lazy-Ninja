@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bylqb04nexnr4"]
 
-[ext_resource type="Script" path="res://scripts/battle_menu.gd" id="1_3csry"]
+[ext_resource type="Script" path="res://scripts/battle/battle_menu.gd" id="1_3csry"]
 
 [node name="BattleMenu" type="VBoxContainer"]
 custom_minimum_size = Vector2(86, 180)

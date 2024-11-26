@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cq6yg7kccbf4m"
-path="res://.godot/imported/heart.png-6d73a809638163677a9db26a997da146.ctex"
+uid="uid://bbngybdig1at7"
+path="res://.godot/imported/face.png-8ef7c9fe97ada3a7c18965f7316d7847.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/gui/heart.png"
-dest_files=["res://.godot/imported/heart.png-6d73a809638163677a9db26a997da146.ctex"]
+source_file="res://art/characters/npc/armory_owner/face.png"
+dest_files=["res://.godot/imported/face.png-8ef7c9fe97ada3a7c18965f7316d7847.ctex"]
 
 [params]
 

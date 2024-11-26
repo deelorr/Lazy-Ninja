@@ -7,7 +7,7 @@ var marker: String
 
 func _init() -> void:
 	if player == null:
-		player = preload("res://scenes/characters/player.tscn").instantiate()
+		player = preload("res://scenes/characters/player/player.tscn").instantiate()
 		player.position = Vector2(150,50)
 		current_scene_name = "inside_house"
 

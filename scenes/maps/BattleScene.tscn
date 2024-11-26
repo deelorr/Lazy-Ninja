@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://xl26l7hf0gov"]
 
-[ext_resource type="Script" path="res://scripts/battle_scene.gd" id="1_6csho"]
+[ext_resource type="Script" path="res://scripts/battle/battle_scene.gd" id="1_6csho"]
 [ext_resource type="PackedScene" uid="uid://ctr8kfyymhvpv" path="res://scenes/battle/PlayerTeam.tscn" id="2_lriba"]
 [ext_resource type="PackedScene" uid="uid://bylqb04nexnr4" path="res://scenes/battle/BattleMenu.tscn" id="3_t1jig"]
 [ext_resource type="PackedScene" uid="uid://b2qikj2ha7rj7" path="res://scenes/battle/EnemyTeam.tscn" id="4_50gyc"]

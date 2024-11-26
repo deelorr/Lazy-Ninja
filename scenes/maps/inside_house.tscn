@@ -5,9 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://db0ofsi30xfjk" path="res://art/tilesets/house elements.png" id="2_w771l"]
 [ext_resource type="Texture2D" uid="uid://dgif58s51ttk0" path="res://art/tilesets/buildings.png" id="3_ctps4"]
 [ext_resource type="Texture2D" uid="uid://cp641bt8pa8ol" path="res://art/tilesets/walls.png" id="4_lqv6r"]
-[ext_resource type="PackedScene" uid="uid://bm0pod17s368c" path="res://scenes/gui/HUD.tscn" id="6_6wukh"]
+[ext_resource type="PackedScene" uid="uid://bm0pod17s368c" path="res://scenes/gui/HUD/HUD.tscn" id="6_6wukh"]
 [ext_resource type="PackedScene" uid="uid://bcyuqcdsqdbd4" path="res://scenes/items/chest.tscn" id="6_akwud"]
-[ext_resource type="PackedScene" uid="uid://blt4seqeee2mk" path="res://scenes/maps/scene_trigger.tscn" id="6_ohnnk"]
+[ext_resource type="PackedScene" uid="uid://blt4seqeee2mk" path="res://scenes/utility/scene_trigger.tscn" id="6_ohnnk"]
 [ext_resource type="Script" path="res://scripts/characters/player/follow_cam.gd" id="11_h1g35"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qk7by"]
@@ -1273,3 +1273,6 @@ position = Vector2(0, 24)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="boundaries"]
 polygon = PackedVector2Array(306, 14, 306, 114, 238, 114, 238, 82, 252, 80, 238, 80, 211, 80, 211, 114, 97, 114, 97, 126, 63, 126, 63, 114, 14, 114, 14, 16, 0, 16, 0, 128, 320, 128, 320, 0, 0, 0, 0, 14, 14, 14, 211, 14, 211, 64, 238, 64, 252, 64, 238, 62, 238, 14)
+
+[connection signal="body_entered" from="TileMap/Chest" to="TileMap/Chest" method="_on_body_entered"]
+[connection signal="body_exited" from="TileMap/Chest" to="TileMap/Chest" method="_on_body_exited"]

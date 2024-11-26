@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c5phbysi2r2uj"]
 
-[ext_resource type="Script" path="res://scripts/pop_up_text.gd" id="1_pi2wn"]
+[ext_resource type="Script" path="res://scripts/gui/pop_up_text.gd" id="1_pi2wn"]
 
 [node name="PopUpText" type="Label"]
 anchors_preset = 15

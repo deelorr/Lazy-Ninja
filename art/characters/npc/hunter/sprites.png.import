@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cq6yg7kccbf4m"
-path="res://.godot/imported/heart.png-6d73a809638163677a9db26a997da146.ctex"
+uid="uid://bnx508tyv8spx"
+path="res://.godot/imported/sprites.png-efffba69f97eb8f9081881e7adeb4829.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/gui/heart.png"
-dest_files=["res://.godot/imported/heart.png-6d73a809638163677a9db26a997da146.ctex"]
+source_file="res://art/characters/npc/hunter/sprites.png"
+dest_files=["res://.godot/imported/sprites.png-efffba69f97eb8f9081881e7adeb4829.ctex"]
 
 [params]
 
