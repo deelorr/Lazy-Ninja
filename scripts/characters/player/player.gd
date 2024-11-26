@@ -7,6 +7,7 @@ signal player_selected(player_node)
 @export var speed: int = 35
 @export var knockback_power: int = 500
 @export var damage: int = 25
+@export var icon: Texture
 
 @onready var inventory: Inventory = preload("res://resources/inventory/player_inventory.tres")
 @onready var animations: AnimationPlayer = $AnimationPlayer

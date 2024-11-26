@@ -4,19 +4,19 @@ signal attack_pressed
 signal item_pressed
 signal run_pressed
 
-@onready var attack: Button = $Attack/Button
-@onready var use_item: Button = $Item/Button
-@onready var run: Button = $Run/Button
+@onready var attack_button: Button = $Attack/Button
+@onready var item_button: Button = $Item/Button
+@onready var run_button: Button = $Run/Button
 
 func enable_buttons():
-	attack.disabled = false
-	use_item.disabled = false
-	run.disabled = false
+	attack_button.disabled = false
+	item_button.disabled = false
+	run_button.disabled = false
 
 func disable_buttons():
-	attack.disabled = true
-	use_item.disabled = true
-	run.disabled = true
+	attack_button.disabled = true
+	item_button.disabled = true
+	run_button.disabled = true
 
 func _on_attack_button_pressed():
 	attack_pressed.emit()

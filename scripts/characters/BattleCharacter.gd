@@ -5,17 +5,26 @@ signal enemy_selected(enemy)
 signal player_selected(player)
 signal character_died(character)
 
-var is_enemy: bool = true
+@export var is_enemy: bool = true
+@export var character_icon: Texture
+@export var max_health: int = 50
+
+@onready var player: Player = SceneManager.player
+
 var current_health: int
-var max_health: int = 50
 var damage: int = 10
 
 func _ready():
+	#$Name.text = self.name
 	current_health = max_health
 	connect("pressed",Callable(self, "_on_pressed")) # Correctly connect the 'pressed' signal
+	if character_icon:
+		icon = character_icon
+	else:
+		icon = null
 
 func _process(delta):
-	update_health()
+	update_healthbar()
 
 func initialize_stats():
 	if is_enemy:
@@ -27,9 +36,12 @@ func initialize_stats():
 	current_health = max_health
 	
 func initialize_hero_stats():
+	is_enemy = false
+	$Name.text = SceneManager.player.name
 	max_health = SceneManager.player.max_health
-	damage = SceneManager.player.damage
 	current_health = max_health
+	damage = SceneManager.player.damage
+	icon = preload("res://art/characters/player/player_face.png")
 
 func _on_pressed():
 	if is_enemy:
@@ -48,7 +60,7 @@ func die():
 	character_died.emit(self)
 	queue_free()
 
-func update_health():
+func update_healthbar():
 	$Health.max_value = max_health
 	$Health.value = current_health
 	$Health/HealthLabel.text = str(current_health) + "/" + str(max_health)

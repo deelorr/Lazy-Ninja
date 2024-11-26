@@ -1,7 +1,8 @@
-[gd_scene load_steps=31 format=3 uid="uid://cw32y4dbgj36m"]
+[gd_scene load_steps=32 format=3 uid="uid://cw32y4dbgj36m"]
 
 [ext_resource type="Texture2D" uid="uid://cdkfsmeq0yn4y" path="res://art/characters/player/player_sprites.png" id="1_3lps0"]
 [ext_resource type="Script" path="res://scripts/characters/player/player.gd" id="1_xum27"]
+[ext_resource type="Texture2D" uid="uid://najt8l70oxnb" path="res://art/characters/player/player_face.png" id="2_ukjt8"]
 [ext_resource type="Shader" path="res://shaders/dissolve.gdshader" id="2_wchek"]
 [ext_resource type="Texture2D" uid="uid://dg1nx8eupwffd" path="res://shaders/dissolve_texture.tres" id="3_ieqjm"]
 [ext_resource type="Script" path="res://scripts/characters/player/weapon_node.gd" id="4_fk1a3"]
@@ -528,6 +529,7 @@ z_index = 1
 collision_layer = 9
 script = ExtResource("1_xum27")
 speed = 100
+icon = ExtResource("2_ukjt8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 clip_children = 2

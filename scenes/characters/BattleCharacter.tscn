@@ -1,7 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://cfavffqss21j7"]
 
-[ext_resource type="Texture2D" uid="uid://najt8l70oxnb" path="res://art/characters/player/player_face.png" id="1_804oq"]
 [ext_resource type="Script" path="res://scripts/characters/BattleCharacter.gd" id="2_ydrks"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_3xw04"]
+size = Vector2(38, 38)
 
 [node name="BattleCharacter" type="Button"]
 anchors_preset = 8
@@ -15,11 +17,20 @@ offset_right = 2.0
 offset_bottom = 16.0
 grow_horizontal = 2
 grow_vertical = 2
-icon = ExtResource("1_804oq")
 flat = true
 icon_alignment = 1
 vertical_icon_alignment = 0
 script = ExtResource("2_ydrks")
+character_icon = SubResource("PlaceholderTexture2D_3xw04")
+
+[node name="Name" type="Label" parent="."]
+layout_mode = 0
+offset_top = 36.0
+offset_right = 92.0
+offset_bottom = 59.0
+scale = Vector2(0.5, 0.5)
+text = "Name"
+horizontal_alignment = 1
 
 [node name="Health" type="ProgressBar" parent="."]
 layout_mode = 0
