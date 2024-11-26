@@ -48,7 +48,6 @@ func take_damage(amount: int):
 
 func die():
 	character_died.emit()
-	#emit_signal("character_died")
 	queue_free()
 
 func update_healthbar():

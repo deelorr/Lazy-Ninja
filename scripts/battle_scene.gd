@@ -186,13 +186,8 @@ func check_battle_end():
 		return_to_overworld()
 
 func return_to_overworld():
-	# Set the overworld position before changing scenes
-	Global.overworld_position = player.position  # Or the position you desire
+	Global.overworld_position = player.position
 	SceneManager.change_scene(get_tree().current_scene, "world", null)
-
-
-	# After changing the scene, you might need to set the player's position
-	# You can do this by using the singleton or a deferred call
 
 func clean_up_teams():
 	player_team = get_valid_team(player_team)

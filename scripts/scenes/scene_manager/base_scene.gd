@@ -8,7 +8,10 @@ class_name BaseScene
 func _ready():
 	if player:
 		add_child(player)
-		position_local_player()
+		if SceneManager.last_scene_name == "BattleScene":
+			position_after_battle()
+		else:
+			position_local_player()
 		if camera:
 			camera.follow_node = player
 
