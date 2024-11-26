@@ -14,9 +14,11 @@ func _init() -> void:
 func change_scene(from_scene, to_scene, connected_marker):
 	last_scene_name = from_scene.name
 	current_scene_name = to_scene
-	marker = connected_marker
+	if connected_marker != null:
+		marker = connected_marker
 	player = from_scene.player
-	player.get_parent().remove_child(player)
+	if player.get_parent() !=null:
+		player.get_parent().remove_child(player)
 	var full_path = "res://scenes/maps/" + to_scene + ".tscn"
 	from_scene.get_tree().call_deferred("change_scene_to_file", full_path)
 	

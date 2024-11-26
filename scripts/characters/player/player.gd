@@ -1,13 +1,11 @@
 extends CharacterBody2D
 class_name Player
 
-signal player_selected(player_node)
-
 @export var max_health: int = 100
 @export var speed: int = 35
 @export var knockback_power: int = 500
 @export var damage: int = 25
-@export var icon: Texture
+@export var character_icon: Texture
 
 @onready var inventory: Inventory = preload("res://resources/inventory/player_inventory.tres")
 @onready var animations: AnimationPlayer = $AnimationPlayer
@@ -28,22 +26,25 @@ var gold: int = 50
 var current_xp: int = 0
 var current_level: int = 1
 var xp_for_next_level: int = 100
+var player_name: String = "Lazy Ninja"
 
 func _ready():
 	inventory.use_item.connect(use_item)  #connect the use_item signal to use_item function
 	weapon_node.disable()  #disable weapon collision at start
 
 func _physics_process(_delta):
+	if not is_inside_tree():
+		return  # Ensure the node is in the scene tree before processing
+
 	#esc to quit for now
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().quit()
 	
 	handle_input()
 	update_animation()
-	if !is_hurt:
-		for area in hurt_box.get_overlapping_areas():
-			if area.name == "hit_box":
-				hurt_by_enemy_area(area)
+	for area in hurt_box.get_overlapping_areas():
+		if area.name == "hit_box":
+			start_battle()
 	move_and_slide()
 
 func check_level_up():
@@ -151,17 +152,17 @@ func knockback(enemy_velocity: Vector2):
 	velocity = knockback_direction
 	move_and_slide()
 
-func hurt_by_enemy_area(area):
-	current_health -= 1
-	if current_health < 0:
-		current_health = max_health
-	is_hurt = true
-	knockback(area.get_parent().velocity)
-	effects.play("hurt_blink")
-	hurt_timer.start()
-	await hurt_timer.timeout
-	effects.play("RESET")
-	is_hurt = false
+#func hurt_by_enemy_area(area):
+	#current_health -= 1
+	#if current_health < 0:
+		#current_health = max_health
+	#is_hurt = true
+	#knockback(area.get_parent().velocity)
+	#effects.play("hurt_blink")
+	#hurt_timer.start()
+	#await hurt_timer.timeout
+	#effects.play("RESET")
+	#is_hurt = false
 
 func _on_hurt_box_area_entered(area):
 	if area.has_method("collect"):
@@ -186,8 +187,20 @@ func add_xp(amount: int):
 	check_level_up()
 
 func die():
-	#if self in player_team:
-		#player_team.erase(self)
-	#elif self in enemy_team:
-		#enemy_team.erase(self)
-	queue_free()  # Free the object after removal
+	queue_free()
+
+func _on_hurt_box_body_entered(body) -> void:
+	if body.is_in_group("enemy"):
+		start_battle()
+		
+func start_battle():
+	# Store necessary data in the singleton
+	#Global.player_data = get_player_data()
+	#Global.enemy_data = enemy.get_enemy_data()
+	# Optionally, you can store the enemy's position to return after the battle
+	Global.overworld_position = self.global_position
+	print(Global.overworld_position)
+	# Change to the battle scene
+	#var battle_scene = preload("res://scenes/maps/BattleScene.tscn")
+	#get_tree().change_scene_to_file("res://scenes/maps/BattleScene.tscn")
+	SceneManager.change_scene(get_tree().current_scene, "BattleScene", null)

@@ -1,14 +1,13 @@
-[gd_scene load_steps=32 format=3 uid="uid://cw32y4dbgj36m"]
+[gd_scene load_steps=31 format=3 uid="uid://cw32y4dbgj36m"]
 
 [ext_resource type="Texture2D" uid="uid://cdkfsmeq0yn4y" path="res://art/characters/player/player_sprites.png" id="1_3lps0"]
 [ext_resource type="Script" path="res://scripts/characters/player/player.gd" id="1_xum27"]
-[ext_resource type="Texture2D" uid="uid://najt8l70oxnb" path="res://art/characters/player/player_face.png" id="2_ukjt8"]
 [ext_resource type="Shader" path="res://shaders/dissolve.gdshader" id="2_wchek"]
 [ext_resource type="Texture2D" uid="uid://dg1nx8eupwffd" path="res://shaders/dissolve_texture.tres" id="3_ieqjm"]
 [ext_resource type="Script" path="res://scripts/characters/player/weapon_node.gd" id="4_fk1a3"]
-[ext_resource type="PackedScene" uid="uid://bylldbpasc02w" path="res://scenes/items/weapons/sword.tscn" id="4_gaop7"]
-[ext_resource type="PackedScene" uid="uid://ck78uu30262eo" path="res://scenes/items/weapons/axe.tscn" id="5_y8ti1"]
-[ext_resource type="PackedScene" uid="uid://c041wyp0jflut" path="res://scenes/items/weapons/shuriken.tscn" id="7_wg64x"]
+[ext_resource type="PackedScene" uid="uid://bylldbpasc02w" path="res://scenes/items/Weapons/sword.tscn" id="4_gaop7"]
+[ext_resource type="PackedScene" uid="uid://ck78uu30262eo" path="res://scenes/items/Weapons/axe.tscn" id="5_y8ti1"]
+[ext_resource type="PackedScene" uid="uid://c041wyp0jflut" path="res://scenes/items/Weapons/shuriken.tscn" id="7_wg64x"]
 [ext_resource type="AudioStream" uid="uid://ck24aoawoc4qo" path="res://sfx/shuriken_noise.wav" id="9_17xkp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1yy2h"]
@@ -529,7 +528,6 @@ z_index = 1
 collision_layer = 9
 script = ExtResource("1_xum27")
 speed = 100
-icon = ExtResource("2_ukjt8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 clip_children = 2
@@ -590,3 +588,4 @@ rotation = -0.523599
 stream = ExtResource("9_17xkp")
 
 [connection signal="area_entered" from="hurt_box" to="." method="_on_hurt_box_area_entered"]
+[connection signal="body_entered" from="hurt_box" to="." method="_on_hurt_box_body_entered"]

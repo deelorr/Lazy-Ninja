@@ -10,46 +10,36 @@ signal character_died(character)
 @export var max_health: int = 50
 
 @onready var player: Player = SceneManager.player
+@onready var name_label: Label = $Name
 
 var current_health: int
 var damage: int = 10
 
 func _ready():
-	#$Name.text = self.name
+	name_label.text = self.name
 	current_health = max_health
-	connect("pressed",Callable(self, "_on_pressed")) # Correctly connect the 'pressed' signal
+	connect("pressed",Callable(self, "_on_pressed"))
 	if character_icon:
 		icon = character_icon
 	else:
 		icon = null
 
-func _process(delta):
+func _process(_delta):
 	update_healthbar()
 
-func initialize_stats():
-	if is_enemy:
-		max_health = int(randf_range(30, 60))
-		damage = int(randf_range(5, 15))
-	else:
-		max_health = int(randf_range(50, 100))
-		damage = int(randf_range(10, 20))
-	current_health = max_health
-	
 func initialize_hero_stats():
 	is_enemy = false
-	$Name.text = SceneManager.player.name
+	name = SceneManager.player.player_name
 	max_health = SceneManager.player.max_health
 	current_health = max_health
 	damage = SceneManager.player.damage
-	icon = preload("res://art/characters/player/player_face.png")
+	character_icon = preload("res://art/characters/player/player_face.png")
 
 func _on_pressed():
 	if is_enemy:
 		enemy_selected.emit(self)
-		#print(self.name, " selected")
 	else:
 		player_selected.emit(self)
-		#print(self.name, " selected")
 
 func take_damage(amount: int):
 	current_health = max(current_health - amount, 0)
@@ -57,7 +47,8 @@ func take_damage(amount: int):
 		die()
 
 func die():
-	character_died.emit(self)
+	character_died.emit()
+	#emit_signal("character_died")
 	queue_free()
 
 func update_healthbar():

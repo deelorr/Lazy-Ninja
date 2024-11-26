@@ -11,6 +11,7 @@ var current_player_index: int = 0
 var enemy_team: Array[BattleCharacter]
 var current_enemy_index: int = 0
 var BattleCharacterScene = preload("res://scenes/characters/BattleCharacter.tscn")
+var battle_over: bool
 
 func _ready():
 	BattleMenu.disable_buttons()
@@ -95,7 +96,6 @@ func _on_item_pressed():
 		current_player_index += 1
 		prompt_player_action()
 
-
 func _on_run_pressed():
 	if is_player_turn:
 		var current_player = player_team[current_player_index]
@@ -106,6 +106,9 @@ func _on_run_pressed():
 		prompt_player_action()
 
 func _on_enemy_selected(enemy):
+	if battle_over:
+		return
+	print(enemy.name, " clicked!")
 	if is_selecting_enemy:
 		is_selecting_enemy = false
 		var current_player = player_team[current_player_index]
@@ -117,8 +120,8 @@ func _on_enemy_selected(enemy):
 		current_player_index += 1
 		prompt_player_action()
 
-func _on_player_selected(player):
-	print(player.name, " selected!")
+func _on_player_selected(selected_player):
+	print(selected_player.name, " clicked!")
 
 func end_player_turn():
 	is_player_turn = false
@@ -155,11 +158,15 @@ func process_enemy_action():
 		end_enemy_turn()
 
 func select_enemy_target():
-	player_team = player_team.filter(func(player):
-		return is_instance_valid(player))
-	if player_team.is_empty():
+	var valid_players = get_valid_team(player_team)
+	if valid_players.is_empty():
 		return null
-	return player_team[randi() % player_team.size()]
+	return valid_players[randi() % valid_players.size()]
+
+	
+func get_valid_team(team):
+	return team.filter(is_instance_valid)
+
 
 func end_enemy_turn():
 	is_player_turn = true
@@ -168,27 +175,29 @@ func end_enemy_turn():
 func check_battle_end():
 	clean_up_teams()
 	if enemy_team.size() == 0:
+		battle_over = true
 		PopUpText.show_popup("Player wins!")
 		await PopUpText.popup_finished
-		#need to get back to world after
-		#SceneManager.change_scene(self, SceneManager.last_scene_name, SceneManager.player_pos)
-
+		return_to_overworld()
 	elif player_team.size() == 0:
+		battle_over = true
 		PopUpText.show_popup("Enemy wins!")
 		await PopUpText.popup_finished
-		#need to get back to world after
-		#SceneManager.change_scene(self, SceneManager.last_scene_name, SceneManager.player_pos)
+		return_to_overworld()
+
+func return_to_overworld():
+	# Set the overworld position before changing scenes
+	Global.overworld_position = player.position  # Or the position you desire
+	SceneManager.change_scene(get_tree().current_scene, "world", null)
+
+
+	# After changing the scene, you might need to set the player's position
+	# You can do this by using the singleton or a deferred call
 
 func clean_up_teams():
-	player_team = player_team.filter(func(player):
-		return is_instance_valid(player))
-	enemy_team = enemy_team.filter(func(enemy):
-		return is_instance_valid(enemy))
+	player_team = get_valid_team(player_team)
+	enemy_team = get_valid_team(enemy_team)
 
-func _on_character_died(character):
-	if character.is_enemy:
-		enemy_team.erase(character)
-	else:
-		player_team.erase(character)
+func _on_character_died():
 	clean_up_teams()
 	check_battle_end()

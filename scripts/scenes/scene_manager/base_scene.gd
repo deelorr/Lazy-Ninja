@@ -20,6 +20,9 @@ func position_local_player():
 				player.global_position = marker.global_position
 				break
 
+func position_after_battle():
+	player.global_position = Global.overworld_position
+
 func _on_inventory_gui_closed() -> void:
 	get_tree().paused = false
 
