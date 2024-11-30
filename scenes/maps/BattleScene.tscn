@@ -28,3 +28,6 @@ layout_mode = 2
 
 [node name="EnemyTeam" parent="." instance=ExtResource("4_50gyc")]
 layout_mode = 2
+
+[connection signal="closed" from="." to="." method="_on_battle_scene_closed"]
+[connection signal="opened" from="." to="." method="_on_battle_scene_opened"]

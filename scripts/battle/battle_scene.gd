@@ -1,5 +1,8 @@
 extends BaseScene
 
+signal opened
+signal closed
+
 @onready var BattleMenu: VBoxContainer = $BattleMenu
 @onready var PlayerTeam: GridContainer = $PlayerTeam
 @onready var EnemyTeam: GridContainer = $EnemyTeam
@@ -196,3 +199,18 @@ func clean_up_teams():
 func _on_character_died():
 	clean_up_teams()
 	check_battle_end()
+
+func open():
+	self.visible = true
+	opened.emit()
+
+func close():
+	self.visible = false
+	closed.emit()
+
+func _on_battle_scene_opened():
+	pass # Replace with function body.
+
+
+func _on_battle_scene_closed():
+	pass # Replace with function body.

@@ -185,13 +185,4 @@ func die():
 
 func _on_hurt_box_body_entered(body) -> void:
 	if body.is_in_group("enemy"):
-		start_battle()
-
-func start_battle():
-	Global.overworld_position = self.global_position
-	print(Global.overworld_position)
-	#call_deferred to change the scene AFTER the physics step
-	call_deferred("_deferred_start_battle")
-
-func _deferred_start_battle():
-	SceneManager.change_scene(get_tree().current_scene, "BattleScene", null)
+		Global.start_battle.emit()

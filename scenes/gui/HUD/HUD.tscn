@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bm0pod17s368c"]
 
-[ext_resource type="Script" path="res://scripts/gui/hud/canvas_layer.gd" id="1_e7oad"]
+[ext_resource type="Script" path="res://scripts/gui/hud/HUD.gd" id="1_e7oad"]
 [ext_resource type="PackedScene" uid="uid://77s2jr485rus" path="res://scenes/gui/inventory/inventory_gui.tscn" id="2_yy873"]
 [ext_resource type="PackedScene" uid="uid://dbejya73te6nu" path="res://scenes/gui/store_inventory/store_inventory_gui.tscn" id="3_b0evs"]
 [ext_resource type="PackedScene" uid="uid://cf71ab0m6youu" path="res://scenes/gui/inventory/hotbar.tscn" id="3_q8jf0"]
