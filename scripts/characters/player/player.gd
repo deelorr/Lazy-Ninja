@@ -1,9 +1,11 @@
 extends CharacterBody2D
 class_name Player
 
-@export var max_health: int = 3
+@export var max_health: int = 100
 @export var speed: int = 35
 @export var knockback_power: int = 500
+@export var damage: int = 25
+@export var character_icon: Texture
 
 @onready var inventory: Inventory = preload("res://resources/inventory/player_inventory.tres")
 @onready var animations: AnimationPlayer = $AnimationPlayer
@@ -27,6 +29,7 @@ var gold: int = 50
 var current_xp: int = 0
 var current_level: int = 1
 var xp_for_next_level: int = 100
+var player_name: String = "Lazy Ninja"
 
 func _ready():
 	inventory.use_item.connect(use_item)  #connect the use_item signal to use_item function
@@ -39,10 +42,6 @@ func _physics_process(_delta):
 	
 	handle_input()
 	update_animation()
-	if !is_hurt:
-		for area in hurt_box.get_overlapping_areas():
-			if area.name == "hit_box":
-				hurt_by_enemy_area(area)
 	move_and_slide()
 
 func check_level_up():
@@ -175,17 +174,17 @@ func knockback(enemy_velocity: Vector2):
 	velocity = knockback_direction
 	move_and_slide()
 
-func hurt_by_enemy_area(area):
-	current_health -= 1
-	if current_health < 0:
-		current_health = max_health
-	is_hurt = true
-	knockback(area.get_parent().velocity)
-	effects.play("hurt_blink")
-	hurt_timer.start()
-	await hurt_timer.timeout
-	effects.play("RESET")
-	is_hurt = false
+#func hurt_by_enemy_area(area):
+	#current_health -= 1
+	#if current_health < 0:
+		#current_health = max_health
+	#is_hurt = true
+	#knockback(area.get_parent().velocity)
+	#effects.play("hurt_blink")
+	#hurt_timer.start()
+	#await hurt_timer.timeout
+	#effects.play("RESET")
+	#is_hurt = false
 
 func _on_hurt_box_area_entered(area):
 	if area.has_method("collect"):
@@ -208,3 +207,10 @@ func add_xp(amount: int):
 	current_xp += amount
 	print("Added XP: ", amount , " Total XP: " , current_xp, "/", xp_for_next_level)
 	check_level_up()
+
+func die():
+	queue_free()
+
+func _on_hurt_box_body_entered(body) -> void:
+	if body.is_in_group("enemy"):
+		Global.start_battle.emit()

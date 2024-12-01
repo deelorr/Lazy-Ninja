@@ -6,11 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://dgif58s51ttk0" path="res://art/tilesets/buildings.png" id="4_31udp"]
 [ext_resource type="Texture2D" uid="uid://cp641bt8pa8ol" path="res://art/tilesets/walls.png" id="5_a4xgw"]
 [ext_resource type="Texture2D" uid="uid://cxg6fosuiwyov" path="res://art/effects/fire.png" id="6_r187j"]
-[ext_resource type="Texture2D" uid="uid://kldl1gjhswy0" path="res://art/tilesets/buildings_t.png" id="7_elcxx"]
-[ext_resource type="PackedScene" uid="uid://bm0pod17s368c" path="res://scenes/gui/HUD.tscn" id="8_2oocy"]
+[ext_resource type="Texture2D" uid="uid://kldl1gjhswy0" path="res://art/tilesets/buildings_trans.png" id="7_elcxx"]
+[ext_resource type="PackedScene" uid="uid://bm0pod17s368c" path="res://scenes/gui/HUD/HUD.tscn" id="8_2oocy"]
 [ext_resource type="Script" path="res://scripts/characters/player/follow_cam.gd" id="14_cdug3"]
-[ext_resource type="PackedScene" uid="uid://blt4seqeee2mk" path="res://scenes/maps/scene_trigger.tscn" id="15_175b3"]
-[ext_resource type="PackedScene" uid="uid://dmuw8hpuyqjpi" path="res://scenes/characters/armory_owner.tscn" id="16_poi4a"]
+[ext_resource type="PackedScene" uid="uid://blt4seqeee2mk" path="res://scenes/utility/scene_trigger.tscn" id="15_175b3"]
+[ext_resource type="PackedScene" uid="uid://dmuw8hpuyqjpi" path="res://scenes/characters/npc/armory_owner.tscn" id="16_poi4a"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qk7by"]
 texture = ExtResource("2_ag74h")

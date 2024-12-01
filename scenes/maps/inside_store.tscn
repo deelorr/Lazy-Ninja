@@ -6,11 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://dgif58s51ttk0" path="res://art/tilesets/buildings.png" id="4_2v4o5"]
 [ext_resource type="Texture2D" uid="uid://cp641bt8pa8ol" path="res://art/tilesets/walls.png" id="5_2tn16"]
 [ext_resource type="Texture2D" uid="uid://cxg6fosuiwyov" path="res://art/effects/fire.png" id="6_i3bpj"]
-[ext_resource type="Texture2D" uid="uid://kldl1gjhswy0" path="res://art/tilesets/buildings_t.png" id="7_afkma"]
-[ext_resource type="PackedScene" uid="uid://bm0pod17s368c" path="res://scenes/gui/HUD.tscn" id="8_qx7vv"]
-[ext_resource type="PackedScene" uid="uid://blt4seqeee2mk" path="res://scenes/maps/scene_trigger.tscn" id="9_cs0xv"]
+[ext_resource type="Texture2D" uid="uid://kldl1gjhswy0" path="res://art/tilesets/buildings_trans.png" id="7_afkma"]
+[ext_resource type="PackedScene" uid="uid://bm0pod17s368c" path="res://scenes/gui/HUD/HUD.tscn" id="8_qx7vv"]
+[ext_resource type="PackedScene" uid="uid://blt4seqeee2mk" path="res://scenes/utility/scene_trigger.tscn" id="9_cs0xv"]
 [ext_resource type="Script" path="res://scripts/characters/player/follow_cam.gd" id="11_mvrf7"]
-[ext_resource type="PackedScene" uid="uid://ma54ampl27ky" path="res://scenes/characters/store_owner.tscn" id="12_xjrcs"]
+[ext_resource type="PackedScene" uid="uid://ma54ampl27ky" path="res://scenes/characters/npc/store_owner.tscn" id="12_xjrcs"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qk7by"]
 texture = ExtResource("2_4do0k")
