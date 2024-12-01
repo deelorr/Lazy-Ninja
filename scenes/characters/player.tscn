@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cw32y4dbgj36m"]
+[gd_scene load_steps=31 format=3 uid="uid://b4ayh4gg3c6m5"]
 
 [ext_resource type="Texture2D" uid="uid://cdkfsmeq0yn4y" path="res://art/characters/player/player_sprites.png" id="1_3lps0"]
 [ext_resource type="Script" path="res://scripts/characters/player/player.gd" id="1_xum27"]
@@ -586,5 +586,9 @@ rotation = -0.523599
 
 [node name="shuriken_noise" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("9_17xkp")
+
+[node name="AimLine" type="Line2D" parent="."]
+width = 2.0
+default_color = Color(0.0290828, 0.00481981, 0.113137, 1)
 
 [connection signal="area_entered" from="hurt_box" to="." method="_on_hurt_box_area_entered"]

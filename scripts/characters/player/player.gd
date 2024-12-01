@@ -13,16 +13,19 @@ class_name Player
 @onready var weapon_node: Node2D = $weapon
 @onready var shuriken: Area2D = $weapon/shuriken
 @onready var shuriken_noise: AudioStreamPlayer2D = $shuriken_noise
+@onready var aim_line = $AimLine
+
 
 var current_health: int = max_health
 var current_weapon: String = "sword"
 var last_anim_direction: String = "down"
+var last_aim_direction = Vector2.ZERO
 var is_hurt: bool = false
 var is_attacking: bool = false
 var is_jumping: bool = false
 var gold: int = 50
 var current_xp: int = 0
-var current_level: int = 1 
+var current_level: int = 1
 var xp_for_next_level: int = 100
 
 func _ready():
@@ -55,24 +58,40 @@ func calculate_xp_for_level(level: int) -> int:
 func handle_input():
 	var move_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	velocity = move_direction * speed
+	
 	if current_weapon == "shuriken":
 		if Input.is_action_pressed("attack"):
 			aim_shuriken()
 		elif Input.is_action_just_released("attack"):
-			var mouse_position = get_global_mouse_position()
+			var aim_position = get_aim_position()
 			var player_position = global_position
-			var direction_vector = (mouse_position - player_position).normalized()
+			var direction_vector = (aim_position - player_position).normalized()
 			last_anim_direction = get_direction_from_vector(direction_vector)
 			throw_shuriken()
 		else:
 			shuriken.stop_aiming()
+			aim_line.visible = false  # Hide the aim line
 	else:
 		if Input.is_action_just_pressed("attack"):
-			var mouse_position = get_global_mouse_position()
+			var aim_position = get_aim_position()
 			var player_position = global_position
-			var direction_vector = (mouse_position - player_position).normalized()
+			var direction_vector = (aim_position - player_position).normalized()
 			last_anim_direction = get_direction_from_vector(direction_vector)
 			attack()
+
+func get_aim_position() -> Vector2:
+	# Get right stick input
+	var right_stick_vector = Vector2(
+		Input.get_action_strength("aim_right") - Input.get_action_strength("aim_left"),
+		Input.get_action_strength("aim_down") - Input.get_action_strength("aim_up")
+	)
+	if right_stick_vector.length() > 0.1:
+		# Use right stick for aiming
+		last_aim_direction = right_stick_vector.normalized()
+		return global_position + last_aim_direction * 100  # Adjust distance as needed
+	else:
+		# Use mouse position for aiming
+		return get_global_mouse_position()
 
 func get_direction_from_vector(direction_vector: Vector2) -> String:
 	if abs(direction_vector.x) > abs(direction_vector.y):
@@ -87,20 +106,29 @@ func get_direction_from_vector(direction_vector: Vector2) -> String:
 			return "up"
 
 func aim_shuriken():
-	var mouse_position = get_global_mouse_position()
+	var aim_position = get_aim_position()
 	var hurt_box_position = hurt_box.global_position
-	var direction = (mouse_position - hurt_box_position).normalized()
+	var direction = (aim_position - hurt_box_position).normalized()
 	var shuriken_global_position = hurt_box_position + direction
 	shuriken.global_position = shuriken_global_position
 	shuriken.rotation = direction.angle()
 	shuriken.aim()
+	
+	# Update the aim line
+	aim_line.visible = true
+	# Set the points for the line
+	aim_line.global_position = Vector2.ZERO  # Ensure it's at the global origin
+	aim_line.clear_points()
+	aim_line.add_point(hurt_box_position)
+	aim_line.add_point(aim_position)
 
 func throw_shuriken():
-	var mouse_position = get_global_mouse_position()
-	shuriken.throw(mouse_position)
+	var aim_position = get_aim_position()
+	shuriken.throw(aim_position)
 	shuriken_noise.play()
 	animations.play("attack_" + last_anim_direction)
 	shuriken.stop_aiming()
+	aim_line.visible = false  # Hide the aim line
 
 func update_animation():
 	if is_attacking or is_jumping:
@@ -109,18 +137,18 @@ func update_animation():
 		if animations.is_playing():
 			animations.stop()
 	elif Input.is_action_just_pressed("jump"):
-			is_jumping = true
-			if last_anim_direction == "left":
-				animations.play("jump_left")
-			elif last_anim_direction == "right":
-				animations.play("jump_right")
-			elif last_anim_direction == "up":
-				animations.play("jump_up")
-			else:
-				animations.play("jump_down")
-			await animations.animation_finished
-			is_jumping = false
-			return
+		is_jumping = true
+		if last_anim_direction == "left":
+			animations.play("jump_left")
+		elif last_anim_direction == "right":
+			animations.play("jump_right")
+		elif last_anim_direction == "up":
+			animations.play("jump_up")
+		else:
+			animations.play("jump_down")
+		await animations.animation_finished
+		is_jumping = false
+		return
 	else:
 		var direction = "down"
 		if velocity.x < 0:
