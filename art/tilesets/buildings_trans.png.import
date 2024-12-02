@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cq6yg7kccbf4m"
-path="res://.godot/imported/heart.png-6d73a809638163677a9db26a997da146.ctex"
+uid="uid://kldl1gjhswy0"
+path="res://.godot/imported/buildings_trans.png-637de8d6c1d631d0e0ab28d1b01a5749.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/gui/heart.png"
-dest_files=["res://.godot/imported/heart.png-6d73a809638163677a9db26a997da146.ctex"]
+source_file="res://art/tilesets/buildings_trans.png"
+dest_files=["res://.godot/imported/buildings_trans.png-637de8d6c1d631d0e0ab28d1b01a5749.ctex"]
 
 [params]
 

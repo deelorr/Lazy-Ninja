@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cq6yg7kccbf4m"
-path="res://.godot/imported/heart.png-6d73a809638163677a9db26a997da146.ctex"
+uid="uid://dmk7pat2vxge0"
+path="res://.godot/imported/sprites.png-27c290d7b10a9dfa76d39437dbe690e1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/gui/heart.png"
-dest_files=["res://.godot/imported/heart.png-6d73a809638163677a9db26a997da146.ctex"]
+source_file="res://art/characters/enemies/green_slime/sprites.png"
+dest_files=["res://.godot/imported/sprites.png-27c290d7b10a9dfa76d39437dbe690e1.ctex"]
 
 [params]
 

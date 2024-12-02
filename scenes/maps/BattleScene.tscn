@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://xl26l7hf0gov"]
+
+[ext_resource type="Script" path="res://scripts/battle/battle_scene.gd" id="1_6csho"]
+[ext_resource type="PackedScene" uid="uid://ctr8kfyymhvpv" path="res://scenes/battle/PlayerTeam.tscn" id="2_lriba"]
+[ext_resource type="PackedScene" uid="uid://bylqb04nexnr4" path="res://scenes/battle/BattleMenu.tscn" id="3_t1jig"]
+[ext_resource type="PackedScene" uid="uid://b2qikj2ha7rj7" path="res://scenes/battle/EnemyTeam.tscn" id="4_50gyc"]
+
+[node name="BattleScene" type="HBoxContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -90.0
+offset_right = 160.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 13
+script = ExtResource("1_6csho")
+
+[node name="PlayerTeam" parent="." instance=ExtResource("2_lriba")]
+layout_mode = 2
+
+[node name="BattleMenu" parent="." instance=ExtResource("3_t1jig")]
+layout_mode = 2
+
+[node name="EnemyTeam" parent="." instance=ExtResource("4_50gyc")]
+layout_mode = 2
+
+[connection signal="closed" from="." to="." method="_on_battle_scene_closed"]
+[connection signal="opened" from="." to="." method="_on_battle_scene_opened"]

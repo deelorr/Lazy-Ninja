@@ -1,0 +1,93 @@
+[gd_scene load_steps=9 format=3 uid="uid://ma54ampl27ky"]
+
+[ext_resource type="Texture2D" uid="uid://641a0fatdw5i" path="res://art/characters/npc/store_owner/sprites.png" id="1_3kwwm"]
+[ext_resource type="Script" path="res://scripts/characters/npc/store_owner.gd" id="1_kgjyf"]
+[ext_resource type="Texture2D" uid="uid://cyn86gtgvj0g3" path="res://art/extras/DialogInfo.png" id="3_mfude"]
+
+[sub_resource type="Animation" id="Animation_2glv3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bubble:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_4fhu0"]
+resource_name = "bubble_pop_down"
+length = 0.5
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bubble:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_r1rbi"]
+resource_name = "bubble_pop_up"
+length = 0.5
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bubble:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_klx4r"]
+_data = {
+"RESET": SubResource("Animation_2glv3"),
+"bubble_pop_down": SubResource("Animation_4fhu0"),
+"bubble_pop_up": SubResource("Animation_r1rbi")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mbyfo"]
+size = Vector2(14, 35)
+
+[node name="StoreOwner" type="CharacterBody2D"]
+script = ExtResource("1_kgjyf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_3kwwm")
+hframes = 4
+vframes = 7
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_klx4r")
+}
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 11.5)
+shape = SubResource("RectangleShape2D_mbyfo")
+
+[node name="bubble" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(1, -16)
+texture = ExtResource("3_mfude")
+hframes = 4
+frame = 3
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

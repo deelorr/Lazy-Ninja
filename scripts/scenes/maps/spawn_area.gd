@@ -1,7 +1,7 @@
 extends Area2D
 
-@onready var beast_scene: PackedScene = preload("res://scenes/characters/enemies/beast.tscn")
-@onready var spider_scene: PackedScene = preload("res://scenes/characters/enemies/spider.tscn")
+@onready var beast_scene: PackedScene = preload("res://scenes/characters/enemies/red_beast.tscn")
+@onready var spider_scene: PackedScene = preload("res://scenes/characters/enemies/black_spider.tscn")
 @onready var collision_polygon: CollisionPolygon2D = $CollisionPolygon2D
 
 func _ready():

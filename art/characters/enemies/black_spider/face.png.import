@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cq6yg7kccbf4m"
-path="res://.godot/imported/heart.png-6d73a809638163677a9db26a997da146.ctex"
+uid="uid://cct661lsfn6n1"
+path="res://.godot/imported/face.png-4c0db3b069ff22b48f5e6e8224689d51.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/gui/heart.png"
-dest_files=["res://.godot/imported/heart.png-6d73a809638163677a9db26a997da146.ctex"]
+source_file="res://art/characters/enemies/black_spider/face.png"
+dest_files=["res://.godot/imported/face.png-4c0db3b069ff22b48f5e6e8224689d51.ctex"]
 
 [params]
 
