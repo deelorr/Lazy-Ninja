@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://14mnf4mhdij4"]
+[gd_scene load_steps=37 format=3 uid="uid://14mnf4mhdij4"]
 
 [ext_resource type="Texture2D" uid="uid://jtuqvr1lwjq7" path="res://art/tilesets/ground.png" id="1_1wufp"]
 [ext_resource type="Script" path="res://scripts/scenes/scene_manager/base_scene.gd" id="1_i2ele"]
@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://duq3rnujqw5h7" path="res://art/tilesets/animated_sprites/anim_flower.png" id="5_tvhvb"]
 [ext_resource type="Texture2D" uid="uid://dxhtr0uptcsdf" path="res://art/tilesets/TilesetDesert.png" id="6_iea3j"]
 [ext_resource type="PackedScene" uid="uid://b2blmb7y86f78" path="res://scenes/items/collectables/lifepot.tscn" id="6_nqj8l"]
-[ext_resource type="PackedScene" path="res://scenes/items/Collectables/Sword.tscn" id="7_bm2he"]
 [ext_resource type="PackedScene" uid="uid://ck78uu30262eo" path="res://scenes/items/weapons/axe.tscn" id="8_yn5ij"]
 [ext_resource type="PackedScene" uid="uid://buthmqfo85e7v" path="res://scenes/items/collectables/coin.tscn" id="9_li2p6"]
 [ext_resource type="Texture2D" uid="uid://dgif58s51ttk0" path="res://art/tilesets/buildings.png" id="10_gckao"]
@@ -2266,7 +2265,6 @@ texture = ExtResource("5_tvhvb")
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_0srv0"]
 resource_name = "Collectables"
 scenes/1/scene = ExtResource("6_nqj8l")
-scenes/2/scene = ExtResource("7_bm2he")
 scenes/3/scene = ExtResource("8_yn5ij")
 scenes/4/scene = ExtResource("9_li2p6")
 

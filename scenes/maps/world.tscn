@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://bi1v3lsgao0wn"]
+[gd_scene load_steps=37 format=3 uid="uid://bi1v3lsgao0wn"]
 
 [ext_resource type="Texture2D" uid="uid://jtuqvr1lwjq7" path="res://art/tilesets/ground.png" id="1_crrrf"]
 [ext_resource type="Script" path="res://scripts/scenes/scene_manager/base_scene.gd" id="1_uu85d"]
@@ -8,20 +8,19 @@
 [ext_resource type="Texture2D" uid="uid://cxoq8wlar5k2u" path="res://art/tilesets/TilesetElement.png" id="4_rdm17"]
 [ext_resource type="Script" path="res://scripts/characters/player/follow_cam.gd" id="5_708fr"]
 [ext_resource type="PackedScene" uid="uid://b2blmb7y86f78" path="res://scenes/items/collectables/lifepot.tscn" id="5_k76w3"]
-[ext_resource type="PackedScene" uid="uid://bi3sw8caf5ubs" path="res://scenes/items/collectables/Sword.tscn" id="6_h7t66"]
 [ext_resource type="Texture2D" uid="uid://dgif58s51ttk0" path="res://art/tilesets/buildings.png" id="7_kmdpc"]
 [ext_resource type="Texture2D" uid="uid://0qc3452mjill" path="res://art/tilesets/water.png" id="8_du033"]
 [ext_resource type="PackedScene" uid="uid://ck78uu30262eo" path="res://scenes/items/weapons/axe.tscn" id="8_pe2y3"]
 [ext_resource type="PackedScene" uid="uid://buthmqfo85e7v" path="res://scenes/items/collectables/coin.tscn" id="9_23hvr"]
 [ext_resource type="Texture2D" uid="uid://cd1fctwfog8wt" path="res://art/tilesets/animated_sprites/anim_water.png" id="9_pgi3e"]
 [ext_resource type="Texture2D" uid="uid://cfvjiywa411sn" path="res://art/tilesets/TilesetRelief.png" id="9_xu1qr"]
-[ext_resource type="Texture2D" uid="uid://dnx4jlfjv8rt6" path="res://art/tilesets/ground_transparent.png" id="10_3wuk1"]
+[ext_resource type="Texture2D" uid="uid://dnx4jlfjv8rt6" path="res://art/tilesets/ground_trans.png" id="10_3wuk1"]
 [ext_resource type="Texture2D" uid="uid://842gat1qraly" path="res://art/tilesets/animated_sprites/quicksand.png" id="11_itwi6"]
-[ext_resource type="PackedScene" uid="uid://blt4seqeee2mk" path="res://scenes/maps/scene_trigger.tscn" id="14_rmnrq"]
-[ext_resource type="PackedScene" uid="uid://bmpwxneat8j66" path="res://scenes/characters/hunter.tscn" id="16_5287r"]
-[ext_resource type="PackedScene" uid="uid://bm0pod17s368c" path="res://scenes/gui/HUD.tscn" id="17_nck1a"]
-[ext_resource type="PackedScene" uid="uid://bp8d5fmlfog07" path="res://scenes/maps/spawn_area.tscn" id="27_7giur"]
-[ext_resource type="PackedScene" uid="uid://be5nryp8gacni" path="res://scenes/maps/slime_cave.tscn" id="27_srog0"]
+[ext_resource type="PackedScene" uid="uid://blt4seqeee2mk" path="res://scenes/utility/scene_trigger.tscn" id="14_rmnrq"]
+[ext_resource type="PackedScene" uid="uid://bmpwxneat8j66" path="res://scenes/characters/npc/hunter.tscn" id="16_5287r"]
+[ext_resource type="PackedScene" uid="uid://bm0pod17s368c" path="res://scenes/gui/HUD/HUD.tscn" id="17_nck1a"]
+[ext_resource type="PackedScene" uid="uid://bp8d5fmlfog07" path="res://scenes/utility/spawn_area.tscn" id="27_7giur"]
+[ext_resource type="PackedScene" uid="uid://be5nryp8gacni" path="res://scenes/utility/slime_cave.tscn" id="27_srog0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h6ijd"]
 texture = ExtResource("1_crrrf")
@@ -2047,7 +2046,6 @@ texture = ExtResource("3_ksm4w")
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_qwk1s"]
 resource_name = "Collectables"
 scenes/1/scene = ExtResource("5_k76w3")
-scenes/2/scene = ExtResource("6_h7t66")
 scenes/3/scene = ExtResource("8_pe2y3")
 scenes/4/scene = ExtResource("9_23hvr")
 
