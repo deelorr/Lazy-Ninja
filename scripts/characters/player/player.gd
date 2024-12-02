@@ -105,7 +105,7 @@ func aim_shuriken(right_stick_vector = null):
 	
 	var aim_position
 	if right_stick_vector != null:
-		last_aim_direction = right_stick_vector.normalized()
+		last_aim_direction = right_stick_vector.normalized()  # Reverse the stick direction
 		aim_position = global_position + last_aim_direction * 100  # Adjust as needed
 	else:
 		aim_position = get_aim_position()
@@ -114,15 +114,20 @@ func aim_shuriken(right_stick_vector = null):
 
 	var hurt_box_position = hurt_box.global_position
 	var direction = (aim_position - hurt_box_position).normalized()
+
+	# Set shuriken position and rotation based on the aiming direction
 	var shuriken_global_position = hurt_box_position + direction
 	shuriken.global_position = shuriken_global_position
 	shuriken.rotation = direction.angle()
 	shuriken.aim()
 
+	# Draw the aiming line
 	aim_line.visible = true
 	aim_line.clear_points()
 	aim_line.add_point(hurt_box_position - global_position)
 	aim_line.add_point(aim_position - global_position)
+
+
 
 func throw_shuriken():
 	if current_weapon != "shuriken":

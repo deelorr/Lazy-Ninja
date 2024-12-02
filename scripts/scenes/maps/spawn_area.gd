@@ -1,39 +1,26 @@
 extends Area2D
 
-@onready var beast_scene: PackedScene = preload("res://scenes/characters/enemies/red_beast.tscn")
-@onready var spider_scene: PackedScene = preload("res://scenes/characters/enemies/black_spider.tscn")
+@export var enemy_scenes: Array[PackedScene]
 @onready var collision_polygon: CollisionPolygon2D = $CollisionPolygon2D
 
 func _ready():
-	randomize()
-	#spawn_beasts(3)
-	#spawn_spiders(5)
+	if enemy_scenes:
+		randomize()
+		spawn_enemy(1)
 
-func spawn_beasts(count: int) -> void:
+func spawn_enemy(count: int) -> void:
 	#get parent node to ensure enemies are added to map
 	var parent_node = self.get_parent()
-	for i in range(count):
-		var beast_instance = beast_scene.instantiate()
-		var spawn_pos = get_random_position()
-		beast_instance.position = spawn_pos
-		if parent_node:
-			parent_node.add_child.call_deferred(beast_instance)
-			Global.beast_count += 1
-		else:
-			print("Error: No parent node found.")
-			
-func spawn_spiders(count: int) -> void:
-	#get parent node to ensure enemies are added to map
-	var parent_node = self.get_parent()
-	for i in range(count):
-		var spider_instance = spider_scene.instantiate()
-		var spawn_pos = get_random_position()
-		spider_instance.position = spawn_pos
-		if parent_node:
-			parent_node.add_child.call_deferred(spider_instance)
-			Global.beast_count += 1
-		else:
-			print("Error: No parent node found.")
+	for enemy_scene in enemy_scenes:
+		for i in range(count):
+			var enemy_instance = enemy_scene.instantiate()
+			var spawn_pos = get_random_position()
+			enemy_instance.position = spawn_pos
+			if parent_node:
+				parent_node.add_child.call_deferred(enemy_instance)
+				#Global.enemy_count += 1
+			else:
+				print("Error: No parent node found.")
 
 func get_random_position() -> Vector2:
 	if collision_polygon and collision_polygon.polygon.size() > 0:

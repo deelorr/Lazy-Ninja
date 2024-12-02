@@ -588,8 +588,8 @@ rotation = -0.523599
 stream = ExtResource("9_agwfe")
 
 [node name="AimLine" type="Line2D" parent="." groups=["gameplay"]]
-width = 2.0
-default_color = Color(0.0290828, 0.00481981, 0.113137, 1)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
 
 [connection signal="area_entered" from="hurt_box" to="." method="_on_hurt_box_area_entered"]
 [connection signal="body_entered" from="hurt_box" to="." method="_on_hurt_box_body_entered"]

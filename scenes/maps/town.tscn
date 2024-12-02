@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://14mnf4mhdij4"]
+[gd_scene load_steps=39 format=3 uid="uid://14mnf4mhdij4"]
 
 [ext_resource type="Texture2D" uid="uid://jtuqvr1lwjq7" path="res://art/tilesets/ground.png" id="1_1wufp"]
 [ext_resource type="Script" path="res://scripts/scenes/scene_manager/base_scene.gd" id="1_i2ele"]
@@ -18,6 +18,8 @@
 [ext_resource type="Texture2D" uid="uid://842gat1qraly" path="res://art/tilesets/animated_sprites/quicksand.png" id="15_d1cxr"]
 [ext_resource type="PackedScene" uid="uid://blt4seqeee2mk" path="res://scenes/utility/scene_trigger.tscn" id="16_3jarj"]
 [ext_resource type="PackedScene" uid="uid://bm0pod17s368c" path="res://scenes/gui/HUD/HUD.tscn" id="17_badmg"]
+[ext_resource type="PackedScene" uid="uid://bp8d5fmlfog07" path="res://scenes/utility/spawn_area.tscn" id="20_kmoth"]
+[ext_resource type="PackedScene" uid="uid://bbr5hssmqx5vl" path="res://scenes/characters/enemies/boss_slime.tscn" id="21_psroi"]
 [ext_resource type="Script" path="res://scripts/characters/player/follow_cam.gd" id="23_n31kn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ii38o"]
@@ -3460,3 +3462,6 @@ collision_mask = 7
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="boundaries"]
 polygon = PackedVector2Array(33, 14, 658, 14, 658, 63, 674, 63, 674, 287, 657, 286.838, 657, 335, 32, 334, 32, 285, 16, 285, 16, 225, -14, 225, -14, 191, 15, 191, 15, 62, 32, 62, 32, -12, -28, -12, -28, 358, 705, 358, 705, -12, 33, -12)
+
+[node name="spawn_area" parent="." instance=ExtResource("20_kmoth")]
+enemy_scenes = Array[PackedScene]([ExtResource("21_psroi")])
