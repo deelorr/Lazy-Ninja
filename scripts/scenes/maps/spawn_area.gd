@@ -6,8 +6,8 @@ extends Area2D
 
 func _ready():
 	randomize()
-	spawn_beasts(3)
-	spawn_spiders(5)
+	#spawn_beasts(3)
+	#spawn_spiders(5)
 
 func spawn_beasts(count: int) -> void:
 	#get parent node to ensure enemies are added to map

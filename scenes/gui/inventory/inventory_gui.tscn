@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://77s2jr485rus"]
+[gd_scene load_steps=6 format=3 uid="uid://77s2jr485rus"]
 
 [ext_resource type="Script" path="res://scripts/gui/inventory/inventory_gui.gd" id="1_gepbl"]
 [ext_resource type="Texture2D" uid="uid://ckokdgtal17wq" path="res://art/gui/InventoryRect.png" id="1_x7j4v"]
 [ext_resource type="PackedScene" uid="uid://bfw6ierk6qtyn" path="res://scenes/gui/inventory/slot_gui.tscn" id="2_q4nbq"]
 [ext_resource type="Texture2D" uid="uid://b7ynlectloe2s" path="res://art/gui/gold.png" id="3_xdr2s"]
+[ext_resource type="Texture2D" uid="uid://b3kvjg7wihv2" path="res://art/gui/hotbar_selector.png" id="5_r2dyx"]
 
 [node name="InventoryGUI" type="Control"]
 custom_minimum_size = Vector2(128, 80)
@@ -118,3 +119,15 @@ layout_mode = 2
 
 [node name="Slot15" parent="NinePatchRect/GridContainer" instance=ExtResource("2_q4nbq")]
 layout_mode = 2
+
+[node name="Selector" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 44.0
+offset_top = 40.0
+offset_right = 84.0
+offset_bottom = 80.0
+
+[node name="Sprite" type="Sprite2D" parent="Selector"]
+texture = ExtResource("5_r2dyx")
+centered = false

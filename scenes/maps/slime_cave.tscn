@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v3lrq"]
 size = Vector2(16, 17)
 
-[node name="slime_cave" type="Area2D"]
+[node name="slime_cave" type="Area2D" groups=["gameplay"]]
 position = Vector2(256, 41)
 script = ExtResource("1_2wgap")
 slime = ExtResource("2_5w8xm")
@@ -14,7 +14,7 @@ slime = ExtResource("2_5w8xm")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_v3lrq")
 
-[node name="spawn_timer" type="Timer" parent="."]
+[node name="spawn_timer" type="Timer" parent="." groups=["gameplay"]]
 wait_time = 5.0
 autostart = true
 

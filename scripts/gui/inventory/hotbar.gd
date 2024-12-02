@@ -15,12 +15,15 @@ func update():
 		var inventory_slot: InventorySlot = inventory.slots[i]
 		slots[i].update_to_slot(inventory_slot)
 
-func move_selector():
-	currently_selected = (currently_selected + 1) % slots.size()
+func move_selector(direction: int):
+	# direction should be 1 (right) or -1 (left)
+	currently_selected = (currently_selected + direction + slots.size()) % slots.size()
 	selector.global_position = slots[currently_selected].global_position
 
 func _unhandled_input(event):
 	if event.is_action_pressed("use_item"):
 		inventory.use_item_at_index(currently_selected)
-	if event.is_action_pressed("move_selector"):
-		move_selector()
+	elif event.is_action_pressed("move_selector_right"):
+		move_selector(1)  # Move right
+	elif event.is_action_pressed("move_selector_left"):
+		move_selector(-1)  # Move left

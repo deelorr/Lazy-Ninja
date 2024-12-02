@@ -17,9 +17,3 @@ func position_local_player():
 		if marker.name == SceneManager.marker:
 			player.global_position = marker.global_position
 			break
-
-func _on_inventory_gui_closed() -> void:
-	get_tree().paused = false
-
-func _on_inventory_gui_opened() -> void:
-	get_tree().paused = true

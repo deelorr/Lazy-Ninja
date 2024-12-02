@@ -1,27 +1,30 @@
 extends Control
 
-signal opened
-signal closed
-
 @onready var inventory: Inventory = preload("res://resources/inventory/player_inventory.tres")
 @onready var itemStackGUIClass = preload("res://scenes/gui/inventory/item_stack_gui.tscn")
 @onready var hotbar_slots: Array = $NinePatchRect/HBoxContainer.get_children()
 @onready var slots: Array = hotbar_slots + $NinePatchRect/GridContainer.get_children()
 @onready var player: Player = SceneManager.player
 @onready var gold_label: Label = $NinePatchRect/VBoxContainer/Gold/gold_label
+@onready var selector: Control = $Selector
 
 var item_in_hand: ItemStackGUI
 var old_index: int = -1
 var locked: bool = false
 var isOpen: bool = false
 
+var selected_slot_index: int = 0
+var is_using_controller: bool = false
+
 func _ready():
 	connect_slots()
 	inventory.updated.connect(update)
 	update()
+	update_selector_position()
 	
 func _process(_delta):
 	update_gold()
+	update_item_in_hand()
 	
 func update_gold():
 	if player:
@@ -39,27 +42,30 @@ func update():
 	for i in range(min(inventory.slots.size(), slots.size())):
 		var inventorySlot: InventorySlot = inventory.slots[i]
 		
-		if !inventorySlot.item:
+		if not inventorySlot.item:
 			slots[i].clear()
 			continue
 		
 		var itemStackGUI: ItemStackGUI = slots[i].item_stack_gui
-		if !itemStackGUI:
+		if not itemStackGUI:
 			itemStackGUI = itemStackGUIClass.instantiate()
 			slots[i].insert(itemStackGUI)
 			
 		itemStackGUI.inventory_slot = inventorySlot
 		itemStackGUI.update()
+	update_selector_position()
+
+func update_selector_position():
+	var slot = slots[selected_slot_index]
+	selector.global_position = slot.global_position
 
 func open():
 	visible = true
 	isOpen = true
-	opened.emit()
 
 func close():
 	visible = false
 	isOpen = false
-	closed.emit()
 
 func on_slot_clicked(slot):
 	if locked:
@@ -69,6 +75,10 @@ func on_slot_clicked(slot):
 		handle_empty_slot_click(slot)
 	else:
 		handle_non_empty_slot_click(slot)
+
+func on_slot_selected():
+	var slot = slots[selected_slot_index]
+	on_slot_clicked(slot)
 
 func handle_empty_slot_click(slot):
 	if item_in_hand:
@@ -88,7 +98,7 @@ func can_stack_items(slot) -> bool:
 func take_item_from_slot(slot):
 	item_in_hand = slot.take_item()
 	add_child(item_in_hand)
-	update_item_in_hand()
+	#update_item_in_hand()
 	old_index = slot.index
 
 func insert_item_in_slot(slot):
@@ -103,7 +113,7 @@ func swap_item(slot):
 	insert_item_in_slot(slot)
 	item_in_hand = temp_item
 	add_child(item_in_hand)
-	update_item_in_hand()
+	#update_item_in_hand()
 
 func stack_items(slot):
 	var slot_item: ItemStackGUI = slot.item_stack_gui
@@ -130,9 +140,12 @@ func add_items_to_slot(slot_item, total_amount, max_amount):
 		item_in_hand.inventory_slot.amount = total_amount - max_amount
 
 func update_item_in_hand():
-	if !item_in_hand:
+	if not item_in_hand:
 		return
-	item_in_hand.global_position = get_global_mouse_position() - item_in_hand.size / 2
+	if is_using_controller:
+		item_in_hand.global_position = selector.global_position + (selector.size - item_in_hand.size) / 2
+	else:
+		item_in_hand.global_position = get_global_mouse_position() - item_in_hand.size / 2
 
 func put_item_back():
 	locked = true
@@ -153,8 +166,42 @@ func put_item_back():
 	insert_item_in_slot(target_slot)
 	locked = false  # Unlock after operation is complete
 
-func _input(_event):
-	if item_in_hand && !locked && Input.is_action_just_pressed("right_click"):
-		put_item_back()
-		
-	update_item_in_hand()
+func _input(event):
+	if event is InputEventMouseMotion or event is InputEventMouseButton:
+		is_using_controller = false
+
+func _unhandled_input(event):
+	if isOpen:
+		if event.is_action_pressed("move_selector_up"):
+			move_selector(-1, 0)
+			is_using_controller = true
+		elif event.is_action_pressed("move_selector_down"):
+			move_selector(1, 0)
+			is_using_controller = true
+		elif event.is_action_pressed("move_selector_left"):
+			move_selector(0, -1)
+			is_using_controller = true
+		elif event.is_action_pressed("move_selector_right"):
+			move_selector(0, 1)
+			is_using_controller = true
+		elif event.is_action_pressed("select_item"):
+			on_slot_selected()
+			is_using_controller = true
+			
+		elif item_in_hand and not locked and event.is_action_pressed("use_item"):
+			put_item_back()
+			is_using_controller = true
+
+func move_selector(delta_row: int, delta_column: int):
+	var grid_columns = 5  # Adjust based on your actual grid
+	var total_slots = slots.size()
+	var grid_rows = int(total_slots / grid_columns)
+	
+	var row = int(selected_slot_index / grid_columns)
+	var column = selected_slot_index % grid_columns
+	
+	row = (row + delta_row + grid_rows) % grid_rows
+	column = (column + delta_column + grid_columns) % grid_columns
+	
+	selected_slot_index = row * grid_columns + column
+	update_selector_position()

@@ -523,7 +523,7 @@ _data = {
 "hurt_blink": SubResource("Animation_l8jos")
 }
 
-[node name="Player" type="CharacterBody2D" groups=["player"]]
+[node name="Player" type="CharacterBody2D" groups=["gameplay", "player"]]
 z_index = 1
 collision_layer = 9
 script = ExtResource("1_xum27")
@@ -587,7 +587,7 @@ rotation = -0.523599
 [node name="shuriken_noise" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("9_17xkp")
 
-[node name="AimLine" type="Line2D" parent="."]
+[node name="AimLine" type="Line2D" parent="." groups=["gameplay"]]
 width = 2.0
 default_color = Color(0.0290828, 0.00481981, 0.113137, 1)
 

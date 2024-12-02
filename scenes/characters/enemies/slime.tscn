@@ -322,7 +322,7 @@ height = 16.0
 radius = 7.0
 height = 20.0
 
-[node name="Slime" type="CharacterBody2D" groups=["slime"]]
+[node name="Slime" type="CharacterBody2D" groups=["gameplay", "slime"]]
 z_index = 1
 collision_layer = 2
 collision_mask = 2

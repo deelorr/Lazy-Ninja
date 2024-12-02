@@ -11,12 +11,13 @@ class_name HunterNPC
 
 var player_in_area: bool = false
 
-func _ready() -> void:
-	set_process(true)  # Ensure _process is called
+#func _ready() -> void:
+	#set_process(true)  # Ensure _process is called
 	
 func _physics_process(_delta):
 	if player_in_area and Input.is_action_just_pressed("action"):
 		start_dialogue()
+		Global.pause_game()
 
 func _on_area_2d_body_entered(player) -> void:
 	if player.is_in_group("player"):
@@ -37,6 +38,7 @@ func _on_dialogue_ended(_resource: DialogueResource):
 	if QuestManager.quest_dialog_point == "finishing":
 		QuestManager.quest_dialog_point = "complete"
 	update_quests()
+	Global.resume_game()
 
 func update_quests():
 	for quest in QuestManager.active_quests.values():
