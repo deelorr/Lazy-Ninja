@@ -1,9 +1,6 @@
 extends Node
 
 signal enemy_killed(enemy_type)
-signal start_battle
-
-var overworld_position
 
 var slime_count: int = 0
 var max_slimes: int = 10

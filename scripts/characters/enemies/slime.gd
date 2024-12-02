@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal slime_killed
+
 @export var speed: int = 50
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
