@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://08wrpgpao75j"
-path="res://.godot/imported/Upgrade.png-0e0ef52277d4e4869536f0454701fe0d.ctex"
+uid="uid://bhdmq6ekebqx1"
+path="res://.godot/imported/Idle.png-944310e272b9d461b17363e1d6f90d25.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/gui/Upgrade.png"
-dest_files=["res://.godot/imported/Upgrade.png-0e0ef52277d4e4869536f0454701fe0d.ctex"]
+source_file="res://art/characters/enemies/green_slime/Idle.png"
+dest_files=["res://.godot/imported/Idle.png-944310e272b9d461b17363e1d6f90d25.ctex"]
 
 [params]
 

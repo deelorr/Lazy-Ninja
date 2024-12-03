@@ -19,8 +19,8 @@
 [ext_resource type="PackedScene" uid="uid://blt4seqeee2mk" path="res://scenes/utility/scene_trigger.tscn" id="14_rmnrq"]
 [ext_resource type="PackedScene" uid="uid://bmpwxneat8j66" path="res://scenes/characters/npc/hunter.tscn" id="16_5287r"]
 [ext_resource type="PackedScene" uid="uid://bm0pod17s368c" path="res://scenes/gui/HUD/HUD.tscn" id="17_nck1a"]
-[ext_resource type="PackedScene" uid="uid://dclyq0qs84nrf" path="res://scenes/characters/enemies/black_spider.tscn" id="22_d3pro"]
-[ext_resource type="PackedScene" uid="uid://bkq7avfjqqqxh" path="res://scenes/characters/enemies/red_beast.tscn" id="23_1f4hp"]
+[ext_resource type="PackedScene" path="res://scenes/characters/enemies/black_spider.tscn" id="22_d3pro"]
+[ext_resource type="PackedScene" path="res://scenes/characters/enemies/red_beast.tscn" id="23_1f4hp"]
 [ext_resource type="PackedScene" uid="uid://bp8d5fmlfog07" path="res://scenes/utility/spawn_area.tscn" id="27_7giur"]
 [ext_resource type="PackedScene" uid="uid://be5nryp8gacni" path="res://scenes/utility/slime_cave.tscn" id="27_srog0"]
 
@@ -3080,7 +3080,7 @@ position = Vector2(264, 41)
 
 [node name="spawn_area" parent="." instance=ExtResource("27_7giur")]
 z_index = 1
-position = Vector2(470, 279)
+position = Vector2(467, 279)
 enemy_scenes = Array[PackedScene]([ExtResource("22_d3pro"), ExtResource("23_1f4hp")])
 
 [node name="boundaries" type="StaticBody2D" parent="."]

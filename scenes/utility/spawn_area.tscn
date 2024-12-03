@@ -3,10 +3,9 @@
 [ext_resource type="Script" path="res://scripts/scenes/maps/spawn_area.gd" id="1_rdawj"]
 
 [node name="spawn_area" type="Area2D"]
-position = Vector2(467, 278)
+position = Vector2(166, 108)
 script = ExtResource("1_rdawj")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2(-1.18944, 0.278717)
-scale = Vector2(1.01056, 0.995084)
-polygon = PackedVector2Array(70, -58, 47, 27, -72, 30, -48, -59)
+scale = Vector2(1.016, 1)
+polygon = PackedVector2Array(46.2598, -59, 46.2598, 26, -48.2283, 26, -48, -59)

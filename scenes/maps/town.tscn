@@ -3464,4 +3464,5 @@ collision_mask = 7
 polygon = PackedVector2Array(33, 14, 658, 14, 658, 63, 674, 63, 674, 287, 657, 286.838, 657, 335, 32, 334, 32, 285, 16, 285, 16, 225, -14, 225, -14, 191, 15, 191, 15, 62, 32, 62, 32, -12, -28, -12, -28, 358, 705, 358, 705, -12, 33, -12)
 
 [node name="spawn_area" parent="." instance=ExtResource("20_kmoth")]
+position = Vector2(255, 281)
 enemy_scenes = Array[PackedScene]([ExtResource("21_psroi")])
