@@ -8,14 +8,11 @@ extends NinePatchRect
 func _ready():
 	if QuestManager:
 		QuestManager.connect("current_objective_changed", Callable(self, "_on_current_objective_changed"))
-	else:
-		print_debug("Error: QuestManager node not found.")
-	self.visible = false
 	
 func _process(_delta):
 	if player:
 		update_quest_panel()
-		
+	
 func update_quest_panel():
 	quest_progress.visible = false
 	if QuestManager.active_quests.size() > 0:

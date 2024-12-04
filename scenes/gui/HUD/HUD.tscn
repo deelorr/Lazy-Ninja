@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bm0pod17s368c"]
+[gd_scene load_steps=8 format=3 uid="uid://bm0pod17s368c"]
 
 [ext_resource type="Script" path="res://scripts/gui/hud/HUD.gd" id="1_e7oad"]
 [ext_resource type="PackedScene" uid="uid://77s2jr485rus" path="res://scenes/gui/inventory/inventory_gui.tscn" id="2_yy873"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cf71ab0m6youu" path="res://scenes/gui/inventory/hotbar.tscn" id="3_q8jf0"]
 [ext_resource type="PackedScene" uid="uid://de4i75octoy82" path="res://scenes/gui/HUD/stat_panel.tscn" id="4_c4hd3"]
 [ext_resource type="PackedScene" uid="uid://cok1fy1chnj" path="res://scenes/gui/HUD/quest_panel.tscn" id="5_qcw0o"]
+[ext_resource type="PackedScene" uid="uid://6wp3vubr0uio" path="res://pause_menu.tscn" id="7_tk1ql"]
 
 [node name="HUD" type="CanvasLayer"]
 process_mode = 3
@@ -52,7 +53,11 @@ offset_right = 319.0
 offset_bottom = 179.0
 
 [node name="QuestPanel" parent="." instance=ExtResource("5_qcw0o")]
+visible = false
 offset_left = 235.0
 offset_top = 152.0
 offset_right = 292.0
 offset_bottom = 179.0
+
+[node name="PauseMenu" parent="." instance=ExtResource("7_tk1ql")]
+visible = false

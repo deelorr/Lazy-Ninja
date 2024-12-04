@@ -1,0 +1,96 @@
+[gd_scene load_steps=3 format=3 uid="uid://6wp3vubr0uio"]
+
+[ext_resource type="Script" path="res://pause_menu.gd" id="1_j2ta2"]
+[ext_resource type="Texture2D" uid="uid://ckokdgtal17wq" path="res://art/gui/InventoryRect.png" id="2_5vhir"]
+
+[node name="PauseMenu" type="CanvasLayer"]
+script = ExtResource("1_j2ta2")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -99.0
+offset_top = -63.5
+offset_right = 99.0
+offset_bottom = 63.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_5vhir")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="TabContainer" type="TabContainer" parent="Control/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -91.0
+offset_top = -54.5
+offset_right = 273.0
+offset_bottom = 165.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+theme_override_constants/side_margin = 0
+current_tab = 0
+
+[node name="Game" type="VBoxContainer" parent="Control/NinePatchRect/TabContainer"]
+layout_mode = 2
+alignment = 1
+metadata/_tab_index = 0
+
+[node name="Paused" type="Label" parent="Control/NinePatchRect/TabContainer/Game"]
+layout_mode = 2
+text = "Paused..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Buttons" type="HBoxContainer" parent="Control/NinePatchRect/TabContainer/Game"]
+layout_mode = 2
+alignment = 1
+
+[node name="Resume" type="Button" parent="Control/NinePatchRect/TabContainer/Game/Buttons"]
+layout_mode = 2
+focus_next = NodePath("../Quit")
+text = "Resume"
+
+[node name="Quit" type="Button" parent="Control/NinePatchRect/TabContainer/Game/Buttons"]
+layout_mode = 2
+focus_previous = NodePath("../Resume")
+text = "Quit"
+
+[node name="Settings" type="Control" parent="Control/NinePatchRect/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Label" type="Label" parent="Control/NinePatchRect/TabContainer/Settings"]
+layout_mode = 2
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Settings go here...."
+
+[connection signal="pressed" from="Control/NinePatchRect/TabContainer/Game/Buttons/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Control/NinePatchRect/TabContainer/Game/Buttons/Quit" to="." method="_on_quit_pressed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dclyq0qs84nrf"]
+[gd_scene load_steps=14 format=3 uid="uid://hhfggt4edi0h"]
 
 [ext_resource type="Script" path="res://scripts/characters/enemies/spider.gd" id="1_oxmcc"]
 [ext_resource type="Texture2D" uid="uid://qmt21n6bx5uw" path="res://art/characters/enemies/black_spider/sprites.png" id="2_w7ygf"]
@@ -197,7 +197,7 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_7csrc"]
 radius = 59.0339
 
-[node name="Spider" type="CharacterBody2D" groups=["beast"]]
+[node name="Spider" type="CharacterBody2D" groups=["beast", "gameplay"]]
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_oxmcc")
