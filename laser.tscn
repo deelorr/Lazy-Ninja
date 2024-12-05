@@ -1,8 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://crnro4neo10sn"]
+[gd_scene load_steps=6 format=3 uid="uid://crnro4neo10sn"]
 
 [ext_resource type="Shader" uid="uid://ceohf70jbda8a" path="res://shaders/lightning_shader.tres" id="1_wmeas"]
 [ext_resource type="Texture2D" uid="uid://wcm4vnilky5y" path="res://art/items/laser beam.jpg" id="2_xaavs"]
-[ext_resource type="Texture2D" uid="uid://ds1n8adbea6u3" path="res://art/items/SparkPart.png" id="3_4f8x5"]
 [ext_resource type="Script" path="res://laser.gd" id="3_trt42"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4otbo"]
@@ -11,74 +10,26 @@ shader_parameter/Vanish_Value = 0.0
 shader_parameter/Speed = Vector2(0, 0)
 shader_parameter/basic_texture = ExtResource("2_xaavs")
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mlq1t"]
-blend_mode = 1
-light_mode = 1
-
-[sub_resource type="Curve" id="Curve_cxk6w"]
-_data = [Vector2(0, 0.505494), 0.0, 0.0, 0, 0, Vector2(1, 0.131868), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Curve" id="Curve_c1ufk"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Curve" id="Curve_bj8an"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_v0qmg"]
-curve_x = SubResource("Curve_cxk6w")
-curve_y = SubResource("Curve_c1ufk")
-curve_z = SubResource("Curve_bj8an")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tjyo4"]
-particle_flag_align_y = true
-particle_flag_disable_z = true
-emission_shape = 6
-emission_ring_axis = Vector3(0, 0, 1)
-emission_ring_height = 50.0
-emission_ring_radius = 50.0
-emission_ring_inner_radius = 0.0
-direction = Vector3(0, 1, 0)
-initial_velocity_min = -500.0
-initial_velocity_max = -400.0
-radial_velocity_min = -478.88
-radial_velocity_max = -278.88
-gravity = Vector3(0, 98, 0)
-scale_min = 0.5
-scale_max = 2.0
-scale_curve = SubResource("CurveXYZTexture_v0qmg")
-color = Color(0.533333, 1, 0.368627, 1)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2u7r2"]
-size = Vector2(11.4992, 32.5763)
+size = Vector2(11.4992, 19.1625)
 
-[node name="Laser" type="Line2D"]
+[node name="Node2D" type="Node2D"]
+script = ExtResource("3_trt42")
+
+[node name="Laser" type="Line2D" parent="."]
 z_index = 10
 material = SubResource("ShaderMaterial_4otbo")
 position = Vector2(-4.54747e-13, 0)
 scale = Vector2(0.173925, 0.521852)
-points = PackedVector2Array(2.61462e-12, 15.33, 2.61462e-12, -17.2463)
+points = PackedVector2Array(2.61462e-12, 9.58126, 2.61462e-12, -9.58126)
 width = 60.0
 default_color = Color(0.358698, 0.03558, 0.023435, 1)
 texture_mode = 2
-script = ExtResource("3_trt42")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-visible = false
-material = SubResource("CanvasItemMaterial_mlq1t")
-position = Vector2(340, 393)
-amount = 5
-process_material = SubResource("ParticleProcessMaterial_tjyo4")
-texture = ExtResource("3_4f8x5")
-lifetime = 0.15
-fixed_fps = 60
-
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="Laser"]
 position = Vector2(0, -3.8147e-06)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, -0.958122)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Laser/Area2D"]
+position = Vector2(0, 3.8147e-06)
 scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_2u7r2")

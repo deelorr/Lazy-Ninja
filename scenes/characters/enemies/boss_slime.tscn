@@ -1,11 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://bbr5hssmqx5vl"]
+[gd_scene load_steps=16 format=3 uid="uid://bbr5hssmqx5vl"]
 
 [ext_resource type="Script" path="res://scripts/characters/enemies/boss_slime.gd" id="1_mrlj3"]
 [ext_resource type="Texture2D" uid="uid://bhdmq6ekebqx1" path="res://art/characters/enemies/green_slime/Idle.png" id="2_pcbdu"]
 [ext_resource type="Texture2D" uid="uid://dgtd1dfpsi0io" path="res://art/characters/enemies/green_slime/Hit.png" id="3_ey67a"]
 [ext_resource type="Texture2D" uid="uid://cjjwa6vwoi6i5" path="res://art/effects/smoke.png" id="3_qc7rt"]
 [ext_resource type="Texture2D" uid="uid://dbvn2mi8bh5fd" path="res://art/characters/enemies/green_slime/Jump.png" id="4_ypmfb"]
-[ext_resource type="PackedScene" uid="uid://crnro4neo10sn" path="res://laser.tscn" id="6_s187d"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lai3o"]
 radius = 6.0
@@ -473,9 +472,9 @@ shape = SubResource("CircleShape2D_4a7qj")
 
 [node name="ShootTimer" type="Timer" parent="."]
 
-[node name="Laser" parent="." instance=ExtResource("6_s187d")]
-visible = false
-position = Vector2(34.4026, 14.3973)
+[node name="Line2D" type="Line2D" parent="."]
+
+[node name="Timer" type="Timer" parent="Line2D"]
 
 [connection signal="area_entered" from="hurt_box" to="." method="_on_hurt_box_area_entered"]
 [connection signal="timeout" from="direction_timer" to="." method="_on_direction_timer_timeout"]

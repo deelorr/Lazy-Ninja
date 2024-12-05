@@ -1,18 +1,28 @@
 extends CharacterBody2D
 
+@onready var player = SceneManager.player
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var direction_timer: Timer = $direction_timer
+
+
 @onready var fov: Area2D = $FieldOfView  # The Area2D node for the field of view
 @onready var shoot_timer: Timer = $ShootTimer  # A timer to control the shooting rate
 @onready var LaserScene: PackedScene = preload("res://laser.tscn")  # Reference to laser scene
 
-var speed: int = 45
+const SPEED = 45
+const LASER_DURATION = 0.03
+
+#var speed: int = 45
 var is_dead: bool = false
+
+
 var player_in_fov: bool = false  # Tracks if the player is inside the FOV
 
 func _ready() -> void:
-	velocity = Vector2.DOWN * speed
+	velocity = Vector2.DOWN * SPEED
 	direction_timer.start()
+	
+	
 	shoot_timer.stop()  # Prevent shooting until the player is in the FOV
 
 func _physics_process(_delta: float) -> void:
@@ -23,7 +33,7 @@ func _physics_process(_delta: float) -> void:
 
 	# Handle shooting if the player is in the FOV
 	if player_in_fov and not shoot_timer.is_stopped():
-		shoot_laser()
+		create_laser(global_position, player.global_position)
 
 func update_animation() -> void:
 	if velocity.length() == 0:
@@ -53,21 +63,59 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 func _on_direction_timer_timeout() -> void:
 	var angle = randf() * 2 * PI  # Random angle
 	var new_direction = Vector2(cos(angle), sin(angle)).normalized()
-	velocity = new_direction * speed
+	velocity = new_direction * SPEED
 	direction_timer.start()
 
 func shoot_laser() -> void:
 	if not is_instance_valid(SceneManager.player):
 		return  # Avoid errors if the player is removed
-	var player_position = SceneManager.player.global_position
-	var direction = (player_position - global_position).normalized()
-
-	# Create and shoot the laser
-	var laser = LaserScene.instantiate()
+	
+	var laser = Line2D.new()
+	laser.add_point(global_position)
+	laser.add_point(player.global_position)
+	laser.default_color = Color(1, 0, 0)  # Optional: Set laser color to red for clarity
 	get_parent().add_child(laser)
-	laser.global_position = global_position
-	laser.direction = direction  # Set the laser's direction
-	laser.z_index = 10  # Ensure laser is rendered above other elements
+
+	# Add a timer to clean up the laser
+	var cleanup_timer = Timer.new()
+	cleanup_timer.wait_time = 0.03  # Adjust duration to match how long the laser should be visible
+	cleanup_timer.one_shot = true
+	cleanup_timer.timeout.connect(laser.queue_free)  # Remove the laser when the timer ends
+	laser.add_child(cleanup_timer)  # Attach the timer to the laser node
+	cleanup_timer.start()
+	
+func create_laser(start: Vector2, end: Vector2) -> void:
+	var laser = Line2D.new()
+	laser.add_point(start)
+	laser.add_point(end)
+	laser.default_color = Color(1, 0.5, 0)  # Orange color for fallback
+	laser.width = 10  # Set the line width
+
+	# Load and set texture for the laser
+	var laser_texture = preload("res://art/items/laser beam.jpg")
+	laser.texture = laser_texture
+	laser.texture_mode = Line2D.LINE_TEXTURE_TILE  # Tile texture along the laser
+
+	# Optional: Add gradient for fading effect
+	var gradient = Gradient.new()
+	gradient.colors = [Color(1, 0, 0, 1), Color(1, 1, 0, 0)]  # From red to transparent
+	laser.gradient = gradient
+
+	## Set smoother corners and caps
+	#laser.joint_mode = Line2D.LINE_JOINT_ROUND
+	#laser.cap_mode = Line2D.LINE_CAP_ROUND
+
+	get_parent().add_child(laser)
+
+	# Cleanup timer to remove laser after a short duration
+	var cleanup_timer = Timer.new()
+	cleanup_timer.wait_time = 0.05
+	cleanup_timer.one_shot = true
+	cleanup_timer.timeout.connect(laser.queue_free)
+	add_child(cleanup_timer)
+	cleanup_timer.start()
+
+
 
 func _on_field_of_view_body_entered(body: Node) -> void:
 	if body.is_in_group("player"):  # Replace with your player's node name or group

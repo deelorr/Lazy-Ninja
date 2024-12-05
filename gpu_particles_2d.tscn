@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://c8dnltdnllvyv"]
+
+[ext_resource type="Texture2D" uid="uid://ds1n8adbea6u3" path="res://art/items/SparkPart.png" id="1_y72pj"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mlq1t"]
+blend_mode = 1
+light_mode = 1
+
+[sub_resource type="Curve" id="Curve_cxk6w"]
+_data = [Vector2(0, 0.505494), 0.0, 0.0, 0, 0, Vector2(1, 0.131868), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_c1ufk"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_bj8an"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_v0qmg"]
+curve_x = SubResource("Curve_cxk6w")
+curve_y = SubResource("Curve_c1ufk")
+curve_z = SubResource("Curve_bj8an")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tjyo4"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 50.0
+emission_ring_radius = 50.0
+emission_ring_inner_radius = 0.0
+direction = Vector3(0, 1, 0)
+initial_velocity_min = -500.0
+initial_velocity_max = -400.0
+radial_velocity_min = -478.88
+radial_velocity_max = -278.88
+gravity = Vector3(0, 98, 0)
+scale_min = 0.5
+scale_max = 2.0
+scale_curve = SubResource("CurveXYZTexture_v0qmg")
+color = Color(0.533333, 1, 0.368627, 1)
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+material = SubResource("CanvasItemMaterial_mlq1t")
+position = Vector2(340, 393)
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_tjyo4")
+texture = ExtResource("1_y72pj")
+lifetime = 0.15
+fixed_fps = 60
