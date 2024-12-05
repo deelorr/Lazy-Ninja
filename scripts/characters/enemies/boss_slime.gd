@@ -92,7 +92,7 @@ func create_laser(start: Vector2, end: Vector2) -> void:
 	laser.width = 10  # Set the line width
 
 	# Load and set texture for the laser
-	var laser_texture = preload("res://art/items/laser beam.jpg")
+	var laser_texture = preload("res://art/items/laser beam clear small tile.jpg")
 	laser.texture = laser_texture
 	laser.texture_mode = Line2D.LINE_TEXTURE_TILE  # Tile texture along the laser
 
@@ -102,8 +102,9 @@ func create_laser(start: Vector2, end: Vector2) -> void:
 	laser.gradient = gradient
 
 	## Set smoother corners and caps
-	#laser.joint_mode = Line2D.LINE_JOINT_ROUND
-	#laser.cap_mode = Line2D.LINE_CAP_ROUND
+	laser.sharp_limit = 5.0 # Adjust for smoothness
+	laser.begin_cap_mode = Line2D.LINE_CAP_ROUND
+	laser.end_cap_mode = Line2D.LINE_CAP_ROUND
 
 	get_parent().add_child(laser)
 
@@ -114,8 +115,6 @@ func create_laser(start: Vector2, end: Vector2) -> void:
 	cleanup_timer.timeout.connect(laser.queue_free)
 	add_child(cleanup_timer)
 	cleanup_timer.start()
-
-
 
 func _on_field_of_view_body_entered(body: Node) -> void:
 	if body.is_in_group("player"):  # Replace with your player's node name or group

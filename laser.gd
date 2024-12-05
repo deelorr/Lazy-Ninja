@@ -1,4 +1,4 @@
-#extends Node2D
+extends Line2D
 #
 #@export var speed: float = 150
 #
