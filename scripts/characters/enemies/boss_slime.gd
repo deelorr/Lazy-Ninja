@@ -3,33 +3,33 @@ extends CharacterBody2D
 @onready var player = SceneManager.player
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var direction_timer: Timer = $direction_timer
-@onready var fov: Area2D = $FieldOfView  # The Area2D node for the field of view
+@onready var fov: Area2D = $FieldOfView
 @onready var laser_duration_timer: Timer = $laser_duration
-@onready var laser_beam: PackedScene = preload("res://laserbeam.tscn")  # Reference to laser scene
-@onready var laser: Line2D = null
+@onready var laser_beam: PackedScene = preload("res://laserbeam.tscn")
+@onready var laser: Line2D
+@onready var cooldown_timer: Timer = $cooldown
 
 const SPEED = 45
-const LASER_DURATION = 5
 
 var is_dead: bool = false
-var player_in_fov: bool = false  # Tracks if the player is inside the FOV
+var player_in_fov: bool = false
+var can_shoot_laser: bool = false
 
 func _ready() -> void:
-	velocity = Vector2.DOWN * SPEED
+	velocity = Vector2.ZERO * SPEED
 	direction_timer.start()
-	laser_duration_timer.wait_time = LASER_DURATION
+	can_shoot_laser = false
 
 func _physics_process(_delta: float) -> void:
 	if is_dead:
 		return
 	update_animation()
 	move_and_slide()
-	
-	if player_in_fov:
-		# Continuously update the laser's position while the player is in FOV
+
+	# Only show laser if player is in FOV and shooting is allowed
+	if player_in_fov and can_shoot_laser:
 		create_laser(global_position, player.global_position)
 	else:
-		# Hide the laser if the player leaves the FOV
 		remove_laser()
 
 func update_animation() -> void:
@@ -58,46 +58,51 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 	queue_free()
 
 func _on_direction_timer_timeout() -> void:
-	var angle = randf() * 2 * PI  # Random angle
+	var angle = randf() * 2 * PI
 	var new_direction = Vector2(cos(angle), sin(angle)).normalized()
 	velocity = new_direction * SPEED
 	direction_timer.start()
-	
+
 func create_laser(start: Vector2, end: Vector2) -> void:
-	# Create the laser instance if it doesn't already exist
+	# Create the laser instance if it doesn't exist
 	if laser == null:
 		laser = laser_beam.instantiate()
 		get_parent().add_child(laser)
 
-	# Update the laser's start and end points
+	# Update laser points
 	laser.clear_points()
 	laser.add_point(start)
 	laser.add_point(end)
-
-	# Set the laser to visible
 	laser.visible = true
-	
+
+	# Start duration timer if not running
 	if laser_duration_timer.is_stopped():
 		laser_duration_timer.start()
-		print("timer started")
-	
+		print("Laser duration timer started")
+
 func remove_laser() -> void:
-	# Hide the laser and stop updates
+	# Hide the laser if it exists
 	if laser != null:
 		laser.visible = false
-	if not laser_duration_timer.is_stopped():
-		laser_duration_timer.stop()
 
 func _on_field_of_view_body_entered(body: Node) -> void:
-	if body.is_in_group("player"):  # Replace with your player's node name or group
+	if body.is_in_group("player"):
 		player_in_fov = true
-		#shoot_timer.start()  # Start shooting when the player enters the FOV
+		# If not cooling down, allow shooting immediately
+		if cooldown_timer.is_stopped():
+			can_shoot_laser = true
 
 func _on_field_of_view_body_exited(body: Node) -> void:
-	if body.is_in_group("player"):  # Replace with your player's node name or group
+	if body.is_in_group("player"):
 		player_in_fov = false
-		#shoot_timer.stop()  # Stop shooting when the player exits the FOV
 
-func _on_laser_duration_timeout():
-	print("timer done")
+func _on_laser_duration_timeout() -> void:
+	print("Laser duration ended")
 	remove_laser()
+	can_shoot_laser = false
+	cooldown_timer.start()
+
+func _on_cooldown_timeout() -> void:
+	# If the player is still in FOV after cooldown, resume shooting
+	if player_in_fov:
+		can_shoot_laser = true
