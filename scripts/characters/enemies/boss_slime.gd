@@ -5,7 +5,7 @@ extends CharacterBody2D
 @onready var direction_timer: Timer = $direction_timer
 @onready var fov: Area2D = $FieldOfView  # The Area2D node for the field of view
 @onready var shoot_timer: Timer = $ShootTimer  # A timer to control the shooting rate
-@onready var LaserScene: PackedScene = preload("res://laser.tscn")  # Reference to laser scene
+@onready var laser_beam: PackedScene = preload("res://laserbeam.tscn")  # Reference to laser scene
 
 const SPEED = 45
 const LASER_DURATION = 0.03
@@ -58,27 +58,10 @@ func _on_direction_timer_timeout() -> void:
 	direction_timer.start()
 	
 func create_laser(start: Vector2, end: Vector2) -> void:
-	var laser = Line2D.new()
+	var laser = laser_beam.instantiate()
+	laser.clear_points()
 	laser.add_point(start)
 	laser.add_point(end)
-	laser.default_color = Color(1, 0.5, 0)  # Orange color for fallback
-	laser.width = 10  # Set the line width
-
-	# Load and set texture for the laser
-	var laser_texture = preload("res://art/items/laser beam clear small tile.jpg")
-	laser.texture = laser_texture
-	laser.texture_mode = Line2D.LINE_TEXTURE_TILE  # Tile texture along the laser
-
-	# Optional: Add gradient for fading effect
-	var gradient = Gradient.new()
-	gradient.colors = [Color(1, 0, 0, 1), Color(1, 1, 0, 0)]  # From red to transparent
-	laser.gradient = gradient
-
-	## Set smoother corners and caps
-	laser.sharp_limit = 5.0 # Adjust for smoothness
-	laser.begin_cap_mode = Line2D.LINE_CAP_ROUND
-	laser.end_cap_mode = Line2D.LINE_CAP_ROUND
-
 	get_parent().add_child(laser)
 
 	# Cleanup timer to remove laser after a short duration
