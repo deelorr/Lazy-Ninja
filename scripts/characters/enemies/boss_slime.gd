@@ -1,7 +1,7 @@
-extends CharacterBody2D
+extends "res://scripts/characters/CharacterClass.gd"
+class_name BossSlime
 
 @onready var player = SceneManager.player
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var direction_timer: Timer = $direction_timer
 @onready var fov: Area2D = $FieldOfView
 @onready var laser_duration_timer: Timer = $laser_duration
@@ -11,11 +11,10 @@ extends CharacterBody2D
 
 const SPEED = 45
 
-var is_dead: bool = false
 var player_in_fov: bool = false
 var can_shoot_laser: bool = false
-
-func _ready() -> void:
+	
+func setup_character():
 	velocity = Vector2.ZERO * SPEED
 	direction_timer.start()
 	can_shoot_laser = false
@@ -34,24 +33,18 @@ func _physics_process(_delta: float) -> void:
 
 func update_animation() -> void:
 	if velocity.length() == 0:
-		if animation_player.is_playing():
-			animation_player.stop()
+		if animations.is_playing():
+			animations.stop()
 		return
-	animation_player.play("idle")
-
-func get_direction() -> String:
-	if abs(velocity.x) > abs(velocity.y):
-		return "left" if velocity.x < 0 else "right"
-	else:
-		return "up" if velocity.y < 0 else "down"
+	animations.play("idle")
 
 func _on_hurt_box_area_entered(area: Area2D) -> void:
 	if not area.is_in_group("weapon"):
 		return
 	$hit_box.set_deferred("monitorable", false)
 	is_dead = true
-	animation_player.play("death")
-	await animation_player.animation_finished
+	animations.play("death")
+	await animations.animation_finished
 	Global.enemy_killed.emit("boss_slime")
 	print("boss slime destroyed")
 	SceneManager.player.progression.add_xp(50)

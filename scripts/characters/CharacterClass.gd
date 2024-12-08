@@ -8,9 +8,10 @@ class_name Character
 @export var diagonal_threshold = 0.5 # Adjust sensitivity to diagonal detection
 
 # children for all characters
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var sprite: Sprite2D = $Sprite2D if has_node("Sprite2D") else null
 @onready var animations: AnimationPlayer = $AnimationPlayer
-@onready var hurt_box: Area2D = $hurt_box
+@onready var hurt_box: Area2D = $hurt_box if has_node("hurt_box") else null
+
 
 # variables for all characters
 var current_health: int

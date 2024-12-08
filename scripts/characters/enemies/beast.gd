@@ -1,16 +1,12 @@
-extends CharacterBody2D
+extends "res://scripts/characters/CharacterClass.gd"
+class_name Beast
 
-@export var speed: int = 50
-
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var direction_timer: Timer = $direction_timer
 
-var current_health: int = 2
-var is_dead: bool = false
 var is_chasing: bool = false
 var player: Player = null
 
-func _ready() -> void:
+func setup_character():
 	player = SceneManager.player
 	velocity = Vector2.DOWN * speed
 	direction_timer.start()
@@ -24,19 +20,6 @@ func _physics_process(_delta: float) -> void:
 		move_and_slide()
 	update_animation()
 
-func update_animation() -> void:
-	if velocity.length() == 0:
-		if animation_player.is_playing():
-			animation_player.stop()
-		return
-	animation_player.play("walk_" + get_direction())
-
-func get_direction() -> String:
-	if abs(velocity.x) > abs(velocity.y):
-		return "left" if velocity.x < 0 else "right"
-	else:
-		return "up" if velocity.y < 0 else "down"
-
 func _on_hurt_box_area_entered(area: Area2D) -> void:
 	if not area.is_in_group("weapon"):
 		return
@@ -44,8 +27,8 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 	if current_health <= 0:
 		$hit_box.set_deferred("monitorable", false)
 		is_dead = true
-		animation_player.play("death")
-		await animation_player.animation_finished
+		animations.play("death")
+		await animations.animation_finished
 		Global.enemy_killed.emit("beast")
 		Global.beast_count -= 1
 		print("beast destroyed", Global.beast_count, "/", Global.max_beasts)
@@ -60,8 +43,8 @@ func _on_direction_timer_timeout() -> void:
 	direction_timer.start()
 
 func chase_player() -> void:
-	var direction = (player.position - position).normalized()
-	velocity = direction * speed
+	var chase_direction = (player.position - position).normalized()
+	velocity = chase_direction * speed
 	move_and_slide()
 
 func _on_detection_body_entered(body: Node) -> void:
