@@ -2,6 +2,9 @@ extends Resource
 class_name PlayerCombat
 
 var player: Player
+var is_aiming_with_stick: bool
+var last_aim_direction: Vector2
+var current_weapon: String = "sword"
 
 func _init(p):
 	player = p
@@ -17,17 +20,17 @@ func attack():
 	player.is_attacking = false
 
 func aim_shuriken(right_stick_vector = null):
-	if player.current_weapon != "shuriken":
+	if player.combat.current_weapon != "shuriken":
 		return
 
 	var aim_position
 	if right_stick_vector != null:
-		player.last_aim_direction = right_stick_vector.normalized()
-		aim_position = player.global_position + player.last_aim_direction * 100
+		player.combat.last_aim_direction = right_stick_vector.normalized()
+		aim_position = player.global_position + player.combat.last_aim_direction * 100
 	else:
 		aim_position = player.get_aim_position()
 		var direction_vector = (aim_position - player.global_position).normalized()
-		player.last_aim_direction = direction_vector
+		player.combat.last_aim_direction = direction_vector
 
 	var hurt_box_position = player.hurt_box.global_position
 	var direction = (aim_position - hurt_box_position).normalized()
@@ -42,9 +45,9 @@ func aim_shuriken(right_stick_vector = null):
 	player.aim_line.add_point(aim_position - player.global_position)
 
 func throw_shuriken():
-	if player.current_weapon != "shuriken":
+	if player.combat.current_weapon != "shuriken":
 		return
-	var aim_position = player.global_position + player.last_aim_direction * 100
+	var aim_position = player.global_position + player.combat.last_aim_direction * 100
 	player.shuriken.throw(aim_position)
 	player.shuriken_noise.play()
 	player.animations.play("attack_" + player.direction)
@@ -73,7 +76,6 @@ func hurt_by_enemy_area(area):
 	player.is_hurt = false
 
 func check_enemy_hits():
-	# Similar logic from original code
 	for area in player.hurt_box.get_overlapping_areas():
 		if area.name == "hit_box":
 			hurt_by_enemy_area(area)

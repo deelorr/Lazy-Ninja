@@ -31,8 +31,8 @@ func change_active_weapon(new_index: int):
 		weapon = weapons[active_weapon_index]
 		# Set the current weapon for the player
 		if weapon:
-			SceneManager.player.current_weapon = weapon.name
-			print("Current Weapon: ", SceneManager.player.current_weapon.capitalize())
+			SceneManager.player.combat.current_weapon = weapon.name
+			print("Current Weapon: ", SceneManager.player.combat.current_weapon.capitalize())
 
 func enable():
 	if not weapon:

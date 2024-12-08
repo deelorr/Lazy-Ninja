@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cxoq8wlar5k2u" path="res://art/tilesets/TilesetElement.png" id="4_01ln3"]
 [ext_resource type="Texture2D" uid="uid://duq3rnujqw5h7" path="res://art/tilesets/animated_sprites/anim_flower.png" id="5_tvhvb"]
 [ext_resource type="Texture2D" uid="uid://dxhtr0uptcsdf" path="res://art/tilesets/TilesetDesert.png" id="6_iea3j"]
-[ext_resource type="PackedScene" uid="uid://b2blmb7y86f78" path="res://scenes/items/collectables/Lifepot.tscn" id="6_nqj8l"]
+[ext_resource type="PackedScene" uid="uid://b2blmb7y86f78" path="res://scenes/items/collectables/lifepot.tscn" id="6_nqj8l"]
 [ext_resource type="PackedScene" uid="uid://ck78uu30262eo" path="res://scenes/items/weapons/axe.tscn" id="8_yn5ij"]
 [ext_resource type="PackedScene" uid="uid://buthmqfo85e7v" path="res://scenes/items/collectables/coin.tscn" id="9_li2p6"]
 [ext_resource type="Texture2D" uid="uid://dgif58s51ttk0" path="res://art/tilesets/buildings.png" id="10_gckao"]
@@ -3401,7 +3401,6 @@ layer_6/z_index = 1
 layer_6/tile_data = PackedInt32Array(458771, 1048580, 0, 393229, 786436, 0, 393239, 1638404, 7, 393222, 1245188, 0, 589852, 1507332, 0)
 
 [node name="HUD" parent="." instance=ExtResource("17_badmg")]
-visible = false
 
 [node name="follow_cam" type="Camera2D" parent="." node_paths=PackedStringArray("tilemap")]
 position = Vector2(176, 106)

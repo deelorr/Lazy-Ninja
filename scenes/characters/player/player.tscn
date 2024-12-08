@@ -527,7 +527,6 @@ _data = {
 z_index = 1
 collision_layer = 9
 script = ExtResource("1_g647x")
-speed = 100
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 clip_children = 2

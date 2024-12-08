@@ -66,7 +66,7 @@ func complete_quest():
 func grant_rewards():
 	for key in rewards.keys():
 		if key == "XP":
-			SceneManager.player.add_xp(rewards[key])
+			SceneManager.player.progression.add_xp(rewards[key])
 		elif key == "Items":
 			SceneManager.player.inventory.insert(rewards[key])
 			print(rewards[key].name, " inserted into Inventory")

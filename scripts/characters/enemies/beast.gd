@@ -49,7 +49,7 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 		Global.enemy_killed.emit("beast")
 		Global.beast_count -= 1
 		print("beast destroyed", Global.beast_count, "/", Global.max_beasts)
-		SceneManager.player.add_xp(10)
+		SceneManager.player.progression.add_xp(10)
 		queue_free()
 
 func _on_direction_timer_timeout() -> void:

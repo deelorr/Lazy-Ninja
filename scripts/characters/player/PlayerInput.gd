@@ -19,13 +19,13 @@ func handle_input():
 	var right_stick_magnitude = right_stick_vector.length()
 	var stick_threshold = 0.1
 
-	if player.current_weapon == "shuriken":
+	if player.combat.current_weapon == "shuriken":
 		if right_stick_magnitude > stick_threshold:
-			if not player.is_aiming_with_stick:
-				player.is_aiming_with_stick = true
+			if not player.combat.is_aiming_with_stick:
+				player.combat.is_aiming_with_stick = true
 			player.combat.aim_shuriken(right_stick_vector)
-		elif player.is_aiming_with_stick:
-			player.is_aiming_with_stick = false
+		elif player.combat.is_aiming_with_stick:
+			player.combat.is_aiming_with_stick = false
 			player.combat.throw_shuriken()
 		else:
 			# Reset aiming visuals if the stick is not moved

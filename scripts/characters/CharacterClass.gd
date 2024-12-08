@@ -1,29 +1,30 @@
 extends CharacterBody2D
 class_name Character
 
-# Shared properties for all characters
+# properties for all characters
 @export var max_health: int = 10
 @export var speed: float = 50
 @export var knockback_power: int = 500
-@export var diagonal_threshold = 0.5 # Adjust sensitivity to diagonal detection 
+@export var diagonal_threshold = 0.5 # Adjust sensitivity to diagonal detection
 
-# Common state
+# children for all characters
+@onready var sprite: Sprite2D = $Sprite2D
+@onready var animations: AnimationPlayer = $AnimationPlayer
+@onready var hurt_box: Area2D = $hurt_box
+
+# variables for all characters
 var current_health: int
 var is_hurt: bool = false
 var is_dead: bool = false
 var is_attacking: bool = false
 var direction: String = "down"
-
-# Onready references (all characters have these children)
-@onready var sprite: Sprite2D = $Sprite2D
-@onready var animations: AnimationPlayer = $AnimationPlayer
-@onready var hurt_box: Area2D = $hurt_box
+var gold: int = 50
 
 func _ready():
 	current_health = max_health
 	setup_character()
 
-# For subclasses to do any special setup
+# subclass setup
 func setup_character():
 	# Override in subclasses if needed
 	pass
@@ -68,3 +69,18 @@ func update_animation():
 		elif velocity.x > 0 and velocity.y > 0:
 			direction = "right"
 	animations.play("walk_" + direction)
+
+func increase_health(amount: int):
+	current_health += amount
+	current_health = min(max_health, current_health)
+
+func decrease_health(amount: int):
+	current_health -= amount
+	current_health = max(max_health, current_health)
+
+func add_gold(amount: int):
+	gold += amount
+	
+func take_gold(amount: int):
+	gold -= amount
+	gold = max(0, gold)

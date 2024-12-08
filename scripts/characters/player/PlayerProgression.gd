@@ -2,14 +2,12 @@ extends Resource
 class_name PlayerProgression
 
 var player: Player
-
-
-func _init(p):
-	player = p
-
 var current_xp: int = 0
 var current_level: int = 1
 var xp_for_next_level: int = 100
+
+func _init(p):
+	player = p
 
 func add_xp(amount: int):
 	current_xp += amount

@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cf71ab0m6youu" path="res://scenes/gui/inventory/hotbar.tscn" id="3_q8jf0"]
 [ext_resource type="PackedScene" uid="uid://de4i75octoy82" path="res://scenes/gui/HUD/stat_panel.tscn" id="4_c4hd3"]
 [ext_resource type="PackedScene" uid="uid://cok1fy1chnj" path="res://scenes/gui/HUD/quest_panel.tscn" id="5_qcw0o"]
-[ext_resource type="PackedScene" uid="uid://6wp3vubr0uio" path="res://pause_menu.tscn" id="7_tk1ql"]
+[ext_resource type="PackedScene" uid="uid://6wp3vubr0uio" path="res://scenes/gui/pause_menu.tscn" id="7_tk1ql"]
 
 [node name="HUD" type="CanvasLayer"]
 process_mode = 3

@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://bi1v3lsgao0wn"]
+[gd_scene load_steps=39 format=3 uid="uid://bi1v3lsgao0wn"]
 
 [ext_resource type="Texture2D" uid="uid://jtuqvr1lwjq7" path="res://art/tilesets/ground.png" id="1_crrrf"]
 [ext_resource type="Script" path="res://scripts/scenes/scene_manager/base_scene.gd" id="1_uu85d"]
@@ -21,9 +21,6 @@
 [ext_resource type="PackedScene" uid="uid://bm0pod17s368c" path="res://scenes/gui/HUD/HUD.tscn" id="17_nck1a"]
 [ext_resource type="PackedScene" uid="uid://hhfggt4edi0h" path="res://scenes/characters/enemies/black_spider.tscn" id="22_d3pro"]
 [ext_resource type="PackedScene" uid="uid://dw5sthe4f7i0a" path="res://scenes/characters/enemies/red_beast.tscn" id="23_1f4hp"]
-[ext_resource type="Shader" uid="uid://ceohf70jbda8a" path="res://shaders/lightning_shader.tres" id="24_ncwou"]
-[ext_resource type="Texture2D" uid="uid://wcm4vnilky5y" path="res://art/items/laser beam.jpg" id="25_jlrux"]
-[ext_resource type="Texture2D" uid="uid://ds1n8adbea6u3" path="res://art/items/SparkPart.png" id="26_8cmo3"]
 [ext_resource type="PackedScene" uid="uid://bp8d5fmlfog07" path="res://scenes/utility/spawn_area.tscn" id="27_7giur"]
 [ext_resource type="PackedScene" uid="uid://be5nryp8gacni" path="res://scenes/utility/slime_cave.tscn" id="27_srog0"]
 
@@ -2997,52 +2994,6 @@ size = Vector2(14, 9)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_38moa"]
 size = Vector2(16, 24)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8s83n"]
-shader = ExtResource("24_ncwou")
-shader_parameter/Vanish_Value = 0.0
-shader_parameter/Speed = Vector2(0, 0)
-shader_parameter/basic_texture = ExtResource("25_jlrux")
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_pd4sq"]
-blend_mode = 1
-light_mode = 1
-
-[sub_resource type="Curve" id="Curve_7l0t0"]
-_data = [Vector2(0, 0.505494), 0.0, 0.0, 0, 0, Vector2(1, 0.131868), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Curve" id="Curve_sm0r4"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Curve" id="Curve_58r4g"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_tm3tl"]
-curve_x = SubResource("Curve_7l0t0")
-curve_y = SubResource("Curve_sm0r4")
-curve_z = SubResource("Curve_58r4g")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8i7pn"]
-particle_flag_align_y = true
-particle_flag_disable_z = true
-emission_shape = 6
-emission_ring_axis = Vector3(0, 0, 1)
-emission_ring_height = 50.0
-emission_ring_radius = 50.0
-emission_ring_inner_radius = 0.0
-direction = Vector3(0, 1, 0)
-initial_velocity_min = -500.0
-initial_velocity_max = -400.0
-radial_velocity_min = -478.88
-radial_velocity_max = -278.88
-gravity = Vector3(0, 98, 0)
-scale_min = 0.5
-scale_max = 2.0
-scale_curve = SubResource("CurveXYZTexture_tm3tl")
-color = Color(0.533333, 1, 0.368627, 1)
-
 [node name="World" type="Node2D" groups=["gameplay"]]
 y_sort_enabled = true
 script = ExtResource("1_uu85d")
@@ -3141,23 +3092,3 @@ collision_mask = 7
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="boundaries"]
 polygon = PackedVector2Array(17, 30, 240, 30, 240, 16, 256, 16, 256, 30, 657, 30, 658, 190, 687, 190, 687, 215, 658, 215, 658, 328, 16, 328, 15, 30, 15, -12, -12, -12, -12, 361, 690, 357, 690, -13, 17, -12)
-
-[node name="Line2D" type="Line2D" parent="."]
-visible = false
-z_index = 5
-material = SubResource("ShaderMaterial_8s83n")
-position = Vector2(-106, -95)
-points = PackedVector2Array(487, 339, 504, 393)
-width = 30.0
-default_color = Color(0.358698, 0.03558, 0.023435, 1)
-texture_mode = 2
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="Line2D"]
-visible = false
-material = SubResource("CanvasItemMaterial_pd4sq")
-position = Vector2(340, 393)
-amount = 5
-process_material = SubResource("ParticleProcessMaterial_8i7pn")
-texture = ExtResource("26_8cmo3")
-lifetime = 0.15
-fixed_fps = 60

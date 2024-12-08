@@ -5,7 +5,7 @@ extends CharacterBody2D
 @onready var direction_timer: Timer = $direction_timer
 @onready var fov: Area2D = $FieldOfView
 @onready var laser_duration_timer: Timer = $laser_duration
-@onready var laser_beam: PackedScene = preload("res://laserbeam.tscn")
+@onready var laser_beam: PackedScene = preload("res://scenes/effects/laserbeam.tscn")
 @onready var laser: Line2D
 @onready var cooldown_timer: Timer = $cooldown
 
@@ -54,7 +54,7 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 	await animation_player.animation_finished
 	Global.enemy_killed.emit("boss_slime")
 	print("boss slime destroyed")
-	SceneManager.player.add_xp(50)
+	SceneManager.player.progression.add_xp(50)
 	queue_free()
 
 func _on_direction_timer_timeout() -> void:

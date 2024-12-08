@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://crnro4neo10sn"]
+[gd_scene load_steps=5 format=3 uid="uid://crnro4neo10sn"]
 
 [ext_resource type="Shader" uid="uid://ceohf70jbda8a" path="res://shaders/lightning_shader.tres" id="1_wmeas"]
 [ext_resource type="Texture2D" uid="uid://wcm4vnilky5y" path="res://art/items/laser beam.jpg" id="2_xaavs"]
-[ext_resource type="Script" path="res://laser.gd" id="3_trt42"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4otbo"]
 shader = ExtResource("1_wmeas")
@@ -22,7 +21,6 @@ points = PackedVector2Array(2.61462e-12, 9.58126, 2.61462e-12, -9.58126)
 width = 60.0
 default_color = Color(0.358698, 0.03558, 0.023435, 1)
 texture_mode = 2
-script = ExtResource("3_trt42")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(0, -3.8147e-06)
