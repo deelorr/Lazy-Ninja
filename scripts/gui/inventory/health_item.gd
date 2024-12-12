@@ -1,7 +1,7 @@
-class_name HealthItem
 extends InventoryItem
+class_name HealthItem
 
-@export var health_increase: int = 1
+@export var health_increase: int
 
 func use(player: Player):
 	player.increase_health(health_increase)

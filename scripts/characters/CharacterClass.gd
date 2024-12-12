@@ -71,17 +71,28 @@ func update_animation():
 			direction = "right"
 	animations.play("walk_" + direction)
 
+func knockback(source_position: Vector2) -> void:
+	var knockback_direction = (position - source_position).normalized() * knockback_power
+	velocity = knockback_direction
+	move_and_slide()
+
 func increase_health(amount: int):
 	current_health += amount
-	current_health = min(max_health, current_health)
+	if current_health > max_health:
+		current_health = max_health
 
 func decrease_health(amount: int):
 	current_health -= amount
-	current_health = max(max_health, current_health)
+	if current_health <= 0:
+		die()
 
 func add_gold(amount: int):
 	gold += amount
-	
+
 func take_gold(amount: int):
 	gold -= amount
 	gold = max(0, gold)
+
+func die():
+	#queue_free()
+	current_health = max_health

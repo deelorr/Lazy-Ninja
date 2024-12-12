@@ -27,7 +27,7 @@ func _physics_process(_delta: float) -> void:
 
 	# Only show laser if player is in FOV and shooting is allowed
 	if player_in_fov and can_shoot_laser:
-		create_laser(global_position, player.global_position)
+		create_laser(global_position + Vector2(0,5), player.global_position)
 	else:
 		remove_laser()
 
@@ -43,6 +43,7 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 		return
 	$hit_box.set_deferred("monitorable", false)
 	is_dead = true
+	knockback(area.global_position)
 	animations.play("death")
 	await animations.animation_finished
 	Global.enemy_killed.emit("boss_slime")
@@ -67,6 +68,7 @@ func create_laser(start: Vector2, end: Vector2) -> void:
 	laser.add_point(start)
 	laser.add_point(end)
 	laser.visible = true
+	laser.z_index = 10
 
 	# Start duration timer if not running
 	if laser_duration_timer.is_stopped():

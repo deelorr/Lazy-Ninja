@@ -24,6 +24,7 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 	if not area.is_in_group("weapon"):
 		return
 	current_health -= 1
+	knockback(area.global_position)
 	if current_health <= 0:
 		$hit_box.set_deferred("monitorable", false)
 		is_dead = true

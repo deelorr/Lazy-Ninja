@@ -2,6 +2,7 @@ extends Resource
 class_name PlayerInput
 
 var player: Player
+var is_aiming_with_stick: bool
 
 func _init(p):
 	player = p
@@ -21,11 +22,11 @@ func handle_input():
 
 	if player.combat.current_weapon == "shuriken":
 		if right_stick_magnitude > stick_threshold:
-			if not player.combat.is_aiming_with_stick:
-				player.combat.is_aiming_with_stick = true
+			if not is_aiming_with_stick:
+				is_aiming_with_stick = true
 			player.combat.aim_shuriken(right_stick_vector)
-		elif player.combat.is_aiming_with_stick:
-			player.combat.is_aiming_with_stick = false
+		elif is_aiming_with_stick:
+			is_aiming_with_stick = false
 			player.combat.throw_shuriken()
 		else:
 			# Reset aiming visuals if the stick is not moved

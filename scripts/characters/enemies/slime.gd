@@ -7,6 +7,11 @@ func setup_character():
 	velocity = Vector2.DOWN * speed
 	direction_timer.start()
 
+func knockback(enemy_velocity: Vector2) -> void:
+	var knockback_direction = (position - enemy_velocity).normalized() * knockback_power
+	velocity = knockback_direction
+	move_and_slide()
+
 func _physics_process(_delta: float) -> void:
 	if is_dead:
 		return
@@ -17,6 +22,7 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 	if not area.is_in_group("weapon"):
 		return
 	$hit_box.set_deferred("monitorable", false)
+	knockback(area.global_position)
 	is_dead = true
 	animations.play("death")
 	await animations.animation_finished
@@ -27,7 +33,7 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 	queue_free()
 
 func _on_direction_timer_timeout() -> void:
-	var angle = randf() * 2 * PI  #random angle
+	var angle = randf() * 2 * PI  # Random angle
 	var new_direction = Vector2(cos(angle), sin(angle)).normalized()
 	velocity = new_direction * speed
 	direction_timer.start()
