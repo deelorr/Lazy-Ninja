@@ -5,18 +5,17 @@ signal updated
 signal use_item
 
 @export var slots: Array[InventorySlot]
-var index_of_last_used_item: int = -1
+var last_used_slot_index: int = -1
 
-# Insert an item into the inventory, either stacking it or placing it in a new slot
-func insert(item: InventoryItem):
-	if try_stack_item(item):
+"""Add an item to the inventory. If possible, stack it; otherwise, place it into an empty slot."""
+func add_item(item: InventoryItem):
+	if try_stack_in_existing_slot(item):
 		return
 	place_item_in_empty_slot(item)
-
 	updated.emit()
 
-# Tries to stack the item in an existing slot
-func try_stack_item(item: InventoryItem) -> bool:
+"""Attempt to stack the given item into an existing slot with the same item."""
+func try_stack_in_existing_slot(item: InventoryItem) -> bool:
 	for slot in slots:
 		if slot.item == item and slot.amount < item.max_per_stack:
 			slot.amount += 1
@@ -24,7 +23,7 @@ func try_stack_item(item: InventoryItem) -> bool:
 			return true
 	return false
 
-# Finds an empty slot and places the item there
+"""Place the given item into the first available empty slot."""
 func place_item_in_empty_slot(item: InventoryItem):
 	for i in range(slots.size()):
 		if !slots[i].item:
@@ -33,37 +32,42 @@ func place_item_in_empty_slot(item: InventoryItem):
 			updated.emit()
 			return
 
-# Remove the item from the specified slot
-func remove_slot(inventory_slot: InventorySlot):
+"""Remove the specified slot (by reference) from the inventory."""
+func remove_slot_by_reference(inventory_slot: InventorySlot):
 	var index = slots.find(inventory_slot)
 	if index >= 0:
-		remove_at_index(index)
+		remove_item_at_index(index)
 
-# Removes the item at a specific index
-func remove_at_index(index: int):
+"""Remove the item at the specified index."""
+func remove_item_at_index(index: int):
+	if index < 0 or index >= slots.size():
+		return
 	slots[index] = InventorySlot.new()
 	updated.emit()
 
-# Insert an item at a specific index in the inventory
-func insert_slot(index: int, inventory_slot: InventorySlot):
+"""Set a slot to a specified InventorySlot structure at a given index."""
+func set_slot(index: int, inventory_slot: InventorySlot):
+	if index < 0 or index >= slots.size():
+		return
 	slots[index] = inventory_slot
 	updated.emit()
 
-# Use the item in the specified slot
+"""Emit the use_item signal for the item in the specified slot index, if valid."""
 func use_item_at_index(index: int):
-	if index < 0 or index >= slots.size() or !slots[index].item:
+	if index < 0 or index >= slots.size():
 		return
 	var slot = slots[index]
-	index_of_last_used_item = index
-	use_item.emit(slot.item)
+	if slot.item:
+		last_used_slot_index = index
+		use_item.emit(slot.item)
 
-# Remove the last used item from the inventory
+"""Removes one unit of the last used item (or clears the slot if it was the last unit)."""
 func remove_last_used_item():
-	if index_of_last_used_item < 0:
+	if last_used_slot_index < 0 or last_used_slot_index >= slots.size():
 		return
-	var slot = slots[index_of_last_used_item]
+	var slot = slots[last_used_slot_index]
 	if slot.amount > 1:
 		slot.amount -= 1
 	else:
-		remove_at_index(index_of_last_used_item)
+		remove_item_at_index(last_used_slot_index)
 	updated.emit()

@@ -9,6 +9,6 @@ func _physics_process(_delta):
 
 func collect(_inventory: Inventory):
 	player.add_gold(10)
-	coin_noise.play()
-	await coin_noise.finished
+	#coin_noise.play()
+	#await coin_noise.finished
 	queue_free()
