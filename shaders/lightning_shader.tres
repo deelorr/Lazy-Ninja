@@ -40,7 +40,7 @@ hint = 1
 code = "shader_type canvas_item;
 render_mode blend_add, unshaded;
 
-uniform float Vanish_Value : hint_range(0, 1);
+uniform float Vanish_Value : hint_range(0.0, 1.0);
 uniform vec2 Speed;
 uniform sampler2D basic_texture : source_color, repeat_enable;
 

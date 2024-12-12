@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://sd1tmok77ome"]
 
-[ext_resource type="Script" path="res://scripts/gui/store_inventory/store_slot_ui.gd" id="1_sefmn"]
+[ext_resource type="Script" uid="uid://bex4tgpunvgn0" path="res://scripts/gui/store_inventory/store_slot_ui.gd" id="1_sefmn"]
 [ext_resource type="Texture2D" uid="uid://c8sp0p78c5y8v" path="res://art/gui/inventorySlot.png" id="2_uk4tj"]
 
 [node name="Slot" type="Button"]

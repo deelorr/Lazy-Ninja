@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Inventory" load_steps=20 format=3 uid="uid://dvw7wrxslo3yr"]
 
-[ext_resource type="Script" path="res://scripts/gui/inventory/inventory.gd" id="1_mqtiq"]
-[ext_resource type="Script" path="res://scripts/gui/inventory/inventory_slot.gd" id="2_kgpvb"]
+[ext_resource type="Script" uid="uid://c1sj03m86v2nl" path="res://scripts/gui/inventory/inventory.gd" id="1_mqtiq"]
+[ext_resource type="Script" uid="uid://c1x0f8c2let7f" path="res://scripts/gui/inventory/inventory_slot.gd" id="2_kgpvb"]
 [ext_resource type="Resource" uid="uid://cb3twnsxpcqgv" path="res://resources/inventory/items/lifepot.tres" id="3_wxj17"]
 [ext_resource type="Resource" uid="uid://cs3dwdv0ffoes" path="res://resources/inventory/items/axe.tres" id="4_1et5h"]
 
