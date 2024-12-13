@@ -1,7 +1,7 @@
 [gd_scene load_steps=39 format=3 uid="uid://14mnf4mhdij4"]
 
 [ext_resource type="Texture2D" uid="uid://jtuqvr1lwjq7" path="res://art/tilesets/ground.png" id="1_1wufp"]
-[ext_resource type="Script" path="res://scripts/scenes/scene_manager/base_scene.gd" id="1_i2ele"]
+[ext_resource type="Script" uid="uid://c12preea1trx3" path="res://scripts/scenes/scene_manager/base_scene.gd" id="1_i2ele"]
 [ext_resource type="Texture2D" uid="uid://becag4plihry" path="res://art/tilesets/nature.png" id="2_frjcv"]
 [ext_resource type="Texture2D" uid="uid://ctm10no46jhh2" path="res://art/tilesets/TilesetReliefDetail.png" id="3_0em2e"]
 [ext_resource type="Texture2D" uid="uid://cxoq8wlar5k2u" path="res://art/tilesets/TilesetElement.png" id="4_01ln3"]
@@ -20,7 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://bm0pod17s368c" path="res://scenes/gui/HUD/HUD.tscn" id="17_badmg"]
 [ext_resource type="PackedScene" uid="uid://bp8d5fmlfog07" path="res://scenes/utility/spawn_area.tscn" id="20_kmoth"]
 [ext_resource type="PackedScene" uid="uid://bbr5hssmqx5vl" path="res://scenes/characters/enemies/boss_slime.tscn" id="21_psroi"]
-[ext_resource type="Script" path="res://scripts/characters/player/follow_cam.gd" id="23_n31kn"]
+[ext_resource type="Script" uid="uid://cs88y3eeq0sw1" path="res://scripts/characters/player/follow_cam.gd" id="23_n31kn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ii38o"]
 texture = ExtResource("1_1wufp")

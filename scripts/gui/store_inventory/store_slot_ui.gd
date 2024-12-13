@@ -4,10 +4,10 @@ extends Button
 @onready var container: CenterContainer = $CenterContainer
 @onready var inventory = preload("res://resources/inventory/store_inventory.tres")
 
-var item_stack_gui: StoreItemStackGUI
+var item_stack_gui: ItemStackGUI
 var index: int
 
-func insert(isg: StoreItemStackGUI):
+func insert(isg: ItemStackGUI):
 	item_stack_gui = isg
 	background_sprite.frame = 1
 	container.add_child(item_stack_gui)

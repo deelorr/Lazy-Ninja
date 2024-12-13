@@ -4,13 +4,14 @@ signal opened
 signal closed
 
 @onready var inventory: StoreInventory = preload("res://resources/inventory/store_inventory.tres")
-@onready var itemStackGUIClass: PackedScene = preload("res://scenes/gui/store_inventory/store_item_stack_gui.tscn")
+@onready var itemStackGUIClass = preload("res://scenes/gui/inventory/item_stack_gui.tscn")
+
 @onready var slots: Array = $NinePatchRect/GridContainer.get_children()
 @onready var player: Player = SceneManager.player
 @onready var selector: Control = $Selector
 
 var isOpen: bool = false
-var item_in_hand: StoreItemStackGUI
+var item_in_hand: ItemStackGUI
 var selected_slot_index: int = 0
 var grid_columns: int = 5  # Adjust based on your actual grid layout
 
@@ -29,11 +30,11 @@ func connect_slots():
 
 func update():
 	for i in range(min(inventory.slots.size(), slots.size())):
-		var inventorySlot: StoreInventorySlot = inventory.slots[i]
+		var inventorySlot: InventorySlot = inventory.slots[i]
 		if !inventorySlot.item:
 			slots[i].clear()
 			continue
-		var itemStackGUI: StoreItemStackGUI = slots[i].item_stack_gui
+		var itemStackGUI: ItemStackGUI = slots[i].item_stack_gui
 		if !itemStackGUI:
 			itemStackGUI = itemStackGUIClass.instantiate()
 			slots[i].insert(itemStackGUI)
@@ -68,11 +69,11 @@ func handle_non_empty_slot_click(slot):
 	var price = item.price
 	if player.gold >= price:
 		player.gold -= price
-		player.inventory.insert(item)
+		player.inventory.add_item(item)
 		inventory_slot.amount -= 1
 		if inventory_slot.amount <= 0:
 			slot.clear()
-			inventory.remove_slot(inventory_slot)
+			inventory.remove_slot_by_reference(inventory_slot)
 		else:
 			slot.item_stack_gui.update()
 		print("Purchased:", item.name)

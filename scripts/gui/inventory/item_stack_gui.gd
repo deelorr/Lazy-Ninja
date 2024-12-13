@@ -3,6 +3,7 @@ extends Panel
 
 @onready var item_sprite: Sprite2D = $item
 @onready var amount_label: Label = $Label
+@onready var price_label: Label = $price_label
 
 var inventory_slot: InventorySlot
 
@@ -21,3 +22,6 @@ func update():
 		amount_label.text = str(inventory_slot.amount)
 	else:
 		amount_label.visible = false
+		
+	price_label.visible = true
+	price_label.text = "$" + str(inventory_slot.item.price)
