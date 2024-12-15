@@ -1,7 +1,7 @@
-[gd_scene load_steps=32 format=3 uid="uid://b4ayh4gg3c6m5"]
+[gd_scene load_steps=36 format=3 uid="uid://b4ayh4gg3c6m5"]
 
 [ext_resource type="Script" uid="uid://iakphx7ruprd" path="res://scripts/characters/player/player.gd" id="1_g647x"]
-[ext_resource type="Shader" path="res://shaders/dissolve.gdshader" id="2_48b8n"]
+[ext_resource type="Shader" uid="uid://k00bpjtln38h" path="res://shaders/dissolve.gdshader" id="2_48b8n"]
 [ext_resource type="Texture2D" uid="uid://dg1nx8eupwffd" path="res://shaders/dissolve_texture.tres" id="3_upp11"]
 [ext_resource type="Texture2D" uid="uid://cdkfsmeq0yn4y" path="res://art/characters/player/sprites.png" id="4_i2t20"]
 [ext_resource type="Script" uid="uid://bmx5ppdiwo8x1" path="res://scripts/characters/player/weapon_node.gd" id="5_t728i"]
@@ -460,6 +460,170 @@ tracks/0/keys = {
 "values": [Vector2i(1, 0), Vector2i(1, 1), Vector2i(1, 2), Vector2i(1, 3)]
 }
 
+[sub_resource type="Animation" id="Animation_3xnwo"]
+resource_name = "stab_down"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("weapon:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [3.14159]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("weapon:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-2, 3), Vector2(-2, 10), Vector2(-2, 3)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 16, 0]
+}
+
+[sub_resource type="Animation" id="Animation_djydg"]
+resource_name = "stab_left"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("weapon:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [4.71239]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("weapon:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.100749, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-9, -3), Vector2(-15, -4), Vector2(-9, -3)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame_coords")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2i(2, 0), Vector2i(2, 4), Vector2i(2, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_bsn6e"]
+resource_name = "stab_right"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("weapon:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5708]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("weapon:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.10035, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(9, -3), Vector2(15, -3), Vector2(9, -3)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame_coords")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2i(3, 0), Vector2i(3, 4), Vector2i(3, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_blysn"]
+resource_name = "stab_up"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("weapon:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("weapon:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0999158, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -13), Vector2(0, -19), Vector2(0, -13)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [1, 17, 1]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ps7e6"]
 _data = {
 &"RESET": SubResource("Animation_60f7p"),
@@ -472,6 +636,10 @@ _data = {
 &"jump_left": SubResource("Animation_hybnj"),
 &"jump_right": SubResource("Animation_nyyha"),
 &"jump_up": SubResource("Animation_a6oi6"),
+&"stab_down": SubResource("Animation_3xnwo"),
+&"stab_left": SubResource("Animation_djydg"),
+&"stab_right": SubResource("Animation_bsn6e"),
+&"stab_up": SubResource("Animation_blysn"),
 &"walk_down": SubResource("Animation_8nybh"),
 &"walk_left": SubResource("Animation_erand"),
 &"walk_right": SubResource("Animation_lx7tm"),

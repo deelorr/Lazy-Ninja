@@ -1,6 +1,6 @@
 [gd_scene load_steps=20 format=3 uid="uid://cxdbvymjgk6cu"]
 
-[ext_resource type="Script" path="res://scripts/scenes/scene_manager/base_scene.gd" id="1_r40tg"]
+[ext_resource type="Script" uid="uid://c12preea1trx3" path="res://scripts/scenes/scene_manager/base_scene.gd" id="1_r40tg"]
 [ext_resource type="Texture2D" uid="uid://yqjhon6jwyfs" path="res://art/tilesets/floor.png" id="2_ag74h"]
 [ext_resource type="Texture2D" uid="uid://db0ofsi30xfjk" path="res://art/tilesets/house elements.png" id="3_1anjt"]
 [ext_resource type="Texture2D" uid="uid://dgif58s51ttk0" path="res://art/tilesets/buildings.png" id="4_31udp"]
@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cxg6fosuiwyov" path="res://art/effects/fire.png" id="6_r187j"]
 [ext_resource type="Texture2D" uid="uid://kldl1gjhswy0" path="res://art/tilesets/buildings_trans.png" id="7_elcxx"]
 [ext_resource type="PackedScene" uid="uid://bm0pod17s368c" path="res://scenes/gui/HUD/HUD.tscn" id="8_2oocy"]
-[ext_resource type="Script" path="res://scripts/characters/player/follow_cam.gd" id="14_cdug3"]
+[ext_resource type="Script" uid="uid://cs88y3eeq0sw1" path="res://scripts/characters/player/follow_cam.gd" id="14_cdug3"]
 [ext_resource type="PackedScene" uid="uid://blt4seqeee2mk" path="res://scenes/utility/scene_trigger.tscn" id="15_175b3"]
 [ext_resource type="PackedScene" uid="uid://dmuw8hpuyqjpi" path="res://scenes/characters/npc/armory_owner.tscn" id="16_poi4a"]
 

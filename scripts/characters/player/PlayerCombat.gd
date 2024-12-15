@@ -27,7 +27,10 @@ func attack():
 	if player.is_attacking:
 		return
 	player.is_attacking = true
-	player.animations.play("attack_" + player.direction)
+	if current_weapon == "spear":
+		player.animations.play("stab_" + player.direction)
+	else:
+		player.animations.play("attack_" + player.direction)
 	player.weapon_node.enable()
 	await player.animations.animation_finished
 	player.weapon_node.disable()
