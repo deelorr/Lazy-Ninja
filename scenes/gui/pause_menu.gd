@@ -1,6 +1,9 @@
 extends CanvasLayer
 
+signal zoom_changed(value)
+
 @onready var buttons: HBoxContainer = $Control/NinePatchRect/TabContainer/Game/Buttons
+@onready var zoom_slider = $Control/NinePatchRect/TabContainer/Settings/ZoomSlider
 
 var is_paused = false
 
@@ -23,3 +26,6 @@ func _on_resume_pressed():
 
 func _on_quit_pressed():
 	get_tree().quit()
+
+func _on_zoom_slider_value_changed(value):
+	zoom_changed.emit(value)

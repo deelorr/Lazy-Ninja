@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://6wp3vubr0uio"]
 
-[ext_resource type="Script" path="res://scenes/gui/pause_menu.gd" id="1_j2ta2"]
+[ext_resource type="Script" uid="uid://bsdiv6ni4brj" path="res://scenes/gui/pause_menu.gd" id="1_j2ta2"]
 [ext_resource type="Texture2D" uid="uid://ckokdgtal17wq" path="res://art/gui/InventoryRect.png" id="2_5vhir"]
 
 [node name="PauseMenu" type="CanvasLayer"]
@@ -54,9 +54,10 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.5, 0.5)
 theme_override_constants/side_margin = 0
-current_tab = 0
+current_tab = 1
 
 [node name="Game" type="VBoxContainer" parent="Control/NinePatchRect/TabContainer"]
+visible = false
 layout_mode = 2
 alignment = 1
 metadata/_tab_index = 0
@@ -81,16 +82,21 @@ layout_mode = 2
 focus_previous = NodePath("../Resume")
 text = "Quit"
 
-[node name="Settings" type="Control" parent="Control/NinePatchRect/TabContainer"]
-visible = false
+[node name="Settings" type="VBoxContainer" parent="Control/NinePatchRect/TabContainer"]
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="Label" type="Label" parent="Control/NinePatchRect/TabContainer/Settings"]
+[node name="Zoom" type="Label" parent="Control/NinePatchRect/TabContainer/Settings"]
 layout_mode = 2
-offset_right = 40.0
-offset_bottom = 23.0
-text = "Settings go here...."
+text = "Zoom Level:"
+
+[node name="ZoomSlider" type="HSlider" parent="Control/NinePatchRect/TabContainer/Settings"]
+layout_mode = 2
+min_value = 0.5
+max_value = 2.0
+step = 0.3
+value = 1.0
 
 [connection signal="pressed" from="Control/NinePatchRect/TabContainer/Game/Buttons/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="Control/NinePatchRect/TabContainer/Game/Buttons/Quit" to="." method="_on_quit_pressed"]
+[connection signal="value_changed" from="Control/NinePatchRect/TabContainer/Settings/ZoomSlider" to="." method="_on_zoom_slider_value_changed"]

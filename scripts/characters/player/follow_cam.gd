@@ -1,14 +1,11 @@
 extends Camera2D
 
 @export var tilemap: TileMap
-@onready var follow_node: Player = SceneManager.player
-
-# Variables for zoom limits
-#@export var min_zoom: float = 0.5
-#@export var max_zoom: float = 2.0
-#@export var zoom_step: float = 0.1
+@onready var player: Player = SceneManager.player
+@onready var pause_menu = get_parent().get_node("HUD").pause_menu
 
 func _ready():
+	pause_menu.zoom_changed.connect(Callable (self, "_on_zoom_changed"))
 	var map_rect = tilemap.get_used_rect()
 	var tile_size = tilemap.rendering_quadrant_size
 	var world_size_in_pixels = map_rect.size * tile_size
@@ -16,11 +13,14 @@ func _ready():
 	limit_bottom = world_size_in_pixels.y
 
 func _process(_delta):
-	global_position = follow_node.global_position
+	global_position = player.global_position
 
-#func _input(event):
-	#if event is InputEventMouseButton:
-		#if event.button_index == MOUSE_BUTTON_WHEEL_DOWN and zoom.x > min_zoom:
-			#zoom -= Vector2(zoom_step, zoom_step)
-		#elif event.button_index == MOUSE_BUTTON_WHEEL_UP and zoom.x < max_zoom:
-			#zoom += Vector2(zoom_step, zoom_step)
+func _on_zoom_changed(value):
+	# Clamp the value to ensure it stays within zoom limits
+	value = clamp(value, pause_menu.zoom_slider.min_value, pause_menu.zoom_slider.max_value)
+	# Apply the value to the zoom level
+	zoom = Vector2(value, value)
+	
+	# Print for debugging purposes
+	var zoom_level = value
+	print("Zoom level set to: ", zoom_level)

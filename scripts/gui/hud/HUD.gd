@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 @onready var inventory = $InventoryGUI
+@onready var pause_menu = $PauseMenu
 
 func _input(event):
 	if event.is_action_pressed("toggle_inventory"):
