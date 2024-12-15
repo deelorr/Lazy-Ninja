@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://08wrpgpao75j"
-path="res://.godot/imported/upgrade.png-ecc43df50eef0e51187d06b01bf02be9.ctex"
+uid="uid://b8tle5f1jrpc3"
+path="res://.godot/imported/spear.png-d90e7b46d1a59461d7436a75338f20dd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/gui/upgrade.png"
-dest_files=["res://.godot/imported/upgrade.png-ecc43df50eef0e51187d06b01bf02be9.ctex"]
+source_file="res://art/items/spear.png"
+dest_files=["res://.godot/imported/spear.png-d90e7b46d1a59461d7436a75338f20dd.ctex"]
 
 [params]
 

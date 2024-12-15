@@ -1,19 +1,20 @@
-[gd_scene load_steps=31 format=3 uid="uid://b4ayh4gg3c6m5"]
+[gd_scene load_steps=32 format=3 uid="uid://b4ayh4gg3c6m5"]
 
-[ext_resource type="Script" path="res://scripts/characters/player/player.gd" id="1_g647x"]
+[ext_resource type="Script" uid="uid://iakphx7ruprd" path="res://scripts/characters/player/player.gd" id="1_g647x"]
 [ext_resource type="Shader" path="res://shaders/dissolve.gdshader" id="2_48b8n"]
 [ext_resource type="Texture2D" uid="uid://dg1nx8eupwffd" path="res://shaders/dissolve_texture.tres" id="3_upp11"]
 [ext_resource type="Texture2D" uid="uid://cdkfsmeq0yn4y" path="res://art/characters/player/sprites.png" id="4_i2t20"]
-[ext_resource type="Script" path="res://scripts/characters/player/weapon_node.gd" id="5_t728i"]
+[ext_resource type="Script" uid="uid://bmx5ppdiwo8x1" path="res://scripts/characters/player/weapon_node.gd" id="5_t728i"]
 [ext_resource type="PackedScene" uid="uid://bylldbpasc02w" path="res://scenes/items/weapons/sword.tscn" id="6_i3whr"]
+[ext_resource type="PackedScene" uid="uid://b0u1qq2quhgsv" path="res://scenes/items/weapons/spear.tscn" id="7_3xnwo"]
 [ext_resource type="PackedScene" uid="uid://ck78uu30262eo" path="res://scenes/items/weapons/axe.tscn" id="7_dp4s2"]
 [ext_resource type="PackedScene" uid="uid://c041wyp0jflut" path="res://scenes/items/weapons/shuriken.tscn" id="8_oig46"]
 [ext_resource type="AudioStream" uid="uid://ck24aoawoc4qo" path="res://sfx/shuriken_noise.wav" id="9_agwfe"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1yy2h"]
 shader = ExtResource("2_48b8n")
-shader_parameter/dissolve_threshold = 1.0
 shader_parameter/noise_texture = ExtResource("3_upp11")
+shader_parameter/dissolve_threshold = 1.0
 
 [sub_resource type="Animation" id="Animation_60f7p"]
 length = 0.001
@@ -461,20 +462,20 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ps7e6"]
 _data = {
-"RESET": SubResource("Animation_60f7p"),
-"attack_down": SubResource("Animation_5m1g4"),
-"attack_left": SubResource("Animation_s8gi6"),
-"attack_right": SubResource("Animation_8b7xp"),
-"attack_spin_right": SubResource("Animation_u4evy"),
-"attack_up": SubResource("Animation_2w6dr"),
-"jump_down": SubResource("Animation_u7u8e"),
-"jump_left": SubResource("Animation_hybnj"),
-"jump_right": SubResource("Animation_nyyha"),
-"jump_up": SubResource("Animation_a6oi6"),
-"walk_down": SubResource("Animation_8nybh"),
-"walk_left": SubResource("Animation_erand"),
-"walk_right": SubResource("Animation_lx7tm"),
-"walk_up": SubResource("Animation_olpwu")
+&"RESET": SubResource("Animation_60f7p"),
+&"attack_down": SubResource("Animation_5m1g4"),
+&"attack_left": SubResource("Animation_s8gi6"),
+&"attack_right": SubResource("Animation_8b7xp"),
+&"attack_spin_right": SubResource("Animation_u4evy"),
+&"attack_up": SubResource("Animation_2w6dr"),
+&"jump_down": SubResource("Animation_u7u8e"),
+&"jump_left": SubResource("Animation_hybnj"),
+&"jump_right": SubResource("Animation_nyyha"),
+&"jump_up": SubResource("Animation_a6oi6"),
+&"walk_down": SubResource("Animation_8nybh"),
+&"walk_left": SubResource("Animation_erand"),
+&"walk_right": SubResource("Animation_lx7tm"),
+&"walk_up": SubResource("Animation_olpwu")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pv273"]
@@ -519,8 +520,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5ikie"]
 _data = {
-"RESET": SubResource("Animation_anj34"),
-"hurt_blink": SubResource("Animation_l8jos")
+&"RESET": SubResource("Animation_anj34"),
+&"hurt_blink": SubResource("Animation_l8jos")
 }
 
 [node name="Player" type="CharacterBody2D" groups=["gameplay", "player"]]
@@ -546,7 +547,7 @@ color = Color(1, 0, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_ps7e6")
+&"": SubResource("AnimationLibrary_ps7e6")
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -564,7 +565,7 @@ shape = SubResource("CapsuleShape2D_ccuuy")
 
 [node name="EffectsPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_5ikie")
+&"": SubResource("AnimationLibrary_5ikie")
 }
 
 [node name="hurt_timer" type="Timer" parent="."]
@@ -576,6 +577,8 @@ rotation = 2.0944
 script = ExtResource("5_t728i")
 
 [node name="sword" parent="weapon" groups=["weapon"] instance=ExtResource("6_i3whr")]
+
+[node name="spear" parent="weapon" groups=["weapon"] instance=ExtResource("7_3xnwo")]
 
 [node name="axe" parent="weapon" groups=["weapon"] instance=ExtResource("7_dp4s2")]
 

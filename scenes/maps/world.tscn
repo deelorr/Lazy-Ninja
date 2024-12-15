@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://duq3rnujqw5h7" path="res://art/tilesets/animated_sprites/anim_flower.png" id="3_ksm4w"]
 [ext_resource type="Texture2D" uid="uid://ctm10no46jhh2" path="res://art/tilesets/TilesetReliefDetail.png" id="4_0taxg"]
 [ext_resource type="Texture2D" uid="uid://cxoq8wlar5k2u" path="res://art/tilesets/TilesetElement.png" id="4_rdm17"]
-[ext_resource type="Script" path="res://scripts/characters/player/follow_cam.gd" id="5_708fr"]
+[ext_resource type="Script" uid="uid://cs88y3eeq0sw1" path="res://scripts/characters/player/follow_cam.gd" id="5_708fr"]
 [ext_resource type="PackedScene" uid="uid://b2blmb7y86f78" path="res://scenes/items/collectables/lifepot.tscn" id="5_k76w3"]
 [ext_resource type="Texture2D" uid="uid://dgif58s51ttk0" path="res://art/tilesets/buildings.png" id="7_kmdpc"]
 [ext_resource type="Texture2D" uid="uid://0qc3452mjill" path="res://art/tilesets/water.png" id="8_du033"]

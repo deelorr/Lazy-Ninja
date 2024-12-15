@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://b0u1qq2quhgsv"]
+
+[ext_resource type="Script" path="res://scripts/items/weapons/weapon.gd" id="1_uyv41"]
+[ext_resource type="Texture2D" uid="uid://b8tle5f1jrpc3" path="res://art/items/spear.png" id="2_uyv41"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k5c1w"]
+size = Vector2(4, 6)
+
+[node name="spear" type="Area2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_uyv41")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -11)
+shape = SubResource("RectangleShape2D_k5c1w")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -6)
+texture = ExtResource("2_uyv41")
