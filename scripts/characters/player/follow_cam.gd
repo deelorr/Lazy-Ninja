@@ -16,9 +16,9 @@ func _process(_delta):
 	global_position = player.global_position
 
 func _on_zoom_changed(value):
-	# Clamp the value to ensure it stays within zoom limits
+	# Clamp within zoom limits
 	value = clamp(value, pause_menu.zoom_slider.min_value, pause_menu.zoom_slider.max_value)
-	# Apply the value to the zoom level
+	# Apply to actual zoom level
 	zoom = Vector2(value, value)
 	
 	# Print for debugging purposes
