@@ -5,7 +5,7 @@ class_name Character
 @export var max_health: int = 10
 @export var speed: float = 50
 @export var knockback_power: int = 500
-@export var diagonal_threshold = 0.5 # Adjust sensitivity to diagonal detection
+@export var diagonal_threshold = 0.25 # Adjust sensitivity to diagonal detection
 
 # children for all characters
 @onready var sprite: Sprite2D = $Sprite2D if has_node("Sprite2D") else null
@@ -50,26 +50,33 @@ func update_animation():
 		if animations.is_playing():
 			animations.stop()
 		return
-	if abs(velocity.x) > abs(velocity.y) * diagonal_threshold:
+	
+	# Check for diagonal movement
+	if abs(velocity.x) > abs(velocity.y) * diagonal_threshold and abs(velocity.y) > abs(velocity.x) * diagonal_threshold:
+		if velocity.x < 0 and velocity.y < 0:
+			direction = "left_up"
+		elif velocity.x > 0 and velocity.y < 0:
+			direction = "right_up"
+		elif velocity.x < 0 and velocity.y > 0:
+			direction = "left_down"
+		elif velocity.x > 0 and velocity.y > 0:
+			direction = "right_down"
+	# Horizontal cases
+	elif abs(velocity.x) > abs(velocity.y):
 		if velocity.x < 0:
 			direction = "left"
 		elif velocity.x > 0:
 			direction = "right"
-	elif abs(velocity.y) > abs(velocity.x) * diagonal_threshold:
+	# Vertical cases
+	elif abs(velocity.y) > abs(velocity.x):
 		if velocity.y < 0:
 			direction = "up"
 		elif velocity.y > 0:
 			direction = "down"
-	else:  # Diagonal cases
-		if velocity.x < 0 and velocity.y < 0:
-			direction = "left"
-		elif velocity.x > 0 and velocity.y < 0:
-			direction = "right"
-		elif velocity.x < 0 and velocity.y > 0:
-			direction = "left"
-		elif velocity.x > 0 and velocity.y > 0:
-			direction = "right"
+	
 	animations.play("walk_" + direction)
+	print(direction)
+
 
 func knockback(source_position: Vector2) -> void:
 	var knockback_direction = (position - source_position).normalized() * knockback_power
