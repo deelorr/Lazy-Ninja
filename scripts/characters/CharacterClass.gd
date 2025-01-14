@@ -21,6 +21,9 @@ var is_attacking: bool = false
 var direction: String = "down"
 var gold: int = 50
 
+var anim_name
+var fallback_anim
+
 func _ready():
 	current_health = max_health
 	setup_character()
@@ -41,7 +44,42 @@ func get_direction_from_vector(direction_vector: Vector2) -> String:
 			return "down"
 		else:
 			return "up"
-
+#
+#func update_animation():
+	#if is_attacking:
+		#return
+	## Stop animation if not moving
+	#if velocity.length() == 0:
+		#if animations.is_playing():
+			#animations.stop()
+		#return
+	#
+	## Check for diagonal movement
+	#if abs(velocity.x) > abs(velocity.y) * diagonal_threshold and abs(velocity.y) > abs(velocity.x) * diagonal_threshold:
+		#if velocity.x < 0 and velocity.y < 0:
+			#direction = "left_up"
+		#elif velocity.x > 0 and velocity.y < 0:
+			#direction = "right_up"
+		#elif velocity.x < 0 and velocity.y > 0:
+			#direction = "left_down"
+		#elif velocity.x > 0 and velocity.y > 0:
+			#direction = "right_down"
+	## Horizontal cases
+	#elif abs(velocity.x) > abs(velocity.y):
+		#if velocity.x < 0:
+			#direction = "left"
+		#elif velocity.x > 0:
+			#direction = "right"
+	## Vertical cases
+	#elif abs(velocity.y) > abs(velocity.x):
+		#if velocity.y < 0:
+			#direction = "up"
+		#elif velocity.y > 0:
+			#direction = "down"
+	#
+	#animations.play("walk_" + direction)
+	#print(direction)
+	
 func update_animation():
 	if is_attacking:
 		return
@@ -51,7 +89,7 @@ func update_animation():
 			animations.stop()
 		return
 	
-	# Check for diagonal movement
+	# Determine the direction
 	if abs(velocity.x) > abs(velocity.y) * diagonal_threshold and abs(velocity.y) > abs(velocity.x) * diagonal_threshold:
 		if velocity.x < 0 and velocity.y < 0:
 			direction = "left_up"
@@ -74,9 +112,18 @@ func update_animation():
 		elif velocity.y > 0:
 			direction = "down"
 	
-	animations.play("walk_" + direction)
-	print(direction)
-
+	# Construct the animation name and check if it exists
+	anim_name = "walk_" + direction
+	if animations.has_animation(anim_name):
+		animations.play(anim_name)
+	else:
+		# Fallback to horizontal or vertical
+		if "up" in direction or "down" in direction:
+			fallback_anim = "walk_" + ("up" if "up" in direction else "down")
+		else:
+			fallback_anim = "walk_" + ("left" if "left" in direction else "right")
+		animations.play(fallback_anim)
+		#print("Using fallback animation:", fallback_anim)
 
 func knockback(source_position: Vector2) -> void:
 	var knockback_direction = (position - source_position).normalized() * knockback_power
