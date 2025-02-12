@@ -12,8 +12,8 @@ script = ExtResource("2_5mxqg")
 
 [node name="BackgroundPanel" type="NinePatchRect" parent="."]
 layout_mode = 0
-offset_right = 47.0
-offset_bottom = 32.0
+offset_right = 56.0
+offset_bottom = 40.0
 texture = ExtResource("1_3ce7w")
 patch_margin_left = 6
 patch_margin_top = 6
@@ -22,11 +22,11 @@ patch_margin_bottom = 6
 
 [node name="MarginContainer" type="MarginContainer" parent="BackgroundPanel"]
 layout_mode = 0
-offset_left = 6.0
-offset_top = 6.0
-offset_right = 146.0
-offset_bottom = 86.0
-scale = Vector2(0.25, 0.25)
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 208.0
+offset_bottom = 128.0
+scale = Vector2(0.2, 0.2)
 theme_override_constants/margin_left = 2
 theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 2
@@ -79,6 +79,25 @@ offset_bottom = 23.0
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
 size_flags_vertical = 3
+show_percentage = false
+
+[node name="ManaUI" type="VBoxContainer" parent="BackgroundPanel/MarginContainer/MainUILayout/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ManaText" type="Label" parent="BackgroundPanel/MarginContainer/MainUILayout/Stats/ManaUI"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "MP:"
+vertical_alignment = 1
+justification_flags = 162
+
+[node name="ManaBar" type="ProgressBar" parent="BackgroundPanel/MarginContainer/MainUILayout/Stats/ManaUI"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+size_flags_vertical = 3
+max_value = 3.0
+step = 0.001
 show_percentage = false
 
 [node name="XPPopUp" type="Label" parent="."]

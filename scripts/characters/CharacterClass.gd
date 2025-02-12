@@ -2,9 +2,11 @@ extends CharacterBody2D
 class_name Character
 
 signal health_changed(current_health, max_health)
+signal mana_changed(current_mana, max_mana)
 
 # properties for all characters
 @export var max_health: int = 10
+@export var max_mana: = 5
 @export var speed: float = 50
 @export var knockback_power: int = 500
 @export var diagonal_threshold = 0.25 # Adjust sensitivity to diagonal detection
@@ -14,9 +16,13 @@ signal health_changed(current_health, max_health)
 @onready var animations: AnimationPlayer = $AnimationPlayer
 @onready var hurt_box: Area2D = $hurt_box if has_node("hurt_box") else null
 
+@onready var mana_timer: Timer = Timer.new()
+
 
 # variables for all characters
 var current_health: int
+var current_mana: int
+var mana_cost: int = 1  # Cost per spell cast
 var is_hurt: bool = false
 var is_dead: bool = false
 var is_attacking: bool = false
@@ -25,10 +31,17 @@ var gold: int = 50
 
 func _init():
 	current_health = max_health
+	current_mana = max_mana
 
 func _ready():
 	health_changed.emit(current_health, max_health)
 	setup_character()
+	
+	mana_timer.wait_time = 5.0  # 5 seconds
+	mana_timer.autostart = true  # Start automatically
+	mana_timer.one_shot = false  # Keeps repeating
+	mana_timer.timeout.connect(_on_mana_timer_timeout)  # Connect timer to function
+	add_child(mana_timer)  # Attach timer to player
 
 # subclass setup
 func setup_character():
@@ -123,3 +136,17 @@ func take_gold(amount: int):
 func die():
 	#queue_free()
 	current_health = max_health
+
+func cast_spell():
+	if current_mana >= mana_cost:
+		current_mana -= mana_cost  # Deduct mana
+		emit_signal("mana_changed", current_mana, max_mana)  # Update UI
+		print("Spell cast! Remaining mana:", current_mana)
+	else:
+		print("Not enough mana!")  # Prevents casting when mana is too low
+
+func _on_mana_timer_timeout():
+	if current_mana < max_mana:
+		current_mana = min(current_mana + 1, max_mana)  # Increase by 1 every 5 seconds
+		emit_signal("mana_changed", current_mana, max_mana)  # Update UI
+		print("Mana Regenerated: ", current_mana, "/", max_mana)  # Debug

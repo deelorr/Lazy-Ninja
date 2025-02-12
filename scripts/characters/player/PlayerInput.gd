@@ -12,6 +12,9 @@ func handle_input():
 	var move_direction = Input.get_vector("walk_left", "walk_right", "walk_up", "walk_down")
 	player.velocity = move_direction * player.speed
 
+	if Input.is_action_just_pressed("cast_spell"):
+		player.cast_spell()
+		
 	# Aim logic for shuriken
 	var right_stick_vector = Vector2(
 		Input.get_action_strength("aim_right") - Input.get_action_strength("aim_left"),

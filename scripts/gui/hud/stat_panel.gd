@@ -6,6 +6,8 @@ extends Control
 @onready var current_lvl: Label = $BackgroundPanel/MarginContainer/MainUILayout/Stats/ExpUI/LevelContainer/LevelText/LevelNumber
 @onready var xp_popup_label: Label = $XPPopUp  # Reference to XP pop-up
 
+
+@onready var mana_bar: ProgressBar = $BackgroundPanel/MarginContainer/MainUILayout/Stats/ManaUI/ManaBar
 # 📌 Player Reference
 @onready var player: Player = SceneManager.player
 
@@ -26,6 +28,8 @@ func _initialize_ui():
 		update_health(player.current_health, player.max_health)
 		update_xp(player.progression.current_xp, player.progression.xp_for_next_level)
 		update_lvl(player.progression.current_level)
+		
+		update_mana(player.current_mana, player.max_mana)  # 🆕 Mana Bar!
 
 		# Store the initial XP to avoid missing the first gain
 		previous_xp = player.progression.current_xp  
@@ -33,6 +37,8 @@ func _initialize_ui():
 		# Connect signals for updates when XP or health changes
 		player.progression.connect("xp_changed", Callable(self, "_on_xp_changed"))
 		player.connect("health_changed", Callable(self, "_on_health_changed"))
+
+		player.connect("mana_changed", Callable(self, "_on_mana_changed"))
 
 
 ### --------------------------- 🔹 HEALTH UPDATES 🔹 --------------------------- ###
@@ -125,6 +131,16 @@ func show_xp_popup(text: String):
 """ Updates the player's displayed level. """
 func update_lvl(level: int):
 	current_lvl.text = str(level)
+	
+func update_mana(current_mana: int, max_mana: int):
+	mana_bar.max_value = max_mana
+	animate_bar(mana_bar, current_mana)  # Smooth bar animation
+
+	# Optional: Change mana bar color (Blue → Purple)
+	var mana_ratio = float(current_mana) / max_mana
+	var new_color = Color(0, 0.5, 1).lerp(Color(0.6, 0, 1), mana_ratio)
+	animate_color(mana_bar, new_color)  # Smooth transition
+
 
 ### --------------------------- 🔹 ANIMATIONS 🔹 --------------------------- ###
 
@@ -147,3 +163,6 @@ func _on_xp_changed(current_xp, xp_for_next_level):
 """ Triggered when health changes; updates the health bar and warnings. """
 func _on_health_changed(new_health, new_max_health):
 	update_health(new_health, new_max_health)
+
+func _on_mana_changed(current_mana, max_mana):
+	update_mana(current_mana, max_mana)
