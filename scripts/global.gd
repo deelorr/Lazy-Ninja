@@ -1,6 +1,6 @@
 extends Node
 
-signal enemy_killed(enemy_type)
+signal enemy_killed(enemy_type: String)
 
 var slime_count: int = 0
 var max_slimes: int = 10
@@ -15,9 +15,6 @@ var is_game_paused = false
 
 func _ready():
 	connect("enemy_killed", Callable(self, "_dummy_method"))
-
-func _dummy_method():
-	pass
 
 func pause_game():
 	if is_game_paused:
@@ -50,3 +47,6 @@ func resume_game():
 			node.set_process_unhandled_key_input(true)
 		if node is Timer:
 			node.start()
+
+func _dummy_method(_enemy_type: String):
+	pass  # Just ignore the argument for now

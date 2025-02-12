@@ -50,6 +50,7 @@ func get_direction_from_vector(direction_vector: Vector2) -> String:
 func update_animation():
 	if is_attacking:
 		return
+	
 	# Stop animation if not moving
 	if velocity.length() == 0:
 		if animations.is_playing():
@@ -78,8 +79,22 @@ func update_animation():
 			direction = "up"
 		elif velocity.y > 0:
 			direction = "down"
-	animations.play("walk_" + direction)
-	#print(direction)
+
+	# Check if the animation exists before playing it
+	var animation_name = "walk_" + direction
+	if animations.has_animation(animation_name):
+		animations.play(animation_name)
+	else:
+		# Fallback to a default animation if diagonal animations don't exist
+		animations.play("walk_" + get_fallback_direction(direction))
+
+# Function to provide a fallback direction (defaults to horizontal/vertical movement)
+func get_fallback_direction(dir: String) -> String:
+	match dir:
+		"left_up", "right_up": return "up"
+		"left_down", "right_down": return "down"
+		_: return dir
+
 
 func knockback(source_position: Vector2) -> void:
 	var knockback_direction = (position - source_position).normalized() * knockback_power

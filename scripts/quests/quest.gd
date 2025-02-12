@@ -68,7 +68,7 @@ func grant_rewards():
 		if key == "XP":
 			SceneManager.player.progression.add_xp(rewards[key])
 		elif key == "Items":
-			SceneManager.player.inventory.insert(rewards[key])
+			SceneManager.player.inventory.add_item(rewards[key])
 			print(rewards[key].name, " inserted into Inventory")
 		else:
 			print("Granting %s: %s" % [key, rewards[key]])
