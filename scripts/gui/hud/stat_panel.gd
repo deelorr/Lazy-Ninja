@@ -1,125 +1,149 @@
 extends Control
 
-# References to UI nodes.
-# health_bar: The ProgressBar that shows the player's health.
+# 📌 UI References
 @onready var health_bar: ProgressBar = $BackgroundPanel/MarginContainer/MainUILayout/Stats/HealthUI/HealthBar
-# xp_bar: The ProgressBar that shows the player's XP progress.
 @onready var xp_bar: ProgressBar = $BackgroundPanel/MarginContainer/MainUILayout/Stats/ExpUI/ExpBar
-# current_lvl: The Label that displays the player's current level.
 @onready var current_lvl: Label = $BackgroundPanel/MarginContainer/MainUILayout/Stats/ExpUI/LevelContainer/LevelText/LevelNumber
-
 @onready var xp_popup_label: Label = $XPPopUp  # Reference to XP pop-up
 
-# player: A reference to the player instance, fetched from the SceneManager.
+# 📌 Player Reference
 @onready var player: Player = SceneManager.player
 
+# 📌 Track Previous Values
+var previous_xp: int = 0  # Stores XP before changes to prevent unnecessary pop-ups
+var low_health_tween: Tween  # Stores tween reference to stop flashing when health improves
+
+### --------------------------- 🔹 INITIALIZATION 🔹 --------------------------- ###
+
 func _ready():
-	# Defer UI initialization to ensure the player and its progression are fully initialized.
+	# Defer UI initialization to ensure player and inventory are loaded
 	call_deferred("_initialize_ui")
 	
 func _initialize_ui():
-	# Check that both the player and its progression resource exist.
+	# Ensure player and progression exist before updating UI
 	if player and player.progression:
-		# Update the health bar with the player's current and maximum health.
+		# Initialize UI elements
 		update_health(player.current_health, player.max_health)
-		# Update the XP bar with the player's current XP and the XP required for the next level.
 		update_xp(player.progression.current_xp, player.progression.xp_for_next_level)
-		# Update the level display with the player's current level.
 		update_lvl(player.progression.current_level)
-		# Connect the xp_changed signal to update the XP bar and level when XP changes.
+
+		# Store the initial XP to avoid missing the first gain
+		previous_xp = player.progression.current_xp  
+
+		# Connect signals for updates when XP or health changes
 		player.progression.connect("xp_changed", Callable(self, "_on_xp_changed"))
-		# Connect the health_changed signal to update the health bar when health changes.
 		player.connect("health_changed", Callable(self, "_on_health_changed"))
 
+
+### --------------------------- 🔹 HEALTH UPDATES 🔹 --------------------------- ###
+
+""" Updates the health bar and triggers low health warning if needed. """
 func update_health(health: int, max_health: int):
-	# Set the maximum value of the health bar.
 	health_bar.max_value = max_health
-	# Animate the health bar to the new health value.
-	animate_bar(health_bar, health)
+	animate_bar(health_bar, health)  # Smooth bar animation
 
-	# Calculate the ratio of current health to maximum health.
+	# Determine health percentage and color
 	var health_ratio = float(health) / max_health
-	# Get a color based on the health ratio (green for high, yellow for medium, red for low).
 	var new_color = get_health_color(health_ratio)
-	# Animate the health bar color change.
-	animate_color(health_bar, new_color)
+	animate_color(health_bar, new_color)  # Smooth color transition
 
+	# Trigger low health warning if needed
+	low_health_warning(health_ratio)
+
+""" Triggers a flashing effect when health is critically low (< 20%). """
+func low_health_warning(health_ratio: float):
+	if health_ratio < 0.2:  # Health is below 20%
+		if low_health_tween and low_health_tween.is_running():
+			return  # Avoid restarting the tween unnecessarily
+
+		# Start flashing effect
+		low_health_tween = create_tween().set_loops()
+		low_health_tween.tween_property(health_bar, "modulate", Color(1, 0, 0), 0.3)  # Flash red
+		low_health_tween.tween_property(health_bar, "modulate", Color(1, 1, 1), 0.3)  # Return to normal
+	else:
+		# Stop flashing if health is restored
+		if low_health_tween and low_health_tween.is_running():
+			low_health_tween.kill()
+		health_bar.modulate = Color(1, 1, 1)  # Reset color
+
+""" Returns a color based on the player's health percentage. """
+func get_health_color(health_ratio: float) -> Color:
+	if health_ratio >= 0.66:  # High health → Green
+		return Color(1, 1, 0).lerp(Color(0, 1, 0), (health_ratio - 0.66) / 0.34)
+	elif health_ratio >= 0.33:  # Medium health → Yellow
+		return Color(1, 0, 0).lerp(Color(1, 1, 0), (health_ratio - 0.33) / 0.33)
+	else:  # Low health → Red
+		return Color(1, 0, 0)
+
+### --------------------------- 🔹 XP UPDATES 🔹 --------------------------- ###
+
+""" Updates the XP bar, level display, and shows an XP gain pop-up if applicable. """
 func update_xp(current_xp: int, xp_for_next_level: int):
-	# Set the maximum value of the XP bar.
 	xp_bar.max_value = xp_for_next_level
-	# Animate the XP bar to the current XP value.
-	animate_bar(xp_bar, current_xp)
+	animate_bar(xp_bar, current_xp)  # Smooth bar animation
 
-	# Calculate the XP ratio (progress towards the next level).
+	# Determine XP percentage and color transition
 	var xp_ratio = float(current_xp) / xp_for_next_level
-	# Interpolate between two colors (blue to purple) based on the XP ratio.
 	var new_color = Color(0, 0.5, 1).lerp(Color(0.6, 0, 1), xp_ratio)
-	# Animate the XP bar color change.
-	animate_color(xp_bar, new_color)
-	
-	# Update the level display based on the player's current level.
+	animate_color(xp_bar, new_color)  # Smooth color transition
+
+	# Update level display
 	update_lvl(player.progression.current_level)
-	
-	# 🔥 **Fix: Only show XP pop-up if XP increased**
-	var xp_gained = current_xp - xp_bar.value
-	if xp_gained > 0:
-		show_xp_popup("+%d XP" % xp_gained)  
+
+	# Ensure first XP gain is properly detected
+	if previous_xp == 0 and current_xp > 0:  # Handle first XP gain case
+		show_xp_popup("+%d XP" % current_xp)  
+	elif previous_xp > 0 and current_xp > previous_xp:  # Normal XP gain case
+		show_xp_popup("+%d XP" % (current_xp - previous_xp))
+
+	# Update previous XP **after** detecting the gain
+	previous_xp = current_xp
 
 
-# 📌 Function to Show XP Gain Pop-up
+""" Displays a floating XP pop-up above the XP bar. """
 func show_xp_popup(text: String):
 	xp_popup_label.text = text
 	xp_popup_label.visible = true
 	xp_popup_label.modulate = Color(1, 1, 1, 1)  # Full opacity
 
-	# Start animation
-	var start_position = xp_popup_label.position
-	var end_position = start_position + Vector2(0, -1)  # Move up slightly
+	# Store the original position before animation
+	var original_position = xp_popup_label.position
+	var end_position = original_position + Vector2(0, -1)  # Move up slightly
 
+	# Animate movement and fade-out
 	var tween = create_tween()
-	tween.tween_property(xp_popup_label, "position", end_position, 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.tween_property(xp_popup_label, "position", end_position, 1.0)
 	tween.tween_property(xp_popup_label, "modulate", Color(1, 1, 1, 0), 1.0)  # Fade out
 
-	# Wait and then hide the label
 	await tween.finished
-	xp_popup_label.visible = false
+	xp_popup_label.visible = false  # Hide pop-up after animation
 
+	# Reset position for the next pop-up
+	xp_popup_label.position = original_position
+
+
+""" Updates the player's displayed level. """
 func update_lvl(level: int):
-	# Update the level label text with the current level.
 	current_lvl.text = str(level)
 
-func get_health_color(health_ratio: float) -> Color:
-	# Returns a color based on the health ratio:
-	# - For high health (>= 66%), interpolate between yellow and green.
-	if health_ratio >= 0.66:
-		var t = (health_ratio - 0.66) / (1.0 - 0.66)
-		return Color(1, 1, 0).lerp(Color(0, 1, 0), t)
-	# - For medium health (>= 33%), interpolate between red and yellow.
-	elif health_ratio >= 0.33:
-		var t = (health_ratio - 0.33) / (0.66 - 0.33)
-		return Color(1, 0, 0).lerp(Color(1, 1, 0), t)
-	# - For low health (< 33%), return solid red.
-	else:
-		return Color(1, 0, 0)
+### --------------------------- 🔹 ANIMATIONS 🔹 --------------------------- ###
 
+""" Smoothly animates a progress bar's value change. """
 func animate_bar(bar: ProgressBar, new_value: float):
-	# Create a tween to animate the bar's "value" property.
-	# The tween smoothly transitions the value over 0.5 seconds using a sine easing function.
 	var tween = create_tween()
 	tween.tween_property(bar, "value", new_value, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
+""" Smoothly animates a progress bar's color transition. """
 func animate_color(bar: ProgressBar, new_color: Color):
-	# Create a tween to animate the bar's "modulate" property (its color).
-	# The tween smoothly transitions the color over 0.3 seconds using a sine easing function.
 	var tween = create_tween()
 	tween.tween_property(bar, "modulate", new_color, 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
+### --------------------------- 🔹 SIGNAL CALLBACKS 🔹 --------------------------- ###
+
+""" Triggered when XP changes; updates the XP bar and level. """
 func _on_xp_changed(current_xp, xp_for_next_level):
-	# Callback function when XP changes:
-	# Update the XP bar and level display with the new values.
 	update_xp(current_xp, xp_for_next_level)
 
+""" Triggered when health changes; updates the health bar and warnings. """
 func _on_health_changed(new_health, new_max_health):
-	# Callback function when health changes:
-	# Update the health bar with the new health values.
 	update_health(new_health, new_max_health)

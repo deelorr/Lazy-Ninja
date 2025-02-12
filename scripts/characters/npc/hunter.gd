@@ -10,14 +10,11 @@ class_name HunterNPC
 @onready var animations: AnimationPlayer = $AnimationPlayer
 
 var player_in_area: bool = false
+var dialogue_active: bool = false  # New flag to prevent multiple dialogues
 
-#func _ready() -> void:
-	#set_process(true)  # Ensure _process is called
-	
 func _physics_process(_delta):
-	if player_in_area and Input.is_action_just_pressed("action"):
+	if player_in_area and Input.is_action_just_pressed("action") and not dialogue_active:
 		start_dialogue()
-		Global.pause_game()
 
 func _on_area_2d_body_entered(player) -> void:
 	if player.is_in_group("player"):
@@ -25,18 +22,30 @@ func _on_area_2d_body_entered(player) -> void:
 		animations.play("bubble_pop_up")
 
 func start_dialogue():
+	if dialogue_active:
+		return  # Prevent multiple instances from being triggered
+
+	dialogue_active = true  # Set flag before starting dialogue
+	Global.pause_game()
 	DialogueManager.show_dialogue_balloon(hunter_dialogue, "start")
-	#connect dialogue_ended signal so when dialogue ends, _on_dialogue_ended is called
-	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
+
+	# Ensure signal is only connected once
+	if not DialogueManager.dialogue_ended.is_connected(_on_dialogue_ended):
+		DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 
 func _on_dialogue_ended(_resource: DialogueResource):
-	#disconnect so doesnt trigger multiple times
-	DialogueManager.dialogue_ended.disconnect(Callable(self, "_on_dialogue_ended"))
+	# Disconnect signal to prevent stacking
+	if DialogueManager.dialogue_ended.is_connected(_on_dialogue_ended):
+		DialogueManager.dialogue_ended.disconnect(_on_dialogue_ended)
+
+	dialogue_active = false  # Allow new dialogue to start after finishing
+
 	if QuestManager.quest_dialog_point == "started":
 		QuestManager.add_quest(first_quest)
 		QuestManager.quest_dialog_point = "in_progress"
-	if QuestManager.quest_dialog_point == "finishing":
+	elif QuestManager.quest_dialog_point == "finishing":
 		QuestManager.quest_dialog_point = "complete"
+
 	update_quests()
 	Global.resume_game()
 
@@ -49,7 +58,6 @@ func update_quests():
 					quest.complete_objective(i)
 					return
 		elif quest.status == quest.Status.COMPLETED:
-			#do not reset quest_dialog_point if it's already 'complete'
 			if QuestManager.quest_dialog_point != "complete":
 				print_debug("Quest completed, but quest_dialog_point is ", QuestManager.quest_dialog_point)
 			return
