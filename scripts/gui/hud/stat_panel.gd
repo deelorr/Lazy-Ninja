@@ -96,14 +96,18 @@ func update_xp(current_xp: int, xp_for_next_level: int):
 	# Update level display
 	update_lvl(player.progression.current_level)
 
-	# Ensure first XP gain is properly detected
-	if previous_xp == 0 and current_xp > 0:  # Handle first XP gain case
-		show_xp_popup("+%d XP" % current_xp)  
-	elif previous_xp > 0 and current_xp > previous_xp:  # Normal XP gain case
+	# 📌 **Prevent Pop-Up on Scene Load**
+	if previous_xp == 0:  
+		previous_xp = current_xp  # Just store it without showing the pop-up
+		return
+
+	# 📌 **Only Show XP Pop-up on Actual XP Gain**
+	if current_xp > previous_xp:
 		show_xp_popup("+%d XP" % (current_xp - previous_xp))
 
 	# Update previous XP **after** detecting the gain
 	previous_xp = current_xp
+
 
 
 """ Displays a floating XP pop-up above the XP bar. """
@@ -157,8 +161,10 @@ func animate_color(bar: ProgressBar, new_color: Color):
 ### --------------------------- 🔹 SIGNAL CALLBACKS 🔹 --------------------------- ###
 
 """ Triggered when XP changes; updates the XP bar and level. """
-func _on_xp_changed(current_xp, xp_for_next_level):
+func _on_xp_changed(current_xp, xp_for_next_level, new_level):
 	update_xp(current_xp, xp_for_next_level)
+	update_lvl(new_level)  # Ensure level updates
+
 
 """ Triggered when health changes; updates the health bar and warnings. """
 func _on_health_changed(new_health, new_max_health):

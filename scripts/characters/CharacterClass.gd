@@ -67,7 +67,8 @@ func update_animation():
 	# Stop animation if not moving
 	if velocity.length() == 0:
 		if animations.is_playing():
-			animations.stop()
+			animations.pause()  # Pause the animation instead of stopping it
+			animations.seek(4.0 / animations.current_animation_length, true)
 		return
 	
 	# Check for diagonal movement
