@@ -1,6 +1,8 @@
 extends Resource
 class_name PlayerProgression
 
+signal xp_changed(new_xp, xp_for_next_level)
+
 var player: Player
 var current_xp: int = 0
 var current_level: int = 1
@@ -11,6 +13,7 @@ func _init(p):
 
 func add_xp(amount: int):
 	current_xp += amount
+	xp_changed.emit(player.progression.current_xp, player.progression.xp_for_next_level)
 	print("Added XP: ", amount, " Total XP: ", current_xp, "/", xp_for_next_level)
 	check_level_up()
 

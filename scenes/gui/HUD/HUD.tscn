@@ -47,10 +47,10 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="StatPanel" parent="." instance=ExtResource("4_c4hd3")]
-offset_left = 293.0
-offset_top = 127.0
-offset_right = 319.0
-offset_bottom = 179.0
+offset_left = 272.0
+offset_top = 147.0
+offset_right = 305.0
+offset_bottom = 199.0
 
 [node name="QuestPanel" parent="." instance=ExtResource("5_qcw0o")]
 visible = false

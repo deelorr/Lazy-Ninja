@@ -3,63 +3,80 @@
 [ext_resource type="Texture2D" uid="uid://ckokdgtal17wq" path="res://art/gui/InventoryRect.png" id="1_3ce7w"]
 [ext_resource type="Script" path="res://scripts/gui/hud/stat_panel.gd" id="2_5mxqg"]
 
-[node name="StatPanel" type="NinePatchRect"]
-offset_left = 1.0
-offset_top = 1.0
-offset_right = 27.0
-offset_bottom = 53.0
+[node name="StatPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 47.0
+offset_bottom = 32.0
+script = ExtResource("2_5mxqg")
+
+[node name="BackgroundPanel" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_right = 47.0
+offset_bottom = 32.0
 texture = ExtResource("1_3ce7w")
 patch_margin_left = 6
 patch_margin_top = 6
 patch_margin_right = 6
 patch_margin_bottom = 6
-script = ExtResource("2_5mxqg")
 
-[node name="Stats" type="HBoxContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="BackgroundPanel"]
 layout_mode = 0
-offset_left = 7.0
+offset_left = 6.0
 offset_top = 6.0
-offset_right = 61.0
-offset_bottom = 166.0
+offset_right = 146.0
+offset_bottom = 86.0
 scale = Vector2(0.25, 0.25)
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
 
-[node name="Health" type="VBoxContainer" parent="Stats"]
+[node name="MainUILayout" type="VBoxContainer" parent="BackgroundPanel/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Stats/Health"]
+[node name="Stats" type="VBoxContainer" parent="BackgroundPanel/MarginContainer/MainUILayout"]
 layout_mode = 2
-text = "HP"
+size_flags_vertical = 3
 
-[node name="Label2" type="Label" parent="Stats/Health"]
+[node name="HealthUI" type="VBoxContainer" parent="BackgroundPanel/MarginContainer/MainUILayout/Stats"]
 layout_mode = 2
+size_flags_vertical = 3
 
-[node name="ProgressBar" type="ProgressBar" parent="Stats/Health/Label2"]
+[node name="HealthText" type="Label" parent="BackgroundPanel/MarginContainer/MainUILayout/Stats/HealthUI"]
 layout_mode = 2
-offset_top = -7.0
-offset_right = 20.0
-offset_bottom = 129.0
+size_flags_vertical = 1
+text = "HP:"
+vertical_alignment = 1
+justification_flags = 162
+
+[node name="HealthBar" type="ProgressBar" parent="BackgroundPanel/MarginContainer/MainUILayout/Stats/HealthUI"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+size_flags_vertical = 3
 max_value = 3.0
-fill_mode = 3
+step = 0.001
 show_percentage = false
 
-[node name="Level" type="VBoxContainer" parent="Stats"]
+[node name="ExpUI" type="VBoxContainer" parent="BackgroundPanel/MarginContainer/MainUILayout/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LevelContainer" type="HBoxContainer" parent="BackgroundPanel/MarginContainer/MainUILayout/Stats/ExpUI"]
 layout_mode = 2
 
-[node name="level" type="Label" parent="Stats/Level"]
+[node name="LevelText" type="Label" parent="BackgroundPanel/MarginContainer/MainUILayout/Stats/ExpUI/LevelContainer"]
 layout_mode = 2
-text = "XP"
+text = "XP:"
 
-[node name="level_label" type="Label" parent="Stats/Level"]
+[node name="LevelNumber" type="Label" parent="BackgroundPanel/MarginContainer/MainUILayout/Stats/ExpUI/LevelContainer/LevelText"]
 layout_mode = 2
+offset_left = 36.0
+offset_right = 48.0
+offset_bottom = 23.0
 
-[node name="Label" type="Label" parent="Stats/Level"]
+[node name="ExpBar" type="ProgressBar" parent="BackgroundPanel/MarginContainer/MainUILayout/Stats/ExpUI"]
+custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
-
-[node name="ProgressBar" type="ProgressBar" parent="Stats/Level/Label"]
-layout_mode = 2
-offset_left = 2.0
-offset_top = -34.0
-offset_right = 22.0
-offset_bottom = 102.0
-fill_mode = 3
+size_flags_vertical = 3
 show_percentage = false

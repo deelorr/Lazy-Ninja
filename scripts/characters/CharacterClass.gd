@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name Character
 
+signal health_changed(current_health, max_health)
+
 # properties for all characters
 @export var max_health: int = 10
 @export var speed: float = 50
@@ -21,8 +23,11 @@ var is_attacking: bool = false
 var direction: String = "down"
 var gold: int = 50
 
-func _ready():
+func _init():
 	current_health = max_health
+
+func _ready():
+	health_changed.emit(current_health, max_health)
 	setup_character()
 
 # subclass setup
@@ -73,10 +78,8 @@ func update_animation():
 			direction = "up"
 		elif velocity.y > 0:
 			direction = "down"
-	
 	animations.play("walk_" + direction)
-	print(direction)
-
+	#print(direction)
 
 func knockback(source_position: Vector2) -> void:
 	var knockback_direction = (position - source_position).normalized() * knockback_power
@@ -87,11 +90,13 @@ func increase_health(amount: int):
 	current_health += amount
 	if current_health > max_health:
 		current_health = max_health
+	health_changed.emit(current_health, max_health)
 
 func decrease_health(amount: int):
 	current_health -= amount
 	if current_health <= 0:
 		die()
+	health_changed.emit(current_health, max_health)
 
 func add_gold(amount: int):
 	gold += amount
