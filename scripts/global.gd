@@ -13,6 +13,12 @@ var max_spiders: int = 5
 
 var is_game_paused = false
 
+func _ready():
+	connect("enemy_killed", Callable(self, "_dummy_method"))
+
+func _dummy_method():
+	pass
+
 func pause_game():
 	if is_game_paused:
 		return
