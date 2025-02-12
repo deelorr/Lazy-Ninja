@@ -7,6 +7,9 @@ extends Control
 @onready var xp_bar: ProgressBar = $BackgroundPanel/MarginContainer/MainUILayout/Stats/ExpUI/ExpBar
 # current_lvl: The Label that displays the player's current level.
 @onready var current_lvl: Label = $BackgroundPanel/MarginContainer/MainUILayout/Stats/ExpUI/LevelContainer/LevelText/LevelNumber
+
+@onready var xp_popup_label: Label = $XPPopUp  # Reference to XP pop-up
+
 # player: A reference to the player instance, fetched from the SceneManager.
 @onready var player: Player = SceneManager.player
 
@@ -56,6 +59,30 @@ func update_xp(current_xp: int, xp_for_next_level: int):
 	
 	# Update the level display based on the player's current level.
 	update_lvl(player.progression.current_level)
+	
+	# 🔥 **Fix: Only show XP pop-up if XP increased**
+	var xp_gained = current_xp - xp_bar.value
+	if xp_gained > 0:
+		show_xp_popup("+%d XP" % xp_gained)  
+
+
+# 📌 Function to Show XP Gain Pop-up
+func show_xp_popup(text: String):
+	xp_popup_label.text = text
+	xp_popup_label.visible = true
+	xp_popup_label.modulate = Color(1, 1, 1, 1)  # Full opacity
+
+	# Start animation
+	var start_position = xp_popup_label.position
+	var end_position = start_position + Vector2(0, -1)  # Move up slightly
+
+	var tween = create_tween()
+	tween.tween_property(xp_popup_label, "position", end_position, 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.tween_property(xp_popup_label, "modulate", Color(1, 1, 1, 0), 1.0)  # Fade out
+
+	# Wait and then hide the label
+	await tween.finished
+	xp_popup_label.visible = false
 
 func update_lvl(level: int):
 	# Update the level label text with the current level.
