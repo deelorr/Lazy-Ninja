@@ -4,7 +4,7 @@
 [ext_resource type="Shader" path="res://shaders/dissolve.gdshader" id="2_48b8n"]
 [ext_resource type="Texture2D" uid="uid://dg1nx8eupwffd" path="res://shaders/dissolve_texture.tres" id="3_upp11"]
 [ext_resource type="Texture2D" uid="uid://cdkfsmeq0yn4y" path="res://art/characters/player/sprites.png" id="4_i2t20"]
-[ext_resource type="Script" uid="uid://bmx5ppdiwo8x1" path="res://scripts/characters/player/weapon_node.gd" id="5_t728i"]
+[ext_resource type="Script" path="res://scripts/characters/player/weapon_node.gd" id="5_t728i"]
 [ext_resource type="PackedScene" uid="uid://bylldbpasc02w" path="res://scenes/items/weapons/sword.tscn" id="6_i3whr"]
 [ext_resource type="PackedScene" uid="uid://b0u1qq2quhgsv" path="res://scenes/items/weapons/spear.tscn" id="7_3xnwo"]
 [ext_resource type="PackedScene" uid="uid://ck78uu30262eo" path="res://scenes/items/weapons/axe.tscn" id="7_dp4s2"]

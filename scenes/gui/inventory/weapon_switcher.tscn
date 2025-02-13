@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://ld7d3wsjunoo"]
+
+[ext_resource type="Script" path="res://scenes/gui/inventory/weapon_switcher.gd" id="1_mgcwv"]
+[ext_resource type="Texture2D" uid="uid://ckokdgtal17wq" path="res://art/gui/InventoryRect.png" id="2_pbbc2"]
+
+[node name="WeaponSwitcher" type="Control"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 31.0
+offset_bottom = 30.0
+scale = Vector2(0.75, 0.75)
+script = ExtResource("1_mgcwv")
+
+[node name="WeaponSwitchPanel" type="NinePatchRect" parent="."]
+clip_contents = true
+custom_minimum_size = Vector2(31, 30)
+layout_mode = 0
+offset_right = 31.0
+offset_bottom = 30.0
+texture = ExtResource("2_pbbc2")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="WeaponIcon" type="TextureRect" parent="WeaponSwitchPanel"]
+clip_contents = true
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 0
+offset_left = 8.0
+offset_top = 5.33333
+offset_right = 23.0
+offset_bottom = 20.3333
+expand_mode = 1
+stretch_mode = 5
+
+[node name="WeaponName" type="Label" parent="WeaponSwitchPanel"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 19.0
+offset_right = 75.0
+offset_bottom = 44.0
+scale = Vector2(0.25, 0.25)

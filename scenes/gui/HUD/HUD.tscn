@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bm0pod17s368c"]
+[gd_scene load_steps=9 format=3 uid="uid://bm0pod17s368c"]
 
 [ext_resource type="Script" uid="uid://drc5lhe1qfkt" path="res://scripts/gui/hud/HUD.gd" id="1_e7oad"]
 [ext_resource type="PackedScene" uid="uid://77s2jr485rus" path="res://scenes/gui/inventory/inventory_gui.tscn" id="2_yy873"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://de4i75octoy82" path="res://scenes/gui/HUD/stat_panel.tscn" id="4_c4hd3"]
 [ext_resource type="PackedScene" uid="uid://cok1fy1chnj" path="res://scenes/gui/HUD/quest_panel.tscn" id="5_qcw0o"]
 [ext_resource type="PackedScene" uid="uid://6wp3vubr0uio" path="res://scenes/gui/pause_menu.tscn" id="7_tk1ql"]
+[ext_resource type="PackedScene" uid="uid://ld7d3wsjunoo" path="res://scenes/gui/inventory/weapon_switcher.tscn" id="8_4ohme"]
 
 [node name="HUD" type="CanvasLayer"]
 process_mode = 3
@@ -61,3 +62,9 @@ offset_bottom = 179.0
 
 [node name="PauseMenu" parent="." instance=ExtResource("7_tk1ql")]
 visible = false
+
+[node name="WeaponSwitcher" parent="." instance=ExtResource("8_4ohme")]
+offset_left = 93.0
+offset_top = 157.0
+offset_right = 124.0
+offset_bottom = 187.0
