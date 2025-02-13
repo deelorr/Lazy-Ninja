@@ -24,5 +24,5 @@ func update_weapon_ui(weapon: String):
 	weapon_name.text = weapon.capitalize() if weapon in WEAPON_TEXTURES else "None"
 
 	# Set a fixed size for all icons
-	weapon_icon.custom_minimum_size = Vector2(15, 15)  # Adjust to your preferred size
+	weapon_icon.custom_minimum_size = Vector2(12, 12)  # Adjust to your preferred size
 	weapon_icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED  # Keeps aspect ratio

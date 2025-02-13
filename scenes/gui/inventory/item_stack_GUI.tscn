@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ce20cd2vpj1yg"]
 
 [ext_resource type="FontFile" uid="uid://ds7aia1vi38r3" path="res://art/extras/NormalFont.ttf" id="1_4bqwo"]
-[ext_resource type="Script" uid="uid://0iaebtk06s2j" path="res://scripts/gui/inventory/item_stack_gui.gd" id="1_sni6d"]
+[ext_resource type="Script" path="res://scripts/gui/inventory/item_stack_gui.gd" id="1_sni6d"]
 
 [node name="Panel" type="Panel"]
 script = ExtResource("1_sni6d")
