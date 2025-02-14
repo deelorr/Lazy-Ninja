@@ -1,20 +1,20 @@
 extends Weapon
 
-signal ninja_star_count_changed(new_count: int)
+#signal ninja_star_count_changed(new_count: int)
 
 @onready var shuriken_scene: PackedScene = preload("res://scenes/items/weapons/shuriken_star.tscn")
 @onready var can_fire_timer: Timer = $can_throw_timer
 @onready var star: Area2D = $shuriken_star
+@onready var player: Player = SceneManager.player
 
 var can_throw: bool = true
 var is_aiming: bool = false
-var ninja_star_count: int = 25
 var fire_rate: float = 0.3 
 var shuriken_spawn_offset: int = 15 #distance from center
 
 func _ready():
 	star.disable() #disable star at start
-	ninja_star_count_changed.emit(ninja_star_count)
+	#ninja_star_count_changed.emit(player.combat.ninja_star_count)
 
 func aim():
 	is_aiming = true
@@ -23,12 +23,12 @@ func stop_aiming():
 	is_aiming = false
 
 func throw(target_position: Vector2):
-	if not can_throw or ninja_star_count <= 0:
+	if not can_throw or player.combat.ninja_star_count <= 0:
 		return
 	can_throw = false
 	can_fire_timer.start(fire_rate)
-	ninja_star_count -= 1
-	emit_signal("ninja_star_count_changed", ninja_star_count)
+	player.combat.ninja_star_count -= 1
+	#emit_signal("ninja_star_count_changed", player.combat.ninja_star_count)
 	
 	#get direction and position for the shuriken
 	var direction = (target_position - global_position).normalized()

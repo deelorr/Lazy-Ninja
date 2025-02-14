@@ -18,8 +18,11 @@ func _ready():
 		weapon = null
 
 func _physics_process(_delta: float) -> void:
-	if Input.is_action_just_pressed("switch_weapon"):
+	if Input.is_action_just_pressed("dpad_up"):
 		change_active_weapon((active_weapon_index + 1) % weapons.size())
+	if Input.is_action_just_pressed("dpad_down"):
+		change_active_weapon((active_weapon_index - 1 + weapons.size()) % weapons.size())
+
 
 func change_active_weapon(new_index: int):
 	if new_index != active_weapon_index and new_index >= 0 and new_index < weapons.size():

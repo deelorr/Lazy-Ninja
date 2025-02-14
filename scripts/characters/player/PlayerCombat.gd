@@ -4,6 +4,8 @@ class_name PlayerCombat
 var player: Player
 var last_aim_direction: Vector2
 var current_weapon: String = "sword"
+var ninja_star_count: int = 25
+
 
 func _init(p):
 	player = p

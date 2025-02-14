@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bm0pod17s368c" path="res://scenes/gui/HUD/HUD.tscn" id="6_6wukh"]
 [ext_resource type="PackedScene" uid="uid://bcyuqcdsqdbd4" path="res://scenes/items/chest.tscn" id="6_akwud"]
 [ext_resource type="PackedScene" uid="uid://blt4seqeee2mk" path="res://scenes/utility/scene_trigger.tscn" id="6_ohnnk"]
-[ext_resource type="Script" uid="uid://cs88y3eeq0sw1" path="res://scripts/characters/player/follow_cam.gd" id="11_h1g35"]
+[ext_resource type="Script" path="res://scripts/characters/player/follow_cam.gd" id="11_h1g35"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qk7by"]
 texture = ExtResource("1_iunt8")
