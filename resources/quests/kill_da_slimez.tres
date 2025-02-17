@@ -21,8 +21,8 @@ description = "Return to Hunter"
 [resource]
 script = ExtResource("2_w6cfy")
 quest_id = 0
-title = "Kill Da Slimez"
-description = "Kill 5 Slimez"
+title = "Slime Hunt"
+description = "Kill 5 Slime for the Hunter.."
 objectives = Array[ExtResource("1_6x5eq")]([SubResource("Resource_ne3lh"), SubResource("Resource_lkcw5")])
 rewards = {
 "Items": ExtResource("1_mmog1"),
